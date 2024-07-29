@@ -31,3 +31,32 @@ body {
     text-wrap: balance;
   }
 }
+
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.font-mulish {
+  font-family: "Mulish", sans-serif;
+}
+.bg-announcement {
+  background: linear-gradient(85.77deg, #EFF8F9 0%, #E2F1F8 51%, #EFF8F9 99%);
+
+}
+
+.announce-list-shadow {
+  box-shadow: 5px 5px 25px 0 rgba(0, 0, 0, 0.08);
+}
+
+.vacancies-card-shadow {
+  box-shadow: 5px 5px 25px 0px rgba(0, 0, 0, 0.07);
+}
+
+.medical-service {
+  background: rgba(0, 125, 139, 0.8);
+
+}
+
+.about-center-shadow {
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.15);
+}
