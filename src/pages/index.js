@@ -162,7 +162,7 @@ export default function Home() {
                     "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
                   }
                 >
-                  <Link href={"/to-be-healty/id"}>Barchasi</Link>
+                  <Link href={"/to-be-healthy"}>Barchasi</Link>
                 </button>
               </motion.div>
             </motion.li>
@@ -254,7 +254,7 @@ export default function Home() {
 
           <div className={"col-span-12"}>
             <Reveal duration={0.5}>
-              <Swiper spaceBetween={50} slidesPerView={2.5}>
+              <Swiper spaceBetween={300} slidesPerView={2.5}>
                 <SwiperSlide>
                   <AnnouncementCard template={"card"} />
                 </SwiperSlide>
@@ -262,11 +262,9 @@ export default function Home() {
                 <SwiperSlide>
                   <AnnouncementCard template={"card"} />
                 </SwiperSlide>
-
                 <SwiperSlide>
                   <AnnouncementCard template={"card"} />
                 </SwiperSlide>
-
                 <SwiperSlide>
                   <AnnouncementCard template={"card"} />
                 </SwiperSlide>
@@ -547,45 +545,25 @@ export default function Home() {
               <Title>Yangiliklar</Title>
             </div>
 
-            <News
-              image={"img3"}
-              url={"#"}
-              title={
-                "Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya hamkorligi ko’p tarmoqli"
-              }
-              desc={
-                "Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belarus Respublikasi o’rtasidagi hamkorlik so’nggi yillarda yangi bosqichga ko’tarilib, ikki davlatning tibbiyot sohasidagi..."
-              }
-            />
+            <div className={`col-span-4 `}>
+              <News template={"card"} />
+            </div>
 
-            <News
-              image={"img3"}
-              url={"#"}
-              title={
-                "Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya hamkorligi"
-              }
-              desc={
-                "Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belarus Respublikasi o’rtasidagi hamkorlik so’nggi yillarda yangi bosqichga ko’tarilib, ikki davlatning tibbiyot sohasidagi..."
-              }
-            />
+            <div className={`col-span-4 `}>
+              <News template={"card"} />
+            </div>
 
-            <News
-              image={"img3"}
-              url={"#"}
-              title={
-                "Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya hamkorligi"
-              }
-              desc={
-                "Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belarus Respublikasi o’rtasidagi hamkorlik so’nggi yillarda yangi bosqichga ko’tarilib, ikki davlatning tibbiyot sohasidagi..."
-              }
-            />
+            <div className={`col-span-4 `}>
+              <News template={"card"} />
+            </div>
+
             <div className={"col-span-12 flex items-center justify-center"}>
               <button
                 className={
                   "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[65px] rounded-br-[10px] mt-[50px] rounded-tl-[10px] text-white"
                 }
               >
-                Barcha yangiliklar
+                <Link href={"/news"}>Barcha yangiliklar</Link>
               </button>
             </div>
           </div>
