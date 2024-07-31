@@ -101,7 +101,7 @@ const Index = () => {
       </motion.div>
 
       {/* mobile version */}
-      <div className="relative">
+      <div className="relative text-[#2C3E50]">
         <div
           className={
             "flex md:hidden container  justify-between items-center gap-x-[63px] py-[20px]"

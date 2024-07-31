@@ -100,7 +100,7 @@ const Index = () => {
 
       <div
         className={
-          " flex md:hidden justify-between container mx-auto py-[10px]"
+          " flex md:hidden justify-between text-[#2C3E50] container mx-auto py-[10px]"
         }
       >
         <div
