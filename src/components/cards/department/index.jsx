@@ -6,7 +6,7 @@ const Department = ({ image, title, desc, url }) => {
   return (
     <div
       className={
-        "col-span-4 bg-[#F7FBFC] hover:border-[#00AFC0] border-[1px] border-transparent cursor-pointer transition-all duration-300 flex items-center justify-center flex-col py-[30px] px-[40px] rounded-bl-[30px] rounded-tr-[30px]"
+        "xl:col-span-4 md:col-span-6  col-span-12 bg-[#F7FBFC] hover:border-[#00AFC0] border-[1px] border-transparent cursor-pointer transition-all duration-300 flex items-center justify-center flex-col py-[30px] px-[40px] rounded-bl-[30px] rounded-tr-[30px]"
       }
     >
       <Image

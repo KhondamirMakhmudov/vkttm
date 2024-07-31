@@ -142,7 +142,7 @@ const Index = () => {
         {openMenu && (
           <div
             className={
-              "md:hidden absolute  w-1/2 min-h-[300px] flex flex-col py-[10px] justify-end items-end bg-white right-0"
+              "md:hidden absolute z-10 w-1/2 min-h-[300px] flex flex-col py-[10px] justify-end items-end bg-white right-0"
             }
           >
             <ul

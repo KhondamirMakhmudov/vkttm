@@ -27,7 +27,7 @@ export default function Home() {
       >
         <div
           className={
-            "grid grid-cols-12 gap-x-[30px] container mx-auto md:px-0 px-[20px]"
+            "grid grid-cols-12 gap-x-[30px] container mx-auto lg:px-0 px-[20px]"
           }
         >
           <div
@@ -82,10 +82,10 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <section className={"bg-[#EFF8F9] pb-[70px] pt-[240px]"}>
+      <section className={"bg-[#EFF8F9] pb-[70px] md:pt-[240px] pt-[400px]"}>
         <div
           className={
-            "grid grid-cols-12 gap-x-[30px] container mx-auto relative"
+            "grid grid-cols-12 gap-x-[30px] container mx-auto lg:px-0 px-[20px]  relative"
           }
         >
           <motion.ul
@@ -93,11 +93,13 @@ export default function Home() {
             animate={{ opacity: 100, translateY: "0px" }}
             transition={{ duration: 0.7 }}
             className={
-              "absolute -top-[300px]  mx-[120px] bg-white flex gap-x-[30px] px-[30px] py-[50px] max-w-[1170px] rounded-bl-[50px] rounded-tr-[50px] "
+              "absolute md:-top-[300px] -top-[550px] mx-[120px] bg-white flex md:flex-row flex-col gap-y-[30px] md:gap-y-0 gap-x-[30px] px-[30px] py-[50px] max-w-[1170px] rounded-bl-[50px] rounded-tr-[50px] "
             }
           >
             <motion.li
-              className={"cursor-pointer flex items-start gap-x-[20px]"}
+              className={
+                "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
+              }
               initial={{ opacity: 0, translateY: "100px" }}
               animate={{ opacity: 100, translateY: "0px" }}
               transition={{ duration: 0.9 }}
@@ -107,7 +109,9 @@ export default function Home() {
                 alt={"doctors"}
                 width={50}
                 height={50}
-                className={"bg-[#00AFC0] p-[10px] rounded-full"}
+                className={
+                  "bg-[#00AFC0] lg:p-[10px] p-[5px] rounded-full lg:w-[50px] lg:h-[50px] w-[30px] h-[30px] "
+                }
               />
 
               <motion.div
@@ -117,20 +121,24 @@ export default function Home() {
               >
                 <h3
                   className={
-                    "text-[24px] font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                    "xl:text-[24px] lg:text-[20px] md:text-[17px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
                   }
                 >
                   Shifokorlar
                 </h3>
 
-                <p className={"font-mulish font-normal my-[10px]"}>
+                <p
+                  className={
+                    "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px] font-normal lg:my-[10px] my-[5px]"
+                  }
+                >
                   Tibbiyot markazidagi oliy toifali shifokorlarning tibbiy
                   xizmatlaridan foydalaning
                 </p>
 
                 <button
                   className={
-                    "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
+                    "font-poppins xl:text-base lg:text-sm md:text-xs text-[10px] font-medium border-b-[2px] border-b-[#00AFC0]"
                   }
                 >
                   <Link href={"/to-be-healty/id"}>Barchasi</Link>
@@ -141,14 +149,18 @@ export default function Home() {
               initial={{ opacity: 0, translateY: "100px" }}
               animate={{ opacity: 100, translateY: "0px" }}
               transition={{ duration: 0.9 }}
-              className={"cursor-pointer flex items-start gap-x-[20px]"}
+              className={
+                "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
+              }
             >
               <Image
                 src={"/images/health-blog.png"}
                 alt={"health-blog"}
                 width={50}
                 height={50}
-                className={"bg-[#00AFC0] p-[10px] rounded-full"}
+                className={
+                  "bg-[#00AFC0] lg:p-[10px] p-[5px] rounded-full lg:w-[50px] lg:h-[50px] w-[30px] h-[30px]"
+                }
               />
 
               <motion.div
@@ -158,20 +170,24 @@ export default function Home() {
               >
                 <h3
                   className={
-                    "text-[24px] font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                    "xl:text-[24px] lg:text-[20px] md:text-[17px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
                   }
                 >
                   Salomatlik blogi{" "}
                 </h3>
 
-                <p className={"font-mulish font-normal my-[10px]"}>
+                <p
+                  className={
+                    "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px]  font-normal lg:my-[10px] my-[5px]"
+                  }
+                >
                   Sog’lom bo’lish uchun turli tavsiya, maqola, ilmiy ishlardan
                   namunalar bilan tanishing
                 </p>
 
                 <button
                   className={
-                    "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
+                    "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
                   }
                 >
                   <Link href={"/to-be-healthy"}>Barchasi</Link>
@@ -182,14 +198,18 @@ export default function Home() {
               initial={{ opacity: 0, translateY: "100px" }}
               animate={{ opacity: 100, translateY: "0px" }}
               transition={{ duration: 0.9 }}
-              className={"cursor-pointer flex items-start gap-x-[20px]"}
+              className={
+                "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
+              }
             >
               <Image
                 src={"/images/contact.png"}
                 alt={"contacts"}
                 width={50}
                 height={50}
-                className={"bg-[#00AFC0] p-[10px] rounded-full"}
+                className={
+                  "bg-[#00AFC0] lg:p-[10px] p-[5px] rounded-full lg:w-[50px] lg:h-[50px] w-[30px] h-[30px]"
+                }
               />
 
               <motion.div
@@ -199,20 +219,24 @@ export default function Home() {
               >
                 <h3
                   className={
-                    "text-[24px] font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                    "xl:text-[24px] lg:text-[20px] md:text-[17px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
                   }
                 >
                   Biz bilan bog’laning
                 </h3>
 
-                <p className={"font-mulish font-normal my-[10px]"}>
+                <p
+                  className={
+                    "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px]  font-normal my-[10px]"
+                  }
+                >
                   Savollar, murojaatlarni onlayn yuborish va va qo’shimcha
                   ma’lumotlar olish imkoniyati
                 </p>
 
                 <button
                   className={
-                    "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
+                    "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
                   }
                 >
                   <Link href={"/to-be-healty/id"}>Barchasi</Link>
@@ -220,7 +244,9 @@ export default function Home() {
               </motion.div>
             </motion.li>
           </motion.ul>
-          <div className={"col-span-4 max-w-[570px]"}>
+          <div
+            className={"xl:col-span-4 md:col-span-6 col-span-12 max-w-[570px] "}
+          >
             <RevealLeft>
               {" "}
               <Image
@@ -231,7 +257,7 @@ export default function Home() {
               />
             </RevealLeft>
           </div>
-          <div className={"col-span-6"}>
+          <div className={"md:col-span-6 col-span-12 md:mt-0 mt-[30px]"}>
             <RevealRight>
               <Title>Sog‘lig‘ingizni bizga ishoning!</Title>
 
@@ -257,7 +283,11 @@ export default function Home() {
       </section>
 
       <section className={"bg-announcement py-[70px]"}>
-        <div className={"grid grid-cols-12 gap-x-[30px] container mx-auto"}>
+        <div
+          className={
+            "grid grid-cols-12 gap-x-[30px] container mx-auto md:px-0 px-[20px]"
+          }
+        >
           <div className={"col-span-12 mb-[50px]"}>
             <Reveal duration={0.3}>
               <Title>E’lonlar</Title>
@@ -325,7 +355,7 @@ export default function Home() {
         <Reveal classNames={0.5}>
           <div
             className={
-              "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto"
+              "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto md:px-0 px-[20px]"
             }
           >
             <div className={"col-span-12 mb-[50px]"}>
@@ -404,7 +434,11 @@ export default function Home() {
       </section>
 
       <section className={"bg-[#EFF8F9] py-[70px]"}>
-        <div className={"grid grid-cols-12 gap-x-[30px]  container mx-auto"}>
+        <div
+          className={
+            "grid grid-cols-12 gap-x-[30px]  container mx-auto md:px-0 px-[20px]"
+          }
+        >
           <div className={"col-span-12 mb-[50px]"}>
             <Title>Sog‘lom bo‘lish uchun</Title>
           </div>
