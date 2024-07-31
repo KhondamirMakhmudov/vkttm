@@ -607,22 +607,22 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className={"bg-white py-[70px]"}>
+      <section className={"bg-white py-[70px] md:px-0 px-[20px]"}>
         <Reveal>
           <div className={"grid grid-cols-12 gap-x-[30px]  container mx-auto"}>
             <div className={"col-span-12 mb-[50px]"}>
               <Title>Yangiliklar</Title>
             </div>
 
-            <div className={`col-span-4 `}>
+            <div className={`md:col-span-4 col-span-12`}>
               <News template={"card"} />
             </div>
 
-            <div className={`col-span-4 `}>
+            <div className={`md:col-span-4 col-span-12 `}>
               <News template={"card"} />
             </div>
 
-            <div className={`col-span-4 `}>
+            <div className={`md:col-span-4 col-span-12 `}>
               <News template={"card"} />
             </div>
 
@@ -639,7 +639,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <section className={"bg-white py-[70px]"}>
+      <section className={"bg-white py-[70px] px-[20px]"}>
         <div
           className={
             "grid grid-cols-12 gap-x-[30px] gap-y-[30px]  container mx-auto"
@@ -651,7 +651,10 @@ export default function Home() {
             </Reveal>
           </div>
 
-          <Reveal classNames={"col-span-4"} duration={0.25}>
+          <Reveal
+            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
+            duration={0.25}
+          >
             <div
               className={
                 "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
@@ -669,7 +672,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal classNames={"col-span-4"} duration={0.3}>
+          <Reveal
+            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
+            duration={0.3}
+          >
             <div
               className={
                 "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
@@ -687,7 +693,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal classNames={"col-span-4"} duration={0.35}>
+          <Reveal
+            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
+            duration={0.35}
+          >
             <div
               className={
                 "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
@@ -705,7 +714,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal classNames={"col-span-4"} duration={0.4}>
+          <Reveal
+            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
+            duration={0.4}
+          >
             <div
               className={
                 "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
@@ -723,7 +735,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal classNames={"col-span-4"} duration={0.45}>
+          <Reveal
+            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
+            duration={0.45}
+          >
             <div
               className={
                 "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
@@ -741,7 +756,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal classNames={"col-span-4"} duration={0.55}>
+          <Reveal
+            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
+            duration={0.55}
+          >
             <div
               className={
                 "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
@@ -759,7 +777,10 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal classNames={"col-span-4"} duration={0.65}>
+          <Reveal
+            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
+            duration={0.65}
+          >
             <div
               className={
                 "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
