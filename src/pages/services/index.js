@@ -4,6 +4,9 @@ import { useRouter } from "next/router";
 import Title from "@/components/title";
 import Reveal from "@/components/reveal";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import EmployeeCard from "@/components/cards/employee";
 
 const Index = () => {
   const router = useRouter();
@@ -32,7 +35,11 @@ const Index = () => {
               className={"flex flex-col gap-y-[20px] p-[50px] text-[#494949]"}
             >
               <li
-                className={`cursor-pointer ${activeTab === "Konsultatsiya" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Konsultatsiya"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("Konsultatsiya")}>
                   Konsultatsiya
@@ -40,7 +47,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "Diagnostika" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Diagnostika"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("Diagnostika")}>
                   Diagnostika
@@ -48,7 +59,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "Xizmat turi" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Xizmat turi"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("Xizmat turi")}>
                   Xizmat turi
@@ -163,12 +178,65 @@ const Index = () => {
                 </section>
               </Reveal>
 
-              <section>
-                <h4
-                  className={"text-[20px] font-mulish font-semibold mb-[20px]"}
-                >
-                  Xizmat bo‘yicha shifokor va xodimlar
-                </h4>
+              <section className="mb-[50px]">
+                <Reveal>
+                  <h4
+                    className={
+                      "text-[20px] font-mulish font-semibold mb-[20px]"
+                    }
+                  >
+                    Xizmat bo‘yicha shifokor va xodimlar
+                  </h4>
+                </Reveal>
+
+                <Reveal>
+                  <Swiper slidesPerView={4.5}>
+                    <SwiperSlide>
+                      <EmployeeCard position={"Bosh shifokor"} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <EmployeeCard position={"Bosh shifokor"} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <EmployeeCard position={"Bosh shifokor"} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <EmployeeCard position={"Bosh shifokor"} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <EmployeeCard position={"Bosh shifokor"} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <EmployeeCard position={"Bosh shifokor"} />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <EmployeeCard position={"Bosh shifokor"} />
+                    </SwiperSlide>
+                  </Swiper>
+                </Reveal>
+
+                <Reveal>
+                  <div className="flex gap-x-[20px] mt-[20px]">
+                    <button className="bg-[#00AFC0] px-[9px] py-[6px] rounded-tl-[10px] rounded-br-[10px] hover:bg-[#00BFD0] active:bg-[#00D1E4]">
+                      <Image
+                        src={"/images/navigation.png"}
+                        alt="navigation"
+                        width={6}
+                        height={12}
+                        className="bg-[#00AFC0] "
+                      />
+                    </button>
+                    <button className="bg-[#00AFC0] px-[9px] py-[6px] rounded-tr-[10px] rounded-bl-[10px] hover:bg-[#00BFD0] active:bg-[#00D1E4]">
+                      <Image
+                        src={"/images/navigation.png"}
+                        alt="navigation"
+                        width={6}
+                        height={12}
+                        className="bg-[#00AFC0] rotate-180"
+                      />
+                    </button>
+                  </div>
+                </Reveal>
               </section>
             </div>
           )}

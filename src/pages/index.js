@@ -272,7 +272,7 @@ export default function Home() {
             </Reveal>
           </div>
 
-          <div className={"col-span-12 mt-[50px]"}>
+          <div className={"col-span-12 mt-[50px] flex justify-between"}>
             <Reveal duration={0.7}>
               <button
                 className={
@@ -281,6 +281,29 @@ export default function Home() {
               >
                 <Link href={"/announcements"}>Barcha e’lonlar</Link>
               </button>
+            </Reveal>
+
+            <Reveal duration={0.7}>
+              <div className="flex gap-x-[20px] mt-[20px]">
+                <button className="bg-[#00AFC0] px-[9px] py-[6px] rounded-tl-[10px] rounded-br-[10px] hover:bg-[#00BFD0] active:bg-[#00D1E4]">
+                  <Image
+                    src={"/images/navigation.png"}
+                    alt="navigation"
+                    width={6}
+                    height={12}
+                    className="bg-[#00AFC0] "
+                  />
+                </button>
+                <button className="bg-[#00AFC0] px-[9px] py-[6px] rounded-tr-[10px] rounded-bl-[10px] hover:bg-[#00BFD0] active:bg-[#00D1E4]">
+                  <Image
+                    src={"/images/navigation.png"}
+                    alt="navigation"
+                    width={6}
+                    height={12}
+                    className="bg-[#00AFC0] rotate-180"
+                  />
+                </button>
+              </div>
             </Reveal>
           </div>
         </div>

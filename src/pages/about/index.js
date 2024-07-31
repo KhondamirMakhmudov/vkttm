@@ -246,20 +246,22 @@ const Index = () => {
                         "col-span-3 announce-list-shadow rounded-bl-[30px] rounded-tr-[30px]"
                       }
                     >
-                      <Image
-                        src={`/images/${get(item, "image")}`}
-                        alt={"lor"}
-                        width={330}
-                        height={210}
-                      />
+                      <Link href={"/about/id"}>
+                        <Image
+                          src={`/images/${get(item, "image")}`}
+                          alt={"lor"}
+                          width={330}
+                          height={210}
+                        />
 
-                      <p
-                        className={
-                          "font-poppins font-medium text-center py-[20px]"
-                        }
-                      >
-                        {get(item, "title")}
-                      </p>
+                        <p
+                          className={
+                            "font-poppins font-medium text-center py-[20px]"
+                          }
+                        >
+                          {get(item, "title")}
+                        </p>
+                      </Link>
                     </div>
                   ))}
                 </div>
