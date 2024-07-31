@@ -10,10 +10,10 @@ const Footer = () => {
       <Reveal duration={0.2}>
         <div
           className={
-            "grid grid-cols-12 gap-x-[30px] container mx-auto py-[50px]"
+            "grid grid-cols-12 gap-x-[30px] md:gap-y-0 gap-y-[30px] container mx-auto md:px-0 px-[20px] py-[50px]"
           }
         >
-          <div className={"col-span-3 text-white"}>
+          <div className={"md:col-span-3 col-span-12 text-white"}>
             <Brand textColor={"white"} image={"footer-brand"} />
 
             <p className={"mt-[30px] mb-[20px]"}>
@@ -137,7 +137,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className={"col-span-3 font-poppins text-white"}>
+          <div className={"md:col-span-3 col-span-12 font-poppins text-white"}>
             <h3 className={"text-lg font-medium"}>Manzil</h3>
             <p className={"text-sm mt-[10px] mb-[20px]"}>
               M.Ulugbek ko&apos;chasi 70, <br />
@@ -155,7 +155,7 @@ const Footer = () => {
             </a>
           </div>
 
-          <div className={"col-span-2 font-poppins text-white"}>
+          <div className={"md:col-span-2 col-span-12 font-poppins text-white"}>
             <h3 className={"text-lg font-medium mb-[10px]"}>Menyu</h3>
 
             <ul className={"flex flex-col gap-y-[8px] text-sm"}>
@@ -167,7 +167,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className={"col-span-2 font-poppins text-white"}>
+          <div className={"md:col-span-2 col-span-12font-poppins text-white"}>
             <h3 className={"text-lg font-medium mb-[10px]"}>Qo’shimcha</h3>
 
             <ul className={"flex flex-col gap-y-[8px] text-sm"}>

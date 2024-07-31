@@ -443,7 +443,7 @@ export default function Home() {
             <Title>Sog‘lom bo‘lish uchun</Title>
           </div>
 
-          <div className={"col-span-4 text-[#2C3E50]"}>
+          <div className={"md:col-span-4 col-span-12 text-[#2C3E50]"}>
             <h2 className={"font-medium font-poppins text-[24px] mb-[20px]"}>
               Doimiy jismoniy mashqalar salomatlik garovidir
             </h2>
@@ -456,7 +456,7 @@ export default function Home() {
               vazifalarni osonlashtiradi.{" "}
             </p>
           </div>
-          <div className={"col-span-4"}>
+          <div className={"md:col-span-4 col-span-12 md:mt-0 mt-[30px]"}>
             <Image
               src={"/images/img2.png"}
               alt={"img2"}
@@ -666,7 +666,7 @@ export default function Home() {
                 width={44}
                 height={44}
               />
-              <p className={"font-medium text-lg"}>
+              <p className={"font-medium text-lg  text-[#2C3E50]"}>
                 O‘zbekiston Respublikasi Sog‘liqni saqlash vazirligi
               </p>
             </div>
@@ -687,7 +687,7 @@ export default function Home() {
                 width={44}
                 height={44}
               />
-              <p className={"font-medium text-lg"}>
+              <p className={"font-medium text-lg text-[#2C3E50]"}>
                 O‘zbekiston Respublikasi Prezidenti matbuot xizmati
               </p>
             </div>
@@ -708,7 +708,7 @@ export default function Home() {
                 width={44}
                 height={44}
               />
-              <p className={"font-medium text-lg"}>
+              <p className={"font-medium text-lg text-[#2C3E50]"}>
                 O‘zbekiston Respublikasi Hukumat portali
               </p>
             </div>
@@ -729,7 +729,7 @@ export default function Home() {
                 width={44}
                 height={44}
               />
-              <p className={"font-medium text-lg"}>
+              <p className={"font-medium text-lg text-[#2C3E50]"}>
                 O‘zbekiston Respublikasi Oliy majlisi Qonunchilik palatasi
               </p>
             </div>
@@ -750,7 +750,7 @@ export default function Home() {
                 width={44}
                 height={44}
               />
-              <p className={"font-medium text-lg"}>
+              <p className={"font-medium text-lg text-[#2C3E50]"}>
                 O‘zbekiston Respublikasi Oliy majlis Senati
               </p>
             </div>
@@ -771,7 +771,7 @@ export default function Home() {
                 width={44}
                 height={44}
               />
-              <p className={"font-medium text-lg"}>
+              <p className={"font-medium text-lg text-[#2C3E50]"}>
                 Milliy huquqiy internet portali
               </p>
             </div>
@@ -792,7 +792,7 @@ export default function Home() {
                 width={44}
                 height={44}
               />
-              <p className={"font-medium text-lg"}>
+              <p className={"font-medium text-lg text-[#2C3E50]"}>
                 O‘zbekiston Respublikasi Qonunchilik ma’lumotlari milliy bazasi
               </p>
             </div>
