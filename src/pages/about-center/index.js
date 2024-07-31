@@ -77,7 +77,7 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={130} />
+                    <CountUp end={130} duration={5} />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 
@@ -101,7 +101,7 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={90} />
+                    <CountUp end={90} duration={5} />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 
@@ -126,7 +126,7 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={20} />
+                    <CountUp end={20} duration={5} />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 
@@ -151,7 +151,7 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={2400} />
+                    <CountUp end={2400} duration={5} />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 

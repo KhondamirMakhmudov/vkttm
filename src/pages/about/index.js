@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import Wrapper from "@/layout/wrapper";
 import ManagementCard from "@/components/cards/management";
 import { sectionData } from "@/dummy-datas";
+import PrideOfCenter from "@/components/cards/prideOfCenter";
 
 const DUMMY_DATA = [
   {
@@ -91,7 +92,11 @@ const Index = () => {
               className={"flex flex-col gap-y-[20px] p-[50px] text-[#494949]"}
             >
               <li
-                className={`cursor-pointer ${activeTab === "markaz-tuzilmasi" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "markaz-tuzilmasi"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("markaz-tuzilmasi")}>
                   Markaz tuzilmasi
@@ -99,7 +104,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "rahbariyat" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "rahbariyat"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("rahbariyat")}>
                   Rahbariyat
@@ -107,7 +116,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "Bo‘limlar" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Bo‘limlar"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("Bo‘limlar")}>
                   Bo‘limlar
@@ -115,7 +128,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "Lavozim majburiyatlari" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Lavozim majburiyatlari"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button
                   onClick={() => handleTabClick("Lavozim majburiyatlari")}
@@ -125,7 +142,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "Markaz nizomi" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Markaz nizomi"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("Markaz nizomi")}>
                   Markaz nizomi
@@ -133,7 +154,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "Markaz faxri" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Markaz faxri"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("Markaz faxri")}>
                   Markaz faxri
@@ -141,7 +166,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "Odob-axloq qoidalari" ? "text-[#00AFC0]" : "text-[##2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Odob-axloq qoidalari"
+                    ? "text-[#00AFC0]"
+                    : "text-[##2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("Odob-axloq qoidalari")}>
                   Odob-axloq qoidalari
@@ -149,7 +178,11 @@ const Index = () => {
               </li>
 
               <li
-                className={`cursor-pointer ${activeTab === "Kasaba uyushmasi" ? "text-[#00AFC0]" : "text-[#2C3E50]"}`}
+                className={`cursor-pointer ${
+                  activeTab === "Kasaba uyushmasi"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
               >
                 <button onClick={() => handleTabClick("Kasaba uyushmasi")}>
                   Kasaba uyushmasi
@@ -160,61 +193,77 @@ const Index = () => {
 
           {activeTab === "markaz-tuzilmasi" && (
             <div className={"col-span-9"}>
-              <Title>Markaz tuzilmasi</Title>
+              <Reveal duration={0.4}>
+                <Title>Markaz tuzilmasi</Title>
+              </Reveal>
 
-              <Image
-                src={"/icons/structure-center.svg"}
-                alt={"structure-center"}
-                width={1050}
-                height={645}
-              />
+              <Reveal duration={0.5}>
+                <Image
+                  src={"/icons/structure-center.svg"}
+                  alt={"structure-center"}
+                  width={1050}
+                  height={645}
+                />
+              </Reveal>
             </div>
           )}
           {activeTab === "rahbariyat" && (
             <div className={"col-span-9"}>
-              <Title>Rahbariyat</Title>
+              <Reveal duration={0.4}>
+                <Title>Rahbariyat</Title>
+              </Reveal>
 
               <div className={"flex flex-col gap-y-[50px]"}>
-                <ManagementCard position={"Bosh vrach"} />
-                <ManagementCard position={"Bosh vrach o‘rinbosari"} />
-                <ManagementCard position={"Bo‘lim boshlig‘i"} />
+                <Reveal duration={0.5}>
+                  <ManagementCard position={"Bosh vrach"} />
+                </Reveal>
+                <Reveal duration={0.6}>
+                  <ManagementCard position={"Bosh vrach o‘rinbosari"} />
+                </Reveal>
+                <Reveal duration={0.7}>
+                  <ManagementCard position={"Bo‘lim boshlig‘i"} />
+                </Reveal>
               </div>
             </div>
           )}
 
           {activeTab === "Bo‘limlar" && (
             <div className={"col-span-9"}>
-              <Title>Bo‘limlar</Title>
+              <Reveal duration={0.4}>
+                <Title>Bo‘limlar</Title>
+              </Reveal>
 
-              <div
-                className={
-                  "grid grid-cols-9 gap-x-[30px]  gap-y-[30px] mt-[50px]"
-                }
-              >
-                {sectionData.map((item) => (
-                  <div
-                    key={get(item, "id")}
-                    className={
-                      "col-span-3 announce-list-shadow rounded-bl-[30px] rounded-tr-[30px]"
-                    }
-                  >
-                    <Image
-                      src={`/images/${get(item, "image")}`}
-                      alt={"lor"}
-                      width={330}
-                      height={210}
-                    />
-
-                    <p
+              <Reveal duration={0.45}>
+                <div
+                  className={
+                    "grid grid-cols-9 gap-x-[30px]  gap-y-[30px] mt-[50px]"
+                  }
+                >
+                  {sectionData.map((item) => (
+                    <div
+                      key={get(item, "id")}
                       className={
-                        "font-poppins font-medium text-center py-[20px]"
+                        "col-span-3 announce-list-shadow rounded-bl-[30px] rounded-tr-[30px]"
                       }
                     >
-                      {get(item, "title")}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                      <Image
+                        src={`/images/${get(item, "image")}`}
+                        alt={"lor"}
+                        width={330}
+                        height={210}
+                      />
+
+                      <p
+                        className={
+                          "font-poppins font-medium text-center py-[20px]"
+                        }
+                      >
+                        {get(item, "title")}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
             </div>
           )}
 
@@ -241,7 +290,9 @@ const Index = () => {
                         alt={"up"}
                         width={24}
                         height={24}
-                        className={`${!isOpen ? "rotate-180" : "rotate-0"} transition-transform duration-300`}
+                        className={`${
+                          !isOpen ? "rotate-180" : "rotate-0"
+                        } transition-transform duration-300`}
                       />
                     </button>
 
@@ -334,83 +385,11 @@ const Index = () => {
                         alt={"up"}
                         width={24}
                         height={24}
-                        className={`${!isOpen ? "rotate-180" : "rotate-0"} transition-transform duration-300`}
+                        className={`${
+                          !isOpen ? "rotate-180" : "rotate-0"
+                        } transition-transform duration-300`}
                       />
                     </button>
-
-                    {!isOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, translateY: "100px" }}
-                        animate={{ opacity: 100, translateY: "0px" }}
-                        transition={{ duration: 0.7 }}
-                      >
-                        <h4
-                          className={
-                            "font-mulish text-[20px] my-[20px] font-semibold"
-                          }
-                        >
-                          Tibbiyot markazi xodimlarining ish vazifalariga
-                          quyidagilar kiradi:
-                        </h4>
-
-                        <ul
-                          className={
-                            "list-disc ml-[30px] font-mulish font-normal"
-                          }
-                        >
-                          <li>
-                            Belgilangan davolash standartlari va protokollariga
-                            muvofiq bemorlarga malakali tibbiy yordam
-                            ko&apos;rsatish.
-                          </li>
-                          <li>
-                            Aniq tashxis qo&apos;yish uchun diagnostika
-                            protseduralari, testlar va tibbiy tadqiqotlar
-                            o&apos;tkazish.
-                          </li>
-                          <li>
-                            Bemorlarning tibbiy tarixi va xususiyatlarini
-                            hisobga olgan holda individual davolash va
-                            reabilitatsiya rejalarini ishlab chiqish va amalga
-                            oshirish.
-                          </li>
-                          <li>
-                            Davolashning butun davri davomida bemorlarning
-                            holatini kuzatish, shuningdek qo&apos;llaniladigan
-                            usullar va terapiyalarning samaradorligini baholash.
-                          </li>
-                          <li>
-                            In&apos;ektsiya, kiyinish, manipulyatsiya va boshqa
-                            tibbiy manipulyatsiyalarni o&apos;z ichiga olgan
-                            tibbiy muolajalarni o&apos;tkazish.
-                          </li>
-                          <li>
-                            Bemorlarni sog&apos;lom turmush tarzi bo&apos;yicha
-                            zarur tibbiy maslahatlar va tavsiyalar bilan
-                            ta&apos;minlash.
-                          </li>
-                          <li>
-                            Tibbiy yozuvlar va hisobotlarni, shu jumladan
-                            bemorlarning ahvoli, protseduralari va
-                            tayinlanishlari to&apos;g&apos;risidagi yozuvlarni
-                            yuritish.
-                          </li>
-
-                          <li>
-                            Tibbiy asboblar, dorilar va chiqindilar bilan
-                            ishlashda barcha belgilangan xavfsizlik qoidalari va
-                            qoidalariga rioya qilish.
-                          </li>
-
-                          <li>
-                            Tegishli tibbiy mavzular bo&apos;yicha o&apos;quv
-                            dasturlari, seminarlar va konferentsiyalarda
-                            qatnashish orqali kasbiy rivojlanishda ishtirok
-                            etish.
-                          </li>
-                        </ul>
-                      </motion.div>
-                    )}
                   </li>
                 </ul>
               </motion.div>
@@ -448,16 +427,20 @@ const Index = () => {
           {activeTab === "Markaz faxri" && (
             <div className={"col-span-9"}>
               <Title>Markaz faxri</Title>
+
+              <PrideOfCenter position={"Lor"} />
+              <PrideOfCenter position={"Lor"} />
+              <PrideOfCenter position={"Lor"} />
             </div>
           )}
 
           {activeTab === "Odob-axloq qoidalari" && (
             <div className={"col-span-9"}>
-              <Reveal duration={0.46}>
+              <Reveal duration={0.36}>
                 <Title>Odob-axloq qoidalari</Title>
               </Reveal>
 
-              <Reveal duration={0.5}>
+              <Reveal duration={0.4}>
                 <h3
                   className={
                     "text-[20px] font-mulish font-semibold mt-[30px] mb-[20px]"
@@ -537,78 +520,86 @@ const Index = () => {
 
           {activeTab === "Kasaba uyushmasi" && (
             <div className={"col-span-9"}>
-              <Title>Kasaba uyushmasi</Title>
+              <Reveal duration={0.3}>
+                <Title>Kasaba uyushmasi</Title>
+              </Reveal>
 
-              <div className={"mt-[30px]"}>
-                <ManagementCard position={"Direktor"} />
+              <Reveal duration={0.35}>
+                <div className={"mt-[30px]"}>
+                  <ManagementCard position={"Direktor"} />
 
-                <motion.div
-                  initial={{ opacity: 0, translateY: "100px" }}
-                  animate={{ opacity: 100, translateY: "0px" }}
-                  transition={{ duration: 0.7 }}
-                >
-                  <h4
-                    className={
-                      "font-mulish text-[20px] mb-[20px] mt-[30px] font-semibold"
-                    }
+                  <motion.div
+                    initial={{ opacity: 0, translateY: "100px" }}
+                    animate={{ opacity: 100, translateY: "0px" }}
+                    transition={{ duration: 0.7 }}
                   >
-                    Tibbiyot markazidagi kasaba uyushma funktsiyalariga
-                    quyidagilar kiradi:
-                  </h4>
+                    <h4
+                      className={
+                        "font-mulish text-[20px] mb-[20px] mt-[30px] font-semibold"
+                      }
+                    >
+                      Tibbiyot markazidagi kasaba uyushma funktsiyalariga
+                      quyidagilar kiradi:
+                    </h4>
 
-                  <ul className={"list-disc ml-[30px] font-mulish font-normal"}>
-                    <li>
-                      Mehnat huquqlarini himoya qilish: kasaba uyushmasi
-                      adolatli mehnat sharoitlarini ta&apos;minlash, kamsitish
-                      va noqonuniy ishdan bo&apos;shatishdan himoya qilish
-                      orqali xodimlarning mehnat qonunchiligi manfaatlarini
-                      himoya qiladi.
-                    </li>
-                    <li>
-                      Ijtimoiy kafolatlar va imtiyozlar: u ijtimoiy
-                      standartlarni oshirish va tibbiyot markazi xodimlarini
-                      turli xil ijtimoiy imtiyozlar bilan ta&apos;minlash uchun
-                      ishlaydi, masalan, tibbiy sug&apos;urta, pensiya
-                      to&apos;lovlari va boshqa qo&apos;llab-quvvatlash
-                      vositalarini taqdim etish.
-                    </li>
-                    <li>
-                      Ish haqini oshirish: kasaba uyushmasi tibbiyot
-                      xodimlarining adolatli ish haqini qo&apos;llab-quvvatlaydi
-                      va ish haqi va boshqa mukofotlarni oshirish uchun markaz
-                      ma&apos;muriyati bilan muzokaralar olib boradi.
-                    </li>
-                    <li>
-                      Kasb-hunar ta&apos;limi va rivojlanishi: u tibbiyot
-                      amaliyotining dolzarb mavzularida malaka oshirish kurslari
-                      va treninglar o&apos;tkazish orqali xodimlarning kasbiy
-                      tayyorgarligi va rivojlanishini tashkil qiladi va
-                      qo&apos;llab-quvvatlaydi.
-                    </li>
-                    <li>
-                      Kollektiv vakillik: kasaba uyushmasi o&apos;z
-                      a&apos;zolarining manfaatlarini tibbiyot markazi
-                      ma&apos;muriyati oldida ifodalaydi, ish sharoitlari va
-                      mehnat munosabatlari bilan bog&apos;liq muhim masalalarni
-                      hal qilishda jamoaviy ovoz sifatida ishlaydi.
-                    </li>
-                    <li>
-                      Ijtimoiy qo&apos;llab-quvvatlash va yordam: u kasallik
-                      yoki baxtsiz hodisa yuz berganda moliyaviy yordam
-                      ko&apos;rsatish kabi qiyin hayotiy vaziyatlarda o&apos;z
-                      a&apos;zolariga ijtimoiy yordam ko&apos;rsatadi.
-                    </li>
-                    <li>
-                      Qulay ish muhitini yaratishga ko&apos;maklashish: kasaba
-                      uyushmasi tibbiyot markazining barcha xodimlarining
-                      ehtiyojlari va manfaatlarini hisobga oladigan, jamoaning
-                      ma&apos;naviyati va kasbiy ish darajasini oshirishga
-                      yordam beradigan qulay ish muhitini yaratishga yordam
-                      beradi.
-                    </li>
-                  </ul>
-                </motion.div>
-              </div>
+                    <ul
+                      className={"list-disc ml-[30px] font-mulish font-normal"}
+                    >
+                      <li>
+                        Mehnat huquqlarini himoya qilish: kasaba uyushmasi
+                        adolatli mehnat sharoitlarini ta&apos;minlash, kamsitish
+                        va noqonuniy ishdan bo&apos;shatishdan himoya qilish
+                        orqali xodimlarning mehnat qonunchiligi manfaatlarini
+                        himoya qiladi.
+                      </li>
+                      <li>
+                        Ijtimoiy kafolatlar va imtiyozlar: u ijtimoiy
+                        standartlarni oshirish va tibbiyot markazi xodimlarini
+                        turli xil ijtimoiy imtiyozlar bilan ta&apos;minlash
+                        uchun ishlaydi, masalan, tibbiy sug&apos;urta, pensiya
+                        to&apos;lovlari va boshqa qo&apos;llab-quvvatlash
+                        vositalarini taqdim etish.
+                      </li>
+                      <li>
+                        Ish haqini oshirish: kasaba uyushmasi tibbiyot
+                        xodimlarining adolatli ish haqini
+                        qo&apos;llab-quvvatlaydi va ish haqi va boshqa
+                        mukofotlarni oshirish uchun markaz ma&apos;muriyati
+                        bilan muzokaralar olib boradi.
+                      </li>
+                      <li>
+                        Kasb-hunar ta&apos;limi va rivojlanishi: u tibbiyot
+                        amaliyotining dolzarb mavzularida malaka oshirish
+                        kurslari va treninglar o&apos;tkazish orqali
+                        xodimlarning kasbiy tayyorgarligi va rivojlanishini
+                        tashkil qiladi va qo&apos;llab-quvvatlaydi.
+                      </li>
+                      <li>
+                        Kollektiv vakillik: kasaba uyushmasi o&apos;z
+                        a&apos;zolarining manfaatlarini tibbiyot markazi
+                        ma&apos;muriyati oldida ifodalaydi, ish sharoitlari va
+                        mehnat munosabatlari bilan bog&apos;liq muhim
+                        masalalarni hal qilishda jamoaviy ovoz sifatida
+                        ishlaydi.
+                      </li>
+                      <li>
+                        Ijtimoiy qo&apos;llab-quvvatlash va yordam: u kasallik
+                        yoki baxtsiz hodisa yuz berganda moliyaviy yordam
+                        ko&apos;rsatish kabi qiyin hayotiy vaziyatlarda o&apos;z
+                        a&apos;zolariga ijtimoiy yordam ko&apos;rsatadi.
+                      </li>
+                      <li>
+                        Qulay ish muhitini yaratishga ko&apos;maklashish: kasaba
+                        uyushmasi tibbiyot markazining barcha xodimlarining
+                        ehtiyojlari va manfaatlarini hisobga oladigan, jamoaning
+                        ma&apos;naviyati va kasbiy ish darajasini oshirishga
+                        yordam beradigan qulay ish muhitini yaratishga yordam
+                        beradi.
+                      </li>
+                    </ul>
+                  </motion.div>
+                </div>
+              </Reveal>
             </div>
           )}
         </div>
