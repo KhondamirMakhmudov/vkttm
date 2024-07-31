@@ -22,16 +22,26 @@ export default function Home() {
       <Header />
       <Menu />
       <main
-        className={"w-full h-[650px] bg-no-repeat bg-cover"}
+        className={"w-full h-[650px] bg-no-repeat md:bg-cover bg-center"}
         style={{ backgroundImage: "url(/images/main-bg.png)" }}
       >
-        <div className={"grid grid-cols-12 gap-x-[30px] container mx-auto"}>
-          <div className={"col-span-5 translate-y-1/2"}>
+        <div
+          className={
+            "grid grid-cols-12 gap-x-[30px] container mx-auto md:px-0 px-[20px]"
+          }
+        >
+          <div
+            className={
+              "xl:col-span-5 md:col-span-10 col-span-12 translate-y-1/2 text-center md:text-start"
+            }
+          >
             <motion.h3
               initial={{ opacity: 0, translateX: "-100px" }}
               animate={{ opacity: 100, translateX: "0px" }}
               transition={{ duration: 0.7 }}
-              className={"font-mulish font-bold text-[#0D4866]"}
+              className={
+                "font-mulish font-bold md:text-base text-sm text-[#0D4866]"
+              }
             >
               Xalqimizga xizmat - oliy ne’mat
             </motion.h3>
@@ -41,7 +51,7 @@ export default function Home() {
               animate={{ opacity: 100, translateX: "0px" }}
               transition={{ duration: 0.7 }}
               className={
-                "text-[#0D4866] font-bold text-[48px] font-poppins mt-[30px] mb-[20px]"
+                "text-[#0D4866] font-bold md:text-[48px] text-[30px] font-poppins mt-[30px] mb-[20px]"
               }
             >
               Zamonaviy tibbiyot xizmatlari markazi
@@ -51,7 +61,9 @@ export default function Home() {
               initial={{ opacity: 0, translateX: "-100px" }}
               animate={{ opacity: 100, translateX: "0px" }}
               transition={{ duration: 0.7 }}
-              className={"font-mulish text-[20px] mb-[30px] text-[#0D4866]"}
+              className={
+                "font-mulish md:text-[20px] text-base mb-[30px] text-[#0D4866]"
+              }
             >
               Markaz doim barcha uchun ochiq, birlamchi tibbiy yordam va
               zamonaviy tibbiyot xizmarlaridan foydalaning{" "}
@@ -62,7 +74,7 @@ export default function Home() {
               animate={{ opacity: 100 }}
               transition={{ duration: 0.7 }}
               className={
-                "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[55px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
+                "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] md:px-[55px] px-[40px] rounded-br-[10px] rounded-tl-[10px] text-white md:text-base text-sm transition-all duration-300"
               }
             >
               <Link href={"/about"}>Batafsil</Link>
