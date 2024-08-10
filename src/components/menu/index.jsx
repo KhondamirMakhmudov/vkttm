@@ -82,7 +82,7 @@ const Index = ({ active = 0 }) => {
       <motion.div
         initial={{ opacity: 0, translateY: "30px" }}
         animate={{ opacity: 100, translateY: "0px" }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.4 }}
         className={
           "hidden md:flex container mx-auto  items-center gap-x-[63px] py-[20px]"
         }

@@ -38,7 +38,7 @@ export default function Home() {
             <motion.h3
               initial={{ opacity: 0, translateX: "-100px" }}
               animate={{ opacity: 100, translateX: "0px" }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.4 }}
               className={
                 "font-mulish font-bold md:text-base text-sm text-[#0D4866]"
               }
@@ -49,7 +49,7 @@ export default function Home() {
             <motion.h1
               initial={{ opacity: 0, translateX: "100px" }}
               animate={{ opacity: 100, translateX: "0px" }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.4 }}
               className={
                 "text-[#0D4866] font-bold md:text-[48px] text-[30px] font-poppins mt-[30px] mb-[20px]"
               }
@@ -60,7 +60,7 @@ export default function Home() {
             <motion.p
               initial={{ opacity: 0, translateX: "-100px" }}
               animate={{ opacity: 100, translateX: "0px" }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.4 }}
               className={
                 "font-mulish md:text-[20px] text-base mb-[30px] text-[#0D4866]"
               }
@@ -68,32 +68,192 @@ export default function Home() {
               Markaz doim barcha uchun ochiq, birlamchi tibbiy yordam va
               zamonaviy tibbiyot xizmarlaridan foydalaning{" "}
             </motion.p>
-
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 100 }}
-              transition={{ duration: 0.7 }}
+            <Link
+              href={"/about"}
               className={
                 "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] md:px-[55px] px-[40px] rounded-br-[10px] rounded-tl-[10px] text-white md:text-base text-sm transition-all duration-300"
               }
             >
-              <Link href={"/about"}>Batafsil</Link>
-            </motion.button>
+              <motion.button
+                initial={{ opacity: 0, translateX: "-100px" }}
+                animate={{ opacity: 100, translateX: "0px" }}
+                transition={{ duration: 0.4 }}
+              >
+                Batafsil
+              </motion.button>
+            </Link>
           </div>
         </div>
       </main>
-      <section className={"bg-[#EFF8F9] pb-[70px] md:pt-[240px] pt-[400px]"}>
+      <section className="md:hidden block">
+        <motion.ul
+          initial={{ opacity: 0, translateY: "100px" }}
+          animate={{ opacity: 100, translateY: "0px" }}
+          transition={{ duration: 0.4 }}
+          className={"bg-white mx-[50px] py-[50px] flex flex-col gap-y-[20px]"}
+        >
+          <motion.li
+            className={
+              "cursor-pointer border flex flex-col gap-y-[20px] py-[30px] px-[20px] justify-center items-center text-center w-full lg:gap-x-[20px] gap-x-[10px] rounded-bl-[50px] rounded-tr-[50px] announce-list-shadow"
+            }
+            initial={{ opacity: 0, translateX: "-100px" }}
+            animate={{ opacity: 100, translateX: "0px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <Image
+              src={"/images/doctors.png"}
+              alt={"doctors"}
+              width={50}
+              height={50}
+              className={
+                "bg-[#00AFC0] p-[10px] rounded-full ] w-[50px] h-[50px] "
+              }
+            />
+
+            <motion.div
+              initial={{ opacity: 0, translateY: "100px" }}
+              animate={{ opacity: 100, translateY: "0px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3
+                className={
+                  "!text-[20px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                }
+              >
+                Shifokorlar
+              </h3>
+
+              <p
+                className={
+                  "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px] font-normal lg:my-[10px] my-[5px]"
+                }
+              >
+                Tibbiyot markazidagi oliy toifali shifokorlarning tibbiy
+                xizmatlaridan foydalaning
+              </p>
+
+              <button
+                className={
+                  "font-poppins xl:text-base lg:text-sm md:text-xs text-[10px] font-medium border-b-[2px] border-b-[#00AFC0]"
+                }
+              >
+                <Link href={"/to-be-healty/id"}>Barchasi</Link>
+              </button>
+            </motion.div>
+          </motion.li>
+          <motion.li
+            initial={{ opacity: 0, translateX: "100px" }}
+            animate={{ opacity: 100, translateX: "0px" }}
+            transition={{ duration: 0.5 }}
+            className={
+              "cursor-pointer border flex flex-col gap-y-[20px] py-[30px] px-[20px] justify-center items-center text-center w-full lg:gap-x-[20px] gap-x-[10px] rounded-bl-[50px] rounded-tr-[50px] announce-list-shadow"
+            }
+          >
+            <Image
+              src={"/images/health-blog.png"}
+              alt={"health-blog"}
+              width={50}
+              height={50}
+              className={
+                "bg-[#00AFC0] p-[10px] rounded-full ] w-[50px] h-[50px] "
+              }
+            />
+
+            <motion.div
+              initial={{ opacity: 0, translateY: "100px" }}
+              animate={{ opacity: 100, translateY: "0px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3
+                className={
+                  "!text-[20px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                }
+              >
+                Salomatlik blogi{" "}
+              </h3>
+
+              <p
+                className={
+                  "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px]  font-normal lg:my-[10px] my-[5px]"
+                }
+              >
+                Sog’lom bo’lish uchun turli tavsiya, maqola, ilmiy ishlardan
+                namunalar bilan tanishing
+              </p>
+
+              <button
+                className={
+                  "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
+                }
+              >
+                <Link href={"/to-be-healthy"}>Barchasi</Link>
+              </button>
+            </motion.div>
+          </motion.li>
+          <motion.li
+            initial={{ opacity: 0, translateX: "-100px" }}
+            animate={{ opacity: 100, translateX: "0px" }}
+            transition={{ duration: 0.5 }}
+            className={
+              "cursor-pointer border flex flex-col gap-y-[20px] py-[30px] px-[20px] justify-center items-center text-center w-full lg:gap-x-[20px] gap-x-[10px] rounded-bl-[50px] rounded-tr-[50px] announce-list-shadow"
+            }
+          >
+            <Image
+              src={"/images/contact.png"}
+              alt={"contacts"}
+              width={50}
+              height={50}
+              className={
+                "bg-[#00AFC0] p-[10px] rounded-full ] w-[50px] h-[50px] "
+              }
+            />
+
+            <motion.div
+              initial={{ opacity: 0, translateY: "100px" }}
+              animate={{ opacity: 100, translateY: "0px" }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3
+                className={
+                  "!text-[20px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                }
+              >
+                Biz bilan bog’laning
+              </h3>
+
+              <p
+                className={
+                  "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px]  font-normal my-[10px]"
+                }
+              >
+                Savollar, murojaatlarni onlayn yuborish va va qo’shimcha
+                ma’lumotlar olish imkoniyati
+              </p>
+
+              <button
+                className={
+                  "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
+                }
+              >
+                <Link href={"/to-be-healty/id"}>Barchasi</Link>
+              </button>
+            </motion.div>
+          </motion.li>
+        </motion.ul>
+      </section>
+      <section className={"bg-[#EFF8F9] pb-[70px] md:pt-[240px] pt-[70px]"}>
         <div
           className={
             "grid grid-cols-12 gap-x-[30px] container mx-auto lg:px-0 px-[20px]  relative"
           }
         >
+          {/* desktop */}
           <motion.ul
             initial={{ opacity: 0, translateY: "100px" }}
             animate={{ opacity: 100, translateY: "0px" }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.4 }}
             className={
-              "absolute md:-top-[300px] -top-[550px] mx-[120px] bg-white flex md:flex-row flex-col gap-y-[30px] md:gap-y-0 gap-x-[30px] px-[30px] py-[50px] max-w-[1170px] rounded-bl-[50px] rounded-tr-[50px] "
+              "absolute hidden md:-top-[300px] -top-[550px] mx-[120px] bg-white md:flex md:flex-row flex-col gap-y-[30px] md:gap-y-0 gap-x-[30px] px-[30px] py-[50px] max-w-[1170px] rounded-bl-[50px] rounded-tr-[50px] "
             }
           >
             <motion.li
@@ -102,7 +262,7 @@ export default function Home() {
               }
               initial={{ opacity: 0, translateY: "100px" }}
               animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.9 }}
+              transition={{ duration: 0.5 }}
             >
               <Image
                 src={"/images/doctors.png"}
@@ -117,7 +277,7 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0, translateY: "100px" }}
                 animate={{ opacity: 100, translateY: "0px" }}
-                transition={{ duration: 1.1 }}
+                transition={{ duration: 0.6 }}
               >
                 <h3
                   className={
@@ -148,7 +308,7 @@ export default function Home() {
             <motion.li
               initial={{ opacity: 0, translateY: "100px" }}
               animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.9 }}
+              transition={{ duration: 0.5 }}
               className={
                 "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
               }
@@ -166,7 +326,7 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0, translateY: "100px" }}
                 animate={{ opacity: 100, translateY: "0px" }}
-                transition={{ duration: 1.1 }}
+                transition={{ duration: 0.6 }}
               >
                 <h3
                   className={
@@ -197,7 +357,7 @@ export default function Home() {
             <motion.li
               initial={{ opacity: 0, translateY: "100px" }}
               animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.9 }}
+              transition={{ duration: 0.5 }}
               className={
                 "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
               }
@@ -215,7 +375,7 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0, translateY: "100px" }}
                 animate={{ opacity: 100, translateY: "0px" }}
-                transition={{ duration: 1.1 }}
+                transition={{ duration: 0.6 }}
               >
                 <h3
                   className={
@@ -261,7 +421,7 @@ export default function Home() {
             <RevealRight>
               <Title>Sog‘lig‘ingizni bizga ishoning!</Title>
 
-              <p className={"mt-[20px] mb-[50px]"}>
+              <p className={"mt-[20px] font-mulish text-lg mb-[50px]"}>
                 Bizning yuqori malakali mutaxassislarimiz jamoasi sizni
                 og&apos;riqsiz sog&apos;lig&apos;ingizni tez va oson tiklash
                 uchun eng yangi shifo texnologiyalaridan foydalanadi. Biz
@@ -270,13 +430,15 @@ export default function Home() {
                 dori vositalari orqali amalga oshiriladi
               </p>
 
-              <button
-                className={
-                  "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[59px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
-                }
-              >
-                Biz bilan bog‘laning
-              </button>
+              <Link href={"#"}>
+                <button
+                  className={
+                    "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[59px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
+                  }
+                >
+                  Biz bilan bog‘laning
+                </button>
+              </Link>
             </RevealRight>
           </div>
         </div>

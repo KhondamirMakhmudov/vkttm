@@ -10,7 +10,7 @@ const Index = () => {
       <motion.div
         initial={{ opacity: 0, translateY: "-30px" }}
         animate={{ opacity: 100, translateY: "0px" }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.4 }}
         className={
           " hidden md:flex justify-between container mx-auto py-[12px]"
         }
