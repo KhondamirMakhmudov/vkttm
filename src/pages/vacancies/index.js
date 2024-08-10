@@ -9,7 +9,7 @@ const Vacancies = () => {
     <Wrapper>
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto my-[50px] gap-y-[30px]"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto py-[50px] gap-y-[30px]"
         }
       >
         <div className={"col-span-12 mb-[30px]"}>

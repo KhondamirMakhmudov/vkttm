@@ -477,9 +477,17 @@ export default function Home() {
         <div className={"col-span-12"}></div>
       </section>
 
-      <section className={"medical-service py-[90px]"}>
+      <section
+        className={
+          " w-full h-[520px] relative   py-[90px] bg-no-repeat bg-cover bg-center z-10"
+        }
+        style={{ backgroundImage: "url(/images/Pluses.png)" }}
+      >
+        <div class="absolute inset-0 medical-service bg-opacity-50 before:absolute after:inset-0 after:medical-service before:opacity-10 -z-10"></div>
         <Reveal>
-          <div className={"container mx-auto grid grid-cols-12 gap-x-[30px]"}>
+          <div
+            className={"container mx-auto grid grid-cols-12 gap-x-[30px] z-50"}
+          >
             <div className={"col-span-6 !text-white"}>
               <Title textColor={"#fff"}>Yuqori malakali tibbiy xizmat</Title>
 

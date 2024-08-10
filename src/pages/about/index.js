@@ -83,7 +83,10 @@ const Index = () => {
     <Wrapper>
       <section className={"bg-white py-[50px]"}>
         <div className={"grid grid-cols-12 gap-x-[30px] container mx-auto"}>
-          <div
+          <motion.div
+            initial={{ opacity: 0, translateX: "-100px" }}
+            animate={{ opacity: 100, translateX: "0px" }}
+            transition={{ duration: 0.5 }}
             className={
               "col-span-3 bg-[#EFF8F9] font-poppins font-medium max-h-[432px]"
             }
@@ -189,7 +192,7 @@ const Index = () => {
                 </button>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {activeTab === "markaz-tuzilmasi" && (
             <div className={"col-span-9"}>

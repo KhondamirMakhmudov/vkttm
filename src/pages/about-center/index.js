@@ -7,6 +7,7 @@ import CountUp from "react-countup";
 import Reveal from "@/components/reveal";
 import RevealLeft from "@/components/reveal/revealLeft";
 import RevealRight from "@/components/reveal/revealRight";
+import Link from "next/link";
 
 const Index = () => {
   return (
@@ -17,7 +18,11 @@ const Index = () => {
             <RevealLeft>
               <Title>Markaz haqida</Title>
 
-              <p className={"font-mulish text-[20px] font-normal my-[30px]"}>
+              <p
+                className={
+                  "font-mulish xl:text-[20px] lg:text-[18px] font-normal my-[30px]"
+                }
+              >
                 Ko&apos;p funktsiyali tibbiyot markazi bir joyda keng
                 ko&apos;lamli tibbiy xizmatlarni taqdim etadi, bu esa tashxis
                 qo&apos;yish va davolashni bemorlar uchun qulay va samarali
@@ -39,7 +44,7 @@ const Index = () => {
                 "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[58px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
               }
             >
-              Biz bilan bog‘laning
+              <Link href={"/about"}>To‘liq o‘qish</Link>
             </motion.button>
           </div>
 
@@ -151,7 +156,7 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={2400} duration={5} />
+                    <CountUp end={2400} duration={3} />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 

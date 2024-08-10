@@ -137,6 +137,7 @@ const Footer = () => {
             </div>
           </div>
 
+
           <div className={"md:col-span-3 col-span-12 font-poppins text-white"}>
             <h3 className={"text-lg font-medium"}>Manzil</h3>
             <p className={"text-sm mt-[10px] mb-[20px]"}>

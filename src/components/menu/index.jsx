@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Brand from "@/components/brand";
-import { get } from "lodash/object";
+import { get, isEmpty, isEqual } from "lodash";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Reveal from "../reveal";
 import RevealRight from "../reveal/revealRight";
+import clsx from "clsx";
 
 const menuData = [
   {
@@ -33,7 +34,24 @@ const menuData = [
   {
     id: 5,
     title: "Matbuot xizmati",
-    url: "/matbuot-xizmati",
+    url: "#",
+    subMenu: [
+      {
+        id: 1,
+        title: "Yangiliklar",
+        url: "/news",
+      },
+      {
+        id: 2,
+        title: "E'lonlar",
+        url: "/announcements",
+      },
+      {
+        id: 3,
+        title: "Vakansiyalar",
+        url: "/vacancies",
+      },
+    ],
   },
   {
     id: 6,
@@ -42,8 +60,18 @@ const menuData = [
   },
 ];
 
-const Index = () => {
+const Index = ({ active = 0 }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleMenu = () => {
+    setOpen(!open);
+  };
 
   const burgerMenu = () => {
     setOpenMenu(!openMenu);
@@ -67,8 +95,48 @@ const Index = () => {
             }
           >
             {menuData.map((item) => (
-              <li key={get(item, "id")}>
-                <Link href={get(item, "url")}>{get(item, "title")}</Link>
+              <li key={get(item, "id")} className="  relative">
+                <Link
+                  className="hover:text-[#00AFC0] transition-all duration-300"
+                  href={get(item, "url")}
+                  onClick={toggleDropdown}
+                >
+                  {get(item, "title")}
+                </Link>
+
+                {isEmpty(get(item, "subMenu")) ? (
+                  ""
+                ) : (
+                  <ul
+                    className={
+                      "hidden  z-50   bg-gray-50 dropdown-menu absolute lg:w-[180px] w-[100px] text-start shadow-xl  rounded-[5px]"
+                    }
+                  >
+                    {get(item, "subMenu", []).map((subItem) => (
+                      <Link
+                        key={get(subItem, "id")}
+                        className={clsx(
+                          "hover:text-[#00AFC0] transition-all  text-[14px] border-b-transparent font-medium ",
+                          {
+                            "!border-b-[#1890FF] text-[#001A57]": isEqual(
+                              get(item, "id"),
+                              active
+                            ),
+                          }
+                        )}
+                        href={get(subItem, "url")}
+                      >
+                        <li
+                          className={
+                            "p-[10px] border-b-[1px] border-b-[#D6E0F5] "
+                          }
+                        >
+                          {get(subItem, "title")}
+                        </li>
+                      </Link>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>

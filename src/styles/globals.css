@@ -54,7 +54,6 @@ body {
 
 .medical-service {
   background: rgba(0, 125, 139, 0.8);
-
 }
 
 .about-center-shadow {
@@ -63,4 +62,14 @@ body {
 
 .content__min_h{
   min-height: calc(100vh - 425px);
+}
+
+.dropdown-menu {
+  position: absolute;
+
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+
 }
