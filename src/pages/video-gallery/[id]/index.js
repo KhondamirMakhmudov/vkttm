@@ -2,19 +2,40 @@ import React, { useState } from "react";
 import Wrapper from "@/layout/wrapper";
 import Link from "next/link";
 import Image from "next/image";
-
-const images = [
-  "/images/gallery1.png",
-  "/images/gallery2.png",
-  "/images/gallery3.png",
-  "/images/gallery4.png",
-];
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { useRouter } from "next/router";
+import { URLS } from "@/constants/url";
+import ContentLoader from "@/components/content-loader";
+import { get } from "lodash";
+import dayjs from "dayjs";
+import ReactPlayer from "react-player";
 
 const Index = () => {
-  const [selectedImage, setSelectedImage] = useState(images[0]);
+  const [selectedVideo, setSelectedVideo] = useState("");
+  const router = useRouter();
+  const { id } = router.query;
+
+  const {
+    data: video,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: [KEYS.video, id],
+    url: `${URLS.video}${id}`,
+    enabled: !!id,
+  });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
 
   const handleClick = (image) => {
-    setSelectedImage(image);
+    setSelectedVideo(image);
   };
   return (
     <Wrapper>
@@ -27,13 +48,11 @@ const Index = () => {
           <p>Bosh sahifa</p>
         </Link>
         <span>/</span>
-        <Link href={"/announcements"}>
-          <p> Barcha e’lonlar</p>
+        <Link href={"/video-gallery"}>
+          <p> Videolavhalar</p>
         </Link>
         <span>/</span>
-        <p className={"text-[#036874]"}>
-          Samarqand viloyat ko’p tarmoqli tibbiyot markazi{" "}
-        </p>
+        <p className={"text-[#036874]"}>{get(video, "data.video_title")}</p>
       </div>
 
       <div
@@ -42,8 +61,7 @@ const Index = () => {
         }
       >
         <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
-          Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya
-          hamkorligi
+          {get(video, "data.video_title")}
         </h1>
 
         <div
@@ -54,7 +72,9 @@ const Index = () => {
           <p>Galereya</p>
           {/*how many times was seen*/}
 
-          <p className={""}>20.06.2024</p>
+          <p className={""}>
+            {dayjs(get(video, "data.date_time")).format("DD.MM.YYYY")}
+          </p>
 
           <div className={"flex items-center gap-x-[15px]"}>
             <div className={"flex items-center gap-x-[4px]"}>
@@ -64,7 +84,7 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>128</p>
+              <p>{get(video, "data.views_count")}</p>
             </div>
             {/*when it is deployed*/}
             <div className={"flex items-center gap-x-[4px]"}>
@@ -74,31 +94,45 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>18:24</p>
+              <p>{dayjs(get(video, "data.date_time")).format("HH:mm")}</p>
             </div>
           </div>
         </div>
 
         <div className={"col-span-8"}>
-          <Image
-            src={selectedImage}
-            alt={`${selectedImage}`}
+          <ReactPlayer
+            url={selectedVideo}
             width={930}
             height={540}
-            className={"mb-[30px] max-h-[540px]"}
+            playIcon={
+              <Image
+                src={"/icons/playIcon.svg"}
+                alt="playIcon"
+                width={48}
+                height={48}
+              />
+            }
           />
 
           <div className={"flex gap-x-[20px]"}>
-            {images.map((image, index) => (
-              <Image
-                key={index}
-                src={image}
-                alt={`image`}
-                width={200}
-                height={147}
-                className={"cursor-pointer"}
-                onClick={() => handleClick(image)}
-              />
+            {get(video, "data.video_links").map((item, index) => (
+              <div key={index} onClick={() => handleClick(item)}>
+                <ReactPlayer
+                  url={item}
+                  key={index}
+                  width={200}
+                  height={157}
+                  pip={true}
+                  playIcon={
+                    <Image
+                      src={"/icons/playIcon.svg"}
+                      alt="playIcon"
+                      width={48}
+                      height={48}
+                    />
+                  }
+                />
+              </div>
             ))}
           </div>
         </div>

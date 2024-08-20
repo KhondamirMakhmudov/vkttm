@@ -5,11 +5,20 @@ import Image from "next/image";
 import Title from "@/components/title";
 import Reveal from "@/components/reveal";
 import AnnouncementCard from "@/components/cards/announcement";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get } from "lodash";
 
 const Index = () => {
   const [tab, setTab] = useState("card");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("barchasi");
+
+  const { data: news, isLoading } = useGetQuery({
+    key: KEYS.news,
+    url: URLS.news,
+  });
 
   const selectTab = (tab) => {
     setTab(tab);
@@ -274,27 +283,31 @@ const Index = () => {
             </div>
           </div>
         </Reveal>
-        <div
-          className={
-            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
-          }
-        >
-          <div className={`${tab === "card" ? "col-span-4" : "col-span-12"} `}>
-            <News template={tab === "card" ? "card" : "list"} />
+        <Reveal duration={0.3}>
+          <div
+            className={
+              "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
+            }
+          >
+            {get(news, "data.results", []).map((item, index) => (
+              <div
+                key={get(item, "id")}
+                className={`${tab === "card" ? "col-span-4" : "col-span-12"} `}
+              >
+                <News
+                  template={tab === "card" ? "card" : "list"}
+                  views={get(item, "views_count")}
+                  title={get(item, "news_title")}
+                  date={get(item, "date_time")}
+                  time={get(item, "date_time")}
+                  desc={get(item, "news_desc")}
+                  image={get(item, "news_image")}
+                  url={get(item, "id")}
+                />
+              </div>
+            ))}
           </div>
-
-          <div className={`${tab === "card" ? "col-span-4" : "col-span-12"} `}>
-            <News template={tab === "card" ? "card" : "list"} />
-          </div>
-
-          <div className={`${tab === "card" ? "col-span-4" : "col-span-12"} `}>
-            <News template={tab === "card" ? "card" : "list"} />
-          </div>
-
-          <div className={`${tab === "card" ? "col-span-4" : "col-span-12"} `}>
-            <News template={tab === "card" ? "card" : "list"} />
-          </div>
-        </div>
+        </Reveal>
       </section>
     </Wrapper>
   );

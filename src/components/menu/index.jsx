@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import Brand from "@/components/brand";
-import { get, isEmpty, isEqual } from "lodash";
+import { dropRight, get, isEmpty, isEqual } from "lodash";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Reveal from "../reveal";
 import RevealRight from "../reveal/revealRight";
 import clsx from "clsx";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
 
 const menuData = [
   {
@@ -65,6 +68,17 @@ const Index = ({ active = 0 }) => {
   const [open, setOpen] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
+  const {
+    data: navMenu,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.menu,
+    url: URLS.menu,
+  });
+
+  console.log(navMenu, "menu");
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -91,52 +105,54 @@ const Index = ({ active = 0 }) => {
         <div className={"flex items-center "}>
           <ul
             className={
-              "flex gap-x-[26px] font-poppins xl:text-base md:text-xs  font-medium"
+              "flex gap-x-[20px] font-poppins xl:text-base md:text-xs  font-medium"
             }
           >
-            {menuData.map((item) => (
-              <li key={get(item, "id")} className="  relative">
+            {dropRight(get(navMenu, "data", []), 2).map((item) => (
+              <li key={get(item, "id")} className="dropdown relative">
                 <Link
                   className="hover:text-[#00AFC0] transition-all duration-300"
-                  href={get(item, "url")}
-                  onClick={toggleDropdown}
+                  href={`${get(item, "title")
+                    .toLowerCase()
+                    .replace(" ", "-")
+                    .replace("'", "")}`}
                 >
                   {get(item, "title")}
                 </Link>
 
-                {isEmpty(get(item, "subMenu")) ? (
-                  ""
-                ) : (
-                  <ul
-                    className={
-                      "hidden  z-50   bg-gray-50 dropdown-menu absolute lg:w-[180px] w-[100px] text-start shadow-xl  rounded-[5px]"
-                    }
-                  >
-                    {get(item, "subMenu", []).map((subItem) => (
-                      <Link
-                        key={get(subItem, "id")}
-                        className={clsx(
-                          "hover:text-[#00AFC0] transition-all  text-[14px] border-b-transparent font-medium ",
-                          {
-                            "!border-b-[#1890FF] text-[#001A57]": isEqual(
-                              get(item, "id"),
-                              active
-                            ),
-                          }
-                        )}
-                        href={get(subItem, "url")}
+                {isEmpty(get(item, "submenus", []))
+                  ? ""
+                  : isOpen && (
+                      <ul
+                        className={
+                          "dropdown-menu z-50   bg-gray-50  absolute lg:w-[180px] w-[100px] text-start shadow-xl  rounded-[5px]"
+                        }
                       >
-                        <li
-                          className={
-                            "p-[10px] border-b-[1px] border-b-[#D6E0F5] "
-                          }
-                        >
-                          {get(subItem, "title")}
-                        </li>
-                      </Link>
-                    ))}
-                  </ul>
-                )}
+                        {get(item, "submenus", []).map((subItem) => (
+                          <Link
+                            key={get(subItem, "id")}
+                            className={clsx(
+                              "hover:text-[#00AFC0] transition-all  text-[14px] border-b-transparent font-medium ",
+                              {
+                                "!border-b-[#1890FF] text-[#001A57]": isEqual(
+                                  get(item, "id"),
+                                  active
+                                ),
+                              }
+                            )}
+                            href={"#"}
+                          >
+                            <li
+                              className={
+                                "p-[10px] border-b-[1px] border-b-[#D6E0F5] "
+                              }
+                            >
+                              {get(subItem, "title")}
+                            </li>
+                          </Link>
+                        ))}
+                      </ul>
+                    )}
               </li>
             ))}
           </ul>

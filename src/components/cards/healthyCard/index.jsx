@@ -1,36 +1,50 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import dayjs from "dayjs";
 
-const HealthyCard = ({ template = "card", width = "630px" }) => {
+const HealthyCard = ({
+  template = "card",
+  width = "630px",
+  title,
+  url,
+  date,
+  time,
+  image,
+  viewsCount,
+}) => {
+  const formattedDate = dayjs(date).format("DD.MM.YYYY");
+  const formattedTime = dayjs(time).format("HH:mm");
   return (
     <>
       {template === "card" && (
         <div
-          className={`flex cursor-pointer hover:shadow-2xl  gap-x-[30px] bg-white p-[20px] rounded-[10px] announce-list-shadow max-w-[${width}] transition-all duration-300`}
+          className={`flex justify-between  cursor-pointer hover:shadow-2xl  gap-x-[30px] bg-white p-[20px] rounded-[10px] announce-list-shadow max-w-[${width}] transition-all duration-300`}
         >
-          <div className={" "}>
-            <h4 className={"font-mulish text-sm text-[#037582] mb-[10px]"}>
+          <div
+            className={"flex flex-col justify-between gap-y-[10px] w-[414px]"}
+          >
+            <h4 className={"font-mulish text-sm text-[#037582] "}>
               Sog‘lom bo‘lish uchun
             </h4>
             {/* desc of announcement */}
-            <p className={"my-[15px] font-medium  flex-1"}>
-              Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya
-              hamkorligi Samarqand viloyat ko’p tarmoqli tibbiyot markazi va
-              Belorusiya hamkorligi
-            </p>
+            <Link href={"#"}>
+              <p className={"font-medium flex-grow"}>{title}</p>
+            </Link>
 
-            <button
-              className={
-                "font-poppins inline-block font-medium border-b-[2px] border-b-[#00AFC0] mb-[10px]"
-              }
-            >
-              <Link href={"/to-be-healthy/id"}>Batafsil</Link>
-            </button>
+            <Link href={`/to-be-healthy/${url}`}>
+              <button
+                className={
+                  "font-poppins  font-medium border-b-[2px] border-b-[#00AFC0] "
+                }
+              >
+                Batafsil
+              </button>
+            </Link>
 
             <div className={"text-sm text-[#037582] flex justify-between"}>
               {/*date*/}
-              <p className={"font-mulish text-sm  "}>20.06.2024</p>
+              <p className={"font-mulish text-sm  "}>{formattedDate}</p>
               <div className={"flex gap-x-[10px]"}>
                 {/*how many times was seen*/}
                 <div className={"flex items-center gap-x-[4px]"}>
@@ -40,7 +54,7 @@ const HealthyCard = ({ template = "card", width = "630px" }) => {
                     width={18}
                     height={18}
                   />
-                  <p>128</p>
+                  <p>{viewsCount}</p>
                 </div>
                 {/*when it is deployed*/}
                 <div className={"flex items-center gap-x-[4px]"}>
@@ -50,7 +64,7 @@ const HealthyCard = ({ template = "card", width = "630px" }) => {
                     width={18}
                     height={18}
                   />
-                  <p>18:24</p>
+                  <p>{formattedTime}</p>
                 </div>
 
                 {/*  active or not */}
@@ -60,8 +74,9 @@ const HealthyCard = ({ template = "card", width = "630px" }) => {
           </div>
 
           <Image
-            src={"/images/img3.png"}
-            alt={"announcement"}
+            src={`${image}`}
+            loader={() => image}
+            alt={"recommendation"}
             width={220}
             height={164}
             className={"rounded-[10px] "}
@@ -77,8 +92,9 @@ const HealthyCard = ({ template = "card", width = "630px" }) => {
         >
           <div className={"min-w-[156px] max-h-[120px]"}>
             <Image
-              src={"/images/img3.png"}
-              alt={"announcement"}
+              src={`${image}`}
+              loader={() => image}
+              alt={"recommendation"}
               width={156}
               height={120}
               className={"w-[156px] h-[120px]"}
@@ -103,10 +119,10 @@ const HealthyCard = ({ template = "card", width = "630px" }) => {
                       width={18}
                       height={18}
                     />
-                    <p>128</p>
+                    <p>{viewsCount}</p>
                   </div>
 
-                  <p className={"font-mulish text-sm  "}>20.06.2024</p>
+                  <p className={"font-mulish text-sm  "}>{formattedDate}</p>
                   {/*when it is deployed*/}
                   <div className={"flex items-center gap-x-[4px]"}>
                     <Image
@@ -115,25 +131,24 @@ const HealthyCard = ({ template = "card", width = "630px" }) => {
                       width={18}
                       height={18}
                     />
-                    <p>18:24</p>
+                    <p>{formattedTime}</p>
                   </div>
                   {/*  active or not */}
                 </div>
               </div>
             </div>
-
-            <p className={"my-[20px] font-medium text-lg   flex-1"}>
-              Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya
-              hamkorligi Samarqand viloyat ko’p tarmoqli tibbiyot markazi va
-              Belorusiya hamkorligi
-            </p>
+            <Link href={`/to-be-healty/${url}`}>
+              <p className={"my-[20px] font-medium text-lg   flex-1"}>
+                {title}
+              </p>
+            </Link>
 
             <button
               className={
                 "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
               }
             >
-              <Link href={"/to-be-healty/id"}>Batafsil</Link>
+              <Link href={`/to-be-healty/${url}`}>Batafsil</Link>
             </button>
           </div>
         </div>

@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import Wrapper from "@/layout/wrapper";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get } from "lodash";
+import dayjs from "dayjs";
 
 const images = [
   "/images/gallery1.png",
@@ -11,6 +17,15 @@ const images = [
 ];
 
 const Index = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const { data: photo, isLoading } = useGetQuery({
+    key: [KEYS.photo, id],
+    url: `${URLS.photo}${id}`,
+    enabled: !!id,
+  });
+
   const [selectedImage, setSelectedImage] = useState(images[0]);
 
   const handleClick = (image) => {
@@ -27,13 +42,11 @@ const Index = () => {
           <p>Bosh sahifa</p>
         </Link>
         <span>/</span>
-        <Link href={"/announcements"}>
-          <p> Barcha e’lonlar</p>
+        <Link href={"/gallery"}>
+          <p> Galleriya</p>
         </Link>
         <span>/</span>
-        <p className={"text-[#036874]"}>
-          Samarqand viloyat ko’p tarmoqli tibbiyot markazi{" "}
-        </p>
+        <p className={"text-[#036874]"}>{get(photo, "data.photo_title")}</p>
       </div>
 
       <div
@@ -42,8 +55,7 @@ const Index = () => {
         }
       >
         <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
-          Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya
-          hamkorligi
+          {get(photo, "data.photo_title")}
         </h1>
 
         <div
@@ -54,7 +66,9 @@ const Index = () => {
           <p>Galereya</p>
           {/*how many times was seen*/}
 
-          <p className={""}>20.06.2024</p>
+          <p className={""}>
+            {dayjs(get(photo, "data.date_time")).format("DD.MM.YYYY")}
+          </p>
 
           <div className={"flex items-center gap-x-[15px]"}>
             <div className={"flex items-center gap-x-[4px]"}>
@@ -64,7 +78,7 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>128</p>
+              <p>{get(photo, "data.views_count")}</p>
             </div>
             {/*when it is deployed*/}
             <div className={"flex items-center gap-x-[4px]"}>
@@ -74,7 +88,7 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>18:24</p>
+              <p>{dayjs(get(photo, "data.date_time")).format("HH:mm")}</p>
             </div>
           </div>
         </div>
@@ -89,15 +103,16 @@ const Index = () => {
           />
 
           <div className={"flex gap-x-[20px]"}>
-            {images.map((image, index) => (
+            {get(photo, "data.images", []).map((image) => (
               <Image
-                key={index}
-                src={image}
+                key={get(image, "image.id")}
+                src={get(image, "image.file")}
+                loader={() => get(image, "image.file")}
                 alt={`image`}
                 width={200}
                 height={147}
                 className={"cursor-pointer"}
-                onClick={() => handleClick(image)}
+                onClick={() => handleClick(get(image, "image.file"))}
               />
             ))}
           </div>
@@ -114,7 +129,7 @@ const Index = () => {
               </h3>
 
               <Link
-                href={"#"}
+                href={"/to-be-healthy"}
                 className={
                   "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
@@ -128,86 +143,49 @@ const Index = () => {
                 />
               </Link>
             </div>
-
+            {/* last_recommendations yo'q, o'rniga  */}
             <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/health1.png"}
-                  alt={"health1"}
-                  width={170}
-                  height={120}
-                />
-
-                <div>
-                  <p
+              {get(photo, "data.last_recommendations", []).map(
+                (item, index) => (
+                  <li
+                    key={get(item, "id")}
                     className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
+                      "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
                     }
                   >
-                    20.06.2024
-                  </p>
+                    <Image
+                      src={
+                        get(item, "recommendation_image") === null
+                          ? `/images/health${index + 1}.png`
+                          : get(item, "recommendation_image")
+                      }
+                      alt={"health1"}
+                      width={170}
+                      height={120}
+                      className="w-[170px] h-[120px]"
+                    />
 
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Boshi tez-tez ogʼrib turadigan insonlarga tavsiya
-                  </p>
-                </div>
-              </li>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/health2.png"}
-                  alt={"health2"}
-                  width={170}
-                  height={120}
-                />
+                    <div>
+                      <p
+                        className={
+                          "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
+                        }
+                      >
+                        {dayjs(get(item, "date_time")).format("DD.MM.YYYY")}
+                      </p>
 
-                <div>
-                  <p
-                    className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
-                    }
-                  >
-                    20.06.2024
-                  </p>
-
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Boshi tez-tez ogʼrib turadigan insonlarga tavsiya
-                  </p>
-                </div>
-              </li>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/health3.png"}
-                  alt={"health3"}
-                  width={170}
-                  height={120}
-                />
-
-                <div>
-                  <p
-                    className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
-                    }
-                  >
-                    20.06.2024
-                  </p>
-
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Boshi tez-tez ogʼrib turadigan insonlarga tavsiya
-                  </p>
-                </div>
-              </li>
+                      <Link
+                        href={`/to-be-healthy/${get(item, "id")}`}
+                        className="hover:text-[#037582] hover:underline"
+                      >
+                        <p className={"font-poppins text-sm font-normal"}>
+                          {get(item, "recommendation_title")}
+                        </p>
+                      </Link>
+                    </div>
+                  </li>
+                )
+              )}
             </ul>
           </div>
 
@@ -238,33 +216,40 @@ const Index = () => {
             </div>
 
             <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/img3.png"}
-                  alt={"img3"}
-                  width={170}
-                  height={120}
-                />
+              {get(photo, "data.last_news", []).map((item) => (
+                <li
+                  key={get(item, "id")}
+                  className={
+                    "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                  }
+                >
+                  <Image
+                    src={"/images/img3.png"}
+                    alt={"img3"}
+                    width={170}
+                    height={120}
+                  />
 
-                <div>
-                  <p
-                    className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
-                    }
-                  >
-                    20.06.2024
-                  </p>
-
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Samarqand viloyat ko’p tarmoqli tibbiyot markazi va
-                    Belorusiya hamkorligi...
-                  </p>
-                </div>
-              </li>
+                  <div>
+                    <p
+                      className={
+                        "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
+                      }
+                    >
+                      {dayjs(get(item, "date_time")).format("DD.MM.YYYY")}
+                    </p>
+                    <Link href={`/news/${get(item, "id")}`}>
+                      <p
+                        className={
+                          "font-poppins text-sm font-normal line-clamp-3 hover:text-[#037582] hover:underline"
+                        }
+                      >
+                        {get(item, "news_title")}
+                      </p>
+                    </Link>
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

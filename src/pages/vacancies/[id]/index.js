@@ -2,14 +2,44 @@ import React from "react";
 import Wrapper from "@/layout/wrapper";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get } from "lodash";
+import dayjs from "dayjs";
+import parse from "html-react-parser";
+import { NumericFormat } from "react-number-format";
 
 const Index = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const {
+    data: vacancy,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: [KEYS.vacancies, id],
+    url: `${URLS.vacancies}${id}/`,
+    enabled: !!id,
+  });
+
+  // const {
+  //   data: vacancies,
+  //   isLoading: isLoadingVacancies,
+  //   isFetching: isFetchingVacancies,
+  // } = useGetQuery({
+  //   key: KEYS.vacancies,
+  //   url: URLS.vacancies,
+  // });
+
   return (
     <Wrapper>
       <div className={"my-[50px]"}>
         <div
           className={
-            "container mx-auto flex italic font-mulish gap-x-[10px] text-[#494949] "
+            "container mx-auto flex italic font-mulish gap-x-[10px] lg:text-base md:text-sm text-xs text-[#494949] px-[20px] lg:px-0"
           }
         >
           <Link href={"/"}>
@@ -17,30 +47,36 @@ const Index = () => {
           </Link>
           <span>/</span>
           <Link href={"/vacancies"}>
-            <p> Vakansiyalar</p>
+            <p>Vakansiyalar</p>
           </Link>
           <span>/</span>
-          <p className={"text-[#036874]"}>Lavozim nomi</p>
+          <p className={"text-[#036874]"}>{get(vacancy, "data.job_title")}</p>
         </div>
 
         <div
           className={
-            "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium my-[50px]"
+            "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium my-[50px] px-[20px] lg:px-0"
           }
         >
-          <h1 className={"col-span-12 font-medium text-[32px] font-poppins"}>
-            SMM menejer
+          <h1
+            className={
+              "col-span-12 font-medium xl:text-[32px] lg:text-[28px] md:text-[24px] text-[20px] font-poppins"
+            }
+          >
+            {get(vacancy, "data.job_title")}
           </h1>
 
           <div
             className={
-              "col-span-12 flex items-center text-[#037582] gap-x-[30px] font-mulish mb-[50px]"
+              "col-span-12 flex items-center text-[#037582] gap-x-[30px] lg:text-base md:text-sm text-xs font-mulish mb-[50px]"
             }
           >
             <p>Vakansiya</p>
             {/*how many times was seen*/}
 
-            <p className={""}>20.06.2024</p>
+            <p className={""}>
+              {dayjs(get(vacancy, "data.date_time")).format("DD.MM.YYYY")}
+            </p>
 
             <div className={"flex items-center gap-x-[30px]"}>
               <div className={"flex items-center gap-x-[4px]"}>
@@ -50,7 +86,7 @@ const Index = () => {
                   width={18}
                   height={18}
                 />
-                <p>128</p>
+                <p>{get(vacancy, "data.views_count")}</p>
               </div>
               {/*when it is deployed*/}
               <div className={"flex items-center gap-x-[4px]"}>
@@ -60,118 +96,57 @@ const Index = () => {
                   width={18}
                   height={18}
                 />
-                <p>18:24</p>
+                <p>{dayjs(get(vacancy, "data.date_time")).format("HH:mm")}</p>
               </div>
             </div>
           </div>
 
-          <div className={"col-span-8"}>
-            <p className={"font-mulish font-medium text-[#494949]"}>
-              Ijtimoiy tarmoqlarda e’lon qilish uchun matnli kontent, jumladan,
-              postlar, maqolalar, e’lonlar va boshqa materiallarni yaratish,
-              Videoroliklar va audio materiallar uchun kreativ g‘oyalar va
-              mavzularni tayyorlash, Kontent taqvimini ishlab chiqish va uning
-              jadvalini rejalashtirish uchun smm menejer kerak
-            </p>
+          <div className={"lg:col-span-8 col-span-12"}>
+            <div
+              className={
+                "font-mulish font-medium text-[#494949] lg:text-base md:text-sm text-xs"
+              }
+            >
+              {parse(get(vacancy, "data.job_desc", ""))}
+            </div>
 
-            <div className={"my-[30px]"}>
+            <div className={"my-[30px] lg:text-base md:text-sm text-xs"}>
               <p className={"font-bold font-mulish"}>
                 Oylik maosh:{" "}
-                <span className={"font-medium"}>6 000 000 so&apos;mdan</span>
+                <span className={"font-medium"}>
+                  <NumericFormat
+                    value={get(vacancy, "data.job_salary")}
+                    thousandSeparator={" "}
+                    suffix=" so'mdan"
+                  />
+                </span>
               </p>
 
               <p className={"font-bold font-mulish"}>
-                Ish tajribasi: <span className={"font-medium"}>1–3 yil</span>
+                Ish tajribasi:{" "}
+                <span className={"font-medium"}>
+                  {get(vacancy, "data.job_experience")} yil
+                </span>
               </p>
 
               <p className={"font-bold font-mulish"}>
-                To‘liq ish, 1 stavka, 2 ta ish o‘rni
+                {get(vacancy, "data.job_time.job_time")} ish,{" "}
+                {get(vacancy, "data.job_type.job_type")},{" "}
+                {get(vacancy, "data.job_count")} ta ish o‘rni
               </p>
             </div>
 
-            <div>
-              <div>
-                <h2>Vazifalar</h2>
-                <ul className={"font-mulish font-medium list-disc ml-[30px]"}>
-                  <li>
-                    Ijtimoiy uchun kontent strategiyasini ishlab chiqish.
-                    tarmoqlar.
-                  </li>
-                  <li>Tarkibni yaratish, rejalashtirish va nashr etish.</li>
-                  <li>
-                    Tomoshabinlar bilan o&apos;zaro munosabatlar: sharhlarga
-                    javoblar, munozaralarda ishtirok etish. .
-                  </li>
-                  <li>
-                    SMM kampaniyalarining samaradorligini tahlil qilish va
-                    olingan ma&apos;lumotlarga asoslangan strategiyani sozlash.
-                  </li>
-                  <li>
-                    Tomoshabinlarning faolligini oshirish uchun tanlovlar,
-                    aktsiyalar va boshqa tadbirlarni o&apos;tkazish.
-                  </li>
-                </ul>
-              </div>
-
-              <div className={"my-[30px]"}>
-                <h2>Talablar</h2>
-                <ul className={"font-mulish font-medium list-disc ml-[30px]"}>
-                  <li>SMM tajribasi 1 yildan.</li>
-                  <li>Tarkibni yaratish, rejalashtirish va nashr etish.</li>
-                  <li>
-                    Ajoyib muloqot qobiliyatlari va turli xil ijtimoiy
-                    platformalar (Instagram, Facebook, TikTok va boshqalar)
-                    bilan ishlash qobiliyati.
-                  </li>
-                  <li>
-                    Tashabbuskorlik, ijodkorlik va rivojlanishga intilish.
-                  </li>
-                  <li>
-                    Tarkibni yaratish va rejalashtirish dasturlarini bilish
-                    (masalan, Tuval, Hootsuite).
-                  </li>
-                  <li>O&apos;zbek va rus tillarini bilish.</li>
-                </ul>
-              </div>
-
-              <div>
-                <h2>Shartlar</h2>
-                <ul className={"font-mulish font-medium list-disc ml-[30px]"}>
-                  <li>
-                    O&apos;zR TK bo&apos;yicha rasmiy ish bilan ta&apos;minlash.
-                  </li>
-                  <li>Kechiktirmasdan ish haqi.</li>
-                  <li>Ish jadvali 5/2.</li>
-                  <li>
-                    Ish haqi suhbat natijalari bo&apos;yicha muhokama qilinadi.
-                  </li>
-                  <li>Do&apos;stona va yosh jamoa. .</li>
-                  <li>Toshkent shahar markazidagi ofis.</li>
-                </ul>
-              </div>
-
-              <div className={"mt-[30px]"}>
-                <h2>Aloqa</h2>
-                <ul className={"list-disc ml-[30px] text-[#00AFC0] "}>
-                  <li>
-                    <Link
-                      href={"#"}
-                      className={"text-[#00AFC0] font-medium underline"}
-                    >
-                      Aloqa uchun
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+            <div className="font-mulish font-normal lg:text-base md:text-sm text-xs">
+              {parse(get(vacancy, "data.job_text", ""))}
             </div>
           </div>
 
-          <div className={"col-span-4"}>
+          <div className={"lg:col-span-4 col-span-12 mt-[30px] lg:mt-0"}>
             <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
               <div className={"flex items-center justify-between"}>
                 <h3
                   className={
-                    "font-poppins font-medium text-[20px] text-[#494949]"
+                    "font-poppins font-medium lg:text-[20px] md:text-base text-sm  text-[#494949]"
                   }
                 >
                   Boshqa vakansiyalar{" "}
@@ -180,166 +155,76 @@ const Index = () => {
                 <Link
                   href={"/vacancies"}
                   className={
-                    "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                    "lg:text-sm md:text-xs text-[10px] font-poppins text-[#037582] font-normal flex items-center hover:translate-x-[2px] transition-all duration-300"
                   }
                 >
-                  Barchasi
+                  <p>Barchasi</p>
                   <Image
                     src={"/images/arrow-right.png"}
                     alt={"arrow-right"}
                     width={18}
                     height={18}
+                    className="lg:w-[18px] lg:h-[18px] md:w-[15px] md:h-[15px] w-[12px] h-[12px]"
                   />
                 </Link>
               </div>
 
               <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-                <li
-                  className={
-                    "bg-white flex flex-col gap-y-[14px] items-start rounded-[10px] p-[10px]"
-                  }
-                >
-                  <div
+                {get(vacancy, "data.last_jobs", []).map((item, index) => (
+                  <li
+                    key={get(item, "id")}
                     className={
-                      "gap-x-[20px] flex font-mulish font-semibold text-[12px] text-[#037582] "
+                      "bg-white flex flex-col gap-y-[14px] items-start rounded-[10px] p-[10px]"
                     }
                   >
-                    <p>To’liq ish</p>
+                    <div
+                      className={
+                        "gap-x-[20px] flex font-mulish font-semibold text-[12px] text-[#037582] "
+                      }
+                    >
+                      <p>{get(item, "job_time.job_time")}</p>
 
-                    <p>1 stavka</p>
+                      <p>{get(item, "job_type.job_type")}</p>
 
-                    <p>2 ta ish o‘rni</p>
-                  </div>
-
-                  <h3 className={"text-sm font-medium font-poppins"}>
-                    Lavozim nomi
-                  </h3>
-
-                  <div
-                    className={
-                      "flex items-center float-end gap-x-[10px] text-[#037582] text-[12px] "
-                    }
-                  >
-                    <div className={"flex items-center gap-x-[4px]"}>
-                      <Image
-                        src={"/images/watch.png"}
-                        alt={"watch"}
-                        width={18}
-                        height={18}
-                      />
-                      <p>128</p>
+                      <p>{get(item, "job_count")} ta ish o‘rni</p>
                     </div>
-                    {/*when it is deployed*/}
-                    <div className={"flex items-center gap-x-[4px]"}>
-                      <Image
-                        src={"/images/time.png"}
-                        alt={"watch"}
-                        width={18}
-                        height={18}
-                      />
-                      <p>18:24</p>
+
+                    <Link href={`${get(item, "id")}`}>
+                      <h3 className={"text-sm font-medium font-poppins"}>
+                        {get(item, "job_title")}
+                      </h3>
+                    </Link>
+
+                    <div
+                      className={
+                        "flex items-center float-end gap-x-[10px] text-[#037582] text-[12px] "
+                      }
+                    >
+                      <div className={"flex items-center gap-x-[4px]"}>
+                        <Image
+                          src={"/images/watch.png"}
+                          alt={"watch"}
+                          width={18}
+                          height={18}
+                        />
+                        <p>{get(item, "views_count")}</p>
+                      </div>
+                      {/*when it is deployed*/}
+                      <div className={"flex items-center gap-x-[4px]"}>
+                        <Image
+                          src={"/images/time.png"}
+                          alt={"watch"}
+                          width={18}
+                          height={18}
+                        />
+                        <p>
+                          {dayjs(get(vacancy, "date_time")).format("HH:mm")}
+                        </p>
+                      </div>
+                      <p>Faol</p>
                     </div>
-                    <p>Faol</p>
-                  </div>
-                </li>
-
-                <li
-                  className={
-                    "bg-white flex flex-col gap-y-[14px] items-start rounded-[10px] p-[10px]"
-                  }
-                >
-                  <div
-                    className={
-                      "gap-x-[20px] flex font-mulish font-semibold text-[12px] text-[#037582] "
-                    }
-                  >
-                    <p>To’liq ish</p>
-
-                    <p>1 stavka</p>
-
-                    <p>2 ta ish o‘rni</p>
-                  </div>
-
-                  <h3 className={"text-sm font-medium font-poppins"}>
-                    Lavozim nomi
-                  </h3>
-
-                  <div
-                    className={
-                      "flex items-center gap-x-[10px] text-[#037582] text-[12px] justify-center"
-                    }
-                  >
-                    <div className={"flex items-center gap-x-[4px]"}>
-                      <Image
-                        src={"/images/watch.png"}
-                        alt={"watch"}
-                        width={18}
-                        height={18}
-                      />
-                      <p>128</p>
-                    </div>
-                    {/*when it is deployed*/}
-                    <div className={"flex items-center gap-x-[4px]"}>
-                      <Image
-                        src={"/images/time.png"}
-                        alt={"watch"}
-                        width={18}
-                        height={18}
-                      />
-                      <p>18:24</p>
-                    </div>
-                    <p>Faol</p>
-                  </div>
-                </li>
-
-                <li
-                  className={
-                    "bg-white flex flex-col gap-y-[14px] items-start rounded-[10px] p-[10px]"
-                  }
-                >
-                  <div
-                    className={
-                      "gap-x-[20px] flex font-mulish font-semibold text-[12px] text-[#037582] "
-                    }
-                  >
-                    <p>To’liq ish</p>
-
-                    <p>1 stavka</p>
-
-                    <p>2 ta ish o‘rni</p>
-                  </div>
-
-                  <h3 className={"text-sm font-medium font-poppins"}>
-                    Lavozim nomi
-                  </h3>
-
-                  <div
-                    className={
-                      "flex items-center gap-x-[10px] text-[#037582] text-[12px] justify-center"
-                    }
-                  >
-                    <div className={"flex items-center gap-x-[4px]"}>
-                      <Image
-                        src={"/images/watch.png"}
-                        alt={"watch"}
-                        width={18}
-                        height={18}
-                      />
-                      <p>128</p>
-                    </div>
-                    {/*when it is deployed*/}
-                    <div className={"flex items-center gap-x-[4px]"}>
-                      <Image
-                        src={"/images/time.png"}
-                        alt={"watch"}
-                        width={18}
-                        height={18}
-                      />
-                      <p>18:24</p>
-                    </div>
-                    <p>Faol</p>
-                  </div>
-                </li>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

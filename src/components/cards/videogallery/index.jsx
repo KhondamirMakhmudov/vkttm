@@ -2,12 +2,13 @@ import React from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
 import Link from "next/link";
+import ReactPlayer from "react-player/youtube";
 
-const GalleryCard = ({ views, date, time, title, image, url }) => {
+const VideoGallery = ({ views, date, time, title, videoUrl, url }) => {
   const formattedDate = dayjs(date).format("DD.MM.YYYY");
   const formattedTime = dayjs(time).format("HH:mm");
   return (
-    <div className={"col-span-4"}>
+    <div className={"lg:col-span-4 md:col-span-6 col-span-12"}>
       <div
         className={
           "text-[#037582] flex justify-between text-sm font-mulish font-semibold"
@@ -40,15 +41,17 @@ const GalleryCard = ({ views, date, time, title, image, url }) => {
         </div>
       </div>
 
-      <Image
-        src={"/images/gallery1.png"}
-        alt={"gallery1"}
-        width={450}
-        height={300}
-        className={"my-[20px]"}
-      />
+      <div className={"my-[20px]"}>
+        <ReactPlayer
+          url={videoUrl}
+          width={450}
+          height={300}
+          playing={false}
+          controls={true}
+        />
+      </div>
 
-      <Link href={`gallery/${url}`}>
+      <Link href={`video-gallery/${url}`}>
         <h3
           className={
             "font-poppins text-lg font-semibold hover:text-[#037582] hover:underline transition-all duration-400"
@@ -61,4 +64,4 @@ const GalleryCard = ({ views, date, time, title, image, url }) => {
   );
 };
 
-export default GalleryCard;
+export default VideoGallery;

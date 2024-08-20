@@ -1,6 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { request } from "@/services/api";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const useGetQuery = ({
   key = "get-all",
@@ -22,13 +23,13 @@ const useGetQuery = ({
       keepPreviousData: true,
       onSuccess: () => {
         if (showSuccessMsg) {
-          toast.success("Success");
+          toast.success("SUCCESS");
         }
       },
 
       onError: (data) => {
         if (showErrorMsg) {
-          toast.error("Error");
+          toast.error(`ERROR`);
         }
       },
       enabled,

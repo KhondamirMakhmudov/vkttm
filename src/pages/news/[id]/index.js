@@ -2,9 +2,25 @@ import React from "react";
 import Wrapper from "@/layout/wrapper";
 import Link from "next/link";
 import Image from "next/image";
-
-import News from "@/components/cards/news";
+import parse from "html-react-parser";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { useRouter } from "next/router";
+import { URLS } from "@/constants/url";
+import { get, isNull } from "lodash";
+import dayjs from "dayjs";
+import Reveal from "@/components/reveal";
+import RevealRight from "@/components/reveal/revealRight";
+import RevealLeft from "@/components/reveal/revealLeft";
 const Index = () => {
+  const router = useRouter();
+  const { id } = router.query;
+
+  const { data: newsItem, isLoading } = useGetQuery({
+    key: [KEYS.news, id],
+    url: `${URLS.news}${id}/`,
+    enabled: !!id,
+  });
   return (
     <Wrapper>
       <div
@@ -20,8 +36,8 @@ const Index = () => {
           <p>Barcha yangiliklar</p>
         </Link>
         <span>/</span>
-        <p className={"text-[#036874]"}>
-          Samarqand viloyat ko’p tarmoqli tibbiyot markazi{" "}
+        <p className={"text-[#036874] max-w-[370px] line-clamp-1"}>
+          {get(newsItem, "data.news_title")}
         </p>
       </div>
 
@@ -31,10 +47,7 @@ const Index = () => {
         }
       >
         <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
-          Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya
-          hamkorligi tibbiyot markazi va Belorusiya hamkorligi Samarqand viloyat
-          ko’p tarmoqli tibbiyot markazi va Belorusiya hamkorligi tibbiyot
-          markazi va Belorusiya hamkorligi
+          {get(newsItem, "data.news_title")}
         </h1>
 
         <div
@@ -45,7 +58,9 @@ const Index = () => {
           <p>Yangilik</p>
           {/*how many times was seen*/}
 
-          <p className={""}>20.06.2024</p>
+          <p className={""}>
+            {dayjs(get(newsItem, "data.date_time")).format("DD.MM.YYYY")}
+          </p>
 
           <div className={"flex items-center gap-x-[15px]"}>
             <div className={"flex items-center gap-x-[4px]"}>
@@ -55,7 +70,7 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>128</p>
+              <p>{get(newsItem, "data.views_count")}</p>
             </div>
             {/*when it is deployed*/}
             <div className={"flex items-center gap-x-[4px]"}>
@@ -65,458 +80,266 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>18:24</p>
+              <p>{dayjs(get(newsItem, "data.date_time")).format("HH:mm")}</p>
             </div>
           </div>
         </div>
 
         <div className={"col-span-8"}>
-          <Image
-            src={"/images/announce_id.png"}
-            alt={"announce_id"}
-            width={930}
-            height={532}
-            priority={true}
-          />
+          <RevealLeft>
+            {isNull(get(newsItem, "news_image")) ? (
+              <Image
+                src={get(newsItem, "news_image")}
+                loader={() => get(newsItem, "news_image")}
+                alt={"img3"}
+                width={170}
+                height={120}
+              />
+            ) : (
+              <Image
+                src="/images/announce_id.png"
+                alt={"announce_id"}
+                width={930}
+                height={532}
+                priority={true}
+              />
+            )}
 
-          <p className={"my-[30px] !font-medium text-[#2C3E50]"}>
-            Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belarus
-            Respublikasi o’rtasidagi hamkorlik so’nggi yillarda yangi bosqichga
-            ko’tarilib, ikki davlatning tibbiyot sohasidagi aloqalarini
-            mustahkamlashga xizmat qilmoqda. Ushbu hamkorlikning asosiy
-            jihatlari va yutuqlari quyidagilardan iborat:
-          </p>
-
-          <div className={"mb-[30px]"}>
-            <h5 className={"font-mulish font-bold"}>Hamkorlik yo’nalishlari</h5>
-            <ul className={"font-mulish font-normal list-decimal ml-[30px]"}>
-              <li>
-                Texnologik Yordam va Innovatsiyalar Belarus Respublikasi
-                tibbiyot sohasida ilg’or texnologiyalar va innovatsiyalarni
-                joriy etgan mamlakatlardan biridir. Samarqand viloyat ko’p
-                tarmoqli tibbiyot markazi Belarusning ilg’or tibbiy uskunalarini
-                sotib olish va ulardan foydalanish imkoniyatiga ega bo’ldi. Bu
-                orqali markazda ko’plab yangi diagnostika va davolash usullari
-                joriy qilindi.
-              </li>
-              <li>
-                Mutaxassislar Almashinuvi va Malaka Oshirish Ikki davlat
-                o’rtasida mutaxassislar almashinuvi yo’lga qo’yilgan. Belarusdan
-                kelgan mutaxassislar Samarqandda zamonaviy tibbiyot yutuqlarini
-                o’rgatishdi va amaliy mashg’ulotlar o’tkazishdi. Shuningdek,
-                Samarqand viloyatining malakali tibbiyot xodimlari Belorusda
-                tajriba orttirish va malaka oshirish imkoniyatiga ega bo’ldilar.
-              </li>
-              <li>
-                Farmatsevtika Sohasida Hamkorlik Samarqand viloyat ko’p tarmoqli
-                tibbiyot markazi va Belarus farmatsevtika kompaniyalari
-                o’rtasida dori-darmon ta’minoti bo’yicha kelishuvlar imzolangan.
-                Bu, O’zbekistonda yuqori sifatli va arzon dori-darmonlarning
-                mavjudligini oshirishga yordam berdi.
-              </li>
-              <li>
-                Davolash va Diagnostika Belarus Respublikasi bilan hamkorlik
-                doirasida Samarqand viloyat ko’p tarmoqli tibbiyot markazida
-                yangi davolash va diagnostika markazlari tashkil etildi. Ushbu
-                markazlar zamonaviy tibbiy uskunalar bilan jihozlangan bo’lib,
-                aholiga yuqori sifatli tibbiy xizmat ko’rsatmoqda.
-              </li>
-            </ul>
-          </div>
-          <div className={"mb-[50px]"}>
-            <h5 className={"font-mulish font-bold"}>
-              Hamkorlikning Natijalari
-            </h5>
-            <ul className={"font-mulish font-normal list-decimal ml-[30px]"}>
-              <li>
-                Sifatli Tibbiy Xizmatlarning Oshishi Samarqand viloyat ko’p
-                tarmoqli tibbiyot markazi Belarus bilan hamkorlik natijasida
-                zamonaviy uskunalar va texnologiyalarni joriy qildi. Bu esa
-                aholiga ko’rsatilayotgan tibbiy xizmatlar sifatini oshirdi va
-                davolash samaradorligini yaxshiladi.
-              </li>
-              <li>
-                Tibbiy Kadrlarning Malakasini Oshirish Samarqand viloyati
-                tibbiyot xodimlari Belarusda malaka oshirib, zamonaviy tibbiyot
-                yutuqlarini o’rganish imkoniyatiga ega bo’ldilar. Bu esa, o’z
-                navbatida, ular tomonidan ko’rsatiladigan tibbiy xizmatlarning
-                sifatini oshirishga xizmat qildi.
-              </li>
-              <li>
-                Farmatsevtika Bozorining Kengayishi Belarus farmatsevtika
-                kompaniyalari bilan hamkorlik qilish natijasida Samarqand
-                viloyati aholisi uchun dori-darmonlar arzon va keng ko’lamda
-                mavjud bo’ldi. Bu, aholi sog’lig’ini yaxshilashga yordam berdi.
-              </li>
-              <li>
-                Yangi Loyihalar va Kelishuvlar Ikki davlat o’rtasidagi hamkorlik
-                doirasida yangi loyihalar va kelishuvlar amalga oshirilib,
-                tibbiyot sohasidagi hamkorlik yanada mustahkamlanmoqda. Bu,
-                kelajakda tibbiyot markazining yanada rivojlanishiga zamin
-                yaratadi.
-              </li>
-            </ul>
-          </div>
+            <div className="!font-medium font-mulish my-[30px]">
+              {parse(get(newsItem, "data.news_desc", ""))}
+            </div>
+          </RevealLeft>
         </div>
 
         <div className={"col-span-4"}>
-          <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
-            <div className={"flex items-center justify-between"}>
-              <h3
-                className={
-                  "font-poppins font-medium text-[20px] text-[#494949]"
-                }
-              >
-                Sog‘lom bo‘lish uchun{" "}
-              </h3>
+          <RevealRight duration={0.3}>
+            <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
+              <div className={"flex items-center justify-between"}>
+                <h3
+                  className={
+                    "font-poppins font-medium text-[20px] text-[#494949]"
+                  }
+                >
+                  Sog‘lom bo‘lish uchun{" "}
+                </h3>
 
-              <Link
-                href={"/to-be-healthy"}
-                className={
-                  "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
-                }
-              >
-                Barchasi
-                <Image
-                  src={"/images/arrow-right.png"}
-                  alt={"arrow-right"}
-                  width={18}
-                  height={18}
-                />
-              </Link>
+                <Link
+                  href={"/to-be-healthy"}
+                  className={
+                    "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                  }
+                >
+                  Barchasi
+                  <Image
+                    src={"/images/arrow-right.png"}
+                    alt={"arrow-right"}
+                    width={18}
+                    height={18}
+                  />
+                </Link>
+              </div>
+
+              <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
+                {get(newsItem, "data.last_recommendations", []).map(
+                  (recommend, index) => (
+                    <li
+                      key={get(recommend, "id")}
+                      className={
+                        "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                      }
+                    >
+                      <Image
+                        src={
+                          get(recommend, "recommendation_image") ||
+                          `/images/health${index + 1}.png`
+                        }
+                        loader={() =>
+                          get(recommend, "recommendation_image") ||
+                          `/images/health${index + 1}.png`
+                        }
+                        alt={"health1"}
+                        width={170}
+                        height={120}
+                        className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
+                      />
+
+                      <div>
+                        <p
+                          className={
+                            "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
+                          }
+                        >
+                          {dayjs(get(recommend, "date_time")).format(
+                            "DD.MM.YYYY"
+                          )}
+                        </p>
+
+                        <Link href={`/to-be-healthy/${get(recommend, "id")}`}>
+                          <p
+                            className={
+                              "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all duration-300"
+                            }
+                          >
+                            {get(recommend, "recommendation_title")}
+                          </p>
+                        </Link>
+                      </div>
+                    </li>
+                  )
+                )}
+              </ul>
             </div>
+          </RevealRight>
 
-            <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/health1.png"}
-                  alt={"health1"}
-                  width={170}
-                  height={120}
-                />
+          <RevealRight>
+            <div className={"bg-[#EFF8F9] p-[30px]"}>
+              <div className={"flex items-center justify-between"}>
+                <h3
+                  className={
+                    "font-poppins font-medium text-[20px] text-[#494949]"
+                  }
+                >
+                  E’lonlar
+                </h3>
 
-                <div>
-                  <p
+                <Link
+                  href={"/announcements"}
+                  className={
+                    "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                  }
+                >
+                  Barchasi
+                  <Image
+                    src={"/images/arrow-right.png"}
+                    alt={"arrow-right"}
+                    width={18}
+                    height={18}
+                  />
+                </Link>
+              </div>
+
+              <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
+                {get(newsItem, "data.last_announces", []).map((announce) => (
+                  <li
+                    key={get(announce, "id")}
                     className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
+                      "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
                     }
                   >
-                    20.06.2024
-                  </p>
+                    {isNull(get(announce, "announce_image")) ? (
+                      <Image
+                        src={get(announce, "announce_image")}
+                        loader={() => get(announce, "announce_image")}
+                        alt={"img3"}
+                        width={170}
+                        height={120}
+                      />
+                    ) : (
+                      <Image
+                        src="/images/img3.png"
+                        alt={"img3"}
+                        width={170}
+                        height={120}
+                      />
+                    )}
 
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Boshi tez-tez ogʼrib turadigan insonlarga tavsiya
-                  </p>
-                </div>
-              </li>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/health2.png"}
-                  alt={"health2"}
-                  width={170}
-                  height={120}
-                />
+                    <div>
+                      <p
+                        className={
+                          "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
+                        }
+                      >
+                        {dayjs(get(announce, "date_time")).format("DD.MM.YYYY")}
+                      </p>
 
-                <div>
-                  <p
-                    className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
-                    }
-                  >
-                    20.06.2024
-                  </p>
-
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Boshi tez-tez ogʼrib turadigan insonlarga tavsiya
-                  </p>
-                </div>
-              </li>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/health3.png"}
-                  alt={"health3"}
-                  width={170}
-                  height={120}
-                />
-
-                <div>
-                  <p
-                    className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
-                    }
-                  >
-                    20.06.2024
-                  </p>
-
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Boshi tez-tez ogʼrib turadigan insonlarga tavsiya
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div className={"bg-[#EFF8F9] p-[30px]"}>
-            <div className={"flex items-center justify-between"}>
-              <h3
-                className={
-                  "font-poppins font-medium text-[20px] text-[#494949]"
-                }
-              >
-                E’lonlar
-              </h3>
-
-              <Link
-                href={"/announcements"}
-                className={
-                  "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
-                }
-              >
-                Barchasi
-                <Image
-                  src={"/images/arrow-right.png"}
-                  alt={"arrow-right"}
-                  width={18}
-                  height={18}
-                />
-              </Link>
+                      <p
+                        className={
+                          "font-poppins text-sm font-normal line-clamp-4"
+                        }
+                      >
+                        {get(announce, "announce_title")}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/img3.png"}
-                  alt={"img3"}
-                  width={170}
-                  height={120}
-                />
-
-                <div>
-                  <p
-                    className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
-                    }
-                  >
-                    20.06.2024
-                  </p>
-
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Samarqand viloyat ko’p tarmoqli tibbiyot markazi va
-                    Belorusiya hamkorligi...
-                  </p>
-                </div>
-              </li>
-              <li
-                className={
-                  "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
-                }
-              >
-                <Image
-                  src={"/images/img3.png"}
-                  alt={"img3"}
-                  width={170}
-                  height={120}
-                />
-
-                <div>
-                  <p
-                    className={
-                      "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
-                    }
-                  >
-                    20.06.2024
-                  </p>
-
-                  <p className={"font-poppins text-sm font-normal"}>
-                    Samarqand viloyat ko’p tarmoqli tibbiyot markazi va
-                    Belorusiya hamkorligi...
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
+          </RevealRight>
         </div>
 
         <div className={"col-span-12"}>
-          <h2 className={"text-[24px] font-semibold font-poppins mb-[30px]"}>
-            Boshqa yangiliklar
-          </h2>
+          <Reveal duration={0.3}>
+            <h2 className={"text-[24px] font-semibold font-poppins mb-[30px]"}>
+              Boshqa yangiliklar
+            </h2>
+          </Reveal>
         </div>
-        <div className={`col-span-4 `}>
-          <div
-            className={
-              " max-w-[450px]  flex-col max-h-[640px] shadow-lg p-[30px]  rounded-bl-[30px] rounded-tr-[30px]"
-            }
-          >
-            <Image
-              src={`/images/img3.png`}
-              alt={"img3"}
-              width={390}
-              height={300}
-              objectFit={"cover"}
-              className={"object-cover  mb-[20px]"}
-            />
-            <div className={"text-sm text-[#037582] flex justify-between"}>
-              <p className={"font-mulish text-sm  "}>Yangilik</p>
-              <div className={"flex gap-x-[10px]"}>
-                {/*how many times was seen*/}
-                <div className={"flex gap-x-[4px]"}>
-                  <Image
-                    src={"/images/watch.png"}
-                    alt={"watch"}
-                    width={18}
-                    height={18}
-                  />
-                  <p>128</p>
-                </div>
-                <p className={"font-mulish text-sm  "}>20.06.2024</p>
-                {/*when it is deployed*/}
-                <div className={"flex gap-x-[4px]"}>
-                  <Image
-                    src={"/images/time.png"}
-                    alt={"watch"}
-                    width={18}
-                    height={18}
-                  />
-                  <p>18:24</p>
-                </div>
-              </div>
-            </div>
-
-            <Link href={"/news/id2"}>
-              <h2
+        {get(newsItem, "data.last_news", []).map((news) => (
+          <div key={get(news, "id")} className={`col-span-4 `}>
+            <Reveal duration={0.3}>
+              <div
                 className={
-                  "font-poppins text-[18px] hover:text-[#00AFC0] text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-200"
+                  " max-w-[450px]  flex-col max-h-[640px] shadow-lg p-[30px]  rounded-bl-[30px] rounded-tr-[30px]"
                 }
               >
-                Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya
-                hamkorligi
-              </h2>
-            </Link>
-          </div>
-        </div>
-        <div className={`col-span-4 `}>
-          <div
-            className={
-              " max-w-[450px]  flex-col max-h-[640px] shadow-lg p-[30px]  rounded-bl-[30px] rounded-tr-[30px]"
-            }
-          >
-            <Image
-              src={`/images/img3.png`}
-              alt={"img3"}
-              width={390}
-              height={300}
-              objectFit={"cover"}
-              className={"object-cover  mb-[20px]"}
-            />
-            <div className={"text-sm text-[#037582] flex justify-between"}>
-              <p className={"font-mulish text-sm  "}>Yangilik</p>
-              <div className={"flex gap-x-[10px]"}>
-                {/*how many times was seen*/}
-                <div className={"flex gap-x-[4px]"}>
+                <Reveal duration={0.32}>
                   <Image
-                    src={"/images/watch.png"}
-                    alt={"watch"}
-                    width={18}
-                    height={18}
+                    src={`/images/img3.png`}
+                    alt={"img3"}
+                    width={390}
+                    height={300}
+                    objectFit={"cover"}
+                    className={"object-cover  mb-[20px]"}
                   />
-                  <p>128</p>
-                </div>
-                <p className={"font-mulish text-sm  "}>20.06.2024</p>
-                {/*when it is deployed*/}
-                <div className={"flex gap-x-[4px]"}>
-                  <Image
-                    src={"/images/time.png"}
-                    alt={"watch"}
-                    width={18}
-                    height={18}
-                  />
-                  <p>18:24</p>
-                </div>
-              </div>
-            </div>
+                </Reveal>
+                <Reveal duration={0.35}>
+                  <div
+                    className={"text-sm text-[#037582] flex justify-between"}
+                  >
+                    <p className={"font-mulish text-sm  "}>Yangilik</p>
+                    <div className={"flex gap-x-[10px]"}>
+                      {/*how many times was seen*/}
+                      <div className={"flex gap-x-[4px]"}>
+                        <Image
+                          src={"/images/watch.png"}
+                          alt={"watch"}
+                          width={18}
+                          height={18}
+                        />
+                        <p>{get(news, "views_count")}</p>
+                      </div>
+                      <p className={"font-mulish text-sm  "}>
+                        {dayjs(get(news, "date_time")).format("DD.MM.YYYY")}
+                      </p>
+                      {/*when it is deployed*/}
+                      <div className={"flex gap-x-[4px]"}>
+                        <Image
+                          src={"/images/time.png"}
+                          alt={"watch"}
+                          width={18}
+                          height={18}
+                        />
+                        <p>{dayjs(get(news, "date_time")).format("HH:mm")}</p>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
 
-            <Link href={"/news/id2"}>
-              <h2
-                className={
-                  "font-poppins text-[18px] hover:text-[#00AFC0] text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-200"
-                }
-              >
-                Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya
-                hamkorligi
-              </h2>
-            </Link>
-          </div>
-        </div>
-        <div className={`col-span-4 `}>
-          <div
-            className={
-              " max-w-[450px]  flex-col max-h-[640px] shadow-lg p-[30px]  rounded-bl-[30px] rounded-tr-[30px]"
-            }
-          >
-            <Image
-              src={`/images/img3.png`}
-              alt={"img3"}
-              width={390}
-              height={300}
-              objectFit={"cover"}
-              className={"object-cover  mb-[20px]"}
-            />
-            <div className={"text-sm text-[#037582] flex justify-between"}>
-              <p className={"font-mulish text-sm  "}>Yangilik</p>
-              <div className={"flex gap-x-[10px]"}>
-                {/*how many times was seen*/}
-                <div className={"flex gap-x-[4px]"}>
-                  <Image
-                    src={"/images/watch.png"}
-                    alt={"watch"}
-                    width={18}
-                    height={18}
-                  />
-                  <p>128</p>
-                </div>
-                <p className={"font-mulish text-sm  "}>20.06.2024</p>
-                {/*when it is deployed*/}
-                <div className={"flex gap-x-[4px]"}>
-                  <Image
-                    src={"/images/time.png"}
-                    alt={"watch"}
-                    width={18}
-                    height={18}
-                  />
-                  <p>18:24</p>
-                </div>
+                <Reveal duration={0.4}>
+                  <Link href={`/news/${get(news, "id")}`}>
+                    <h2
+                      className={
+                        "font-poppins text-[18px] hover:text-[#00AFC0] text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-200"
+                      }
+                    >
+                      {get(news, "news_title")}
+                    </h2>
+                  </Link>
+                </Reveal>
               </div>
-            </div>
-
-            <Link href={"/news/id2"}>
-              <h2
-                className={
-                  "font-poppins text-[18px] hover:text-[#00AFC0] text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-200"
-                }
-              >
-                Samarqand viloyat ko’p tarmoqli tibbiyot markazi va Belorusiya
-                hamkorligi
-              </h2>
-            </Link>
+            </Reveal>
           </div>
-        </div>
+        ))}
       </div>
     </Wrapper>
   );

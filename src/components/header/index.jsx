@@ -3,8 +3,16 @@ import Image from "next/image";
 import Language from "@/components/language";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get } from "lodash";
 
 const Index = () => {
+  const { data: basicInfos, isLoading } = useGetQuery({
+    key: KEYS.basicInfos,
+    url: URLS.basicInfos,
+  });
   return (
     <>
       <motion.div
@@ -27,9 +35,8 @@ const Index = () => {
               width={24}
               height={24}
             />
-            <p>
-              M.Ulugbek ko&apos;chasi 70, <br />
-              Samarqand, Uzbekistan 140100
+            <p className="md:max-w-[234px]">
+              {get(basicInfos, "data.company_address")}
             </p>
           </div>
 
@@ -46,8 +53,13 @@ const Index = () => {
             </p>
 
             <div>
-              <a href={"tel:+998 78 210 00 81"}>+998 78 210 00 81</a> <br />
-              <a href={"tel:+998 78 000 00 00"}>+998 78 000 00 00</a>
+              <a href={`tel:${get(basicInfos, "data.company_phone")}`}>
+                {get(basicInfos, "data.company_phone")}
+              </a>{" "}
+              <br />
+              <a href={`tel:${get(basicInfos, "data.company_phones")}`}>
+                {get(basicInfos, "data.company_phones")}
+              </a>{" "}
             </div>
           </div>
         </div>
@@ -62,11 +74,16 @@ const Index = () => {
               width={24}
               height={24}
             />
-            <a href={"mailto:vkttm.uz@gmail.com"}>vkttm.uz@gmail.com</a>
+            <a href={`mailto:${get(basicInfos, "data.company_mail")}`}>
+              {get(basicInfos, "data.company_mail")}
+            </a>{" "}
           </div>
 
           <div className={"flex gap-x-[10px]"}>
-            <Link href={"#"} className={"cursor-pointer"}>
+            <Link
+              href={`${get(basicInfos, "data.company_telegram")}`}
+              className={"cursor-pointer"}
+            >
               <Image
                 src={"/icons/telegram.svg"}
                 alt={"address"}
@@ -74,7 +91,10 @@ const Index = () => {
                 height={24}
               />
             </Link>
-            <Link href={"#"} className={"cursor-pointer"}>
+            <Link
+              href={`${get(basicInfos, "data.company_facebook")}`}
+              className={"cursor-pointer"}
+            >
               <Image
                 src={"/icons/facebook.svg"}
                 alt={"address"}
@@ -82,7 +102,10 @@ const Index = () => {
                 height={24}
               />
             </Link>
-            <Link href={"#"} className={"cursor-pointer"}>
+            <Link
+              href={`${get(basicInfos, "data.company_instagram")}`}
+              className={"cursor-pointer"}
+            >
               <Image
                 src={"/icons/instagram.svg"}
                 alt={"address"}

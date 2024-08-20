@@ -3,23 +3,51 @@ import Wrapper from "@/layout/wrapper";
 import Title from "@/components/title";
 import Image from "next/image";
 import VacancyCard from "@/components/cards/vacancy";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get, isEmpty } from "lodash";
 
 const Vacancies = () => {
+  const { data: vacancies, isLoading } = useGetQuery({
+    key: KEYS.vacancies,
+    url: URLS.vacancies,
+  });
   return (
     <Wrapper>
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto py-[50px] gap-y-[30px]"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto pt-[50px] gap-y-[30px] px-[20px] md:px-0"
         }
       >
         <div className={"col-span-12 mb-[30px]"}>
           <Title>Vakansiyalar</Title>
         </div>
+      </div>
 
-        <VacancyCard />
-        <VacancyCard />
-        <VacancyCard />
-        <VacancyCard />
+      <div
+        className={
+          "grid grid-cols-12 gap-x-[30px] container mx-auto pb-[50px]  gap-y-[30px] px-[20px] md:px-0"
+        }
+      >
+        {isEmpty(get(vacancies, "data.results", [])) ? (
+          <h1 className="text-[32px] col-span-12 font-mulish font-semibold">
+            Hozircha bo‘sh ish o‘rinlari mavjud emas
+          </h1>
+        ) : (
+          get(vacancies, "data.results", []).map((item) => (
+            <VacancyCard
+              url={`/vacancies/${get(item, "id")}`}
+              key={get(item, "id")}
+              jobTitle={get(item, "job_title")}
+              jobDescription={get(item, "job_desc")}
+              jobType={get(item, "job_type.job_type")}
+              views={get(item, "views_count")}
+              time={get(item, "date_time")}
+              jobCount={get(item, "job_count")}
+            />
+          ))
+        )}
       </div>
     </Wrapper>
   );

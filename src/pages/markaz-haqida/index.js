@@ -8,8 +8,28 @@ import Reveal from "@/components/reveal";
 import RevealLeft from "@/components/reveal/revealLeft";
 import RevealRight from "@/components/reveal/revealRight";
 import Link from "next/link";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import ContentLoader from "@/components/content-loader";
+import { get } from "lodash";
+import parse from "html-react-parser";
 
 const Index = () => {
+  const {
+    data: aboutCenter,
+    isLoading,
+    isFetching,
+  } = useGetQuery({ key: KEYS.aboutCenter, url: URLS.aboutCenter });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <section className={"bg-[#EFF8F9] py-[70px]"}>
@@ -23,16 +43,7 @@ const Index = () => {
                   "font-mulish xl:text-[20px] lg:text-[18px] font-normal my-[30px]"
                 }
               >
-                Ko&apos;p funktsiyali tibbiyot markazi bir joyda keng
-                ko&apos;lamli tibbiy xizmatlarni taqdim etadi, bu esa tashxis
-                qo&apos;yish va davolashni bemorlar uchun qulay va samarali
-                qiladi. Turli xil profillar va zamonaviy uskunalar bo&apos;yicha
-                mutaxassislarning mavjudligi keng qamrovli tekshiruvlarni
-                o&apos;tkazishga va davolanishga har tomonlama yondashuvni
-                ta&apos;minlashga imkon beradi. Bundan tashqari, bunday
-                markazlar ko&apos;pincha turli sohalardagi mutaxassislar
-                o&apos;rtasida doimiy bilim va tajriba almashinuvi tufayli
-                yuqori sifatli tibbiy yordamni taklif qilishadi.
+                {get(aboutCenter, "data.company_desc")}
               </p>
             </RevealLeft>
 
@@ -82,7 +93,10 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={130} duration={5} />
+                    <CountUp
+                      end={get(aboutCenter, "data.company_employees")}
+                      duration={5}
+                    />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 
@@ -106,7 +120,10 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={90} duration={5} />
+                    <CountUp
+                      end={get(aboutCenter, "data.company_scientists")}
+                      duration={5}
+                    />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 
@@ -131,7 +148,10 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={20} duration={5} />
+                    <CountUp
+                      end={get(aboutCenter, "data.company_departments")}
+                      duration={3}
+                    />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 
@@ -156,7 +176,10 @@ const Index = () => {
                       "text-[64px] font-semibold font-poppins flex gap-x-[10px] text-[#037582]"
                     }
                   >
-                    <CountUp end={2400} duration={3} />
+                    <CountUp
+                      end={get(aboutCenter, "data.company_capacity")}
+                      duration={3}
+                    />
                     <span className={"!text-[#00AFC0]"}>+</span>
                   </h2>
 
@@ -182,6 +205,8 @@ const Index = () => {
             <Title>Muvaffaqiyatlar</Title>
           </Reveal>
         </div>
+        {/* bu parsingni bir gaplashib ko'rish kerak */}
+        {/* <div>{parse(get(aboutCenter, "data.company_achievements"))}</div> */}
 
         <div
           className={

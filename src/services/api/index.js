@@ -12,7 +12,7 @@ const request = axios.create({
     common: {
       Accept: "application/json",
       "Content-Type": "application/json, charset=utf-8",
-      Authorization: `Token ${token}`,
+      //   Authorization: `Token ${token}`,
     },
   },
 });
@@ -22,7 +22,7 @@ request.interceptors.request.use(
     const token = get(
       JSON.parse(storage.get("settings")),
       "state.token",
-      "here should be a token"
+      "Frg5XI8NLbjbjnKUdxJ8MO6NMM7Uv29EuZ4sD5vF603yioYU4LyUL5oFgt2fFURx"
     );
 
     if (token) {

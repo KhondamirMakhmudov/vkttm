@@ -4,8 +4,6 @@ import Header from "@/components/header";
 import Menu from "@/components/menu";
 import Footer from "@/components/footer";
 import Title from "@/components/title";
-import Announcement from "@/components/cards/announcement";
-import AnnouncementCard from "@/components/cards/announcement";
 import Department from "@/components/cards/department";
 import Link from "next/link";
 import News from "@/components/cards/news";
@@ -13,84 +11,128 @@ import { motion } from "framer-motion";
 import Reveal from "@/components/reveal";
 import RevealRight from "@/components/reveal/revealRight";
 import RevealLeft from "@/components/reveal/revealLeft";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+
 import "swiper/css";
+import "swiper/css/pagination";
+import Head from "next/head";
+import SlideNextButton from "@/components/slideButtons/next";
+import SlidePreviousButton from "@/components/slideButtons/previous";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get, isNull } from "lodash";
+import dayjs from "dayjs";
+import ContentLoader from "@/components/content-loader";
+import Wrapper from "@/layout/wrapper";
 
 export default function Home() {
+  const {
+    data: mainInformations,
+    isLoading: isLoadingMainPage,
+    isFetching: isFetchingMainPage,
+  } = useGetQuery({
+    key: KEYS.mainPage,
+    url: URLS.mainPage,
+  });
+
+  if (isLoadingMainPage || isFetchingMainPage) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
+
+  console.log(get(mainInformations, "data.banners"), "main-info");
+
   return (
     <>
+      <Head>
+        <title>vkttm</title>
+      </Head>
       <Header />
       <Menu />
-      <main
-        className={"w-full h-[650px] bg-no-repeat md:bg-cover bg-center"}
-        style={{ backgroundImage: "url(/images/main-bg.png)" }}
-      >
-        <div
-          className={
-            "grid grid-cols-12 gap-x-[30px] container mx-auto lg:px-0 px-[20px]"
-          }
+      {get(mainInformations, "data.banners", []).map((item, index) => (
+        <main
+          key={index}
+          className={"w-full h-[650px] bg-no-repeat md:bg-cover bg-center"}
+          style={{
+            backgroundImage: `url(${
+              isNull(get(item, "banner_image"))
+                ? "/images/main-bg.png"
+                : get(item, "banner_image")
+            })`,
+          }}
         >
           <div
             className={
-              "xl:col-span-5 md:col-span-10 col-span-12 translate-y-1/2 text-center md:text-start"
+              "grid grid-cols-12 gap-x-[30px] container mx-auto lg:px-0 px-[20px]"
             }
           >
-            <motion.h3
-              initial={{ opacity: 0, translateX: "-100px" }}
-              animate={{ opacity: 100, translateX: "0px" }}
-              transition={{ duration: 0.4 }}
+            <div
               className={
-                "font-mulish font-bold md:text-base text-sm text-[#0D4866]"
+                "xl:col-span-5 md:col-span-10 col-span-12 translate-y-1/2 text-center md:text-start"
               }
             >
-              Xalqimizga xizmat - oliy ne’mat
-            </motion.h3>
-
-            <motion.h1
-              initial={{ opacity: 0, translateX: "100px" }}
-              animate={{ opacity: 100, translateX: "0px" }}
-              transition={{ duration: 0.4 }}
-              className={
-                "text-[#0D4866] font-bold md:text-[48px] text-[30px] font-poppins mt-[30px] mb-[20px]"
-              }
-            >
-              Zamonaviy tibbiyot xizmatlari markazi
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, translateX: "-100px" }}
-              animate={{ opacity: 100, translateX: "0px" }}
-              transition={{ duration: 0.4 }}
-              className={
-                "font-mulish md:text-[20px] text-base mb-[30px] text-[#0D4866]"
-              }
-            >
-              Markaz doim barcha uchun ochiq, birlamchi tibbiy yordam va
-              zamonaviy tibbiyot xizmarlaridan foydalaning{" "}
-            </motion.p>
-            <Link
-              href={"/about"}
-              className={
-                "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] md:px-[55px] px-[40px] rounded-br-[10px] rounded-tl-[10px] text-white md:text-base text-sm transition-all duration-300"
-              }
-            >
-              <motion.button
+              <motion.h3
                 initial={{ opacity: 0, translateX: "-100px" }}
                 animate={{ opacity: 100, translateX: "0px" }}
                 transition={{ duration: 0.4 }}
+                className={
+                  "font-mulish font-bold md:text-base text-sm text-[#0D4866]"
+                }
               >
-                Batafsil
-              </motion.button>
-            </Link>
+                {get(item, "banner_header")}
+              </motion.h3>
+
+              <motion.h1
+                initial={{ opacity: 0, translateX: "100px" }}
+                animate={{ opacity: 100, translateX: "0px" }}
+                transition={{ duration: 0.4 }}
+                className={
+                  "text-[#0D4866] font-bold md:text-[48px] text-[30px] font-poppins mt-[30px] mb-[20px]"
+                }
+              >
+                {get(item, "banner_title")}
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, translateX: "-100px" }}
+                animate={{ opacity: 100, translateX: "0px" }}
+                transition={{ duration: 0.4 }}
+                className={
+                  "font-mulish md:text-[20px] text-base mb-[30px] text-[#0D4866]"
+                }
+              >
+                {get(item, "banner_header")}
+              </motion.p>
+              <Link
+                href={"/about"}
+                className={
+                  "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] md:px-[55px] px-[40px] rounded-br-[10px] rounded-tl-[10px] text-white md:text-base text-sm transition-all duration-300"
+                }
+              >
+                <motion.button
+                  initial={{ opacity: 0, translateX: "-100px" }}
+                  animate={{ opacity: 100, translateX: "0px" }}
+                  transition={{ duration: 0.4 }}
+                >
+                  Batafsil
+                </motion.button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      ))}
       <section className="md:hidden block">
         <motion.ul
           initial={{ opacity: 0, translateY: "100px" }}
           animate={{ opacity: 100, translateY: "0px" }}
           transition={{ duration: 0.4 }}
-          className={"bg-white mx-[50px] py-[50px] flex flex-col gap-y-[20px]"}
+          className={
+            "bg-white mx-[50px] py-[50px] flex flex-col gap-y-[20px] text-[#0D4866]"
+          }
         >
           <motion.li
             className={
@@ -256,190 +298,100 @@ export default function Home() {
               "absolute hidden md:-top-[300px] -top-[550px] mx-[120px] bg-white md:flex md:flex-row flex-col gap-y-[30px] md:gap-y-0 gap-x-[30px] px-[30px] py-[50px] max-w-[1170px] rounded-bl-[50px] rounded-tr-[50px] "
             }
           >
-            <motion.li
-              className={
-                "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
-              }
-              initial={{ opacity: 0, translateY: "100px" }}
-              animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.5 }}
-            >
-              <Image
-                src={"/images/doctors.png"}
-                alt={"doctors"}
-                width={50}
-                height={50}
+            {get(mainInformations, "data.fast_links", []).map((item, index) => (
+              <motion.li
+                key={index}
                 className={
-                  "bg-[#00AFC0] lg:p-[10px] p-[5px] rounded-full lg:w-[50px] lg:h-[50px] w-[30px] h-[30px] "
+                  "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
                 }
-              />
-
-              <motion.div
                 initial={{ opacity: 0, translateY: "100px" }}
                 animate={{ opacity: 100, translateY: "0px" }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
               >
-                <h3
+                <Image
+                  src={"/images/doctors.png"}
+                  alt={"doctors"}
+                  width={50}
+                  height={50}
                   className={
-                    "xl:text-[24px] lg:text-[20px] md:text-[17px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                    "bg-[#00AFC0] lg:p-[10px] p-[5px] rounded-full lg:w-[50px] lg:h-[50px] w-[30px] h-[30px] "
                   }
-                >
-                  Shifokorlar
-                </h3>
+                />
 
-                <p
-                  className={
-                    "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px] font-normal lg:my-[10px] my-[5px]"
-                  }
+                <motion.div
+                  initial={{ opacity: 0, translateY: "100px" }}
+                  animate={{ opacity: 100, translateY: "0px" }}
+                  transition={{ duration: 0.6 }}
                 >
-                  Tibbiyot markazidagi oliy toifali shifokorlarning tibbiy
-                  xizmatlaridan foydalaning
-                </p>
+                  <h3
+                    className={
+                      "xl:text-[24px] lg:text-[20px] md:text-[17px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                    }
+                  >
+                    {get(item, "title")}
+                  </h3>
 
-                <button
-                  className={
-                    "font-poppins xl:text-base lg:text-sm md:text-xs text-[10px] font-medium border-b-[2px] border-b-[#00AFC0]"
-                  }
-                >
-                  <Link href={"/to-be-healty/id"}>Barchasi</Link>
-                </button>
-              </motion.div>
-            </motion.li>
-            <motion.li
-              initial={{ opacity: 0, translateY: "100px" }}
-              animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.5 }}
-              className={
-                "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
-              }
-            >
-              <Image
-                src={"/images/health-blog.png"}
-                alt={"health-blog"}
-                width={50}
-                height={50}
-                className={
-                  "bg-[#00AFC0] lg:p-[10px] p-[5px] rounded-full lg:w-[50px] lg:h-[50px] w-[30px] h-[30px]"
-                }
-              />
+                  <p
+                    className={
+                      "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px] font-normal lg:my-[10px] my-[5px]"
+                    }
+                  >
+                    {get(item, "description")}
+                  </p>
 
-              <motion.div
-                initial={{ opacity: 0, translateY: "100px" }}
-                animate={{ opacity: 100, translateY: "0px" }}
-                transition={{ duration: 0.6 }}
-              >
-                <h3
-                  className={
-                    "xl:text-[24px] lg:text-[20px] md:text-[17px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
-                  }
-                >
-                  Salomatlik blogi{" "}
-                </h3>
-
-                <p
-                  className={
-                    "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px]  font-normal lg:my-[10px] my-[5px]"
-                  }
-                >
-                  Sog’lom bo’lish uchun turli tavsiya, maqola, ilmiy ishlardan
-                  namunalar bilan tanishing
-                </p>
-
-                <button
-                  className={
-                    "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
-                  }
-                >
-                  <Link href={"/to-be-healthy"}>Barchasi</Link>
-                </button>
-              </motion.div>
-            </motion.li>
-            <motion.li
-              initial={{ opacity: 0, translateY: "100px" }}
-              animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.5 }}
-              className={
-                "cursor-pointer flex items-start lg:gap-x-[20px] gap-x-[10px]"
-              }
-            >
-              <Image
-                src={"/images/contact.png"}
-                alt={"contacts"}
-                width={50}
-                height={50}
-                className={
-                  "bg-[#00AFC0] lg:p-[10px] p-[5px] rounded-full lg:w-[50px] lg:h-[50px] w-[30px] h-[30px]"
-                }
-              />
-
-              <motion.div
-                initial={{ opacity: 0, translateY: "100px" }}
-                animate={{ opacity: 100, translateY: "0px" }}
-                transition={{ duration: 0.6 }}
-              >
-                <h3
-                  className={
-                    "xl:text-[24px] lg:text-[20px] md:text-[17px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
-                  }
-                >
-                  Biz bilan bog’laning
-                </h3>
-
-                <p
-                  className={
-                    "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px]  font-normal my-[10px]"
-                  }
-                >
-                  Savollar, murojaatlarni onlayn yuborish va va qo’shimcha
-                  ma’lumotlar olish imkoniyati
-                </p>
-
-                <button
-                  className={
-                    "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
-                  }
-                >
-                  <Link href={"/to-be-healty/id"}>Barchasi</Link>
-                </button>
-              </motion.div>
-            </motion.li>
+                  <button
+                    className={
+                      "font-poppins xl:text-base lg:text-sm md:text-xs text-[10px] font-medium border-b-[2px] border-b-[#00AFC0]"
+                    }
+                  >
+                    <Link href={"/to-be-healthy"}>
+                      {get(item, "link_title")}
+                    </Link>
+                  </button>
+                </motion.div>
+              </motion.li>
+            ))}
           </motion.ul>
           <div
-            className={"xl:col-span-4 md:col-span-6 col-span-12 max-w-[570px] "}
+            className={"xl:col-span-5 md:col-span-6 col-span-12 max-w-[570px] "}
           >
             <RevealLeft>
               {" "}
-              <Image
-                src={"/images/img1.png"}
-                alt={"img1"}
-                width={570}
-                height={363}
-              />
+              {get(mainInformations, "data.main_page_texts", []).map(
+                (item, index) => (
+                  <Image
+                    key={index}
+                    src={"/images/img1.png"}
+                    alt={"img1"}
+                    width={570}
+                    height={363}
+                  />
+                )
+              )}
             </RevealLeft>
           </div>
           <div className={"md:col-span-6 col-span-12 md:mt-0 mt-[30px]"}>
-            <RevealRight>
-              <Title>Sog‘lig‘ingizni bizga ishoning!</Title>
+            {get(mainInformations, "data.main_page_texts", []).map(
+              (item, index) => (
+                <RevealRight key={index}>
+                  <Title>{get(item, "title")}</Title>
 
-              <p className={"mt-[20px] font-mulish text-lg mb-[50px]"}>
-                Bizning yuqori malakali mutaxassislarimiz jamoasi sizni
-                og&apos;riqsiz sog&apos;lig&apos;ingizni tez va oson tiklash
-                uchun eng yangi shifo texnologiyalaridan foydalanadi. Biz
-                yaxshilab kasallikni aniqlab, tahlillar o‘tkazib, uning ildiz
-                omillarini davolaymiz. Davolash jarayoni zamonaviy texnika va
-                dori vositalari orqali amalga oshiriladi
-              </p>
+                  <p className={"mt-[20px] font-mulish text-lg mb-[50px]"}>
+                    {get(item, "description")}
+                  </p>
 
-              <Link href={"#"}>
-                <button
-                  className={
-                    "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[59px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
-                  }
-                >
-                  Biz bilan bog‘laning
-                </button>
-              </Link>
-            </RevealRight>
+                  <Link href={"#"}>
+                    <button
+                      className={
+                        "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[59px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
+                      }
+                    >
+                      {get(item, "button_text")}
+                    </button>
+                  </Link>
+                </RevealRight>
+              )
+            )}
           </div>
         </div>
       </section>
@@ -457,127 +409,127 @@ export default function Home() {
           </div>
 
           <div className={"col-span-12"}>
-            <Reveal duration={0.5}>
-              <Swiper spaceBetween={300} slidesPerView={2.5}>
-                <SwiperSlide>
-                  <AnnouncementCard template={"card"} />
-                </SwiperSlide>
+            <Reveal duration={0.3}>
+              <Swiper slidesPerView={2.5} spaceBetween={300}>
+                {get(mainInformations, "data.announces", []).map(
+                  (item, index) => (
+                    <SwiperSlide key={index}>
+                      <div className="flex  bg-white min-w-[630px] p-[20px] gap-x-[16px] announce-list-shadow rounded-[20px]">
+                        <div className="flex flex-col justify-between gap-y-[15px]">
+                          <h4 className="text-[#037582] font-mulish font-semibold text-sm ">
+                            E’lon
+                          </h4>
 
-                <SwiperSlide>
-                  <AnnouncementCard template={"card"} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <AnnouncementCard template={"card"} />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <AnnouncementCard template={"card"} />
-                </SwiperSlide>
+                          <Link
+                            href={`/announcements/${get(item, "id")}`}
+                            className="font-poppins font-medium text-sm flex-grow hover:text-[#037582] hover:underline"
+                          >
+                            {get(item, "announce_title")}
+                          </Link>
+
+                          <div
+                            className={
+                              "text-sm text-[#037582] flex justify-between"
+                            }
+                          >
+                            {/*date*/}
+                            <p className={"font-mulish text-sm  "}>
+                              {dayjs(get(item, "date_time")).format(
+                                "DD.MM.YYYY"
+                              )}
+                            </p>
+                            <div className={"flex gap-x-[10px]"}>
+                              {/*how many times was seen*/}
+                              <div className={"flex items-center gap-x-[4px]"}>
+                                <Image
+                                  src={"/images/watch.png"}
+                                  alt={"watch"}
+                                  width={18}
+                                  height={18}
+                                />
+                                <p>{get(item, "views_count")}</p>
+                              </div>
+                              {/*when it is deployed*/}
+                              <div className={"flex items-center gap-x-[4px]"}>
+                                <Image
+                                  src={"/images/time.png"}
+                                  alt={"watch"}
+                                  width={18}
+                                  height={18}
+                                />
+                                <p>
+                                  {" "}
+                                  {dayjs(get(item, "date_time")).format(
+                                    "HH:mm"
+                                  )}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <Image
+                          src={"/images/img3.png"}
+                          alt="announce_id"
+                          width={220}
+                          height={164}
+                          className="w-[220px] h-[164px] object-center rounded-[10px]"
+                        />
+                      </div>
+                    </SwiperSlide>
+                  )
+                )}
+                <div className={"col-span-12 mt-[50px] flex justify-between"}>
+                  <Reveal duration={0.3}>
+                    <Link href={"/announcements"}>
+                      <button
+                        className={
+                          "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[27px] rounded-br-[10px] rounded-tl-[10px] text-white"
+                        }
+                      >
+                        Barcha e’lonlar
+                      </button>
+                    </Link>
+                  </Reveal>
+
+                  <Reveal duration={0.3}>
+                    <div className="flex gap-x-[20px]">
+                      <SlidePreviousButton />
+                      <SlideNextButton />
+                    </div>
+                  </Reveal>
+                </div>
+                <div></div>
               </Swiper>
-            </Reveal>
-          </div>
-
-          <div className={"col-span-12 mt-[50px] flex justify-between"}>
-            <Reveal duration={0.7}>
-              <button
-                className={
-                  "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[27px] rounded-br-[10px] rounded-tl-[10px] text-white"
-                }
-              >
-                <Link href={"/announcements"}>Barcha e’lonlar</Link>
-              </button>
-            </Reveal>
-
-            <Reveal duration={0.7}>
-              <div className="flex gap-x-[20px] mt-[20px]">
-                <button className="bg-[#00AFC0] px-[9px] py-[6px] rounded-tl-[10px] rounded-br-[10px] hover:bg-[#00BFD0] active:bg-[#00D1E4]">
-                  <Image
-                    src={"/images/navigation.png"}
-                    alt="navigation"
-                    width={6}
-                    height={12}
-                    className="bg-[#00AFC0] "
-                  />
-                </button>
-                <button className="bg-[#00AFC0] px-[9px] py-[6px] rounded-tr-[10px] rounded-bl-[10px] hover:bg-[#00BFD0] active:bg-[#00D1E4]">
-                  <Image
-                    src={"/images/navigation.png"}
-                    alt="navigation"
-                    width={6}
-                    height={12}
-                    className="bg-[#00AFC0] rotate-180"
-                  />
-                </button>
-              </div>
             </Reveal>
           </div>
         </div>
       </section>
 
       <section className={"bg-[white] py-[70px]"}>
-        <Reveal classNames={0.5}>
+        <Reveal classNames={0.3}>
           <div
             className={
               "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto md:px-0 px-[20px]"
             }
           >
             <div className={"col-span-12 mb-[50px]"}>
-              <Reveal duration={0.7}>
+              <Reveal duration={0.3}>
                 <Title>Bizning bo’limlar</Title>
               </Reveal>
             </div>
 
-            <Department
-              image={"department1"}
-              title={"Lor"}
-              desc={
-                "Quloq, tomoq va burun kasalliklarini tashxislash va davolash bilan shug'ullanadi."
-              }
-              url={"#"}
-            />
+            {get(mainInformations, "data.departments", []).map((item) => (
+              <Department
+                key={get(item, "id")}
+                image={get(item, "department_image")}
+                title={get(item, "department_title")}
+                classNames={"xl:col-span-4 md:col-span-6  col-span-12"}
+                desc={get(item, "department_desc")}
+                url={"#"}
+              />
+            ))}
 
-            <Department
-              image={"department2"}
-              title={"Fizioterapiya"}
-              desc={
-                "Tananing funktsiyasi va harakatchanligini tiklash va yaxshilash uchun jismoniy mashqlar, massaj va elektroterapiya kabi jismoniy usullardan foydalanishni o'z ichiga oladi."
-              }
-              url={"#"}
-            />
-            <Department
-              image={"department3"}
-              title={"Nevrologiya"}
-              desc={
-                "Nevrologiya asab tizimining kasalliklarini, shu jumladan miya va orqa miya, asab va mushak tizimini o'rganadi va davolaydi."
-              }
-              url={"#"}
-            />
-
-            <Department
-              image={"department4"}
-              title={"Psixoterapiya"}
-              desc={
-                "Bemorning hissiy holati va xatti-harakatlarini yaxshilashga qaratilgan nutq texnikasi va psixologik usullar orqali ruhiy va hissiy kasalliklarni davolash usuli."
-              }
-              url={"#"}
-            />
-
-            <Department
-              image={"department5"}
-              title={"Urologiya"}
-              desc={
-                "Urologiya erkaklar va ayollarda siydik tizimi kasalliklarini, shuningdek erkaklarning reproduktiv tizimini tashxislash va davolash bilan shug'ullanadi."
-              }
-              url={"#"}
-            />
-
-            <Department
-              image={"department6"}
-              title={"Reanimatsiya"}
-              desc={
-                "Tananing hayotiy funktsiyalarini, masalan, nafas olish va qon aylanishini, agar ular jiddiy buzilgan bo'lsa, tiklashga qaratilgan shoshilinch tibbiy choralar majmui."
-              }
-              url={"#"}
-            />
             <div
               className={
                 "col-span-12 flex justify-center items-center mt-[20px]"
@@ -602,30 +554,64 @@ export default function Home() {
           }
         >
           <div className={"col-span-12 mb-[50px]"}>
-            <Title>Sog‘lom bo‘lish uchun</Title>
+            <Reveal duration={0.3}>
+              <Title>Sog‘lom bo‘lish uchun</Title>
+            </Reveal>
           </div>
 
           <div className={"md:col-span-4 col-span-12 text-[#2C3E50]"}>
-            <h2 className={"font-medium font-poppins text-[24px] mb-[20px]"}>
-              Doimiy jismoniy mashqalar salomatlik garovidir
-            </h2>
-            <p>
-              Muntazam jismoniy mashqlar jismoniy tayyorgarlikni saqlashga va
-              yurak-qon tomir tizimini mustahkamlashga yordam beradi. Ular
-              endorfin ishlab chiqarish orqali kayfiyatni yaxshilashga va stress
-              darajasini pasaytirishga yordam beradi. Faol bo&apos;lish
-              chidamlilik va moslashuvchanlikni oshiradi, bu esa kundalik
-              vazifalarni osonlashtiradi.{" "}
-            </p>
+            <Reveal duration={0.35}>
+              <h2 className={"font-medium font-poppins text-[24px] mb-[20px]"}>
+                Doimiy jismoniy mashqalar salomatlik garovidir
+              </h2>
+              <p>
+                Muntazam jismoniy mashqlar jismoniy tayyorgarlikni saqlashga va
+                yurak-qon tomir tizimini mustahkamlashga yordam beradi. Ular
+                endorfin ishlab chiqarish orqali kayfiyatni yaxshilashga va
+                stress darajasini pasaytirishga yordam beradi. Faol bo&apos;lish
+                chidamlilik va moslashuvchanlikni oshiradi, bu esa kundalik
+                vazifalarni osonlashtiradi.{" "}
+              </p>
+            </Reveal>
           </div>
+
           <div className={"md:col-span-4 col-span-12 md:mt-0 mt-[30px]"}>
-            <Image
-              src={"/images/img2.png"}
-              alt={"img2"}
-              width={450}
-              height={330}
-            />{" "}
+            <Reveal duration={0.55}>
+              <Image
+                src={"/images/img2.png"}
+                alt={"img2"}
+                width={450}
+                height={330}
+              />{" "}
+            </Reveal>
           </div>
+
+          <div className="md:col-span-4 col-span-12">
+            <Reveal duration={0.65}>
+              {get(mainInformations, "data.recommendations", []).map(
+                (recommendation) => (
+                  <div key={get(recommendation, "id")} className={""}>
+                    <div>
+                      <Link
+                        href={`/to-be-healthy/${get(recommendation, "id")}`}
+                        className="font-medium font-poppins hover:underline"
+                      >
+                        <h5>{get(recommendation, "recommendation_title")}</h5>
+                      </Link>
+
+                      <p className="text-sm font-medium font-poppins text-[#037582]">
+                        {dayjs(get(recommendation, "date_time")).format(
+                          "DD.MM.YYYY"
+                        )}
+                      </p>
+                    </div>
+                    <div className="my-[20px] w-full h-[1px] bg-[#78D7DF]"></div>
+                  </div>
+                )
+              )}
+            </Reveal>
+          </div>
+
           <div className={"col-span-12 mt-[50px]"}>
             <button
               className={
@@ -646,11 +632,11 @@ export default function Home() {
         style={{ backgroundImage: "url(/images/Pluses.png)" }}
       >
         <div class="absolute inset-0 medical-service bg-opacity-50 before:absolute after:inset-0 after:medical-service before:opacity-10 -z-10"></div>
-        <Reveal>
+        <Reveal duration={0.4}>
           <div
             className={"container mx-auto grid grid-cols-12 gap-x-[30px] z-50"}
           >
-            <div className={"col-span-6 !text-white"}>
+            <div className={"lg:col-span-6 col-span-12 !text-white"}>
               <Title textColor={"#fff"}>Yuqori malakali tibbiy xizmat</Title>
 
               <p className={"mt-[30px] font-mulish text-[20px] font-semibold"}>
@@ -778,23 +764,29 @@ export default function Home() {
       </section>
 
       <section className={"bg-white py-[70px] md:px-0 px-[20px]"}>
-        <Reveal>
+        <Reveal duration={0.4}>
           <div className={"grid grid-cols-12 gap-x-[30px]  container mx-auto"}>
             <div className={"col-span-12 mb-[50px]"}>
               <Title>Yangiliklar</Title>
             </div>
 
-            <div className={`md:col-span-4 col-span-12`}>
-              <News template={"card"} />
-            </div>
-
-            <div className={`md:col-span-4 col-span-12 `}>
-              <News template={"card"} />
-            </div>
-
-            <div className={`md:col-span-4 col-span-12 `}>
-              <News template={"card"} />
-            </div>
+            {get(mainInformations, "data.news", []).map((item) => (
+              <div
+                key={get(item, "id")}
+                className={`md:col-span-4 col-span-12`}
+              >
+                <News
+                  template={"card"}
+                  title={get(item, "news_title")}
+                  date={get(item, "date_time")}
+                  time={get(item, "date_time")}
+                  views={get(item, "views_count")}
+                  desc={get(item, "news_desc")}
+                  image={get(item, "news_image")}
+                  url={get(item, "id")}
+                />
+              </div>
+            ))}
 
             <div className={"col-span-12 flex items-center justify-center"}>
               <button
@@ -820,153 +812,32 @@ export default function Home() {
               <Title>Hukumat manbalari</Title>
             </Reveal>
           </div>
-
-          <Reveal
-            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
-            duration={0.25}
-          >
-            <div
-              className={
-                "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
-              }
+          {get(mainInformations, "data.government_links", []).map((item) => (
+            <Reveal
+              classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
+              duration={0.25}
+              key={get(item, "id")}
             >
-              <Image
-                src={"/images/government1.png"}
-                alt={"government"}
-                width={44}
-                height={44}
-              />
-              <p className={"font-medium text-lg  text-[#2C3E50]"}>
-                O‘zbekiston Respublikasi Sog‘liqni saqlash vazirligi
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal
-            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
-            duration={0.3}
-          >
-            <div
-              className={
-                "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
-              }
-            >
-              <Image
-                src={"/images/government1.png"}
-                alt={"government"}
-                width={44}
-                height={44}
-              />
-              <p className={"font-medium text-lg text-[#2C3E50]"}>
-                O‘zbekiston Respublikasi Prezidenti matbuot xizmati
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal
-            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
-            duration={0.35}
-          >
-            <div
-              className={
-                "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
-              }
-            >
-              <Image
-                src={"/images/government2.png"}
-                alt={"government"}
-                width={44}
-                height={44}
-              />
-              <p className={"font-medium text-lg text-[#2C3E50]"}>
-                O‘zbekiston Respublikasi Hukumat portali
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal
-            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
-            duration={0.4}
-          >
-            <div
-              className={
-                "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
-              }
-            >
-              <Image
-                src={"/images/government3.png"}
-                alt={"government"}
-                width={44}
-                height={44}
-              />
-              <p className={"font-medium text-lg text-[#2C3E50]"}>
-                O‘zbekiston Respublikasi Oliy majlisi Qonunchilik palatasi
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal
-            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
-            duration={0.45}
-          >
-            <div
-              className={
-                "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
-              }
-            >
-              <Image
-                src={"/images/government4.png"}
-                alt={"government"}
-                width={44}
-                height={44}
-              />
-              <p className={"font-medium text-lg text-[#2C3E50]"}>
-                O‘zbekiston Respublikasi Oliy majlis Senati
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal
-            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
-            duration={0.55}
-          >
-            <div
-              className={
-                "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
-              }
-            >
-              <Image
-                src={"/images/government5.png"}
-                alt={"government"}
-                width={44}
-                height={44}
-              />
-              <p className={"font-medium text-lg text-[#2C3E50]"}>
-                Milliy huquqiy internet portali
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal
-            classNames={"xl:col-span-4 lg:col-span-6 col-span-12"}
-            duration={0.65}
-          >
-            <div
-              className={
-                "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px]"
-              }
-            >
-              <Image
-                src={"/images/government6.png"}
-                alt={"government"}
-                width={44}
-                height={44}
-              />
-              <p className={"font-medium text-lg text-[#2C3E50]"}>
-                O‘zbekiston Respublikasi Qonunchilik ma’lumotlari milliy bazasi
-              </p>
-            </div>
-          </Reveal>
+              <Link href={get(item, "link")} className="">
+                <div
+                  className={
+                    "col-span-4 flex items-start gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px] flex-grow flex-1"
+                  }
+                >
+                  <Image
+                    src={get(item, "image")}
+                    loader={() => get(item, "image")}
+                    alt={"government"}
+                    width={44}
+                    height={44}
+                  />
+                  <p className={"font-medium text-lg  text-[#2C3E50]  "}>
+                    {get(item, "title")}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
         </div>
       </section>
       <Footer />

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Title from "@/components/title";
-import Header from "@/components/header";
-import Menu from "@/components/menu";
+import Head from "next/head";
 import Image from "next/image";
 import { get } from "lodash";
 import Footer from "@/components/footer";
@@ -81,6 +80,7 @@ const Index = () => {
 
   return (
     <Wrapper>
+      <Head>Xizmatlar</Head>
       <section className={"bg-white py-[50px]"}>
         <div className={"grid grid-cols-12 gap-x-[30px] container mx-auto"}>
           <motion.div

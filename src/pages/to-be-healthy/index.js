@@ -4,6 +4,13 @@ import Title from "@/components/title";
 import News from "@/components/cards/news";
 import AnnouncementCard from "@/components/cards/announcement";
 import HealthyCard from "@/components/cards/healthyCard";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get, isNull } from "lodash";
+import ContentLoader from "@/components/content-loader";
+import Reveal from "@/components/reveal";
+import Image from "next/image";
 
 const Announcement = () => {
   const [tab, setTab] = useState("card");
@@ -11,6 +18,23 @@ const Announcement = () => {
   const [selectedOption, setSelectedOption] = useState("barchasi");
 
   const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const {
+    data: recommends,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.recommends,
+    url: URLS.recommends,
+  });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
 
   const selectTab = (tab) => {
     setTab(tab);
@@ -24,7 +48,9 @@ const Announcement = () => {
     <Wrapper>
       <section>
         <div className={"container mx-auto mb-[30px] mt-[50px]"}>
-          <Title>Sog‘lom bo‘lish uchun</Title>
+          <Reveal>
+            <Title>Sog‘lom bo‘lish uchun</Title>
+          </Reveal>
         </div>
         <div
           className={
@@ -248,7 +274,25 @@ const Announcement = () => {
             </div>
           </div>
 
-          <div></div>
+          <div
+            className={
+              "w-full flex announce-list-shadow pr-[30px] rounded-[10px] "
+            }
+          >
+            <input
+              type={"search"}
+              placeholder={"qidiruv"}
+              className={"w-full pl-[30px] py-[13px] rounded-[10px]"}
+            />
+            <button className={""}>
+              <Image
+                src={"/images/search.png"}
+                alt={"search"}
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
         </div>
 
         <div
@@ -256,33 +300,31 @@ const Announcement = () => {
             "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
           }
         >
-          <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
-            <HealthyCard
-              template={tab === "card" ? "card" : "list"}
-              width={"690px"}
-            />
-          </div>
-
-          <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
-            <HealthyCard
-              template={tab === "card" ? "card" : "list"}
-              width={"690px"}
-            />
-          </div>
-
-          <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
-            <HealthyCard
-              template={tab === "card" ? "card" : "list"}
-              width={"690px"}
-            />
-          </div>
-
-          <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
-            <HealthyCard
-              template={tab === "card" ? "card" : "list"}
-              width={"690px"}
-            />
-          </div>
+          {get(recommends, "data.results", []).map((item) => (
+            <div
+              key={get(item, "id")}
+              className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}
+            >
+              <Reveal>
+                <HealthyCard
+                  title={get(item, "recommendation_title")}
+                  template={tab === "card" ? "card" : "list"}
+                  width={"690px"}
+                  image={
+                    isNull(
+                      get(item, "recommendation_image", "/images/img3.png")
+                    )
+                      ? "/images/img3.png"
+                      : get(item, "recommendation_image", "/images/img3.png")
+                  }
+                  url={get(item, "id")}
+                  date={get(item, "date_time")}
+                  time={get(item, "date_time")}
+                  viewsCount={get(item, "views_count")}
+                />
+              </Reveal>
+            </div>
+          ))}
         </div>
       </section>
     </Wrapper>

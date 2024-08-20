@@ -2,16 +2,15 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const Department = ({ image, title, desc, url }) => {
+const Department = ({ image, title, desc, url, classNames }) => {
   return (
     <div
-      className={
-        "xl:col-span-4 md:col-span-6  col-span-12 bg-[#F7FBFC] hover:border-[#00AFC0] border-[1px] border-transparent cursor-pointer transition-all duration-300 flex items-center justify-center flex-col py-[30px] px-[40px] rounded-bl-[30px] rounded-tr-[30px]"
-      }
+      className={` ${classNames} bg-[#F7FBFC] hover:border-[#00AFC0] border-[1px] border-transparent cursor-pointer transition-all duration-300 flex items-center justify-center flex-col py-[30px] px-[40px] rounded-bl-[30px] rounded-tr-[30px]`}
     >
       <Image
-        src={`/images/${image}.png`}
-        alt={`${image}`}
+        src={image}
+        loader={() => image}
+        alt={`department`}
         width={58}
         height={58}
         className={

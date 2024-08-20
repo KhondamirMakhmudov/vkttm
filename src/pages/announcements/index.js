@@ -3,11 +3,35 @@ import Wrapper from "@/layout/wrapper";
 import Title from "@/components/title";
 import News from "@/components/cards/news";
 import AnnouncementCard from "@/components/cards/announcement";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get } from "lodash";
+import ContentLoader from "@/components/content-loader";
+import Reveal from "@/components/reveal";
+import Image from "next/image";
 
 const Announcement = () => {
   const [tab, setTab] = useState("card");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("barchasi");
+
+  const {
+    data: announces,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.announces,
+    url: URLS.announces,
+  });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
@@ -23,7 +47,9 @@ const Announcement = () => {
     <Wrapper>
       <section>
         <div className={"container mx-auto mb-[30px] mt-[50px]"}>
-          <Title>Barcha e’lonlar</Title>
+          <Reveal>
+            <Title>Barcha e’lonlar</Title>
+          </Reveal>
         </div>
         <div
           className={
@@ -247,7 +273,25 @@ const Announcement = () => {
             </div>
           </div>
 
-          <div></div>
+          <div
+            className={
+              "w-full flex announce-list-shadow pr-[30px] rounded-[10px] "
+            }
+          >
+            <input
+              type={"search"}
+              placeholder={"qidiruv"}
+              className={"w-full pl-[30px] py-[13px] rounded-[10px]"}
+            />
+            <button className={""}>
+              <Image
+                src={"/images/search.png"}
+                alt={"search"}
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
         </div>
 
         <div
@@ -255,7 +299,25 @@ const Announcement = () => {
             "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
           }
         >
-          <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
+          {get(announces, "data.results", []).map((item) => (
+            <div
+              key={get(item, "id")}
+              className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}
+            >
+              <AnnouncementCard
+                template={tab === "card" ? "card" : "list"}
+                width={"690px"}
+                title={get(item, "announce_title")}
+                date={get(item, "date_time")}
+                time={get(item, "date_time")}
+                image={get(item, "announce_image")}
+                views={get(item, "views_count")}
+                url={get(item, "id")}
+              />
+            </div>
+          ))}
+
+          {/* <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
             <AnnouncementCard
               template={tab === "card" ? "card" : "list"}
               width={"690px"}
@@ -267,14 +329,7 @@ const Announcement = () => {
               template={tab === "card" ? "card" : "list"}
               width={"690px"}
             />
-          </div>
-
-          <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
-            <AnnouncementCard
-              template={tab === "card" ? "card" : "list"}
-              width={"690px"}
-            />
-          </div>
+          </div> */}
         </div>
       </section>
     </Wrapper>
