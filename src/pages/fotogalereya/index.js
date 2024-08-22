@@ -6,12 +6,25 @@ import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get, times } from "lodash";
+import ContentLoader from "@/components/content-loader";
 
 const Index = () => {
-  const { data: photos, isLoading } = useGetQuery({
+  const {
+    data: photos,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
     key: KEYS.photo,
     url: URLS.photo,
   });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <div
@@ -31,6 +44,7 @@ const Index = () => {
             date={get(photo, "date_time")}
             time={get(photo, "date_time")}
             url={get(photo, "id")}
+            image={get(photo, "images[0].image.file")}
           />
         ))}
       </div>

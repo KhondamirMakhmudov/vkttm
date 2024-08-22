@@ -1,45 +1,57 @@
 import React, { useState } from "react";
 import Wrapper from "@/layout/wrapper";
-import News from "@/components/cards/news";
-import Image from "next/image";
 import Title from "@/components/title";
-import Reveal from "@/components/reveal";
+import News from "@/components/cards/news";
 import AnnouncementCard from "@/components/cards/announcement";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get } from "lodash";
+import ContentLoader from "@/components/content-loader";
+import Reveal from "@/components/reveal";
+import Image from "next/image";
 
-const Index = () => {
+const Announcement = () => {
   const [tab, setTab] = useState("card");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("barchasi");
 
-  const { data: news, isLoading } = useGetQuery({
-    key: KEYS.news,
-    url: URLS.news,
+  const {
+    data: announces,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.announces,
+    url: URLS.announces,
   });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
   const selectTab = (tab) => {
     setTab(tab);
   };
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
   };
-
   return (
     <Wrapper>
       <section>
         <div className={"container mx-auto mb-[30px] mt-[50px]"}>
-          <Reveal duration={0.5}>
-            <Title>Barcha yangiliklar</Title>
+          <Reveal duration={0.3}>
+            <Title>Barcha e’lonlar</Title>
           </Reveal>
         </div>
-        <Reveal duration={0.6}>
+        <Reveal duration={0.3}>
           <div
             className={
               "container mx-auto flex items-center gap-x-[90px] mb-[30px]"
@@ -283,34 +295,49 @@ const Index = () => {
             </div>
           </div>
         </Reveal>
-        <Reveal duration={0.3}>
-          <div
-            className={
-              "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
-            }
-          >
-            {get(news, "data.results", []).map((item, index) => (
-              <div
-                key={get(item, "id")}
-                className={`${tab === "card" ? "col-span-4" : "col-span-12"} `}
-              >
-                <News
+
+        <div
+          className={
+            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
+          }
+        >
+          {get(announces, "data.results", []).map((item) => (
+            <div
+              key={get(item, "id")}
+              className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}
+            >
+              <Reveal duration={0.3}>
+                <AnnouncementCard
                   template={tab === "card" ? "card" : "list"}
-                  views={get(item, "views_count")}
-                  title={get(item, "news_title")}
+                  width={"690px"}
+                  title={get(item, "announce_title")}
                   date={get(item, "date_time")}
                   time={get(item, "date_time")}
-                  desc={get(item, "news_desc")}
-                  image={get(item, "news_image")}
+                  image={get(item, "announce_image")}
+                  views={get(item, "views_count")}
                   url={get(item, "id")}
                 />
-              </div>
-            ))}
+              </Reveal>
+            </div>
+          ))}
+
+          {/* <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
+            <AnnouncementCard
+              template={tab === "card" ? "card" : "list"}
+              width={"690px"}
+            />
           </div>
-        </Reveal>
+
+          <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
+            <AnnouncementCard
+              template={tab === "card" ? "card" : "list"}
+              width={"690px"}
+            />
+          </div> */}
+        </div>
       </section>
     </Wrapper>
   );
 };
 
-export default Index;
+export default Announcement;

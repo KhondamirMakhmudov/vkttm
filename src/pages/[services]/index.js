@@ -7,34 +7,20 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import EmployeeCard from "@/components/cards/employee";
-import Head from "next/head";
-import useGetQuery from "@/hooks/api/useGetQuery";
-import { KEYS } from "@/constants/key";
-import { URLS } from "@/constants/url";
-import ContentLoader from "@/components/content-loader";
-import { get } from "lodash";
 
 const Index = () => {
   const router = useRouter();
-  const { tab } = router.query;
-  const [activeTab, setActiveTab] = useState("Konsultatsiya");
-
-  const { data, isLoading, isFetching } = useGetQuery({
-    key: KEYS.services,
-    url: URLS.services,
-  });
-
-  if (isLoading || isFetching) {
-    return (
-      <Wrapper>
-        <ContentLoader />
-      </Wrapper>
-    );
-  }
+  const { services } = router.query;
+  const [activeTab, setActiveTab] = useState("konsultatsiya");
 
   const handleTabClick = (tab) => {
     router.push(`/${tab}`);
   };
+  useEffect(() => {
+    if (services) {
+      setActiveTab(services);
+    }
+  }, [services]);
 
   return (
     <Wrapper>
@@ -48,22 +34,41 @@ const Index = () => {
             <ul
               className={"flex flex-col gap-y-[20px] p-[50px] text-[#494949]"}
             >
-              {get(data, "data.results", []).map((item) => (
-                <li
-                  key={get(item, "id")}
-                  className={`cursor-pointer ${
-                    activeTab === get(item, "service_title")
-                      ? "text-[#00AFC0]"
-                      : "text-[#2C3E50]"
-                  }`}
-                >
-                  <button
-                    onClick={() => handleTabClick(get(item, "service_title"))}
-                  >
-                    {get(item, "service_title")}
-                  </button>
-                </li>
-              ))}
+              <li
+                className={`cursor-pointer ${
+                  activeTab === "Konsultatsiya"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
+              >
+                <button onClick={() => handleTabClick("konsultatsiya")}>
+                  Konsultatsiya
+                </button>
+              </li>
+
+              <li
+                className={`cursor-pointer ${
+                  activeTab === "Diagnostika"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
+              >
+                <button onClick={() => handleTabClick("diagnostika")}>
+                  Diagnostika
+                </button>
+              </li>
+
+              <li
+                className={`cursor-pointer ${
+                  activeTab === "Xizmat turi"
+                    ? "text-[#00AFC0]"
+                    : "text-[#2C3E50]"
+                }`}
+              >
+                <button onClick={() => handleTabClick("xizmat-turi")}>
+                  Xizmat turi
+                </button>
+              </li>
             </ul>
           </div>
 

@@ -44,8 +44,6 @@ export default function Home() {
     );
   }
 
-  console.log(get(mainInformations, "data.banners"), "main-info");
-
   return (
     <>
       <Head>
@@ -56,7 +54,7 @@ export default function Home() {
       {get(mainInformations, "data.banners", []).map((item, index) => (
         <main
           key={index}
-          className={"w-full h-[650px] bg-no-repeat md:bg-cover bg-center"}
+          className={"w-full  h-[650px] bg-no-repeat md:bg-cover bg-center"}
           style={{
             backgroundImage: `url(${
               isNull(get(item, "banner_image"))
@@ -105,7 +103,7 @@ export default function Home() {
                   "font-mulish md:text-[20px] text-base mb-[30px] text-[#0D4866]"
                 }
               >
-                {get(item, "banner_header")}
+                {get(item, "banner_desc")}
               </motion.p>
               <Link
                 href={"/about"}
@@ -228,7 +226,7 @@ export default function Home() {
                   "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
                 }
               >
-                <Link href={"/to-be-healthy"}>Barchasi</Link>
+                <Link href={"/salomatlik-blogi"}>Barchasi</Link>
               </button>
             </motion.div>
           </motion.li>
@@ -421,7 +419,7 @@ export default function Home() {
                           </h4>
 
                           <Link
-                            href={`/announcements/${get(item, "id")}`}
+                            href={`/elonlar/${get(item, "id")}`}
                             className="font-poppins font-medium text-sm flex-grow hover:text-[#037582] hover:underline"
                           >
                             {get(item, "announce_title")}
@@ -540,7 +538,7 @@ export default function Home() {
                   "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[72px] rounded-br-[10px] rounded-tl-[10px] text-white"
                 }
               >
-                <Link href={"/about?tab=Bo‘limlar"}>Barcha bo‘limlar</Link>
+                <Link href={"/bolimlar"}>Barcha bo‘limlar</Link>
               </button>
             </div>
           </div>
@@ -593,7 +591,7 @@ export default function Home() {
                   <div key={get(recommendation, "id")} className={""}>
                     <div>
                       <Link
-                        href={`/to-be-healthy/${get(recommendation, "id")}`}
+                        href={`/salomatlik-blogi/${get(recommendation, "id")}`}
                         className="font-medium font-poppins hover:underline"
                       >
                         <h5>{get(recommendation, "recommendation_title")}</h5>
@@ -618,7 +616,7 @@ export default function Home() {
                 "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[45px] rounded-br-[10px] rounded-tl-[10px] text-white"
               }
             >
-              <Link href={"/to-be-healthy"}>Barcha maqolalar</Link>
+              <Link href={"/salomatlik-blogi"}>Barcha maqolalar</Link>
             </button>
           </div>
         </div>
@@ -794,7 +792,7 @@ export default function Home() {
                   "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[65px] rounded-br-[10px] mt-[50px] rounded-tl-[10px] text-white"
                 }
               >
-                <Link href={"/news"}>Barcha yangiliklar</Link>
+                <Link href={"/yangiliklar"}>Barcha yangiliklar</Link>
               </button>
             </div>
           </div>

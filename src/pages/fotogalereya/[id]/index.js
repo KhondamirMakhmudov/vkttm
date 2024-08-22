@@ -42,7 +42,7 @@ const Index = () => {
           <p>Bosh sahifa</p>
         </Link>
         <span>/</span>
-        <Link href={"/gallery"}>
+        <Link href={"/fotogalereya"}>
           <p> Galleriya</p>
         </Link>
         <span>/</span>
@@ -129,7 +129,7 @@ const Index = () => {
               </h3>
 
               <Link
-                href={"/to-be-healthy"}
+                href={"/salomatlik-blogi"}
                 className={
                   "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
@@ -175,7 +175,7 @@ const Index = () => {
                       </p>
 
                       <Link
-                        href={`/to-be-healthy/${get(item, "id")}`}
+                        href={`/salomatlik-blogi/${get(item, "id")}`}
                         className="hover:text-[#037582] hover:underline"
                       >
                         <p className={"font-poppins text-sm font-normal"}>
@@ -200,7 +200,7 @@ const Index = () => {
               </h3>
 
               <Link
-                href={"/news"}
+                href={"/yangiliklar"}
                 className={
                   "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
@@ -238,7 +238,7 @@ const Index = () => {
                     >
                       {dayjs(get(item, "date_time")).format("DD.MM.YYYY")}
                     </p>
-                    <Link href={`/news/${get(item, "id")}`}>
+                    <Link href={`/yangiliklar/${get(item, "id")}`}>
                       <p
                         className={
                           "font-poppins text-sm font-normal line-clamp-3 hover:text-[#037582] hover:underline"

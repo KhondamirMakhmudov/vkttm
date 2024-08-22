@@ -24,15 +24,12 @@ const HealthyCard = ({
           <div
             className={"flex flex-col justify-between gap-y-[10px] w-[414px]"}
           >
-            <h4 className={"font-mulish text-sm text-[#037582] "}>
-              Sog‘lom bo‘lish uchun
-            </h4>
+            <h4 className={"font-mulish text-sm  "}>Sog‘lom bo‘lish uchun</h4>
             {/* desc of announcement */}
-            <Link href={"#"}>
-              <p className={"font-medium flex-grow"}>{title}</p>
-            </Link>
 
-            <Link href={`/to-be-healthy/${url}`}>
+            <p className={"font-medium flex-grow "}>{title}</p>
+
+            <Link href={`/salomatlik-blogi/${url}`}>
               <button
                 className={
                   "font-poppins  font-medium border-b-[2px] border-b-[#00AFC0] "
@@ -137,7 +134,7 @@ const HealthyCard = ({
                 </div>
               </div>
             </div>
-            <Link href={`/to-be-healty/${url}`}>
+            <Link href={`/salomatlik-blogi/${url}`}>
               <p className={"my-[20px] font-medium text-lg   flex-1"}>
                 {title}
               </p>
@@ -148,7 +145,7 @@ const HealthyCard = ({
                 "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
               }
             >
-              <Link href={`/to-be-healty/${url}`}>Batafsil</Link>
+              <Link href={`/salomatlik-blogi/${url}`}>Batafsil</Link>
             </button>
           </div>
         </div>

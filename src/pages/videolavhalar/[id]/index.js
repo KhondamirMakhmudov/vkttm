@@ -1,54 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "@/layout/wrapper";
 import Link from "next/link";
 import Image from "next/image";
-import Title from "@/components/title";
-import Announcement from "@/components/cards/announcement";
-import { useRouter } from "next/router";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
+import { useRouter } from "next/router";
 import { URLS } from "@/constants/url";
+import ContentLoader from "@/components/content-loader";
 import { get, isNull } from "lodash";
 import dayjs from "dayjs";
-import parse from "html-react-parser";
+import ReactPlayer from "react-player";
 
 const Index = () => {
+  const [selectedVideo, setSelectedVideo] = useState("");
   const router = useRouter();
   const { id } = router.query;
 
-  const { data: announce, isLoading } = useGetQuery({
-    key: [KEYS.announces, id],
-    url: `${URLS.announces}${id}`,
+  const {
+    data: video,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: [KEYS.video, id],
+    url: `${URLS.video}${id}`,
     enabled: !!id,
   });
 
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
+
+  const handleClick = (image) => {
+    setSelectedVideo(image);
+  };
   return (
     <Wrapper>
       <div
         className={
-          "container mx-auto flex italic font-mulish gap-x-[10px] lg:text-sm md:text-xs text-[8px] text-[#494949] mt-[50px] px-[20px] md:px-0"
+          "container mx-auto flex italic font-mulish gap-x-[10px] text-[#494949] mt-[50px]"
         }
       >
         <Link href={"/"}>
           <p>Bosh sahifa</p>
         </Link>
         <span>/</span>
-        <Link href={"/announcements"}>
-          <p> Barcha e’lonlar</p>
+        <Link href={"/videolavhalar"}>
+          <p> Videolavhalar</p>
         </Link>
         <span>/</span>
-        <p className={"text-[#036874] max-w-[370px] line-clamp-1"}>
-          {get(announce, "data.announce_title")}
-        </p>
+        <p className={"text-[#036874]"}>{get(video, "data.video_title")}</p>
       </div>
 
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium my-[50px] px-[20px] md:px-0"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium mb-[50px] mt-[30px]"
         }
       >
         <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
-          {get(announce, "data.announce_title")}
+          {get(video, "data.video_title")}
         </h1>
 
         <div
@@ -56,11 +69,11 @@ const Index = () => {
             "col-span-12 flex items-center text-[#037582] gap-x-[50px] font-mulish mb-[50px]"
           }
         >
-          <p>E’lon</p>
+          <p>Galereya</p>
           {/*how many times was seen*/}
 
           <p className={""}>
-            {dayjs(get(announce, "data.date_time")).format("DD.MM.YYYY")}
+            {dayjs(get(video, "data.date_time")).format("DD.MM.YYYY")}
           </p>
 
           <div className={"flex items-center gap-x-[15px]"}>
@@ -71,7 +84,7 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>{get(announce, "data.views_count")}</p>
+              <p>{get(video, "data.views_count")}</p>
             </div>
             {/*when it is deployed*/}
             <div className={"flex items-center gap-x-[4px]"}>
@@ -81,46 +94,63 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>{dayjs(get(announce, "data.date_time")).format("HH:mm")}</p>
+              <p>{dayjs(get(video, "data.date_time")).format("HH:mm")}</p>
             </div>
           </div>
         </div>
 
         <div className={"col-span-8"}>
-          <Image
-            src={
-              get(announce, "data.announce_image") || "/images/announce_id.png"
-            }
-            loader={() =>
-              get(announce, "data.announce_image") || "/images/announce_id.png"
-            }
-            alt={"announce_id"}
+          <ReactPlayer
+            url={selectedVideo}
             width={930}
-            height={532}
-            priority={true}
-            quality={100}
+            height={540}
+            playIcon={
+              <Image
+                src={"/icons/playIcon.svg"}
+                alt="playIcon"
+                width={48}
+                height={48}
+              />
+            }
           />
 
-          <div className={"my-[30px] font-mulish !font-normal "}>
-            {parse(get(announce, "data.announce_desc", ""))}
+          <div className={"flex gap-x-[20px]"}>
+            {get(video, "data.video_links").map((item, index) => (
+              <div key={index} onClick={() => handleClick(item)}>
+                <ReactPlayer
+                  url={item}
+                  key={index}
+                  width={200}
+                  height={157}
+                  pip={true}
+                  playIcon={
+                    <Image
+                      src={"/icons/playIcon.svg"}
+                      alt="playIcon"
+                      width={48}
+                      height={48}
+                    />
+                  }
+                />
+              </div>
+            ))}
           </div>
         </div>
-
-        <div className={"md:col-span-4 col-span-12"}>
+        <div className={"col-span-4"}>
           <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
-                  "font-poppins font-medium lg:text-[20px] md:text-lg text-base text-[#494949]"
+                  "font-poppins font-medium text-[20px] text-[#494949]"
                 }
               >
                 Sog‘lom bo‘lish uchun{" "}
               </h3>
 
               <Link
-                href={"/to-be-healthy"}
+                href={"/salomatlik-blogi"}
                 className={
-                  "lg:text-sm md:text-xs text-[10px] font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                  "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
               >
                 Barchasi
@@ -134,7 +164,7 @@ const Index = () => {
             </div>
 
             <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-              {get(announce, "data.last_recommendations", []).map(
+              {get(video, "data.last_recommendations", []).map(
                 (recommend, index) => (
                   <li
                     key={get(recommend, "id")}
@@ -168,7 +198,7 @@ const Index = () => {
                         )}
                       </p>
 
-                      <Link href={`/to-be-healthy/${get(recommend, "id")}`}>
+                      <Link href={`/salomatlik-blogi/${get(recommend, "id")}`}>
                         <p
                           className={
                             "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all duration-300"
@@ -188,16 +218,16 @@ const Index = () => {
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
-                  "font-poppins font-medium lg:text-[20px] md:text-lg text-base text-[20px] text-[#494949]"
+                  "font-poppins font-medium text-[20px] text-[#494949]"
                 }
               >
                 Yangiliklar
               </h3>
 
               <Link
-                href={"/news"}
+                href={"/yangiliklar"}
                 className={
-                  "lg:text-sm md:text-xs text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                  "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
               >
                 Barchasi
@@ -211,7 +241,7 @@ const Index = () => {
             </div>
 
             <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-              {get(announce, "data.last_news", []).map((news) => (
+              {get(video, "data.last_news", []).map((news) => (
                 <li
                   key={get(news, "id")}
                   className={
@@ -245,7 +275,7 @@ const Index = () => {
                       {dayjs(get(news, "date_time")).format("DD.MM.YYYY")}
                     </p>
 
-                    <Link href={`/news/${get(news, "id")}}`}>
+                    <Link href={`/yangiliklar/${get(news, "id")}`}>
                       <p
                         className={
                           "font-poppins text-sm font-normal line-clamp-3 hover:text-[#037582] hover:underline transition-all duration-300"
@@ -260,26 +290,6 @@ const Index = () => {
             </ul>
           </div>
         </div>
-
-        <div className={"col-span-12"}>
-          <h2 className={"text-[24px] font-semibold font-poppins mb-[30px]"}>
-            Boshqa e’lonlar
-          </h2>
-        </div>
-        {get(announce, "data.last_announces", []).map((item) => (
-          <div className={"lg:col-span-6 col-span-12"} key={(item, "id")}>
-            <Announcement
-              width={"690px"}
-              template={"card"}
-              title={get(item, "announce_title")}
-              date={get(item, "date_time")}
-              time={get(item, "date_time")}
-              image={"/images/img3.png"}
-              views={get(item, "views_count")}
-              url={get(item, "id")}
-            />
-          </div>
-        ))}
       </div>
     </Wrapper>
   );

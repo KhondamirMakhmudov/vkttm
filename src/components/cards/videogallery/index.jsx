@@ -51,7 +51,7 @@ const VideoGallery = ({ views, date, time, title, videoUrl, url }) => {
         />
       </div>
 
-      <Link href={`video-gallery/${url}`}>
+      <Link href={`videolavhalar/${url}`}>
         <h3
           className={
             "font-poppins text-lg font-semibold hover:text-[#037582] hover:underline transition-all duration-400"

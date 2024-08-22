@@ -41,14 +41,15 @@ const GalleryCard = ({ views, date, time, title, image, url }) => {
       </div>
 
       <Image
-        src={"/images/gallery1.png"}
+        src={image}
+        loader={() => image}
         alt={"gallery1"}
         width={450}
         height={300}
-        className={"my-[20px]"}
+        className={"my-[20px] w-[450px] h-[300px]"}
       />
 
-      <Link href={`gallery/${url}`}>
+      <Link href={`fotogalereya/${url}`}>
         <h3
           className={
             "font-poppins text-lg font-semibold hover:text-[#037582] hover:underline transition-all duration-400"

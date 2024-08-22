@@ -5,8 +5,30 @@ import Title from "@/components/title";
 import { documents } from "@/dummy-datas";
 import { get } from "lodash";
 import Image from "next/image";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import ContentLoader from "@/components/content-loader";
+import Link from "next/link";
 
 const Index = () => {
+  const {
+    data: normativeDocuments,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.normativeDocs,
+    url: URLS.normativeDocs,
+  });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <section className={"my-[50px]"}>
@@ -21,25 +43,34 @@ const Index = () => {
             </Reveal>
           </div>
 
-          {documents.map((document) => (
+          {get(normativeDocuments, "data.results").map((document) => (
             <Reveal
               duration={0.3}
               key={get(document, "id")}
-              classNames={"col-span-3 announce-list-shadow"}
+              classNames={
+                "lg:col-span-3 md:col-span-6 col-span-12 announce-list-shadow hover:shadow-2xl transition-all duration-300"
+              }
             >
               <div>
                 <Reveal duration={0.5}>
                   <Image
-                    src={`/images/${get(document, "image")}`}
+                    src={get(document, "document_image")}
+                    loader={() => get(document, "document_image")}
                     alt={`${get(document, "image")}`}
                     width={330}
                     height={210}
+                    className="w-[330px] h-[210px] rounded-tr-[20px] rounded-bl-[20px]"
                   />
-                  <p className={"font-poppins font-medium px-[10px] py-[20px]"}>
-                    Lorem ipsum dolor sit amet consectetur. Vehicula neque sed
-                    egestas tellus ut egestas in velit gravida. Sem pretium
-                    adipiscing mauris pharetra quisque pulvinar nunc amet.
-                  </p>
+                  <Link
+                    href={get(document, "document_url")}
+                    className="hover:text-[#037582] transition-all duration-300"
+                  >
+                    <p
+                      className={"font-poppins font-medium px-[10px] py-[20px]"}
+                    >
+                      {get(document, "document_title")}
+                    </p>
+                  </Link>
                 </Reveal>
               </div>
             </Reveal>

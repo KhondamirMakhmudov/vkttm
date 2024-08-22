@@ -11,7 +11,7 @@ const request = axios.create({
   headers: {
     common: {
       Accept: "application/json",
-      "Content-Type": "application/json, charset=utf-8",
+      "Content-Type": "application/json",
       //   Authorization: `Token ${token}`,
     },
   },

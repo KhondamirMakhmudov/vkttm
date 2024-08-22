@@ -7,6 +7,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import VideoGallery from "@/components/cards/videogallery";
+import ContentLoader from "@/components/content-loader";
 
 const Index = () => {
   const {
@@ -17,6 +18,14 @@ const Index = () => {
     key: KEYS.video,
     url: URLS.video,
   });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <div

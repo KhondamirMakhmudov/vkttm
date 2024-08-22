@@ -1,13 +1,16 @@
+import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { forEach, isArray } from "lodash";
-import toast from "react-hot-toast";
-
-const { request } = require("@/services/api");
+import { request, requestTMSITI } from "@/services/api";
+import { toast } from "react-hot-toast";
+import { isArray, get, forEach, isObject, values } from "lodash";
+import { useTranslation } from "react-i18next";
 
 const postRequest = (url, attributes, config = {}) =>
   request.post(url, attributes, config);
 
 const usePostQuery = ({ hideSuccessToast = false, listKeyId = null }) => {
+  const { t } = useTranslation();
+
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, isError, error, isFetching } = useMutation(
@@ -15,7 +18,7 @@ const usePostQuery = ({ hideSuccessToast = false, listKeyId = null }) => {
     {
       onSuccess: (data) => {
         if (!hideSuccessToast) {
-          toast.success(data?.data?.message || "Success");
+          toast.success(t(data?.data?.message) || "Muvaqqiyatli bajarildi");
         }
 
         if (listKeyId) {
@@ -28,8 +31,28 @@ const usePostQuery = ({ hideSuccessToast = false, listKeyId = null }) => {
           }
         }
       },
+      onError: (data) => {
+        if (isArray(get(data, "response.data"))) {
+          forEach(get(data, "response.data"), (val) => {
+            toast.error(t(get(val, "message", "ERROR")));
+          });
+        } else if (isObject(get(data, "response.data"))) {
+          forEach(values(get(data, "response.data")), (val) => {
+            toast.error(val, { position: "top-right" });
+          });
+        } else {
+          toast.error(t(data?.response?.data?.message) || t("ERROR"));
+        }
+      },
     }
   );
-};
 
+  return {
+    mutate,
+    isLoading,
+    isError,
+    error,
+    isFetching,
+  };
+};
 export default usePostQuery;

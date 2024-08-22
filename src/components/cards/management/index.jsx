@@ -2,11 +2,25 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const ManagementCard = ({ position }) => {
+const ManagementCard = ({
+  position,
+  fullname,
+  managerDesc,
+  receiptDays,
+  receiptTime,
+  phone,
+  email,
+  telegram,
+  instagram,
+  facebook,
+  image,
+  positionResponsibilities,
+}) => {
   return (
-    <div className={"flex items-start gap-x-[30px]"}>
+    <div className={"flex items-start gap-x-[30px] mb-[30px]"}>
       <Image
-        src={"/images/management.png"}
+        src={image}
+        loader={() => image}
         alt={"management"}
         width={280}
         height={320}
@@ -28,18 +42,10 @@ const ManagementCard = ({ position }) => {
             "text-[#2C3E50] text-[24px] font-poppins mt-[20px] mb-[10px]"
           }
         >
-          Familiya Ism Sharif
+          {fullname}
         </h3>
 
-        <p className={"font-mulish font-normal mb-[12 0px]"}>
-          Tibbiyot markazi direktori sog&apos;liqni saqlashni boshqarish va
-          sog&apos;liqni saqlash xizmatlarini tashkil etishda katta tajribaga
-          ega. U sog&apos;liqni saqlash sifatini yaxshilash va xizmatlar
-          doirasini kengaytirishga qaratilgan markazni rivojlantirish
-          strategiyalarini faol rivojlantirmoqda. Direktor markazdagi barcha
-          tibbiy jarayonlarning xavfsizligi va samaradorligining yuqori
-          standartini ta&apos;minlaydi.
-        </p>
+        <p className={"font-mulish font-normal mb-[10px]"}>{managerDesc}</p>
 
         <Link
           href={"#"}
@@ -48,7 +54,7 @@ const ManagementCard = ({ position }) => {
           Lavozim yo’riqnomasi
         </Link>
 
-        <div className={"flex gap-x-[50px]"}>
+        <div className={"flex gap-x-[50px] mt-[30px]"}>
           <div>
             <h4 className={"font-poppins font-medium "}>Bog’lanish:</h4>
 
@@ -63,7 +69,7 @@ const ManagementCard = ({ position }) => {
                 width={24}
                 height={24}
               />
-              <Link href={"tel:+998 78 210 00 81"}>+998 78 210 00 81</Link>
+              <Link href={`tel:${phone}`}>{phone}</Link>
             </div>
 
             <div
@@ -75,7 +81,7 @@ const ManagementCard = ({ position }) => {
                 width={24}
                 height={24}
               />
-              <Link href={"mailto:vkttm.uz@gmail.com"}>vkttm.uz@gmail.com</Link>
+              <Link href={`mailto:${email}`}>{email}</Link>
             </div>
           </div>
 
@@ -87,11 +93,11 @@ const ManagementCard = ({ position }) => {
                 "flex gap-x-[10px] my-[10px] text-sm font-medium font-mulish"
               }
             >
-              Dushanba-Shanba
+              {receiptDays}
             </p>
 
             <p className={"flex gap-x-[10px] text-sm font-medium font-mulish"}>
-              10:00 - 12:00
+              {receiptTime}
             </p>
           </div>
 
@@ -103,7 +109,7 @@ const ManagementCard = ({ position }) => {
 
             <ul className={"flex gap-x-[10px] mt-[10px]"}>
               <li>
-                <Link href={"#"} className={"cursor-pointer"}>
+                <Link href={telegram} className={"cursor-pointer"}>
                   <svg
                     width="25"
                     height="24"
@@ -134,7 +140,7 @@ const ManagementCard = ({ position }) => {
                 </Link>
               </li>
               <li>
-                <Link href={"#"} className={"cursor-pointer"}>
+                <Link href={facebook} className={"cursor-pointer"}>
                   <svg
                     width="25"
                     height="24"
@@ -165,7 +171,7 @@ const ManagementCard = ({ position }) => {
                 </Link>
               </li>
               <li>
-                <Link href={"#"} className={"cursor-pointer"}>
+                <Link href={instagram} className={"cursor-pointer"}>
                   <svg
                     width="25"
                     height="24"

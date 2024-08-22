@@ -16,6 +16,23 @@ const menuData = [
     id: 1,
     title: "Markaz haqida",
     url: "/about-center",
+    subMenu: [
+      {
+        id: 1,
+        title: "Markaz tuzilmasi",
+        url: "/news",
+      },
+      {
+        id: 2,
+        title: "Rahbariyat",
+        url: "/announcements",
+      },
+      {
+        id: 3,
+        title: "Vakansiyalar",
+        url: "/vacancies",
+      },
+    ],
   },
   {
     id: 2,
@@ -66,7 +83,7 @@ const menuData = [
 const Index = ({ active = 0 }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const [open, setOpen] = useState(true);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState("");
 
   const {
     data: navMenu,
@@ -77,10 +94,8 @@ const Index = ({ active = 0 }) => {
     url: URLS.menu,
   });
 
-  console.log(navMenu, "menu");
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+  const toggleDropdown = (menu) => {
+    setIsOpen(menu);
   };
 
   const toggleMenu = () => {
@@ -98,7 +113,7 @@ const Index = ({ active = 0 }) => {
         animate={{ opacity: 100, translateY: "0px" }}
         transition={{ duration: 0.4 }}
         className={
-          "hidden md:flex container mx-auto  items-center gap-x-[63px] py-[20px]"
+          "hidden md:flex container mx-auto  items-center gap-x-[63px] z-50 py-[20px]"
         }
       >
         <Brand />
@@ -109,23 +124,31 @@ const Index = ({ active = 0 }) => {
             }
           >
             {dropRight(get(navMenu, "data", []), 2).map((item) => (
-              <li key={get(item, "id")} className="dropdown relative">
+              <li
+                key={get(item, "id")}
+                className="dropdown relative "
+                onClick={() => toggleDropdown(get(item, "title"))}
+              >
                 <Link
                   className="hover:text-[#00AFC0] transition-all duration-300"
-                  href={`${get(item, "title")
-                    .toLowerCase()
-                    .replace(" ", "-")
-                    .replace("'", "")}`}
+                  href={
+                    !isEmpty(get(item, "submenus", []))
+                      ? "#"
+                      : `${get(item, "title")
+                          .toLowerCase()
+                          .replace(" ", "-")
+                          .replace("'", "")}`
+                  }
                 >
                   {get(item, "title")}
                 </Link>
 
                 {isEmpty(get(item, "submenus", []))
                   ? ""
-                  : isOpen && (
+                  : isOpen === get(item, "title") && (
                       <ul
                         className={
-                          "dropdown-menu z-50   bg-gray-50  absolute lg:w-[180px] w-[100px] text-start shadow-xl  rounded-[5px]"
+                          "block bg-gray-50  absolute lg:w-[180px] w-[100px] text-start shadow-xl  rounded-[5px]"
                         }
                       >
                         {get(item, "submenus", []).map((subItem) => (
@@ -135,12 +158,15 @@ const Index = ({ active = 0 }) => {
                               "hover:text-[#00AFC0] transition-all  text-[14px] border-b-transparent font-medium ",
                               {
                                 "!border-b-[#1890FF] text-[#001A57]": isEqual(
-                                  get(item, "id"),
+                                  get(subItem, "id"),
                                   active
                                 ),
                               }
                             )}
-                            href={"#"}
+                            href={`/${get(subItem, "title")
+                              .toLowerCase()
+                              .replace(" ", "-")
+                              .replace("'", "")}`}
                           >
                             <li
                               className={

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Wrapper from "@/layout/wrapper";
 import Reveal from "@/components/reveal";
 import Title from "@/components/title";
@@ -7,8 +7,71 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import RevealLeft from "@/components/reveal/revealLeft";
 import RevealRight from "@/components/reveal/revealRight";
+import usePostQuery from "@/hooks/api/usePostQuery";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { get } from "lodash";
+import { KEYS } from "@/constants/key";
+import { useForm } from "react-hook-form";
+import { URLS } from "@/constants/url";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Index = () => {
+  const router = useRouter();
+  const [contact, setContact] = useState({});
+  const {
+    data: basicInfos,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.basicInfos,
+    url: URLS.basicInfos,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ values: contact });
+
+  const {
+    mutate: contacts,
+    isLoading: isLoadingContacts,
+    isFetching: isFetchingContacts,
+  } = usePostQuery({
+    listKeyId: KEYS.contacts,
+  });
+
+  const onSubmit = ({
+    appeal_fullname,
+    appeal_email,
+    appeal_theme,
+    appeal_text,
+  }) => {
+    let formData = new FormData();
+    formData.append("appeal_fullname", appeal_fullname);
+    formData.append("appeal_email", appeal_email);
+    formData.append("appeal_theme", appeal_theme);
+    formData.append("appeal_text", appeal_text);
+    contacts(
+      {
+        url: URLS.contacts,
+        attributes: formData,
+      },
+      {
+        onSuccess: () => {
+          toast.success(
+            "Muvaqqiyatli",
+            { position: "top-right" },
+            router.push("/")
+          );
+        },
+        onError: (error) => {
+          toast.error(`Error is ${error}`, { position: "top-right" });
+        },
+      }
+    );
+  };
   return (
     <Wrapper>
       <section className={"my-[50px]"}>
@@ -35,7 +98,7 @@ const Index = () => {
                     height={24}
                   />
                   <p className={"font-mulish font-medium"}>
-                    M.Ulugbek ko&apos;chasi 70, Samarqand, Uzbekistan 140100
+                    {get(basicInfos, "data.company_address")}
                   </p>
                 </div>
               </div>
@@ -60,9 +123,13 @@ const Index = () => {
                   </p>
 
                   <div className={"font-mulish font-medium"}>
-                    <a href={"tel:+998 78 210 00 81"}>+998 78 210 00 81</a>{" "}
+                    <a href={`tel:${get(basicInfos, "data.company_phone")}`}>
+                      {get(basicInfos, "data.company_phone")}
+                    </a>{" "}
                     <br />
-                    <a href={"tel:+998 78 000 00 00"}>+998 78 000 00 00</a>
+                    <a href={`tel:${get(basicInfos, "data.company_phones")}`}>
+                      {get(basicInfos, "data.company_phones")}
+                    </a>{" "}
                   </div>
                 </div>
               </div>
@@ -83,10 +150,10 @@ const Index = () => {
                   />
                   <a
                     className={"font-mulish font-medium"}
-                    href={"mailto:vkttm.uz@gmail.com"}
+                    href={`mailto:${get(basicInfos, "data.company_mail")}`}
                   >
-                    vkttm.uz@gmail.com
-                  </a>
+                    {get(basicInfos, "data.company_mail")}
+                  </a>{" "}
                 </div>
               </div>
 
@@ -99,7 +166,10 @@ const Index = () => {
 
                 <ul className={"flex gap-x-[10px] mt-[10px]"}>
                   <li>
-                    <Link href={"#"} className={"cursor-pointer"}>
+                    <Link
+                      href={`${get(basicInfos, "data.company_telegram")}`}
+                      className={"cursor-pointer"}
+                    >
                       <svg
                         width="25"
                         height="24"
@@ -130,7 +200,10 @@ const Index = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href={"#"} className={"cursor-pointer"}>
+                    <Link
+                      href={`${get(basicInfos, "data.company_facebook")}`}
+                      className={"cursor-pointer"}
+                    >
                       <svg
                         width="25"
                         height="24"
@@ -161,7 +234,10 @@ const Index = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link href={"#"} className={"cursor-pointer"}>
+                    <Link
+                      href={`${get(basicInfos, "data.company_instagram")}`}
+                      className={"cursor-pointer"}
+                    >
                       <svg
                         width="25"
                         height="24"
@@ -220,6 +296,7 @@ const Index = () => {
                 batafsil yozib yuboring. Tez orada siz bilan bog‘lanishadi.
               </p>
               <form
+                onSubmit={handleSubmit(onSubmit)}
                 className={
                   "flex flex-col gap-y-[20px] font-mulish placeholder:font-medium placeholder:text-[#494949]"
                 }
@@ -227,12 +304,14 @@ const Index = () => {
                 <input
                   type={"text"}
                   placeholder={"F.I.SH"}
+                  {...register("appeal_fullname", { required: true })}
                   className={
                     "py-[12px] px-[30px] w-full announce-list-shadow rounded-[10px]"
                   }
                 />
                 <input
                   type={"email"}
+                  {...register("appeal_email", { required: true })}
                   placeholder={"Email"}
                   className={
                     "py-[12px] px-[30px] w-full announce-list-shadow rounded-[10px]"
@@ -240,12 +319,14 @@ const Index = () => {
                 />
                 <input
                   type={"text"}
+                  {...register("appeal_theme", { required: true })}
                   placeholder={"Murojaat mavzusi"}
                   className={
                     "py-[12px] px-[30px] w-full announce-list-shadow rounded-[10px]"
                   }
                 />
                 <textarea
+                  {...register("appeal_text", { required: true })}
                   placeholder={"Murojaat mavzusi"}
                   className={
                     "py-[12px] px-[30px] w-full announce-list-shadow rounded-[10px]"

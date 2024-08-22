@@ -1,22 +1,40 @@
 import Wrapper from "@/layout/wrapper";
+import { isNull } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const PrideOfCenter = ({ position }) => {
+const PrideOfCenter = ({
+  position,
+  fullname,
+  veteranDesc,
+  veteranVideo,
+  image,
+}) => {
   return (
     <div className="flex">
-      <Image
-        src={"/images/management1.png"}
-        alt="pride of center"
-        width={280}
-        height={320}
-      />
+      {isNull(image) ? (
+        <Image
+          src={"/images/management1.png"}
+          alt="pride of center"
+          width={280}
+          height={320}
+        />
+      ) : (
+        <Image
+          src={image}
+          loader={() => image}
+          alt="pride of center"
+          width={280}
+          height={320}
+          className="w-[280px] h-[320px]"
+        />
+      )}
 
       <div>
         <p
           className={
-            "px-[24px] py-[4px] text-xs font-poppins bg-[#00ADBE] text-white rounded-[30px] inline"
+            "px-[24px] py-[4px] text-xs font-poppins bg-[#00ADBE] text-white  rounded-[30px] inline"
           }
         >
           {position}
@@ -24,27 +42,18 @@ const PrideOfCenter = ({ position }) => {
 
         <h3
           className={
-            "text-[#2C3E50] text-[24px] font-poppins mt-[20px] mb-[10px]"
+            "text-[#2C3E50] text-[24px] font-poppins font-semibold mt-[20px] mb-[10px]"
           }
         >
-          Familiya Ism Sharif
+          {fullname}
         </h3>
 
-        <p className="mb-[10px] font-mulish font-normal">
-          Tibbiyot markazining faxriysi sog&apos;liqni saqlash sohasida
-          ko&apos;p yillik tajribaga ega bo&apos;lgan tajribali va obro&apos;li
-          mutaxassis. U o&apos;zining ixtisosligi bo&apos;yicha chuqur bilim va
-          tajribaga ega bo&apos;lib, unga eng qiyin tibbiy muammolarni
-          muvaffaqiyatli hal qilishga imkon beradi. Veteran hamkasblari va
-          bemorlari tomonidan kasbiy mahorati va g&apos;amxo&apos;r munosabati
-          uchun qadrlanadi. U o&apos;z tajribasini yosh mutaxassislarga faol
-          ravishda topshiradi, jamoada murabbiy va usta bo&apos;ladi. Tibbiyot
-          markazi faxriysi yuqori darajadagi tibbiy amaliyotni saqlab qolish va
-          bemorlarga sifatli xizmat ko&apos;rsatishning uzluksizligini
-          ta&apos;minlashda muhim rol o&apos;ynaydi.
-        </p>
+        <p className="mb-[10px] font-mulish font-normal">{veteranDesc}</p>
 
-        <Link href={"#"} className="underline text-[#037582] font-medium">
+        <Link
+          href={`${veteranVideo}`}
+          className="underline text-[#037582] font-mulish font-medium"
+        >
           Videoga havola
         </Link>
       </div>

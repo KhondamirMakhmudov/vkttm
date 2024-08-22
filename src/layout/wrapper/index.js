@@ -8,7 +8,7 @@ const Wrapper = ({ children }) => {
     <div>
       <Header />
       <Menu />
-      <main className="content__min_h">{children}</main>
+      <main className="content__min_h ">{children}</main>
       <Footer />
     </div>
   );

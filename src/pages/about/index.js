@@ -12,6 +12,9 @@ import Wrapper from "@/layout/wrapper";
 import ManagementCard from "@/components/cards/management";
 import { sectionData } from "@/dummy-datas";
 import PrideOfCenter from "@/components/cards/prideOfCenter";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
 
 const DUMMY_DATA = [
   {
@@ -55,6 +58,29 @@ const DUMMY_DATA = [
 const Index = () => {
   const router = useRouter();
   const { tab } = router.query;
+  const { data: structureOfCenter, isLoading: isLoadingStructureOfCenter } =
+    useGetQuery({
+      key: KEYS.structureOfCenter,
+      url: URLS.structureOfCenter,
+    });
+
+  const { data: managers, isLoading: isLoadingManagers } = useGetQuery({
+    key: KEYS.managers,
+    url: URLS.managers,
+  });
+
+  const { data: veterans, isLoading: isLoadingVeterans } = useGetQuery({
+    key: KEYS.veterans,
+    url: URLS.veterans,
+  });
+
+  const {
+    data: positionResponsibilities,
+    isLoading: isLoadingPositionResponsibilities,
+  } = useGetQuery({
+    key: KEYS.positionResponsibilities,
+    url: URLS.positionResponsibilities,
+  });
 
   const [activeTab, setActiveTab] = useState("markaz-tuzilmasi");
   const [accordion, setAccordion] = useState(1);
@@ -120,12 +146,10 @@ const Index = () => {
 
               <li
                 className={`cursor-pointer ${
-                  activeTab === "Bo‘limlar"
-                    ? "text-[#00AFC0]"
-                    : "text-[#2C3E50]"
+                  activeTab === "bolimlar" ? "text-[#00AFC0]" : "text-[#2C3E50]"
                 }`}
               >
-                <button onClick={() => handleTabClick("Bo‘limlar")}>
+                <button onClick={() => handleTabClick("bolimlar")}>
                   Bo‘limlar
                 </button>
               </li>
@@ -138,7 +162,7 @@ const Index = () => {
                 }`}
               >
                 <button
-                  onClick={() => handleTabClick("Lavozim majburiyatlari")}
+                  onClick={() => handleTabClick("lavozim-majburiyatlari")}
                 >
                   Lavozim majburiyatlari
                 </button>
@@ -151,7 +175,7 @@ const Index = () => {
                     : "text-[#2C3E50]"
                 }`}
               >
-                <button onClick={() => handleTabClick("Markaz nizomi")}>
+                <button onClick={() => handleTabClick("markaz-nizomi")}>
                   Markaz nizomi
                 </button>
               </li>
@@ -163,7 +187,7 @@ const Index = () => {
                     : "text-[#2C3E50]"
                 }`}
               >
-                <button onClick={() => handleTabClick("Markaz faxri")}>
+                <button onClick={() => handleTabClick("markaz-faxri")}>
                   Markaz faxri
                 </button>
               </li>
@@ -175,7 +199,7 @@ const Index = () => {
                     : "text-[##2C3E50]"
                 }`}
               >
-                <button onClick={() => handleTabClick("Odob-axloq qoidalari")}>
+                <button onClick={() => handleTabClick("odob-axloq-qoidalari")}>
                   Odob-axloq qoidalari
                 </button>
               </li>
@@ -187,7 +211,7 @@ const Index = () => {
                     : "text-[#2C3E50]"
                 }`}
               >
-                <button onClick={() => handleTabClick("Kasaba uyushmasi")}>
+                <button onClick={() => handleTabClick("kasaba-uyushmasi")}>
                   Kasaba uyushmasi
                 </button>
               </li>
@@ -197,12 +221,13 @@ const Index = () => {
           {activeTab === "markaz-tuzilmasi" && (
             <div className={"col-span-9"}>
               <Reveal duration={0.4}>
-                <Title>Markaz tuzilmasi</Title>
+                <Title>{get(structureOfCenter, "data.structure_title")}</Title>
               </Reveal>
 
               <Reveal duration={0.5}>
                 <Image
-                  src={"/icons/structure-center.svg"}
+                  src={get(structureOfCenter, "data.structure_image")}
+                  loader={() => get(structureOfCenter, "data.structure_image")}
                   alt={"structure-center"}
                   width={1050}
                   height={645}
@@ -218,19 +243,28 @@ const Index = () => {
 
               <div className={"flex flex-col gap-y-[50px]"}>
                 <Reveal duration={0.5}>
-                  <ManagementCard position={"Bosh vrach"} />
-                </Reveal>
-                <Reveal duration={0.6}>
-                  <ManagementCard position={"Bosh vrach o‘rinbosari"} />
-                </Reveal>
-                <Reveal duration={0.7}>
-                  <ManagementCard position={"Bo‘lim boshlig‘i"} />
+                  {get(managers, "data.results", []).map((manager) => (
+                    <ManagementCard
+                      key={get(manager, "id")}
+                      position={get(manager, "position.position_title")}
+                      fullname={get(manager, "manager_fullname")}
+                      managerDesc={get(manager, "position.position_text")}
+                      receiptDays={get(manager, "receipt_days")}
+                      receiptTime={get(manager, "receipt_time")}
+                      instagram={get(manager, "instagram")}
+                      telegram={get(manager, "telegram")}
+                      facebook={get(manager, "facebook")}
+                      phone={get(manager, "phone")}
+                      email={get(manager, "email")}
+                      image={get(manager, "image")}
+                    />
+                  ))}
                 </Reveal>
               </div>
             </div>
           )}
 
-          {activeTab === "Bo‘limlar" && (
+          {activeTab === "bolimlar" && (
             <div className={"col-span-9"}>
               <Reveal duration={0.4}>
                 <Title>Bo‘limlar</Title>
@@ -272,7 +306,7 @@ const Index = () => {
             </div>
           )}
 
-          {activeTab === "Lavozim majburiyatlari" && (
+          {activeTab === "lavozim-majburiyatlari" && (
             <div className={"col-span-9"}>
               <Reveal>
                 <Title>Lavozim majburiyatlari</Title>
@@ -280,128 +314,114 @@ const Index = () => {
 
               <motion.div className={"mt-[30px]"}>
                 <ul className={"flex flex-col gap-y-[20px]"}>
-                  <li>
-                    <button
-                      onClick={toggleAccordion}
-                      className={
-                        "bg-[#EFF8F9] cursor-pointer w-full flex justify-between p-[10px] items-center"
-                      }
-                    >
-                      <p className={"font-mulish font-semibold text-[20px]"}>
-                        Lavozim nomi
-                      </p>
-                      <Image
-                        src={"/images/up.png"}
-                        alt={"up"}
-                        width={24}
-                        height={24}
-                        className={`${
-                          !isOpen ? "rotate-180" : "rotate-0"
-                        } transition-transform duration-300`}
-                      />
-                    </button>
-
-                    {!isOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, translateY: "100px" }}
-                        animate={{ opacity: 100, translateY: "0px" }}
-                        transition={{ duration: 0.7 }}
-                      >
-                        <h4
+                  {get(positionResponsibilities, "data.results", []).map(
+                    (responsibility) => (
+                      <li key={get(responsibility, "id")}>
+                        <button
+                          onClick={toggleAccordion}
                           className={
-                            "font-mulish text-[20px] my-[20px] font-semibold"
+                            "bg-[#EFF8F9] cursor-pointer w-full flex justify-between p-[10px] items-center"
                           }
                         >
-                          Tibbiyot markazi xodimlarining ish vazifalariga
-                          quyidagilar kiradi:
-                        </h4>
+                          <p
+                            className={"font-mulish font-semibold text-[20px]"}
+                          >
+                            {get(responsibility, "position_title")}
+                          </p>
+                          <Image
+                            src={"/images/up.png"}
+                            alt={"up"}
+                            width={24}
+                            height={24}
+                            className={`${
+                              !isOpen ? "rotate-180" : "rotate-0"
+                            } transition-transform duration-300`}
+                          />
+                        </button>
 
-                        <ul
-                          className={
-                            "list-disc ml-[30px] font-mulish font-normal"
-                          }
-                        >
-                          <li>
-                            Belgilangan davolash standartlari va protokollariga
-                            muvofiq bemorlarga malakali tibbiy yordam
-                            ko&apos;rsatish.
-                          </li>
-                          <li>
-                            Aniq tashxis qo&apos;yish uchun diagnostika
-                            protseduralari, testlar va tibbiy tadqiqotlar
-                            o&apos;tkazish.
-                          </li>
-                          <li>
-                            Bemorlarning tibbiy tarixi va xususiyatlarini
-                            hisobga olgan holda individual davolash va
-                            reabilitatsiya rejalarini ishlab chiqish va amalga
-                            oshirish.
-                          </li>
-                          <li>
-                            Davolashning butun davri davomida bemorlarning
-                            holatini kuzatish, shuningdek qo&apos;llaniladigan
-                            usullar va terapiyalarning samaradorligini baholash.
-                          </li>
-                          <li>
-                            In&apos;ektsiya, kiyinish, manipulyatsiya va boshqa
-                            tibbiy manipulyatsiyalarni o&apos;z ichiga olgan
-                            tibbiy muolajalarni o&apos;tkazish.
-                          </li>
-                          <li>
-                            Bemorlarni sog&apos;lom turmush tarzi bo&apos;yicha
-                            zarur tibbiy maslahatlar va tavsiyalar bilan
-                            ta&apos;minlash.
-                          </li>
-                          <li>
-                            Tibbiy yozuvlar va hisobotlarni, shu jumladan
-                            bemorlarning ahvoli, protseduralari va
-                            tayinlanishlari to&apos;g&apos;risidagi yozuvlarni
-                            yuritish.
-                          </li>
+                        {!isOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, translateY: "100px" }}
+                            animate={{ opacity: 100, translateY: "0px" }}
+                            transition={{ duration: 0.7 }}
+                          >
+                            <h4
+                              className={
+                                "font-mulish text-[20px] my-[20px] font-semibold"
+                              }
+                            >
+                              Tibbiyot markazi xodimlarining ish vazifalariga
+                              quyidagilar kiradi:
+                            </h4>
 
-                          <li>
-                            Tibbiy asboblar, dorilar va chiqindilar bilan
-                            ishlashda barcha belgilangan xavfsizlik qoidalari va
-                            qoidalariga rioya qilish.
-                          </li>
+                            <ul
+                              className={
+                                "list-disc ml-[30px] font-mulish font-normal"
+                              }
+                            >
+                              <li>
+                                Belgilangan davolash standartlari va
+                                protokollariga muvofiq bemorlarga malakali
+                                tibbiy yordam ko&apos;rsatish.
+                              </li>
+                              <li>
+                                Aniq tashxis qo&apos;yish uchun diagnostika
+                                protseduralari, testlar va tibbiy tadqiqotlar
+                                o&apos;tkazish.
+                              </li>
+                              <li>
+                                Bemorlarning tibbiy tarixi va xususiyatlarini
+                                hisobga olgan holda individual davolash va
+                                reabilitatsiya rejalarini ishlab chiqish va
+                                amalga oshirish.
+                              </li>
+                              <li>
+                                Davolashning butun davri davomida bemorlarning
+                                holatini kuzatish, shuningdek
+                                qo&apos;llaniladigan usullar va terapiyalarning
+                                samaradorligini baholash.
+                              </li>
+                              <li>
+                                In&apos;ektsiya, kiyinish, manipulyatsiya va
+                                boshqa tibbiy manipulyatsiyalarni o&apos;z
+                                ichiga olgan tibbiy muolajalarni o&apos;tkazish.
+                              </li>
+                              <li>
+                                Bemorlarni sog&apos;lom turmush tarzi
+                                bo&apos;yicha zarur tibbiy maslahatlar va
+                                tavsiyalar bilan ta&apos;minlash.
+                              </li>
+                              <li>
+                                Tibbiy yozuvlar va hisobotlarni, shu jumladan
+                                bemorlarning ahvoli, protseduralari va
+                                tayinlanishlari to&apos;g&apos;risidagi
+                                yozuvlarni yuritish.
+                              </li>
 
-                          <li>
-                            Tegishli tibbiy mavzular bo&apos;yicha o&apos;quv
-                            dasturlari, seminarlar va konferentsiyalarda
-                            qatnashish orqali kasbiy rivojlanishda ishtirok
-                            etish.
-                          </li>
-                        </ul>
-                      </motion.div>
-                    )}
-                  </li>
-                  <li>
-                    <button
-                      onClick={toggleAccordion}
-                      className={
-                        "bg-[#EFF8F9] cursor-pointer w-full flex justify-between p-[10px] items-center"
-                      }
-                    >
-                      <p className={"font-mulish font-semibold text-[20px]"}>
-                        Lavozim nomi
-                      </p>
-                      <Image
-                        src={"/images/up.png"}
-                        alt={"up"}
-                        width={24}
-                        height={24}
-                        className={`${
-                          !isOpen ? "rotate-180" : "rotate-0"
-                        } transition-transform duration-300`}
-                      />
-                    </button>
-                  </li>
+                              <li>
+                                Tibbiy asboblar, dorilar va chiqindilar bilan
+                                ishlashda barcha belgilangan xavfsizlik
+                                qoidalari va qoidalariga rioya qilish.
+                              </li>
+
+                              <li>
+                                Tegishli tibbiy mavzular bo&apos;yicha
+                                o&apos;quv dasturlari, seminarlar va
+                                konferentsiyalarda qatnashish orqali kasbiy
+                                rivojlanishda ishtirok etish.
+                              </li>
+                            </ul>
+                          </motion.div>
+                        )}
+                      </li>
+                    )
+                  )}
                 </ul>
               </motion.div>
             </div>
           )}
 
-          {activeTab === "Markaz nizomi" && (
+          {activeTab === "markaz-nizomi" && (
             <div className={"col-span-9"}>
               <Title>Markaz nizomi</Title>
 
@@ -429,13 +449,25 @@ const Index = () => {
             </div>
           )}
 
-          {activeTab === "Markaz faxri" && (
+          {activeTab === "markaz-faxri" && (
             <div className={"col-span-9"}>
               <Title>Markaz faxri</Title>
 
-              <PrideOfCenter position={"Lor"} />
-              <PrideOfCenter position={"Lor"} />
-              <PrideOfCenter position={"Lor"} />
+              <div>
+                {get(veterans, "data.results", []).map((veteran) => (
+                  <PrideOfCenter
+                    key={get(veteran, "id")}
+                    fullname={get(veteran, "veteran_fullname")}
+                    position={get(
+                      veteran,
+                      "veteran_speciality.speciality_title"
+                    )}
+                    veteranDesc={get(veteran, "veteran_desc")}
+                    veteranVideo={get(veteran, "veteran_video")}
+                    image={get(veteran, "veteran_image")}
+                  />
+                ))}
+              </div>
             </div>
           )}
 
@@ -523,7 +555,7 @@ const Index = () => {
             </div>
           )}
 
-          {activeTab === "Kasaba uyushmasi" && (
+          {activeTab === "kasaba-uyushmasi" && (
             <div className={"col-span-9"}>
               <Reveal duration={0.3}>
                 <Title>Kasaba uyushmasi</Title>

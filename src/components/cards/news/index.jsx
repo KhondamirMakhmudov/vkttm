@@ -62,7 +62,7 @@ const News = ({
             </div>
           </div>
 
-          <Link href={`/news/${parseInt(url)}`}>
+          <Link href={`/yangiliklar/${parseInt(url)}`}>
             <h2
               className={
                 "font-poppins text-[18px] hover:text-[#00AFC0] hover:underline  text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-300"
@@ -79,7 +79,7 @@ const News = ({
               "font-poppins font-medium border-b-[2px] border-b-[#00AFC0] hover:border-b-[#00D1E4] mt-[20px] line-clamp-4 transition-all duration-300"
             }
           >
-            <Link href={`/news/${parseInt(url)}`}>Batafsil</Link>
+            <Link href={`/yangiliklar/${parseInt(url)}`}>Batafsil</Link>
           </button>
         </div>
       )}
@@ -138,7 +138,7 @@ const News = ({
               </div>
             </div>
 
-            <Link href={`/news/${url.toString}`}>
+            <Link href={`/yangiliklar/${url}`}>
               <p
                 className={
                   " font-semibold text-lg hover:text-[#00AFC0] hover:underline font-poppins  my-[10px] flex-1"
@@ -157,7 +157,7 @@ const News = ({
                 "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
               }
             >
-              <Link href={`/news/${url.toString}`}>Batafsil</Link>
+              <Link href={`/yangiliklar/${url}`}>Batafsil</Link>
             </button>
           </div>
         </div>

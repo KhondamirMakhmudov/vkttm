@@ -24,21 +24,29 @@ const AnnouncementCard = ({
           className={`flex cursor-pointer hover:shadow-2xl  gap-x-[30px] bg-white p-[20px] rounded-[10px] announce-list-shadow lg:w-[${width}] w-auto transition-all duration-300`}
         >
           <div className={"flex flex-col "}>
-            <h4 className={"font-mulish text-sm text-[#037582] mb-[15px]"}>
+            <h4
+              className={
+                "font-mulish text-sm text-[#037582] font-semibold mb-[15px]"
+              }
+            >
               E’lon
             </h4>
             {/* desc of announcement */}
-            <Link href={`/announcements/${url}`}>
+            <Link href={`/elonlar/${url}`}>
               <p
                 className={
-                  "my-[15px] font-medium hover:text-[#00AFC0] hover:underline   flex-1"
+                  "my-[15px] font-medium hover:text-[#00AFC0] hover:underline font-poppins  flex-1"
                 }
               >
                 {title}
               </p>
             </Link>
 
-            <div className={"text-sm text-[#037582] flex justify-between"}>
+            <div
+              className={
+                "text-sm text-[#037582] font-semibold flex justify-between"
+              }
+            >
               {/*date*/}
               <p className={"font-mulish text-sm  "}>{formattedDate}</p>
               <div className={"flex gap-x-[10px]"}>
@@ -143,7 +151,7 @@ const AnnouncementCard = ({
               </div>
             </div>
 
-            <Link href={`/announcements/${url}`}>
+            <Link href={`/elonlar/${url}`}>
               <p className={"my-[20px] font-medium text-lg   flex-1"}>
                 {title}
               </p>
@@ -154,7 +162,7 @@ const AnnouncementCard = ({
                 "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
               }
             >
-              <Link href={`/announcements/${url}`}>Batafsil</Link>
+              <Link href={`/elonlar/${url}`}>Batafsil</Link>
             </button>
           </div>
         </div>

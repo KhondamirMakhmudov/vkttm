@@ -7,12 +7,26 @@ import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get, isEmpty } from "lodash";
+import ContentLoader from "@/components/content-loader";
 
 const Vacancies = () => {
-  const { data: vacancies, isLoading } = useGetQuery({
+  const {
+    data: vacancies,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
     key: KEYS.vacancies,
     url: URLS.vacancies,
   });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <div
@@ -37,7 +51,7 @@ const Vacancies = () => {
         ) : (
           get(vacancies, "data.results", []).map((item) => (
             <VacancyCard
-              url={`/vacancies/${get(item, "id")}`}
+              url={`/vakansiyalar/${get(item, "id")}`}
               key={get(item, "id")}
               jobTitle={get(item, "job_title")}
               jobDescription={get(item, "job_desc")}

@@ -10,6 +10,7 @@ import { get } from "lodash";
 import dayjs from "dayjs";
 import parse from "html-react-parser";
 import { NumericFormat } from "react-number-format";
+import ContentLoader from "@/components/content-loader";
 
 const Index = () => {
   const router = useRouter();
@@ -25,14 +26,13 @@ const Index = () => {
     enabled: !!id,
   });
 
-  // const {
-  //   data: vacancies,
-  //   isLoading: isLoadingVacancies,
-  //   isFetching: isFetchingVacancies,
-  // } = useGetQuery({
-  //   key: KEYS.vacancies,
-  //   url: URLS.vacancies,
-  // });
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
 
   return (
     <Wrapper>
@@ -46,7 +46,7 @@ const Index = () => {
             <p>Bosh sahifa</p>
           </Link>
           <span>/</span>
-          <Link href={"/vacancies"}>
+          <Link href={"/vakansiyalar"}>
             <p>Vakansiyalar</p>
           </Link>
           <span>/</span>
@@ -153,7 +153,7 @@ const Index = () => {
                 </h3>
 
                 <Link
-                  href={"/vacancies"}
+                  href={"/vakansiyalar"}
                   className={
                     "lg:text-sm md:text-xs text-[10px] font-poppins text-[#037582] font-normal flex items-center hover:translate-x-[2px] transition-all duration-300"
                   }

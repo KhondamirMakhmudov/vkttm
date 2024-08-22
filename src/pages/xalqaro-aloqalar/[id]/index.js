@@ -1,12 +1,9 @@
 import React from "react";
 import Wrapper from "@/layout/wrapper";
 import Reveal from "@/components/reveal";
-import Title from "@/components/title";
-import ManagementCard from "@/components/cards/management";
+
 import Link from "next/link";
 import Image from "next/image";
-import { internatiolSectionData } from "@/dummy-datas";
-import { get } from "lodash";
 
 const Index = () => {
   return (
@@ -15,15 +12,15 @@ const Index = () => {
         <div className={"grid grid-cols-12 gap-x-[30px] container mx-auto"}>
           <div className={"col-span-12 my-[50px]"}>
             <Reveal>
-              <Title>Xalqaro bo’lim</Title>
+              <h2 className={"font-poppins font-medium text-[32px] "}>
+                Amerika qo’shma shtatlari
+              </h2>
             </Reveal>
           </div>
 
           <div className={"col-span-8"}>
-            <ManagementCard position={"Xalqaro bo‘lim boshlig‘i"} />
-
-            <h4 className={"font-mulish font-semibold text-[24px] my-[30px]"}>
-              Bo‘lim haqida
+            <h4 className={"font-mulish font-semibold text-[24px] mb-[30px]"}>
+              Hamkorlik haqida
             </h4>
 
             <p className={"font-mulish font-medium mb-[30px]"}>
@@ -43,7 +40,10 @@ const Index = () => {
               xorijiy tibbiyot muassasalari bilan hamkorlikni yo&apos;lga
               qo&apos;yish bilan shug&apos;ullanadi.
             </p>
-            <h5 className={"font-mulish font-bold"}>Hamkorlik yo’nalishlari</h5>
+
+            <h5 className={"font-mulish font-bold mb-[30px]"}>
+              Hamkorlik yo’nalishlari
+            </h5>
             <ul className={"font-mulish font-normal list-decimal ml-[30px]"}>
               <li>
                 Texnologik Yordam va Innovatsiyalar Belarus Respublikasi
@@ -78,37 +78,38 @@ const Index = () => {
               </li>
             </ul>
 
-            <h4 className={"font-mulish font-semibold text-[24px] my-[30px]"}>
-              Xalqaro hamkor davlatlar
-            </h4>
+            <h5 className={"font-mulish font-bold my-[30px]"}>Memorandumlar</h5>
 
-            <div className={"flex gap-x-[15px] gap-y-[15px]  flex-wrap"}>
-              {internatiolSectionData.map((country) => (
-                <div
-                  className={
-                    "announce-list-shadow max-w-[174px] rounded-bl-[30px] rounded-tr-[30px]"
-                  }
-                  key={get(country, "id")}
-                >
-                  <Link href={"/international-section/id"}>
-                    <Image
-                      src={`/images/${get(country, "image")}`}
-                      alt={`${get(country, "image")}`}
-                      width={174}
-                      height={104}
-                    />
-                    <p
-                      className={
-                        "text-[14px] font-poppins font-medium text-center py-[10px] px-[15px]"
-                      }
-                    >
-                      {get(country, "title")}
-                    </p>
-                  </Link>
-                </div>
-              ))}
-            </div>
+            <ul className={"flex gap-x-[30px] mb-[50px]"}>
+              <li>
+                <Image
+                  src={"/images/memorendum1.png"}
+                  alt={"memorendum1"}
+                  width={290}
+                  height={370}
+                />
+              </li>
+
+              <li>
+                <Image
+                  src={"/images/memorendum2.png"}
+                  alt={"memorendum1"}
+                  width={290}
+                  height={370}
+                />
+              </li>
+
+              <li>
+                <Image
+                  src={"/images/memorendum3.png"}
+                  alt={"memorendum1"}
+                  width={290}
+                  height={370}
+                />
+              </li>
+            </ul>
           </div>
+
           <div className={"col-span-4"}>
             <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
               <div className={"flex items-center justify-between"}>
@@ -250,12 +251,6 @@ const Index = () => {
                 </li>
               </ul>
             </div>
-          </div>
-
-          <div className={"col-span-12 mt-[50px]"}>
-            <h4 className={"font-poppins font-medium text-[24px] mb-[30px]"}>
-              Boshqa hamkor tashkilotlar
-            </h4>
           </div>
         </div>
       </section>

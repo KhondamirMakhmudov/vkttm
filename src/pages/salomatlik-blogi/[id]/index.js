@@ -12,15 +12,29 @@ import dayjs from "dayjs";
 import Reveal from "@/components/reveal";
 import RevealRight from "@/components/reveal/revealRight";
 import RevealLeft from "@/components/reveal/revealLeft";
+import ContentLoader from "@/components/content-loader";
+import HealthyCard from "@/components/cards/healthyCard";
 const Index = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data: newsItem, isLoading } = useGetQuery({
-    key: [KEYS.news, id],
-    url: `${URLS.news}${id}/`,
+  const {
+    data: recommends,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: [KEYS.recommends, id],
+    url: `${URLS.recommends}${id}/`,
     enabled: !!id,
   });
+
+  if (isLoading || isFetching) {
+    return (
+      <Wrapper>
+        <ContentLoader />
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <div
@@ -32,12 +46,12 @@ const Index = () => {
           <p>Bosh sahifa</p>
         </Link>
         <span>/</span>
-        <Link href={"/announcements"}>
-          <p>Barcha yangiliklar</p>
+        <Link href={"/salomatlik-blogi"}>
+          <p>Sog‘lom bo‘lish uchun </p>
         </Link>
         <span>/</span>
         <p className={"text-[#036874] max-w-[370px] line-clamp-1"}>
-          {get(newsItem, "data.news_title")}
+          {get(recommends, "data.recommendation_title")}
         </p>
       </div>
 
@@ -47,7 +61,7 @@ const Index = () => {
         }
       >
         <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
-          {get(newsItem, "data.news_title")}
+          {get(recommends, "data.recommendation_title")}
         </h1>
 
         <div
@@ -55,11 +69,11 @@ const Index = () => {
             "col-span-12 flex items-center text-[#037582] gap-x-[50px] font-mulish mb-[50px]"
           }
         >
-          <p>Yangilik</p>
+          <p>Sog‘lom bo‘lish uchun </p>
           {/*how many times was seen*/}
 
           <p className={""}>
-            {dayjs(get(newsItem, "data.date_time")).format("DD.MM.YYYY")}
+            {dayjs(get(recommends, "data.date_time")).format("DD.MM.YYYY")}
           </p>
 
           <div className={"flex items-center gap-x-[15px]"}>
@@ -70,7 +84,7 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>{get(newsItem, "data.views_count")}</p>
+              <p>{get(recommends, "data.views_count")}</p>
             </div>
             {/*when it is deployed*/}
             <div className={"flex items-center gap-x-[4px]"}>
@@ -80,20 +94,23 @@ const Index = () => {
                 width={18}
                 height={18}
               />
-              <p>{dayjs(get(newsItem, "data.date_time")).format("HH:mm")}</p>
+              <p>{dayjs(get(recommends, "data.date_time")).format("HH:mm")}</p>
             </div>
           </div>
         </div>
 
         <div className={"col-span-8"}>
           <RevealLeft>
-            {isNull(get(newsItem, "news_image")) ? (
+            {isNull(get(recommends, "recommendation_image", "img")) ? (
               <Image
-                src={get(newsItem, "news_image")}
-                loader={() => get(newsItem, "news_image")}
+                src={get(recommends, "data.recommendation_image", "img")}
+                loader={() =>
+                  get(recommends, "data.recommendation_image", "img")
+                }
                 alt={"img3"}
-                width={170}
-                height={120}
+                width={930}
+                height={532}
+                priority={true}
               />
             ) : (
               <Image
@@ -106,7 +123,7 @@ const Index = () => {
             )}
 
             <div className="!font-medium font-mulish my-[30px]">
-              {parse(get(newsItem, "data.news_desc", ""))}
+              {parse(get(recommends, "data.recommendation_desc", ""))}
             </div>
           </RevealLeft>
         </div>
@@ -120,11 +137,11 @@ const Index = () => {
                     "font-poppins font-medium text-[20px] text-[#494949]"
                   }
                 >
-                  Sog‘lom bo‘lish uchun{" "}
+                  Yangiliklar
                 </h3>
 
                 <Link
-                  href={"/to-be-healthy"}
+                  href={"/yangiliklar"}
                   className={
                     "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                   }
@@ -140,53 +157,49 @@ const Index = () => {
               </div>
 
               <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-                {get(newsItem, "data.last_recommendations", []).map(
-                  (recommend, index) => (
-                    <li
-                      key={get(recommend, "id")}
-                      className={
-                        "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                {get(recommends, "data.last_news", []).map((news, index) => (
+                  <li
+                    key={get(news, "id")}
+                    className={
+                      "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                    }
+                  >
+                    <Image
+                      src={
+                        get(news, "news_image") ||
+                        `/images/health${index + 1}.png`
                       }
-                    >
-                      <Image
-                        src={
-                          get(recommend, "recommendation_image") ||
-                          `/images/health${index + 1}.png`
-                        }
-                        loader={() =>
-                          get(recommend, "recommendation_image") ||
-                          `/images/health${index + 1}.png`
-                        }
-                        alt={"health1"}
-                        width={170}
-                        height={120}
-                        className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
-                      />
+                      loader={() =>
+                        get(news, "news_image") ||
+                        `/images/health${index + 1}.png`
+                      }
+                      alt={"health1"}
+                      width={170}
+                      height={120}
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
+                    />
 
-                      <div>
+                    <div>
+                      <p
+                        className={
+                          "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
+                        }
+                      >
+                        {dayjs(get(news, "date_time")).format("DD.MM.YYYY")}
+                      </p>
+
+                      <Link href={`/yangiliklar/${get(news, "id")}`}>
                         <p
                           className={
-                            "font-semibold font-mulish text-[12px] text-[#037582] mb-[14px]"
+                            "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all duration-300"
                           }
                         >
-                          {dayjs(get(recommend, "date_time")).format(
-                            "DD.MM.YYYY"
-                          )}
+                          {get(news, "news_title")}
                         </p>
-
-                        <Link href={`/to-be-healthy/${get(recommend, "id")}`}>
-                          <p
-                            className={
-                              "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all duration-300"
-                            }
-                          >
-                            {get(recommend, "recommendation_title")}
-                          </p>
-                        </Link>
-                      </div>
-                    </li>
-                  )
-                )}
+                      </Link>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </RevealRight>
@@ -203,7 +216,7 @@ const Index = () => {
                 </h3>
 
                 <Link
-                  href={"/announcements"}
+                  href={"/elonlar"}
                   className={
                     "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                   }
@@ -219,24 +232,25 @@ const Index = () => {
               </div>
 
               <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-                {get(newsItem, "data.last_announces", []).map((announce) => (
+                {get(recommends, "data.last_announces", []).map((announce) => (
                   <li
                     key={get(announce, "id")}
                     className={
                       "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
                     }
                   >
-                    {isNull(get(announce, "announce_image")) ? (
+                    {!isNull(get(announce, "announce_image")) ? (
                       <Image
                         src={get(announce, "announce_image")}
                         loader={() => get(announce, "announce_image")}
                         alt={"img3"}
                         width={170}
                         height={120}
+                        className="w-[170px] h-[120px]"
                       />
                     ) : (
                       <Image
-                        src="/images/img3.png"
+                        src="/images/brand.png"
                         alt={"img3"}
                         width={170}
                         height={120}
@@ -252,13 +266,18 @@ const Index = () => {
                         {dayjs(get(announce, "date_time")).format("DD.MM.YYYY")}
                       </p>
 
-                      <p
-                        className={
-                          "font-poppins text-sm font-normal line-clamp-4"
-                        }
+                      <Link
+                        href={`/elonlar/${get(announce, "id")}`}
+                        className="hover:text-[#037582] hover:underline transition-all duration-300"
                       >
-                        {get(announce, "announce_title")}
-                      </p>
+                        <p
+                          className={
+                            "font-poppins text-sm font-normal line-clamp-4"
+                          }
+                        >
+                          {get(announce, "announce_title")}
+                        </p>
+                      </Link>
                     </div>
                   </li>
                 ))}
@@ -270,73 +289,29 @@ const Index = () => {
         <div className={"col-span-12"}>
           <Reveal duration={0.3}>
             <h2 className={"text-[24px] font-semibold font-poppins mb-[30px]"}>
-              Boshqa yangiliklar
+              Boshqa maqolalar
             </h2>
           </Reveal>
         </div>
-        {get(newsItem, "data.last_news", []).map((news) => (
-          <div key={get(news, "id")} className={`col-span-4 `}>
+        {get(recommends, "data.last_recommendations", []).map((recommend) => (
+          <div key={get(recommend, "id")} className="col-span-6">
             <Reveal duration={0.3}>
-              <div
-                className={
-                  " max-w-[450px]  flex-col max-h-[640px] shadow-lg p-[30px]  rounded-bl-[30px] rounded-tr-[30px]"
+              <HealthyCard
+                title={get(recommend, "recommendation_title")}
+                template={"card"}
+                width={"690px"}
+                image={
+                  !isNull(
+                    get(recommend, "recommendation_image", "/images/img3.png")
+                  )
+                    ? get(recommend, "recommendation_image", "")
+                    : "/images/img3.png"
                 }
-              >
-                <Reveal duration={0.32}>
-                  <Image
-                    src={`/images/img3.png`}
-                    alt={"img3"}
-                    width={390}
-                    height={300}
-                    objectFit={"cover"}
-                    className={"object-cover  mb-[20px]"}
-                  />
-                </Reveal>
-                <Reveal duration={0.35}>
-                  <div
-                    className={"text-sm text-[#037582] flex justify-between"}
-                  >
-                    <p className={"font-mulish text-sm  "}>Yangilik</p>
-                    <div className={"flex gap-x-[10px]"}>
-                      {/*how many times was seen*/}
-                      <div className={"flex gap-x-[4px]"}>
-                        <Image
-                          src={"/images/watch.png"}
-                          alt={"watch"}
-                          width={18}
-                          height={18}
-                        />
-                        <p>{get(news, "views_count")}</p>
-                      </div>
-                      <p className={"font-mulish text-sm  "}>
-                        {dayjs(get(news, "date_time")).format("DD.MM.YYYY")}
-                      </p>
-                      {/*when it is deployed*/}
-                      <div className={"flex gap-x-[4px]"}>
-                        <Image
-                          src={"/images/time.png"}
-                          alt={"watch"}
-                          width={18}
-                          height={18}
-                        />
-                        <p>{dayjs(get(news, "date_time")).format("HH:mm")}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-
-                <Reveal duration={0.4}>
-                  <Link href={`/news/${get(news, "id")}`}>
-                    <h2
-                      className={
-                        "font-poppins text-[18px] hover:text-[#00AFC0] text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-200"
-                      }
-                    >
-                      {get(news, "news_title")}
-                    </h2>
-                  </Link>
-                </Reveal>
-              </div>
+                url={get(recommend, "id")}
+                date={get(recommend, "date_time")}
+                time={get(recommend, "date_time")}
+                viewsCount={get(recommend, "views_count")}
+              />
             </Reveal>
           </div>
         ))}
