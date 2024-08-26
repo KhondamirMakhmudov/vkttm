@@ -1,7 +1,9 @@
+import { get } from "lodash";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-const EmployeeCard = ({ position }) => {
+const EmployeeCard = ({ position, fullname, id }) => {
   return (
     <div>
       <Image
@@ -14,9 +16,11 @@ const EmployeeCard = ({ position }) => {
         {position}
       </p>
 
-      <h3 className={"text-[#2C3E50] font-semibold font-poppins "}>
-        Familiya Ism Sharif
-      </h3>
+      <Link href={`/doctors/${id}`}>
+        <h3 className={"text-[#2C3E50] font-semibold font-poppins "}>
+          {fullname}
+        </h3>
+      </Link>
     </div>
   );
 };
