@@ -273,7 +273,7 @@ const Index = () => {
                         "col-span-3 announce-list-shadow rounded-bl-[30px] rounded-tr-[30px]"
                       }
                     >
-                      <Link href={"/about/id"}>
+                      <Link href={`/department/${get(item,'id')}`}>
                         <Image
                           src={get(item, "department_image")}
                           loader={() => get(item, "department_image")}
