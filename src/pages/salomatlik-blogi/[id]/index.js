@@ -254,6 +254,7 @@ const Index = () => {
                         alt={"img3"}
                         width={170}
                         height={120}
+                        className="w-[170px] h-[120px]"
                       />
                     )}
 

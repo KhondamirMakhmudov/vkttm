@@ -246,7 +246,7 @@ const Index = () => {
                       phone={get(manager, "phone")}
                       email={get(manager, "email")}
                       image={get(manager, "image")}
-                      positionResponsibilities={get(manager, "")}
+                      positionResponsibilities={"/lavozim-majburiyatlari"}
                     />
                   ))}
                 </Reveal>
@@ -273,7 +273,7 @@ const Index = () => {
                         "col-span-3 announce-list-shadow rounded-bl-[30px] rounded-tr-[30px]"
                       }
                     >
-                      <Link href={`/department/${get(item,'id')}`}>
+                      <Link href={`/department/${get(item, "id")}`}>
                         <Image
                           src={get(item, "department_image")}
                           loader={() => get(item, "department_image")}
@@ -499,6 +499,7 @@ const Index = () => {
                     facebook={get(tradeUnionPage, "data.facebook", "#")}
                     phone={get(tradeUnionPage, "data.phone")}
                     email={get(tradeUnionPage, "data.email")}
+                    positionResponsibilities={"/lavozim-majburiyatlari"}
                     image={get(tradeUnionPage, "data.department_chief.image")}
                   />
 
@@ -517,7 +518,7 @@ const Index = () => {
                     </h4>
 
                     <div>
-                      {parse(get(tradeUnionPage, "data.department_text"))}
+                      {parse(get(tradeUnionPage, "data.department_text", ""))}
                     </div>
                   </motion.div>
                 </div>

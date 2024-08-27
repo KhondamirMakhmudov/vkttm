@@ -243,13 +243,14 @@ const Index = () => {
                       "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
                     }
                   >
-                    {isNull(get(announce, "announce_image")) ? (
+                    {!isNull(get(announce, "announce_image")) ? (
                       <Image
                         src={get(announce, "announce_image")}
                         loader={() => get(announce, "announce_image")}
                         alt={"img3"}
                         width={170}
                         height={120}
+                        className="w-[170px] h-[120px]"
                       />
                     ) : (
                       <Image
@@ -257,6 +258,7 @@ const Index = () => {
                         alt={"img3"}
                         width={170}
                         height={120}
+                        className="w-[170px] h-[120px]"
                       />
                     )}
 

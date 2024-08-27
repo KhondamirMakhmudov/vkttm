@@ -21,4 +21,5 @@ export const KEYS = {
   tradeUnionPage: "tradeUnionPage",
   etiquettesPage: "etiquettesPage",
   departments: "departments",
+  doctors: "doctors",
 };

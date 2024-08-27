@@ -56,6 +56,7 @@ const Index = () => {
               phone={get(data, "data.phone")}
               email={get(data, "data.email")}
               image={get(data, "data.image")}
+              positionResponsibilities={"/lavozim-majburiyatlari"}
             />
             <h4 className={"font-mulish font-semibold text-[24px] my-[30px]"}>
               Bo‘lim haqida
@@ -97,7 +98,7 @@ const Index = () => {
               ))}
             </div>
           </div>
-          <div className={"col-span-4"}>
+          {/* <div className={"col-span-4"}>
             <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
               <div className={"flex items-center justify-between"}>
                 <h3
@@ -155,7 +156,7 @@ const Index = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
 
           <div className={"col-span-12 mt-[50px]"}>
             <h4 className={"font-poppins font-medium text-[24px] mb-[30px]"}>

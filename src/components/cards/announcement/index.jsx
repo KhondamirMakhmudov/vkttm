@@ -32,10 +32,10 @@ const AnnouncementCard = ({
               E’lon
             </h4>
             {/* desc of announcement */}
-            <Link href={`/elonlar/${url}`}>
+            <Link href={`/elonlar/${url}`} className="flex-grow  flex-1">
               <p
                 className={
-                  "my-[15px] font-medium hover:text-[#00AFC0] hover:underline font-poppins  flex-1"
+                  "my-[15px] font-medium hover:text-[#00AFC0] hover:underline font-poppins "
                 }
               >
                 {title}
@@ -77,7 +77,7 @@ const AnnouncementCard = ({
             </div>
           </div>
 
-          {isNull(image) ? (
+          {!isNull(image) ? (
             <Image
               src={image}
               loader={() => image}
@@ -105,14 +105,24 @@ const AnnouncementCard = ({
           }
         >
           <div className={"min-w-[156px] max-h-[120px]"}>
-            <Image
-              src={image}
-              loader={() => image}
-              alt={"announcement"}
-              width={156}
-              height={120}
-              className={"w-[156px] h-[120px]"}
-            />
+            {!isNull(image) ? (
+              <Image
+                src={image}
+                loader={() => image}
+                alt={"announcement"}
+                width={156}
+                height={120}
+                className={"rounded-[10px] "}
+              />
+            ) : (
+              <Image
+                src={"/images/img3.png"}
+                alt={"announcement"}
+                width={156}
+                height={120}
+                className={"rounded-[10px] "}
+              />
+            )}
           </div>
 
           <div>

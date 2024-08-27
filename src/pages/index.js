@@ -307,7 +307,7 @@ export default function Home() {
                 transition={{ duration: 0.5 }}
               >
                 <Image
-                  src={"/images/doctors.png"}
+                  src={`/images/fastLink${index + 1}.png`}
                   alt={"doctors"}
                   width={50}
                   height={50}
@@ -342,7 +342,17 @@ export default function Home() {
                       "font-poppins xl:text-base lg:text-sm md:text-xs text-[10px] font-medium border-b-[2px] border-b-[#00AFC0]"
                     }
                   >
-                    <Link href={"/to-be-healthy"}>
+                    <Link
+                      href={`${
+                        get(item, "title") === "Shifokorlar"
+                          ? "/doctors/1"
+                          : get(item, "title") === "Salomatlik blogi"
+                          ? "/salomatlik-blogi"
+                          : get(item, "title") === "Biz bilan bog’laning"
+                          ? "/boglanish"
+                          : ""
+                      }`}
+                    >
                       {get(item, "link_title")}
                     </Link>
                   </button>
@@ -479,7 +489,7 @@ export default function Home() {
                 )}
                 <div className={"col-span-12 mt-[50px] flex justify-between"}>
                   <Reveal duration={0.3}>
-                    <Link href={"/announcements"}>
+                    <Link href={"/elonlar"}>
                       <button
                         className={
                           "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[27px] rounded-br-[10px] rounded-tl-[10px] text-white"
@@ -524,7 +534,7 @@ export default function Home() {
                 title={get(item, "department_title")}
                 classNames={"xl:col-span-4 md:col-span-6  col-span-12"}
                 desc={get(item, "department_desc")}
-                url={"#"}
+                url={`/department/${get(item, "id")}`}
               />
             ))}
 

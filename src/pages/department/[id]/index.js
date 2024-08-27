@@ -98,11 +98,11 @@ const Index = () => {
                   }
                 >
                   <li className={"col-span-6 flex justify-between font-mulish"}>
-                    <p>
+                    <div>
                       {parse(
                         get(department, "data.department_services", "sss")
                       )}
-                    </p>
+                    </div>
                   </li>
                 </ul>
               </section>

@@ -6,14 +6,14 @@ const ManagementCard = ({
   position,
   fullname,
   managerDesc,
-  receiptDays,
-  receiptTime,
-  phone,
-  email,
-  telegram,
-  instagram,
-  facebook,
-  image,
+  receiptDays = "#",
+  receiptTime = "#",
+  phone = "#",
+  email = "#",
+  telegram = "#",
+  instagram = "#",
+  facebook = "#",
+  image = "#",
   positionResponsibilities,
 }) => {
   return (
@@ -48,7 +48,7 @@ const ManagementCard = ({
         <p className={"font-mulish font-normal mb-[10px]"}>{managerDesc}</p>
 
         <Link
-          href={"#"}
+          href={positionResponsibilities}
           className={"underline text-[#00ADBE] font-mulish font-medium "}
         >
           Lavozim yo’riqnomasi
@@ -109,7 +109,7 @@ const ManagementCard = ({
 
             <ul className={"flex gap-x-[10px] mt-[10px]"}>
               <li>
-                <Link href={telegram} className={"cursor-pointer"}>
+                <Link href={`${telegram}`} className={"cursor-pointer"}>
                   <svg
                     width="25"
                     height="24"
@@ -140,7 +140,7 @@ const ManagementCard = ({
                 </Link>
               </li>
               <li>
-                <Link href={facebook} className={"cursor-pointer"}>
+                <Link href={`${facebook}`} className={"cursor-pointer"}>
                   <svg
                     width="25"
                     height="24"
@@ -171,7 +171,7 @@ const ManagementCard = ({
                 </Link>
               </li>
               <li>
-                <Link href={instagram} className={"cursor-pointer"}>
+                <Link href={`${instagram}`} className={"cursor-pointer"}>
                   <svg
                     width="25"
                     height="24"

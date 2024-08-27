@@ -20,4 +20,5 @@ export const URLS = {
   tradeUnionPage: "pages/trade-union-page/",
   etiquettesPage: "pages/etiquettes-page/",
   departments: "pages/departments/",
+  doctors: "pages/doctors/",
 };

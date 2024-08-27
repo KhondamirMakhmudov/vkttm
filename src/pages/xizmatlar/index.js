@@ -1,240 +1,66 @@
-import React, { useEffect, useState } from "react";
 import Wrapper from "@/layout/wrapper";
-import { useRouter } from "next/router";
-import Title from "@/components/title";
-import Reveal from "@/components/reveal";
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import EmployeeCard from "@/components/cards/employee";
-import Head from "next/head";
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
-import ContentLoader from "@/components/content-loader";
 import { get } from "lodash";
-
+import { useRouter } from "next/router";
+import Reveal from "@/components/reveal";
+import Title from "@/components/title";
 const Index = () => {
   const router = useRouter();
-  const { tab } = router.query;
-  const [activeTab, setActiveTab] = useState("Konsultatsiya");
-
-  const { data, isLoading, isFetching } = useGetQuery({
+  const { id } = router.query;
+  const { data: services } = useGetQuery({
     key: KEYS.services,
     url: URLS.services,
   });
-
-  if (isLoading || isFetching) {
-    return (
-      <Wrapper>
-        <ContentLoader />
-      </Wrapper>
-    );
-  }
-
-  const handleTabClick = (tab) => {
-    router.push(`/${tab}`);
-  };
-
   return (
     <Wrapper>
-      <section>
+      <section className={"bg-white py-[50px]"}>
         <div className={"grid grid-cols-12 gap-x-[30px] container mx-auto"}>
-          <div
+          <motion.div
+            initial={{ opacity: 0, translateX: "-100px" }}
+            animate={{ opacity: 100, translateX: "0px" }}
+            transition={{ duration: 0.5 }}
             className={
-              "col-span-3 bg-[#EFF8F9] font-poppins font-medium max-h-[432px]"
+              "col-span-3 bg-[#EFF8F9] font-poppins font-medium min-h-[432px]"
             }
           >
             <ul
               className={"flex flex-col gap-y-[20px] p-[50px] text-[#494949]"}
             >
-              {get(data, "data.results", []).map((item) => (
+              {get(services, "data.results", []).map((item) => (
                 <li
                   key={get(item, "id")}
                   className={`cursor-pointer ${
-                    activeTab === get(item, "service_title")
-                      ? "text-[#00AFC0]"
-                      : "text-[#2C3E50]"
+                    id == get(item, "id") ? "text-[#00AFC0]" : "text-[#2C3E50]"
                   }`}
                 >
-                  <button
-                    onClick={() => handleTabClick(get(item, "service_title"))}
-                  >
+                  <Link href={`/xizmatlar/${get(item, "id")}`}>
                     {get(item, "service_title")}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          {activeTab === "Konsultatsiya" && (
-            <div className={"col-span-9"}>
-              <Reveal duration={0.5}>
-                <Title>Xizmatlar</Title>
-              </Reveal>
+          <motion.div
+            initial={{ opacity: 0, translateX: "-100px" }}
+            animate={{ opacity: 100, translateX: "0px" }}
+            transition={{ duration: 0.5 }}
+            className="col-span-9"
+          >
+            <Reveal duration={0.3}>
+              <Title>Xizmatlar</Title>
 
-              <Reveal duration={0.7}>
-                <h4
-                  className={"font-mulish font-semibold text-[24px] mt-[30px]"}
-                >
-                  Konsultatsiya
-                </h4>
-              </Reveal>
-              <Reveal duration={0.8}>
-                <section className={"flex gap-x-[30px] my-[20px] "}>
-                  <p className={"font-mulish font-normal"}>
-                    Bizning ko&apos;p funktsiyali tibbiyot markazimiz yuqori
-                    malakali mutaxassislar jamoasi va ilg&apos;or uskunalardan
-                    foydalanish orqali tibbiyotning turli sohalarida katta
-                    yutuqlarga erishdi. Biz ko&apos;plab murakkab operatsiyalar
-                    va protseduralarni muvaffaqiyatli o&apos;tkazdik, bemorlarga
-                    tez tiklanish va tiklanish ehtimoli yuqori. Bizning
-                    innovatsion diagnostika va davolash dasturlarimiz
-                    kasalliklarni dastlabki bosqichlarida aniqlash va davolash
-                    imkonini beradi, bu esa bemorlarning prognozlarini sezilarli
-                    darajada yaxshilaydi. Shuningdek, biz bemorlarga to&apos;liq
-                    hayotga qaytishda jarohatlar va operatsiyalardan xalos
-                    bo&apos;lishga yordam beradigan keng qamrovli reabilitatsiya
-                    dasturlarini amalga oshirdik.
-                  </p>
-
-                  <Image
-                    src={"/images/fizioterapiya.png"}
-                    alt={"Fizioterapiya"}
-                    width={329}
-                    height={241}
-                  />
-                </section>
-              </Reveal>
-              <Reveal>
-                <section className={"bg-[#EFF8F9] p-[20px] mb-[20px]"}>
-                  <h4
-                    className={
-                      "text-[20px] font-mulish font-semibold mb-[20px]"
-                    }
-                  >
-                    Xizmat preskuranti
-                  </h4>
-                  <ul
-                    className={
-                      "grid grid-cols-12 gap-x-[30px] p-[10px] list-disc gap-y-[10px]"
-                    }
-                  >
-                    <li
-                      className={"col-span-6 flex justify-between font-mulish"}
-                    >
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur, ipsum dolor sit
-                        amet consectetur:
-                      </p>
-                      <span className={"text-[#037582]"}>100000 so‘m;</span>
-                    </li>
-
-                    <li
-                      className={"col-span-6 flex justify-between font-mulish"}
-                    >
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur, ipsum dolor sit
-                        amet consectetur:
-                      </p>
-                      <span className={"text-[#037582]"}>100000 so‘m;</span>
-                    </li>
-
-                    <li
-                      className={"col-span-6 flex justify-between font-mulish"}
-                    >
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur, ipsum dolor sit
-                        amet consectetur:
-                      </p>
-                      <span className={"text-[#037582]"}>100000 so‘m;</span>
-                    </li>
-
-                    <li
-                      className={"col-span-6 flex justify-between font-mulish"}
-                    >
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur, ipsum dolor sit
-                        amet consectetur:
-                      </p>
-                      <span className={"text-[#037582]"}>100000 so‘m;</span>
-                    </li>
-
-                    <li
-                      className={"col-span-6 flex justify-between font-mulish"}
-                    >
-                      <p>
-                        Lorem ipsum dolor sit amet consectetur, ipsum dolor sit
-                        amet consectetur:
-                      </p>
-                      <span className={"text-[#037582]"}>100000 so‘m;</span>
-                    </li>
-                  </ul>
-                </section>
-              </Reveal>
-
-              <section className="mb-[50px]">
-                <Reveal>
-                  <h4
-                    className={
-                      "text-[20px] font-mulish font-semibold mb-[20px]"
-                    }
-                  >
-                    Xizmat bo‘yicha shifokor va xodimlar
-                  </h4>
-                </Reveal>
-
-                <Reveal>
-                  <Swiper slidesPerView={4.5}>
-                    <SwiperSlide>
-                      <EmployeeCard position={"Bosh shifokor"} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <EmployeeCard position={"Bosh shifokor"} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <EmployeeCard position={"Bosh shifokor"} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <EmployeeCard position={"Bosh shifokor"} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <EmployeeCard position={"Bosh shifokor"} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <EmployeeCard position={"Bosh shifokor"} />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <EmployeeCard position={"Bosh shifokor"} />
-                    </SwiperSlide>
-                  </Swiper>
-                </Reveal>
-
-                <Reveal>
-                  <div className="flex gap-x-[20px] mt-[20px]">
-                    <button className="bg-[#00AFC0] px-[9px] py-[6px] rounded-tl-[10px] rounded-br-[10px] hover:bg-[#00BFD0] active:bg-[#00D1E4]">
-                      <Image
-                        src={"/images/navigation.png"}
-                        alt="navigation"
-                        width={6}
-                        height={12}
-                        className="bg-[#00AFC0] "
-                      />
-                    </button>
-                    <button className="bg-[#00AFC0] px-[9px] py-[6px] rounded-tr-[10px] rounded-bl-[10px] hover:bg-[#00BFD0] active:bg-[#00D1E4]">
-                      <Image
-                        src={"/images/navigation.png"}
-                        alt="navigation"
-                        width={6}
-                        height={12}
-                        className="bg-[#00AFC0] rotate-180"
-                      />
-                    </button>
-                  </div>
-                </Reveal>
-              </section>
-            </div>
-          )}
+              <p className="text-xl font-mulish font-medium">
+                👈 chap tarafdagi bo&apos;limdan o&apos;zingizga kerakli xizmat
+                turini tanlang.
+              </p>
+            </Reveal>
+          </motion.div>
         </div>
       </section>
     </Wrapper>

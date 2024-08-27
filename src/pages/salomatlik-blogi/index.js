@@ -54,7 +54,7 @@ const Announcement = () => {
         </div>
         <div
           className={
-            "container mx-auto flex items-center gap-x-[90px] mb-[30px]"
+            "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px]"
           }
         >
           <div className={"flex gap-x-[10px]"}>
@@ -152,7 +152,7 @@ const Announcement = () => {
             </button>
           </div>
 
-          <div className="flex items-center gap-x-[20px] font-mulish ">
+          {/* <div className="flex items-center gap-x-[20px] font-mulish ">
             <label className="text-gray-700">Filtr</label>
             <div className="relative">
               <button
@@ -272,11 +272,11 @@ const Announcement = () => {
                 </ul>
               )}
             </div>
-          </div>
+          </div> */}
 
           <div
             className={
-              "w-full flex announce-list-shadow pr-[30px] rounded-[10px] "
+              "w-1/2 flex announce-list-shadow pr-[30px] rounded-[10px] "
             }
           >
             <input
