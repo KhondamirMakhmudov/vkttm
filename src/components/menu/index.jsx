@@ -163,7 +163,7 @@ const Index = ({ active = 0 }) => {
                                 ),
                               }
                             )}
-                            href={`/${get(subItem, "title")
+                            href={`${get(subItem, "title")
                               .toLowerCase()
                               .replace(" ", "-")
                               .replace("'", "")}`}
