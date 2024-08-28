@@ -45,12 +45,11 @@ export default function Home() {
   }
 
   return (
-    <>
+    <Wrapper>
       <Head>
         <title>vkttm</title>
       </Head>
-      <Header />
-      <Menu />
+
       {get(mainInformations, "data.banners", []).map((item, index) => (
         <main
           key={index}
@@ -852,6 +851,6 @@ export default function Home() {
         </div>
       </section>
       <Footer />
-    </>
+    </Wrapper>
   );
 }

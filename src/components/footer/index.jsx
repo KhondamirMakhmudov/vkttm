@@ -3,8 +3,25 @@ import Image from "next/image";
 import Brand from "@/components/brand";
 import Link from "next/link";
 import Reveal from "@/components/reveal";
+import { dropRight, get, isEmpty } from "lodash";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
 
 const Footer = () => {
+  const { data: basicInfos, isLoadingBasicInfos } = useGetQuery({
+    key: KEYS.basicInfos,
+    url: URLS.basicInfos,
+  });
+
+  const {
+    data: navMenu,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.menu,
+    url: URLS.menu,
+  });
   return (
     <footer className={"bg-[#048998] font-mulish"}>
       <Reveal duration={0.2}>
@@ -137,34 +154,53 @@ const Footer = () => {
             </div>
           </div>
 
-
           <div className={"md:col-span-3 col-span-12 font-poppins text-white"}>
             <h3 className={"text-lg font-medium"}>Manzil</h3>
             <p className={"text-sm mt-[10px] mb-[20px]"}>
-              M.Ulugbek ko&apos;chasi 70, <br />
-              Samarqand, Uzbekistan 140100
+              {get(basicInfos, "data.company_address")}
             </p>
-
             <h3 className={"text-lg font-medium"}>Aloqa</h3>
             <div className={"text-sm mt-[10px] mb-[6px]"}>
-              <a href={"tel:+998 78 210 00 81"}>+998 78 210 00 81</a> <br />
-              <a href={"tel:+998 78 000 00 00"}>+998 78 000 00 00</a>
+              <a href={`tel:${get(basicInfos, "data.company_phone")}`}>
+                {get(basicInfos, "data.company_phone")}
+              </a>{" "}
+              <br />
+              <a href={`tel:${get(basicInfos, "data.company_phones")}`}>
+                {get(basicInfos, "data.company_phones")}
+              </a>{" "}
+              <br />
+              <a
+                href={`mailto:${get(basicInfos, "data.company_mail")}`}
+                className="mt-[6px]"
+              >
+                {get(basicInfos, "data.company_mail")}
+              </a>{" "}
             </div>
-
-            <a className={"text-sm"} href={"mailto:vkttm.uz@gmail.com"}>
-              vkttm.uz@gmail.com
-            </a>
           </div>
 
           <div className={"md:col-span-2 col-span-12 font-poppins text-white"}>
             <h3 className={"text-lg font-medium mb-[10px]"}>Menyu</h3>
 
             <ul className={"flex flex-col gap-y-[8px] text-sm"}>
-              <li>Markaz haqida</li>
-              <li>Bo’limlar</li>
-              <li>Xizmatlar</li>
-              <li>Matbuot xizmati</li>
-              <li>Aloqa</li>
+              {dropRight(
+                get(navMenu, "data", []).map((menu) => (
+                  <li key={get(menu, "id")}>
+                    <Link
+                      href={
+                        !isEmpty(get(menu, "submenus", []))
+                          ? "#"
+                          : `/${get(menu, "title")
+                              .toLowerCase()
+                              .replace(" ", "-")
+                              .replace("'", "")}`
+                      }
+                    >
+                      {get(menu, "title")}
+                    </Link>
+                  </li>
+                )),
+                2
+              )}
             </ul>
           </div>
 
@@ -172,9 +208,15 @@ const Footer = () => {
             <h3 className={"text-lg font-medium mb-[10px]"}>Qo’shimcha</h3>
 
             <ul className={"flex flex-col gap-y-[8px] text-sm"}>
-              <li>Shifokorlar</li>
-              <li>Salomatlik blogi</li>
-              <li>Yangiliklar</li>
+              <li>
+                <Link href={"/doctors"}>Shifokorlar</Link>
+              </li>
+              <li>
+                <Link href={"/salomatlik-blogi"}>Salomatlik blogi</Link>
+              </li>
+              <li>
+                <Link href={"/yangiliklar"}>Yangiliklar</Link>
+              </li>
             </ul>
           </div>
         </div>
