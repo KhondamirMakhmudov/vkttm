@@ -262,7 +262,7 @@ const Index = ({ active = 0 }) => {
                       : isOpen === get(item, "title") && (
                           <ul
                             className={
-                              " bg-gray-50  absolute lg:w-[180px] w-[100px] text-start z-30 shadow-xl  rounded-[5px]"
+                              " bg-gray-50  absolute lg:w-[180px] w-[100px] text-start z-50 shadow-xl  rounded-[5px]"
                             }
                           >
                             {get(item, "submenus", []).map((subItem) => (
@@ -280,7 +280,7 @@ const Index = ({ active = 0 }) => {
                                         isEqual(get(subItem, "id"), active),
                                     }
                                   )}
-                                  href={`${get(subItem, "title")
+                                  href={`/${get(subItem, "title")
                                     .toLowerCase()
                                     .replace(" ", "-")
                                     .replace("'", "")}`}
