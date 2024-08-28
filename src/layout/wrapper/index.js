@@ -5,10 +5,10 @@ import Footer from "@/components/footer";
 
 const Wrapper = ({ children }) => {
   return (
-    <div>
+    <div className="-z-10">
       <Header />
       <Menu />
-      <main className="content__min_h ">{children}</main>
+      <main className="-z-10 content__min_h ">{children}</main>
       <Footer />
     </div>
   );

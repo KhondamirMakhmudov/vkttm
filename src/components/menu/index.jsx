@@ -15,40 +15,82 @@ const menuData = [
   {
     id: 1,
     title: "Markaz haqida",
-    url: "/about-center",
+    url: "#",
     subMenu: [
       {
         id: 1,
         title: "Markaz tuzilmasi",
-        url: "/news",
+        url: "/markaz-tuzilmasi",
       },
       {
         id: 2,
         title: "Rahbariyat",
-        url: "/announcements",
+        url: "/rahbariyat",
       },
       {
         id: 3,
-        title: "Vakansiyalar",
-        url: "/vacancies",
+        title: "Bo'limlar",
+        url: "/bolimlar",
+      },
+      {
+        id: 4,
+        title: "Lavozim majburiyatlari",
+        url: "/lavozim-majburiyatlari",
+      },
+      {
+        id: 5,
+        title: "Markaz nizomi",
+        url: "markaz-nizomi",
+      },
+      {
+        id: 6,
+        title: "Markaz faxriylari",
+        url: "/markaz-faxriylari",
+      },
+      {
+        id: 7,
+        title: "Odob-ahloq qoidalari",
+        url: "/odob-ahloq-qoidalari",
+      },
+      {
+        id: 8,
+        title: "Kasaba uyushmasi",
+        url: "/kasaba-uyushmasi",
+      },
+      {
+        id: 15,
+        title: "Biz haqimizda",
+        url: "/biz-haqimizda",
       },
     ],
   },
   {
     id: 2,
     title: "Xizmatlar",
-    url: "/services",
+    url: "/xizmatlar",
   },
   {
     id: 3,
     title: "Xalqaro bo’lim",
-    url: "/international-section",
+    url: "#",
+    subMenu: [
+      {
+        id: 16,
+        title: "Xalqaro aloqalar",
+        url: "/xalqaro-aloqalar",
+      },
+      {
+        id: 17,
+        title: "Memorandumlar",
+        url: "/memorandumlar",
+      },
+    ],
   },
 
   {
     id: 4,
     title: "Me’yoriy hujjatlar",
-    url: "/documents",
+    url: "/meyoriy-hujjatlar",
   },
 
   {
@@ -57,26 +99,41 @@ const menuData = [
     url: "#",
     subMenu: [
       {
-        id: 1,
+        id: 9,
         title: "Yangiliklar",
-        url: "/news",
+        url: "/yangiliklar",
       },
       {
-        id: 2,
+        id: 10,
         title: "E'lonlar",
-        url: "/announcements",
+        url: "/elonlar",
       },
       {
-        id: 3,
-        title: "Vakansiyalar",
-        url: "/vacancies",
+        id: 11,
+        title: "Fotogalereya",
+        url: "/fotogalereya",
+      },
+      {
+        id: 12,
+        title: "Videolavhalar",
+        url: "/videolavhalar",
+      },
+      {
+        id: 13,
+        title: "vakansiyalar",
+        url: "/vakansiyalar",
+      },
+      {
+        id: 14,
+        title: "Salomatlik blogi",
+        url: "/salomatlik-blogi",
       },
     ],
   },
   {
     id: 6,
-    title: "Aloqa",
-    url: "/contacts",
+    title: "Bog'lanish",
+    url: "/boglanish",
   },
 ];
 
@@ -123,64 +180,119 @@ const Index = ({ active = 0 }) => {
               "flex gap-x-[20px] font-poppins xl:text-base md:text-xs  font-medium"
             }
           >
-            {dropRight(get(navMenu, "data", []), 2).map((item) => (
-              <li
-                key={get(item, "id")}
-                className="dropdown relative "
-                onClick={() => toggleDropdown(get(item, "title"))}
-              >
-                <Link
-                  className="hover:text-[#00AFC0] transition-all duration-300"
-                  href={
-                    !isEmpty(get(item, "submenus", []))
-                      ? "#"
-                      : `${get(item, "title")
-                          .toLowerCase()
-                          .replace(" ", "-")
-                          .replace("'", "")}`
-                  }
-                >
-                  {get(item, "title")}
-                </Link>
-
-                {isEmpty(get(item, "submenus", []))
-                  ? ""
-                  : isOpen === get(item, "title") && (
-                      <ul
-                        className={
-                          "block bg-gray-50  absolute lg:w-[180px] w-[100px] text-start shadow-xl  rounded-[5px]"
-                        }
-                      >
-                        {get(item, "submenus", []).map((subItem) => (
-                          <Link
-                            key={get(subItem, "id")}
-                            className={clsx(
-                              "hover:text-[#00AFC0] transition-all  text-[14px] border-b-transparent font-medium ",
-                              {
-                                "!border-b-[#1890FF] text-[#001A57]": isEqual(
-                                  get(subItem, "id"),
-                                  active
-                                ),
-                              }
-                            )}
-                            href={`${get(subItem, "title")
+            {isLoading || isFetching
+              ? menuData.map((item) => (
+                  <li
+                    key={get(item, "id")}
+                    className="dropdown relative "
+                    onClick={() => toggleDropdown(get(item, "title"))}
+                  >
+                    <Link
+                      className="hover:text-[#00AFC0] transition-all duration-300"
+                      href={
+                        !isEmpty(get(item, "submenus", []))
+                          ? "#"
+                          : `/${get(item, "title")
                               .toLowerCase()
                               .replace(" ", "-")
-                              .replace("'", "")}`}
+                              .replace("'", "")}`
+                      }
+                    >
+                      {get(item, "title")}
+                    </Link>
+
+                    {isEmpty(get(item, "subMenu", []))
+                      ? ""
+                      : isOpen === get(item, "title") && (
+                          <ul
+                            className={
+                              "block bg-gray-50  absolute lg:w-[180px] w-[100px] text-start shadow-xl  rounded-[5px]"
+                            }
                           >
-                            <li
-                              className={
-                                "p-[10px] border-b-[1px] border-b-[#D6E0F5] "
-                              }
-                            >
-                              {get(subItem, "title")}
-                            </li>
-                          </Link>
-                        ))}
-                      </ul>
-                    )}
-              </li>
-            ))}
+                            {get(item, "subMenu", []).map((subItem) => (
+                              <Link
+                                key={get(subItem, "id")}
+                                className={clsx(
+                                  "hover:text-[#00AFC0] transition-all  text-[14px] border-b-transparent font-medium ",
+                                  {
+                                    "!border-b-[#1890FF] text-[#001A57]":
+                                      isEqual(get(subItem, "id"), active),
+                                  }
+                                )}
+                                href={`${get(subItem, "title")
+                                  .toLowerCase()
+                                  .replace(" ", "-")
+                                  .replace("'", "")}`}
+                              >
+                                <li
+                                  className={
+                                    "p-[10px] border-b-[1px] border-b-[#D6E0F5] "
+                                  }
+                                >
+                                  {get(subItem, "title")}
+                                </li>
+                              </Link>
+                            ))}
+                          </ul>
+                        )}
+                  </li>
+                ))
+              : dropRight(get(navMenu, "data", []), 2).map((item) => (
+                  <li
+                    key={get(item, "id")}
+                    className="  "
+                    onClick={() => toggleDropdown(get(item, "title"))}
+                  >
+                    <Link
+                      className="hover:text-[#00AFC0] transition-all duration-300"
+                      href={
+                        !isEmpty(get(item, "submenus", []))
+                          ? "#"
+                          : `/${get(item, "title")
+                              .toLowerCase()
+                              .replace(" ", "-")
+                              .replace("'", "")}`
+                      }
+                    >
+                      {get(item, "title")}
+                    </Link>
+
+                    {isEmpty(get(item, "submenus", []))
+                      ? ""
+                      : isOpen === get(item, "title") && (
+                          <ul
+                            className={
+                              " bg-gray-50  absolute lg:w-[180px] w-[100px] text-start z-30 shadow-xl  rounded-[5px]"
+                            }
+                          >
+                            {get(item, "submenus", []).map((subItem) => (
+                              <li
+                                className={
+                                  "p-[10px] z-30 border-b-[1px] border-b-[#D6E0F5] "
+                                }
+                                key={get(subItem, "id")}
+                              >
+                                <Link
+                                  className={clsx(
+                                    "hover:text-[#00AFC0] transition-all  text-[14px] border-b-transparent font-medium ",
+                                    {
+                                      "!border-b-[#1890FF] text-[#001A57]":
+                                        isEqual(get(subItem, "id"), active),
+                                    }
+                                  )}
+                                  href={`${get(subItem, "title")
+                                    .toLowerCase()
+                                    .replace(" ", "-")
+                                    .replace("'", "")}`}
+                                >
+                                  {get(subItem, "title")}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                  </li>
+                ))}
           </ul>
         </div>
 
