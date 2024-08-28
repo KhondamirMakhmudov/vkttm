@@ -123,6 +123,7 @@ export default function Home() {
           </div>
         </main>
       ))}
+      {/* MOBILE VERSION */}
       <section className="md:hidden block">
         <motion.ul
           initial={{ opacity: 0, translateY: "100px" }}
@@ -287,7 +288,7 @@ export default function Home() {
             "grid grid-cols-12 gap-x-[30px] container mx-auto lg:px-0 px-[20px]  relative"
           }
         >
-          {/* desktop */}
+          {/* DESKTOP VERSION */}
           <motion.ul
             initial={{ opacity: 0, translateY: "100px" }}
             animate={{ opacity: 100, translateY: "0px" }}
@@ -388,7 +389,7 @@ export default function Home() {
                     {get(item, "description")}
                   </p>
 
-                  <Link href={"#"}>
+                  <Link href={"/boglanish"}>
                     <button
                       className={
                         "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[59px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
@@ -797,13 +798,15 @@ export default function Home() {
             ))}
 
             <div className={"col-span-12 flex items-center justify-center"}>
-              <button
-                className={
-                  "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[65px] rounded-br-[10px] mt-[50px] rounded-tl-[10px] text-white"
-                }
-              >
-                <Link href={"/yangiliklar"}>Barcha yangiliklar</Link>
-              </button>
+              <Link href={"/yangiliklar"}>
+                <button
+                  className={
+                    "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[65px] rounded-br-[10px] mt-[50px] rounded-tl-[10px] text-white"
+                  }
+                >
+                  Barcha yangiliklar
+                </button>
+              </Link>
             </div>
           </div>
         </Reveal>

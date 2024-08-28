@@ -65,11 +65,7 @@ const Index = () => {
             telegram={get(doctor, "data.telegram", "#")}
             instagram={get(doctor, "data.instagram", "#")}
             facebook={get(doctor, "data.facebook", "#")}
-            positionResponsibilities={get(
-              doctor,
-              "data.position_responsibility",
-              "#"
-            )}
+            positionResponsibilities={"/lavozim-majburiyatlari"}
             image={get(doctor, "data.image")}
           />
         </div>

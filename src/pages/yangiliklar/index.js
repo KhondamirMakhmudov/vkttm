@@ -55,7 +55,7 @@ const Index = () => {
         <Reveal duration={0.6}>
           <div
             className={
-              "container mx-auto flex items-center gap-x-[90px] mb-[30px]"
+              "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px]"
             }
           >
             <div className={"flex gap-x-[10px]"}>
@@ -153,131 +153,9 @@ const Index = () => {
               </button>
             </div>
 
-            <div className="flex items-center gap-x-[20px] font-mulish ">
-              <label className="text-gray-700">Filtr</label>
-              <div className="relative">
-                <button
-                  onClick={toggleDropdown}
-                  className="flex  w-[170px] bg-white text-[#494949]  hover:border-gray-400 p-[10px] justify-between rounded-[10px] shadow leading-tight focus:outline-none focus:shadow-outline items-center"
-                >
-                  {selectedOption}
-                  <svg
-                    width="21"
-                    height="20"
-                    viewBox="0 0 21 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clipPath="url(#clip0_175_296)">
-                      <path
-                        d="M5.87439 7.5L10.8744 12.5L15.8744 7.5"
-                        stroke="#494949"
-                        strokeWidth="1.3"
-                        strokeLinecap="square"
-                        strokeLinejoin="round"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_175_296">
-                        <rect
-                          width="20"
-                          height="20"
-                          fill="white"
-                          transform="translate(0.87439)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </button>
-                {isOpen && (
-                  <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded shadow-lg">
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => handleOptionClick("barchasi")}
-                    >
-                      barchasi
-                    </li>
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => handleOptionClick("Option 1")}
-                    >
-                      Option 1
-                    </li>
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => handleOptionClick("Option 2")}
-                    >
-                      Option 2
-                    </li>
-                  </ul>
-                )}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-x-[20px] font-mulish ">
-              <label className="text-gray-700">Kategoriya</label>
-              <div className="relative">
-                <button
-                  onClick={toggleDropdown}
-                  className="flex  w-[170px] bg-white   hover:border-gray-400 p-[10px] justify-between rounded-[10px] shadow leading-tight focus:outline-none focus:shadow-outline items-center"
-                >
-                  {selectedOption}
-                  <svg
-                    width="21"
-                    height="20"
-                    viewBox="0 0 21 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clipPath="url(#clip0_175_296)">
-                      <path
-                        d="M5.87439 7.5L10.8744 12.5L15.8744 7.5"
-                        stroke="#494949"
-                        strokeWidth="1.3"
-                        strokeLinecap="square"
-                        strokeLinejoin="round"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_175_296">
-                        <rect
-                          width="20"
-                          height="20"
-                          fill="white"
-                          transform="translate(0.87439)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </button>
-                {isOpen && (
-                  <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded shadow-lg">
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => handleOptionClick("barchasi")}
-                    >
-                      barchasi
-                    </li>
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => handleOptionClick("Option 1")}
-                    >
-                      Option 1
-                    </li>
-                    <li
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                      onClick={() => handleOptionClick("Option 2")}
-                    >
-                      Option 2
-                    </li>
-                  </ul>
-                )}
-              </div>
-            </div>
-
             <div
               className={
-                "w-full flex announce-list-shadow pr-[30px] rounded-[10px] "
+                "w-1/2 flex announce-list-shadow pr-[30px] rounded-[10px] "
               }
             >
               <input

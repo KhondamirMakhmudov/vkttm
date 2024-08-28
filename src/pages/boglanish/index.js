@@ -20,6 +20,11 @@ const Index = () => {
   const router = useRouter();
   const [contact, setContact] = useState({});
   const {
+    data: aboutCenter,
+    isLoadingAboutCenter,
+    isFetchingAboutCenter,
+  } = useGetQuery({ key: KEYS.aboutCenter, url: URLS.aboutCenter });
+  const {
     data: basicInfos,
     isLoading,
     isFetching,
@@ -355,46 +360,18 @@ const Index = () => {
               <h3 className={"font-mulish text-[20px] font-semibold mb-[20px]"}>
                 Asosiy bino lokatsiyasi:
               </h3>
-              <div className={"w-[630px] h-[430px] bg-[#C5C5C5]"}></div>
+              <div className={"w-[630px] h-[430px] bg-[#C5C5C5]"}>
+                <iframe
+                  src={`${get(aboutCenter, "data.company_location")}`}
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className={"w-full lg:h-full h-[400px] border shadow-2xl"}
+                ></iframe>
+              </div>
             </div>
           </RevealLeft>
-
-          <RevealRight classNameTop={"col-span-6"} duration={0.3}>
-            <div className={"col-span-6 p-[30px]"}>
-              <h3 className={"font-mulish text-[20px] font-semibold mb-[20px]"}>
-                Bo’limlar joylashuvi
-              </h3>
-              <ul className={"flex flex-col gap-y-[20px]"}>
-                <li className={"flex gap-x-[30px] items-start"}>
-                  <div className={"min-w-[180px] h-[130px] bg-[#C5C5C5]"}></div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur. Volutpat vitae nulla
-                    lacus est amet nullam phasellus sed libero. Enim gravida in
-                    ultrices tortor. Placerat proin duis gravida venenatis a
-                    suscipit volutpat.
-                  </p>
-                </li>
-                <li className={"flex gap-x-[30px] items-start"}>
-                  <div className={"min-w-[180px] h-[130px] bg-[#C5C5C5]"}></div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur. Volutpat vitae nulla
-                    lacus est amet nullam phasellus sed libero. Enim gravida in
-                    ultrices tortor. Placerat proin duis gravida venenatis a
-                    suscipit volutpat.
-                  </p>
-                </li>
-                <li className={"flex gap-x-[30px] items-start"}>
-                  <div className={"min-w-[180px] h-[130px] bg-[#C5C5C5]"}></div>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur. Volutpat vitae nulla
-                    lacus est amet nullam phasellus sed libero. Enim gravida in
-                    ultrices tortor. Placerat proin duis gravida venenatis a
-                    suscipit volutpat.
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </RevealRight>
         </div>
       </section>
     </Wrapper>
