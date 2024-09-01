@@ -123,7 +123,7 @@ export default function Home() {
         </main>
       ))}
       {/* MOBILE VERSION */}
-      <section className="md:hidden block">
+      <section className="md:hidden block bg-white">
         <motion.ul
           initial={{ opacity: 0, translateY: "100px" }}
           animate={{ opacity: 100, translateY: "0px" }}
