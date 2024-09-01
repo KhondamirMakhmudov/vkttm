@@ -20,7 +20,11 @@ const Department = ({ image, title, desc, url, classNames }) => {
       <h3 className={"font-poppins text-[24px] font-semibold text-[#2C3E50]"}>
         {title}
       </h3>
-      <p className={"font-normal  font-mulish text-center my-[7px] flex-1"}>
+      <p
+        className={
+          "font-normal  font-mulish text-center my-[7px] flex-1 text-[#2C3E50]"
+        }
+      >
         {desc}
       </p>
 

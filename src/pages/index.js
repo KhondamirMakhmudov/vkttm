@@ -290,7 +290,7 @@ export default function Home() {
 
                   <p
                     className={
-                      "mt-[20px] font-mulish lg:text-lg md:text-base text-sm mb-[50px]"
+                      "mt-[20px] font-mulish text-[#2C3E50] lg:text-lg md:text-base text-sm mb-[50px]"
                     }
                   >
                     {get(item, "description")}
@@ -358,7 +358,7 @@ export default function Home() {
 
                           <Link
                             href={`/elonlar/${get(item, "id")}`}
-                            className="font-poppins font-medium text-sm flex-grow hover:text-[#037582] hover:underline"
+                            className="font-poppins font-medium text-sm text-[#2C3E50] flex-grow hover:text-[#037582] hover:underline line-clamp-3"
                           >
                             {get(item, "announce_title")}
                           </Link>
@@ -409,7 +409,7 @@ export default function Home() {
                           alt="announce_id"
                           width={220}
                           height={164}
-                          className="w-[220px] h-[164px] object-center rounded-[10px]"
+                          className="xl:w-[220px] xl:h-[164px] lg:w-[200px] lg:h-[144px] md:w-[150px] h-[90px] md:block hidden object-center rounded-[10px]"
                         />
                       </div>
                     </SwiperSlide>
@@ -530,7 +530,7 @@ export default function Home() {
                     <div>
                       <Link
                         href={`/salomatlik-blogi/${get(recommendation, "id")}`}
-                        className="font-medium font-poppins hover:underline"
+                        className="font-medium font-poppins hover:underline text-[#2C3E50]"
                       >
                         <h5>{get(recommendation, "recommendation_title")}</h5>
                       </Link>
