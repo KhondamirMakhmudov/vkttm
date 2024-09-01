@@ -1,7 +1,6 @@
 import React from "react";
 import Wrapper from "@/layout/wrapper";
 import Title from "@/components/title";
-import GalleryCard from "@/components/cards/gallery";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
