@@ -16,45 +16,6 @@ import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 
-const DUMMY_DATA = [
-  {
-    id: 1,
-    title: "Fanlararo hamkorlik",
-    description:
-      "Sakson ilmiy aloqasi turli xil ilmiy fanlar o'rtasidagi o'zaro ta'sirga yordam beradi, bu esa keng qamrovli tadqiqotlar olib borish va murakkab muammolar uchun innovatsion echimlarni topish imkonini beradi.",
-  },
-  {
-    id: 2,
-    title: "Yosh olimlarni qo'llab-quvvatlash",
-    description:
-      "Tashabbus rivojlanayotgan tadqiqotchilarni grantlar, stipendiyalar va amaliyot imkoniyatlari orqali faol qo'llab-quvvatlaydi, bu esa yangi iste'dodlarni rivojlantirishga va mintaqaning ilmiy salohiyatini oshirishga yordam beradi.",
-  },
-  {
-    id: 3,
-    title: "Tadqiqot infratuzilmasini rivojlantirish",
-    description:
-      "Tashabbus laboratoriyalarni modernizatsiya qilish va yangi tadqiqot markazlarini tashkil etishni o'z ichiga oladi, bu esa olib borilayotgan tadqiqotlar sifati va hajmini oshirishga yordam beradi.",
-  },
-  {
-    id: 4,
-    title: "Xalqaro hamkorlik",
-    description:
-      "Saksoniya ilmiy aloqasi xalqaro ilmiy loyihalar va sherikliklarni rivojlantiradi, bu esa ilmiy nashrlarning sifati va sonini oshirish orqali global darajada bilim va tajriba almashishga yordam beradi.",
-  },
-  {
-    id: 5,
-    title: "Sanoat bilan o'zaro aloqalar",
-    description:
-      "Sakson ilmiy aloqasi universitetlar va sanoat korxonalari o'rtasidagi hamkorlikni rag'batlantiradi, bu esa amaliy tadqiqotlarni rivojlantirishga va ishlab chiqarishda innovatsiyalarni tezlashtirishga yordam beradi.",
-  },
-  {
-    id: 6,
-    title: "Ta'lim faoliyati va fanni ommalashtirish",
-    description:
-      "Dastur ilm-fan va texnologiya yutuqlari to'g'risida jamoatchilik xabardorligini oshirishga qaratilgan ommaviy ma'ruzalar, ilmiy festivallar va boshqa tadbirlarni o'tkazadi, bu esa jamiyatda ilm-fanning ijobiy imidjini shakllantirishga yordam beradi.",
-  },
-];
-
 const Index = () => {
   const router = useRouter();
   const { tab } = router.query;

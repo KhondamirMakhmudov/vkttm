@@ -11,6 +11,7 @@ const Brand = ({ image = "brand-img", textColor = "[#2C3E50]" }) => {
           alt={"brand"}
           width={232}
           height={60}
+          className="md:w-[232px] w-[170px]"
         />
       </Link>
 

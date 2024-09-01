@@ -303,7 +303,7 @@ const Index = ({ active = 0 }) => {
         >
           <Link href={"#"}>Qabulga yozilish</Link>
 
-          <Link href={"#"} className={"flex items-center"}>
+          <Link href={"#"} className={"flex items-center "}>
             <Image
               src={"/images/login.png"}
               alt={"login"}
@@ -323,10 +323,10 @@ const Index = ({ active = 0 }) => {
       </motion.div>
 
       {/* mobile version */}
-      <div className="relative text-[#2C3E50]">
+      <div className="relative text-[#2C3E50] ">
         <div
           className={
-            "flex md:hidden container  justify-between items-center gap-x-[63px] py-[20px]"
+            "flex md:hidden container  justify-between items-center gap-x-[63px] py-[20px] md:px-0 px-[10px]"
           }
         >
           <Brand />
@@ -342,16 +342,9 @@ const Index = ({ active = 0 }) => {
                 alt={"login"}
                 width={24}
                 height={24}
+                className="md:w-[24px] md:h-[24px] w-[20px] h-[20px]"
               />
-              <p>Kirish</p>
             </Link>
-
-            <Image
-              src={"/images/search.png"}
-              alt={"search"}
-              width={24}
-              height={24}
-            />
 
             <button onClick={burgerMenu} className="flex flex-col gap-y-[4px]">
               <div className="burger h-[1px] w-[20px] bg-black"></div>
@@ -364,7 +357,7 @@ const Index = ({ active = 0 }) => {
         {openMenu && (
           <div
             className={
-              "md:hidden absolute z-10 w-1/2 min-h-[300px] flex flex-col py-[10px] justify-end items-end bg-white right-0"
+              "md:hidden absolute z-10 w-2/3 min-h-[300px] flex flex-col py-[10px] justify-end items-end bg-white right-0"
             }
           >
             <ul
@@ -372,10 +365,59 @@ const Index = ({ active = 0 }) => {
                 " gap-y-[26px] pr-[20px] flex flex-col font-poppins xl:text-base md:text-xs   font-medium"
               }
             >
-              {menuData.map((item) => (
-                <li key={get(item, "id")}>
+              {dropRight(get(navMenu, "data", []), 2).map((item) => (
+                <li
+                  key={get(item, "id")}
+                  onClick={() => toggleDropdown(get(item, "title"))}
+                >
                   <RevealRight>
-                    <Link href={get(item, "url")}>{get(item, "title")}</Link>
+                    <Link
+                      href={
+                        !isEmpty(get(item, "submenus", []))
+                          ? "#"
+                          : `/${get(item, "title")
+                              .toLowerCase()
+                              .replace(" ", "-")
+                              .replace("'", "")}`
+                      }
+                    >
+                      {get(item, "title")}
+                    </Link>
+
+                    {isEmpty(get(item, "submenus", []))
+                      ? ""
+                      : isOpen === get(item, "title") && (
+                          <ul
+                            className={
+                              "  text-sm  text-start z-50 rounded-[5px]"
+                            }
+                          >
+                            {get(item, "submenus", []).map((subItem) => (
+                              <li
+                                className={
+                                  "p-[10px] z-30 border-b-[1px] border-b-[#D6E0F5] "
+                                }
+                                key={get(subItem, "id")}
+                              >
+                                <Link
+                                  className={clsx(
+                                    "hover:text-[#00AFC0] transition-all  text-[14px] border-b-transparent font-medium ",
+                                    {
+                                      "!border-b-[#1890FF] text-[#001A57]":
+                                        isEqual(get(subItem, "id"), active),
+                                    }
+                                  )}
+                                  href={`/${get(subItem, "title")
+                                    .toLowerCase()
+                                    .replace(" ", "-")
+                                    .replace("'", "")}`}
+                                >
+                                  {get(subItem, "title")}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
                   </RevealRight>
                 </li>
               ))}

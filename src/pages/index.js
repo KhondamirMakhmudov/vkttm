@@ -132,153 +132,57 @@ export default function Home() {
             "bg-white mx-[50px] py-[50px] flex flex-col gap-y-[20px] text-[#0D4866]"
           }
         >
-          <motion.li
-            className={
-              "cursor-pointer border flex flex-col gap-y-[20px] py-[30px] px-[20px] justify-center items-center text-center w-full lg:gap-x-[20px] gap-x-[10px] rounded-bl-[50px] rounded-tr-[50px] announce-list-shadow"
-            }
-            initial={{ opacity: 0, translateX: "-100px" }}
-            animate={{ opacity: 100, translateX: "0px" }}
-            transition={{ duration: 0.5 }}
-          >
-            <Image
-              src={"/images/doctors.png"}
-              alt={"doctors"}
-              width={50}
-              height={50}
+          {get(mainInformations, "data.fast_links", []).map((item, index) => (
+            <motion.li
+              key={get(item, "id")}
               className={
-                "bg-[#00AFC0] p-[10px] rounded-full ] w-[50px] h-[50px] "
+                "cursor-pointer border flex flex-col gap-y-[20px] py-[30px] px-[20px] justify-center items-center text-center w-full lg:gap-x-[20px] gap-x-[10px] rounded-bl-[50px] rounded-tr-[50px] announce-list-shadow"
               }
-            />
-
-            <motion.div
-              initial={{ opacity: 0, translateY: "100px" }}
-              animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.6 }}
+              initial={{ opacity: 0, translateX: "-100px" }}
+              animate={{ opacity: 100, translateX: "0px" }}
+              transition={{ duration: 0.5 }}
             >
-              <h3
+              <Image
+                src={`/images/fastLink${index + 1}.png`}
+                alt={"doctors"}
+                width={50}
+                height={50}
                 className={
-                  "!text-[20px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                  "bg-[#00AFC0] p-[10px] rounded-full ] w-[50px] h-[50px] "
                 }
-              >
-                Shifokorlar
-              </h3>
+              />
 
-              <p
-                className={
-                  "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px] font-normal lg:my-[10px] my-[5px]"
-                }
+              <motion.div
+                initial={{ opacity: 0, translateY: "100px" }}
+                animate={{ opacity: 100, translateY: "0px" }}
+                transition={{ duration: 0.6 }}
               >
-                Tibbiyot markazidagi oliy toifali shifokorlarning tibbiy
-                xizmatlaridan foydalaning
-              </p>
+                <h3
+                  className={
+                    "!text-[18px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
+                  }
+                >
+                  {get(item, "title")}
+                </h3>
 
-              <button
-                className={
-                  "font-poppins xl:text-base lg:text-sm md:text-xs text-[10px] font-medium border-b-[2px] border-b-[#00AFC0]"
-                }
-              >
-                <Link href={"/to-be-healty/id"}>Barchasi</Link>
-              </button>
-            </motion.div>
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, translateX: "100px" }}
-            animate={{ opacity: 100, translateX: "0px" }}
-            transition={{ duration: 0.5 }}
-            className={
-              "cursor-pointer border flex flex-col gap-y-[20px] py-[30px] px-[20px] justify-center items-center text-center w-full lg:gap-x-[20px] gap-x-[10px] rounded-bl-[50px] rounded-tr-[50px] announce-list-shadow"
-            }
-          >
-            <Image
-              src={"/images/health-blog.png"}
-              alt={"health-blog"}
-              width={50}
-              height={50}
-              className={
-                "bg-[#00AFC0] p-[10px] rounded-full ] w-[50px] h-[50px] "
-              }
-            />
+                <p
+                  className={
+                    "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px] font-normal lg:my-[10px] my-[5px]"
+                  }
+                >
+                  {get(item, "description")}
+                </p>
 
-            <motion.div
-              initial={{ opacity: 0, translateY: "100px" }}
-              animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.6 }}
-            >
-              <h3
-                className={
-                  "!text-[20px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
-                }
-              >
-                Salomatlik blogi{" "}
-              </h3>
-
-              <p
-                className={
-                  "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px]  font-normal lg:my-[10px] my-[5px]"
-                }
-              >
-                Sog’lom bo’lish uchun turli tavsiya, maqola, ilmiy ishlardan
-                namunalar bilan tanishing
-              </p>
-
-              <button
-                className={
-                  "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
-                }
-              >
-                <Link href={"/salomatlik-blogi"}>Barchasi</Link>
-              </button>
-            </motion.div>
-          </motion.li>
-          <motion.li
-            initial={{ opacity: 0, translateX: "-100px" }}
-            animate={{ opacity: 100, translateX: "0px" }}
-            transition={{ duration: 0.5 }}
-            className={
-              "cursor-pointer border flex flex-col gap-y-[20px] py-[30px] px-[20px] justify-center items-center text-center w-full lg:gap-x-[20px] gap-x-[10px] rounded-bl-[50px] rounded-tr-[50px] announce-list-shadow"
-            }
-          >
-            <Image
-              src={"/images/contact.png"}
-              alt={"contacts"}
-              width={50}
-              height={50}
-              className={
-                "bg-[#00AFC0] p-[10px] rounded-full ] w-[50px] h-[50px] "
-              }
-            />
-
-            <motion.div
-              initial={{ opacity: 0, translateY: "100px" }}
-              animate={{ opacity: 100, translateY: "0px" }}
-              transition={{ duration: 0.6 }}
-            >
-              <h3
-                className={
-                  "!text-[20px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
-                }
-              >
-                Biz bilan bog’laning
-              </h3>
-
-              <p
-                className={
-                  "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px]  font-normal my-[10px]"
-                }
-              >
-                Savollar, murojaatlarni onlayn yuborish va va qo’shimcha
-                ma’lumotlar olish imkoniyati
-              </p>
-
-              <button
-                className={
-                  "font-poppins font-medium border-b-[2px] xl:text-base lg:text-sm md:text-xs text-[10px] border-b-[#00AFC0]"
-                }
-              >
-                <Link href={"/to-be-healty/id"}>Barchasi</Link>
-              </button>
-            </motion.div>
-          </motion.li>
+                <button
+                  className={
+                    "font-poppins xl:text-base lg:text-sm md:text-xs text-[10px] font-medium border-b-[2px] border-b-[#00AFC0]"
+                  }
+                >
+                  <Link href={"/to-be-healty/id"}>Barchasi</Link>
+                </button>
+              </motion.div>
+            </motion.li>
+          ))}
         </motion.ul>
       </section>
       <section className={"bg-[#EFF8F9] pb-[70px] md:pt-[240px] pt-[70px]"}>
@@ -384,14 +288,18 @@ export default function Home() {
                 <RevealRight key={index}>
                   <Title>{get(item, "title")}</Title>
 
-                  <p className={"mt-[20px] font-mulish text-lg mb-[50px]"}>
+                  <p
+                    className={
+                      "mt-[20px] font-mulish lg:text-lg md:text-base text-sm mb-[50px]"
+                    }
+                  >
                     {get(item, "description")}
                   </p>
 
                   <Link href={"/boglanish"}>
                     <button
                       className={
-                        "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[59px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
+                        "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] lg:px-[59px] px-[47px] rounded-br-[10px] rounded-tl-[10px] lg:text-base text-sm text-white transition-all duration-300"
                       }
                     >
                       {get(item, "button_text")}
@@ -418,11 +326,31 @@ export default function Home() {
 
           <div className={"col-span-12"}>
             <Reveal duration={0.3}>
-              <Swiper slidesPerView={2.5} spaceBetween={300}>
+              <Swiper
+                slidesPerView={2.5}
+                breakpoints={{
+                  200: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                  },
+                  640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                  },
+                  768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40,
+                  },
+                  1024: {
+                    slidesPerView: 2.5,
+                    spaceBetween: 50,
+                  },
+                }}
+              >
                 {get(mainInformations, "data.announces", []).map(
                   (item, index) => (
                     <SwiperSlide key={index}>
-                      <div className="flex  bg-white min-w-[630px] p-[20px] gap-x-[16px] announce-list-shadow rounded-[20px]">
+                      <div className="flex  bg-white max-w-[630px] p-[20px] gap-x-[16px] announce-list-shadow rounded-[20px]">
                         <div className="flex flex-col justify-between gap-y-[15px]">
                           <h4 className="text-[#037582] font-mulish font-semibold text-sm ">
                             E’lon
@@ -572,7 +500,7 @@ export default function Home() {
               <h2 className={"font-medium font-poppins text-[24px] mb-[20px]"}>
                 Doimiy jismoniy mashqalar salomatlik garovidir
               </h2>
-              <p>
+              <p className="font-mulish">
                 Muntazam jismoniy mashqlar jismoniy tayyorgarlikni saqlashga va
                 yurak-qon tomir tizimini mustahkamlashga yordam beradi. Ular
                 endorfin ishlab chiqarish orqali kayfiyatni yaxshilashga va
@@ -594,7 +522,7 @@ export default function Home() {
             </Reveal>
           </div>
 
-          <div className="md:col-span-4 col-span-12">
+          <div className="md:col-span-4 col-span-12 md:mt-0 mt-[30px]">
             <Reveal duration={0.65}>
               {get(mainInformations, "data.recommendations", []).map(
                 (recommendation) => (
@@ -632,10 +560,10 @@ export default function Home() {
         </div>
         <div className={"col-span-12"}></div>
       </section>
-
+      {/* Desktop version */}
       <section
         className={
-          " w-full h-[520px] relative   py-[90px] bg-no-repeat bg-cover bg-center z-10"
+          " w-full h-[520px] relative md:block hidden  py-[90px] bg-no-repeat bg-cover bg-center z-10"
         }
         style={{ backgroundImage: "url(/images/Pluses.png)" }}
       >
@@ -713,7 +641,7 @@ export default function Home() {
                   </p>
                 </li>
               </ul>
-              <ul className={"col-span-6 text-white"}>
+              <ul className={" text-white"}>
                 <li className={"flex gap-x-[20px] items-start"}>
                   <Image
                     src={"/images/checked.png"}
@@ -759,6 +687,152 @@ export default function Home() {
                     alt={"checked"}
                     width={30}
                     height={30}
+                  />
+
+                  <p className={"text-[22px] font-semibold font-mulish"}>
+                    Reabilitatsiya xizmatlari
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <section
+        className={
+          " w-full  relative md:hidden block  py-[90px] bg-no-repeat bg-cover bg-center z-10 px-[20px]"
+        }
+        style={{ backgroundImage: "url(/images/Pluses.png)" }}
+      >
+        <div class="absolute inset-0 medical-service bg-opacity-50 before:absolute after:inset-0 after:medical-service before:opacity-10 -z-10"></div>
+        <Reveal duration={0.4}>
+          <div
+            className={"container mx-auto grid grid-cols-12 gap-x-[30px] z-50"}
+          >
+            <div className={"lg:col-span-12 col-span-12 !text-white"}>
+              <Title textColor={"#fff"}>Yuqori malakali tibbiy xizmat</Title>
+
+              <p className={"mt-[30px] font-mulish text-[20px] font-semibold"}>
+                Bizning markazimiz shifokorlari yuqori malakali mutaxassislar
+                bo&apos;lib, ularning kasbiy bilimlari va tajribalari bemorlarga
+                eng yuqori darajadagi tibbiy yordam ko&apos;rsatishga imkon
+                beradi. Ularning fidoyiligi, har bir bemorga ehtiyotkorlik bilan
+                munosabatda bo&apos;lishi va mukammallikka tinimsiz intilishidi.
+                Ularning sa&apos;y-harakatlari tufayli bemorlar o&apos;z
+                sog&apos;lig&apos;ini tiklash va hayot sifatini yaxshilash
+                orqali o&apos;z vaqtida va samarali davolanadilar.
+              </p>
+            </div>
+
+            <div className={"col-span-12 flex flex-col gap-x-[30px] mt-[30px]"}>
+              <ul className={"text-white flex flex-col"}>
+                <li className={"flex gap-x-[20px] items-start "}>
+                  <Image
+                    src={"/images/checked.png"}
+                    alt={"checked"}
+                    width={30}
+                    height={30}
+                    className={"w-[30px] h-[30px]"}
+                  />
+
+                  <p className={"text-[22px] font-semibold font-mulish"}>
+                    20 + yil tibbiy tajriba
+                  </p>
+                </li>
+
+                <li className={"flex gap-x-[20px] items-start"}>
+                  <Image
+                    src={"/images/checked.png"}
+                    alt={"checked"}
+                    width={30}
+                    height={30}
+                    className={"w-[30px] h-[30px]"}
+                  />
+
+                  <p className={"text-[22px] font-semibold font-mulish"}>
+                    Bir joyda tibbiy keng doiradagi xizmatlar joylashuvi
+                  </p>
+                </li>
+
+                <li className={"flex gap-x-[20px] items-start "}>
+                  <Image
+                    src={"/images/checked.png"}
+                    alt={"checked"}
+                    width={30}
+                    height={30}
+                    className={"w-[30px] h-[30px]"}
+                  />
+
+                  <p className={"text-[22px] font-semibold font-mulish"}>
+                    Zamonaviy uskunalar va jihozlar
+                  </p>
+                </li>
+
+                <li className={"flex gap-x-[20px] items-start"}>
+                  <Image
+                    src={"/images/checked.png"}
+                    alt={"checked"}
+                    width={30}
+                    height={30}
+                    className={"w-[30px] h-[30px]"}
+                  />
+
+                  <p className={"text-[22px] font-semibold font-mulish"}>
+                    Kasalliklarning oldini olish va erta aniqlash
+                  </p>
+                </li>
+              </ul>
+              <ul className={" text-white"}>
+                <li className={"flex gap-x-[20px] items-start"}>
+                  <Image
+                    src={"/images/checked.png"}
+                    alt={"checked"}
+                    width={30}
+                    height={30}
+                    className={"w-[30px] h-[30px]"}
+                  />
+
+                  <p className={"text-[22px] font-semibold font-mulish"}>
+                    Yuqori malakali mutaxassislar
+                  </p>
+                </li>
+
+                <li className={"flex gap-x-[20px] items-start"}>
+                  <Image
+                    src={"/images/checked.png"}
+                    alt={"checked"}
+                    width={30}
+                    height={30}
+                    className={"w-[30px] h-[30px]"}
+                  />
+
+                  <p className={"text-[22px] font-semibold font-mulish"}>
+                    Diagnostika vaqti qisqaligi
+                  </p>
+                </li>
+
+                <li className={"flex gap-x-[20px] items-start"}>
+                  <Image
+                    src={"/images/checked.png"}
+                    alt={"checked"}
+                    width={30}
+                    height={30}
+                    className={"w-[30px] h-[30px]"}
+                  />
+
+                  <p className={"text-[22px] font-semibold font-mulish"}>
+                    Turli xil tibbiy yo’nalish mutaxassislarining mavjudligi
+                  </p>
+                </li>
+
+                <li className={"flex gap-x-[20px] items-start"}>
+                  <Image
+                    src={"/images/checked.png"}
+                    alt={"checked"}
+                    width={30}
+                    height={30}
+                    className={"w-[30px] h-[30px]"}
                   />
 
                   <p className={"text-[22px] font-semibold font-mulish"}>
@@ -850,7 +924,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-      <Footer />
     </Wrapper>
   );
 }
