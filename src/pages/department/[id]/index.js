@@ -77,7 +77,7 @@ const Index = () => {
                 </p>
 
                 <Image
-                  src={get(department, "data.department_image")}
+                  src={`${get(department, "data.department_image")}`}
                   loader={() => get(department, "data.department_image")}
                   alt={"Fizioterapiya"}
                   width={329}

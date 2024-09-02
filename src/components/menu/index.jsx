@@ -153,6 +153,7 @@ const Index = ({ active = 0 }) => {
 
   const toggleDropdown = (menu) => {
     setIsOpen(menu);
+    toggleMenu();
   };
 
   const toggleMenu = () => {
@@ -240,11 +241,11 @@ const Index = ({ active = 0 }) => {
               : dropRight(get(navMenu, "data", []), 2).map((item) => (
                   <li
                     key={get(item, "id")}
-                    className="  "
+                    className=" container-menu "
                     onClick={() => toggleDropdown(get(item, "title"))}
                   >
                     <Link
-                      className="hover:text-[#00AFC0] transition-all duration-300"
+                      className="hover:text-[#00AFC0]  transition-all duration-300"
                       href={
                         !isEmpty(get(item, "submenus", []))
                           ? "#"
@@ -259,10 +260,11 @@ const Index = ({ active = 0 }) => {
 
                     {isEmpty(get(item, "submenus", []))
                       ? ""
-                      : isOpen === get(item, "title") && (
+                      : isOpen === get(item, "title") &&
+                        !open && (
                           <ul
                             className={
-                              " bg-gray-50  absolute lg:w-[180px] w-[100px] text-start z-50 shadow-xl  rounded-[5px]"
+                              " bg-gray-50   lg:w-[180px] w-[100px] text-start  shadow-xl  rounded-[5px]"
                             }
                           >
                             {get(item, "submenus", []).map((subItem) => (

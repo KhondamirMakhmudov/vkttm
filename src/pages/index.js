@@ -267,25 +267,19 @@ export default function Home() {
           <div
             className={"xl:col-span-5 md:col-span-6 col-span-12 max-w-[570px] "}
           >
-            <RevealLeft>
-              {" "}
-              {get(mainInformations, "data.main_page_texts", []).map(
-                (item, index) => (
-                  <Image
-                    key={index}
-                    src={"/images/img1.png"}
-                    alt={"img1"}
-                    width={570}
-                    height={363}
-                  />
-                )
-              )}
-            </RevealLeft>
+            <Reveal>
+              <Image
+                src={"/images/img1.png"}
+                alt={"img1"}
+                width={570}
+                height={363}
+              />
+            </Reveal>
           </div>
           <div className={"md:col-span-6 col-span-12 md:mt-0 mt-[30px]"}>
             {get(mainInformations, "data.main_page_texts", []).map(
               (item, index) => (
-                <RevealRight key={index}>
+                <Reveal key={index}>
                   <Title>{get(item, "title")}</Title>
 
                   <p
@@ -305,7 +299,7 @@ export default function Home() {
                       {get(item, "button_text")}
                     </button>
                   </Link>
-                </RevealRight>
+                </Reveal>
               )
             )}
           </div>
@@ -471,13 +465,15 @@ export default function Home() {
                 "col-span-12 flex justify-center items-center mt-[20px]"
               }
             >
-              <button
-                className={
-                  "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[72px] rounded-br-[10px] rounded-tl-[10px] text-white"
-                }
-              >
-                <Link href={"/bolimlar"}>Barcha bo‘limlar</Link>
-              </button>
+              <Link href={"/bolimlar"}>
+                <button
+                  className={
+                    "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[72px] rounded-br-[10px] rounded-tl-[10px] text-white"
+                  }
+                >
+                  Barcha bo‘limlar
+                </button>
+              </Link>
             </div>
           </div>
         </Reveal>
@@ -549,13 +545,15 @@ export default function Home() {
           </div>
 
           <div className={"col-span-12 mt-[50px]"}>
-            <button
-              className={
-                "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[45px] rounded-br-[10px] rounded-tl-[10px] text-white"
-              }
-            >
-              <Link href={"/salomatlik-blogi"}>Barcha maqolalar</Link>
-            </button>
+            <Link href={"/salomatlik-blogi"}>
+              <button
+                className={
+                  "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[45px] rounded-br-[10px] rounded-tl-[10px] text-white"
+                }
+              >
+                Barcha maqolalar
+              </button>
+            </Link>
           </div>
         </div>
         <div className={"col-span-12"}></div>
@@ -567,7 +565,7 @@ export default function Home() {
         }
         style={{ backgroundImage: "url(/images/Pluses.png)" }}
       >
-        <div class="absolute inset-0 medical-service bg-opacity-50 before:absolute after:inset-0 after:medical-service before:opacity-10 -z-10"></div>
+        <div className="absolute inset-0 medical-service bg-opacity-50 before:absolute after:inset-0 after:medical-service before:opacity-10 -z-10"></div>
         <Reveal duration={0.4}>
           <div
             className={"container mx-auto grid grid-cols-12 gap-x-[30px] z-50"}
@@ -705,7 +703,7 @@ export default function Home() {
         }
         style={{ backgroundImage: "url(/images/Pluses.png)" }}
       >
-        <div class="absolute inset-0 medical-service bg-opacity-50 before:absolute after:inset-0 after:medical-service before:opacity-10 -z-10"></div>
+        <div className="absolute inset-0 medical-service bg-opacity-50 before:absolute after:inset-0 after:medical-service before:opacity-10 -z-10"></div>
         <Reveal duration={0.4}>
           <div
             className={"container mx-auto grid grid-cols-12 gap-x-[30px] z-50"}
