@@ -48,7 +48,7 @@ const Index = () => {
               duration={0.3}
               key={get(document, "id")}
               classNames={
-                "lg:col-span-3 md:col-span-6 col-span-12 announce-list-shadow hover:shadow-2xl transition-all duration-300"
+                "xl:col-span-3 md:col-span-6 col-span-12 announce-list-shadow hover:shadow-2xl transition-all duration-300"
               }
             >
               <div>
@@ -59,7 +59,7 @@ const Index = () => {
                     alt={`${get(document, "image")}`}
                     width={330}
                     height={210}
-                    className="w-[330px] h-[210px] rounded-tr-[20px] rounded-bl-[20px]"
+                    className="xl:w-[330px] xl:h-[210px] lg:w-full lg:h-[180px] object-cover object-center md:w-full md:h-[150px] w-full h-[250px] rounded-tr-[20px] rounded-bl-[20px]"
                   />
                   <Link
                     href={get(document, "document_url")}

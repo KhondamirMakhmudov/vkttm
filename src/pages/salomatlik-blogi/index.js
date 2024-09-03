@@ -47,14 +47,18 @@ const Announcement = () => {
   return (
     <Wrapper>
       <section>
-        <div className={"container mx-auto mb-[30px] mt-[50px]"}>
+        <div
+          className={
+            "container mx-auto mb-[30px] mt-[50px]  px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
+          }
+        >
           <Reveal>
             <Title>Sog‘lom bo‘lish uchun</Title>
           </Reveal>
         </div>
         <div
           className={
-            "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px]"
+            "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px]  px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
           }
         >
           <div className={"flex gap-x-[10px]"}>
@@ -276,7 +280,7 @@ const Announcement = () => {
 
           <div
             className={
-              "w-1/2 flex announce-list-shadow pr-[30px] rounded-[10px] "
+              "w-1/2 flex announce-list-shadow pr-[30px] rounded-[10px]  "
             }
           >
             <input
@@ -297,13 +301,15 @@ const Announcement = () => {
 
         <div
           className={
-            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
+            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
           }
         >
           {get(recommends, "data.results", []).map((item) => (
             <div
               key={get(item, "id")}
-              className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}
+              className={`${
+                tab === "card" ? "lg:col-span-6 col-span-12" : "col-span-12"
+              } `}
             >
               <Reveal>
                 <HealthyCard

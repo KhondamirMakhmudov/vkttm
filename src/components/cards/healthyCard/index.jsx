@@ -24,7 +24,9 @@ const HealthyCard = ({
           <div
             className={"flex flex-col justify-between gap-y-[10px] w-[414px]"}
           >
-            <h4 className={"font-mulish text-sm  "}>Sog‘lom bo‘lish uchun</h4>
+            <h4 className={"font-mulish text-sm  text-[#037582]"}>
+              Sog‘lom bo‘lish uchun
+            </h4>
             {/* desc of announcement */}
 
             <p className={"font-medium flex-grow "}>{title}</p>
@@ -76,7 +78,9 @@ const HealthyCard = ({
             alt={"recommendation"}
             width={220}
             height={164}
-            className={"rounded-[10px] "}
+            className={
+              "rounded-[10px] lg:w-[220px] lg:h-[164px] w-[190px] h-[134px]"
+            }
           />
         </div>
       )}
@@ -98,7 +102,7 @@ const HealthyCard = ({
             />
           </div>
 
-          <div>
+          <div className="flex-1">
             <div className={" flex justify-between items-center"}>
               <h4 className={"font-mulish text-sm text-[#037582] "}>
                 Sog‘lom bo‘lish uchun

@@ -47,7 +47,9 @@ const Index = () => {
   return (
     <Wrapper>
       <section>
-        <div className={"container mx-auto mb-[30px] mt-[50px]"}>
+        <div
+          className={"container mx-auto mb-[30px] mt-[50px] px-[20px] md:px-0"}
+        >
           <Reveal duration={0.5}>
             <Title>Barcha yangiliklar</Title>
           </Reveal>
@@ -55,7 +57,7 @@ const Index = () => {
         <Reveal duration={0.6}>
           <div
             className={
-              "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px]"
+              "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px] px-[20px] md:px-0"
             }
           >
             <div className={"flex gap-x-[10px]"}>
@@ -177,13 +179,17 @@ const Index = () => {
         <Reveal duration={0.3}>
           <div
             className={
-              "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
+              "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px] px-[20px] md:px-0"
             }
           >
             {get(news, "data.results", []).map((item, index) => (
               <div
                 key={get(item, "id")}
-                className={`${tab === "card" ? "col-span-4" : "col-span-12"} `}
+                className={`${
+                  tab === "card"
+                    ? "lg:col-span-4 md:col-span-6 col-span-12"
+                    : "col-span-12"
+                } `}
               >
                 <News
                   template={tab === "card" ? "card" : "list"}

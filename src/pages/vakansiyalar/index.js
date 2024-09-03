@@ -31,7 +31,7 @@ const Vacancies = () => {
     <Wrapper>
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto pt-[50px] gap-y-[30px] px-[20px] md:px-0"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto pt-[50px] gap-y-[30px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
         <div className={"col-span-12 mb-[30px]"}>
@@ -41,11 +41,11 @@ const Vacancies = () => {
 
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto pb-[50px]  gap-y-[30px] px-[20px] md:px-0"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto pb-[50px]  gap-y-[30px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
         {isEmpty(get(vacancies, "data.results", [])) ? (
-          <h1 className="text-[32px] col-span-12 font-mulish font-semibold">
+          <h1 className="text-[32px] col-span-12 font-mulish font-semibold px-[20px] md:px-[15px] lg:px-[10px] xl:px-0">
             Hozircha bo‘sh ish o‘rinlari mavjud emas
           </h1>
         ) : (

@@ -39,7 +39,7 @@ const Index = () => {
     <Wrapper>
       <div
         className={
-          "container mx-auto flex italic font-mulish gap-x-[10px] lg:text-sm md:text-xs text-[8px] text-[#494949] mt-[50px] px-[20px] md:px-0"
+          "container mx-auto flex italic font-mulish gap-x-[10px] lg:text-sm md:text-xs text-[8px] text-[#494949] mt-[50px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
         <Link href={"/"}>
@@ -57,10 +57,14 @@ const Index = () => {
 
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium my-[50px] px-[20px] md:px-0"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium my-[50px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
-        <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
+        <h1
+          className={
+            "col-span-12 font-poppins xl:text-[32px] lg:text-[28px] md:text-[25px] text-[22px] mb-[16px]"
+          }
+        >
           {get(announce, "data.announce_title")}
         </h1>
 
@@ -184,7 +188,7 @@ const Index = () => {
                       <Link href={`/salomatlik-blogi/${get(recommend, "id")}`}>
                         <p
                           className={
-                            "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all duration-300"
+                            "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all  line-clamp-3 duration-300"
                           }
                         >
                           {get(recommend, "recommendation_title")}
@@ -275,7 +279,11 @@ const Index = () => {
         </div>
 
         <div className={"col-span-12"}>
-          <h2 className={"text-[24px] font-semibold font-poppins mb-[30px]"}>
+          <h2
+            className={
+              "text-[24px] font-semibold font-poppins mb-[30px] mt-[30px] md:mt-0"
+            }
+          >
             Boshqa e’lonlar
           </h2>
         </div>

@@ -35,7 +35,7 @@ const AnnouncementCard = ({
             <Link href={`/elonlar/${url}`} className="flex-grow  flex-1">
               <p
                 className={
-                  "my-[15px] font-medium hover:text-[#00AFC0] hover:underline font-poppins "
+                  "my-[15px] font-medium hover:text-[#00AFC0] hover:underline font-poppins line-clamp-3"
                 }
               >
                 {title}
@@ -84,7 +84,7 @@ const AnnouncementCard = ({
               alt={"announcement"}
               width={220}
               height={164}
-              className={"rounded-[10px] "}
+              className={"rounded-[10px] w-[220px] h-[164px] object-cover"}
             />
           ) : (
             <Image
@@ -92,7 +92,7 @@ const AnnouncementCard = ({
               alt={"announcement"}
               width={220}
               height={164}
-              className={"rounded-[10px] "}
+              className={"rounded-[10px] w-[220px] h-[164px] object-cover"}
             />
           )}
         </div>
@@ -101,7 +101,7 @@ const AnnouncementCard = ({
       {template === "list" && (
         <div
           className={
-            "flex gap-x-[20px] announce-list-shadow p-[30px] rounded-bl-[30px] hover:shadow-2xl rounded-tr-[30px] transition-all duration-300"
+            "flex  gap-x-[20px] announce-list-shadow p-[30px] rounded-bl-[30px] hover:shadow-2xl rounded-tr-[30px] transition-all duration-300"
           }
         >
           <div className={"min-w-[156px] max-h-[120px]"}>
@@ -125,8 +125,10 @@ const AnnouncementCard = ({
             )}
           </div>
 
-          <div>
-            <div className={" flex justify-between items-center"}>
+          <div className="flex-grow">
+            <div
+              className={" flex-grow flex-1 flex justify-between  items-center"}
+            >
               <h4 className={"font-mulish text-sm text-[#037582] "}>E’lon</h4>
 
               <div className={"text-sm text-[#037582] flex"}>

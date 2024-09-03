@@ -46,7 +46,11 @@ const Announcement = () => {
   return (
     <Wrapper>
       <section>
-        <div className={"container mx-auto mb-[30px] mt-[50px]"}>
+        <div
+          className={
+            "container mx-auto mb-[30px] mt-[50px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
+          }
+        >
           <Reveal duration={0.3}>
             <Title>Barcha e’lonlar</Title>
           </Reveal>
@@ -54,7 +58,7 @@ const Announcement = () => {
         <Reveal duration={0.3}>
           <div
             className={
-              "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px]"
+              "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px] md:px-[15px] lg:px-[10px] xl:px-0"
             }
           >
             <div className={"flex gap-x-[10px]"}>
@@ -176,13 +180,15 @@ const Announcement = () => {
 
         <div
           className={
-            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px]"
+            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px] md:px-[15px] lg:px-[10px] xl:px-0"
           }
         >
           {get(announces, "data.results", []).map((item) => (
             <div
               key={get(item, "id")}
-              className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}
+              className={`${
+                tab === "card" ? "lg:col-span-6 col-span-12" : "col-span-12"
+              } `}
             >
               <Reveal duration={0.3}>
                 <AnnouncementCard

@@ -21,7 +21,7 @@ const News = ({
       {template === "card" && (
         <div
           className={
-            " max-w-[450px]  flex-col max-h-[640px] shadow-lg p-[30px]  rounded-bl-[30px] rounded-tr-[30px]"
+            " xl:max-w-[450px] md:max-w-[400px] flex-col xl:max-h-[640px] shadow-lg p-[30px]  rounded-bl-[30px] rounded-tr-[30px]"
           }
         >
           <Image
@@ -32,7 +32,7 @@ const News = ({
             height={300}
             objectFit={"cover"}
             className={
-              "object-cover w-[390px] h-[300px] rounded-tr-[20px] rounded-bl-[20px] mb-[20px]"
+              "object-cover xl:w-[390px] xl:h-[300px] md:w-[390px] md:h-[300px] w-full rounded-tr-[20px] rounded-bl-[20px] mb-[20px]"
             }
           />
           <div className={"text-sm text-[#037582] flex justify-between"}>
@@ -65,15 +65,15 @@ const News = ({
           <Link href={`/yangiliklar/${parseInt(url)}`}>
             <h2
               className={
-                "font-poppins text-[18px] hover:text-[#00AFC0] hover:underline  text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-300"
+                "font-poppins lg:text-lg md:text-base text-[15px] hover:text-[#00AFC0] hover:underline  text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-300"
               }
             >
               {title}
             </h2>
           </Link>
-          <div className={"mt-[10px] font-mulish text-[#2C3E50] line-clamp-4"}>
+          {/* <div className={"mt-[10px] font-mulish text-[#2C3E50] "}>
             {parse(desc)}
-          </div>
+          </div> */}
           <button
             className={
               "font-poppins font-medium border-b-[2px] border-b-[#00AFC0] hover:border-b-[#00D1E4] mt-[20px] line-clamp-4 transition-all duration-300"
@@ -100,7 +100,7 @@ const News = ({
             />
           </div>
 
-          <div>
+          <div className="flex-grow">
             <div className={" flex justify-between items-center"}>
               <p
                 className={"font-mulish text-sm  text-[#037582] font-semibold"}
@@ -141,20 +141,24 @@ const News = ({
             <Link href={`/yangiliklar/${url}`}>
               <p
                 className={
-                  " font-semibold text-lg hover:text-[#00AFC0] hover:underline font-poppins  my-[10px] flex-1"
+                  " font-semibold lg:text-lg md:text-base text-[15px] hover:text-[#00AFC0] hover:underline font-poppins  my-[10px] flex-1"
                 }
               >
                 {title}
               </p>
             </Link>
 
-            <div className={"font-mulish font-normal text-[#2C3E50] mb-[10px]"}>
+            <div
+              className={
+                "font-mulish font-normal text-[#2C3E50] mb-[10px] lg:line-clamp-2 md:line-clamp-3 hidden md:block"
+              }
+            >
               {parse(desc)}
             </div>
 
             <button
               className={
-                "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
+                "font-poppins font-medium border-b-[2px] lg:text-lg md:text-base text-sm border-b-[#00AFC0]"
               }
             >
               <Link href={`/yangiliklar/${url}`}>Batafsil</Link>
