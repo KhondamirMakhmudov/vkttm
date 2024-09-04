@@ -7,6 +7,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get, times } from "lodash";
 import ContentLoader from "@/components/content-loader";
+import Pagination from "@/components/pagination";
 
 const Index = () => {
   const {
@@ -47,6 +48,10 @@ const Index = () => {
             image={get(photo, "images[0].image.file")}
           />
         ))}
+
+        <div className="col-span-12">
+          <Pagination />
+        </div>
       </div>
     </Wrapper>
   );

@@ -10,6 +10,7 @@ import { get } from "lodash";
 import ContentLoader from "@/components/content-loader";
 import Reveal from "@/components/reveal";
 import Image from "next/image";
+import Pagination from "@/components/pagination";
 
 const Announcement = () => {
   const [tab, setTab] = useState("card");
@@ -204,6 +205,9 @@ const Announcement = () => {
               </Reveal>
             </div>
           ))}
+          <div className="col-span-12">
+            <Pagination />
+          </div>
 
           {/* <div className={`${tab === "card" ? "col-span-6" : "col-span-12"} `}>
             <AnnouncementCard

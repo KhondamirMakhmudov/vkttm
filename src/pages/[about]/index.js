@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Title from "@/components/title";
-import Head from "next/head";
 import Image from "next/image";
 import { get, isNull } from "lodash";
-import Footer from "@/components/footer";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Reveal from "@/components/reveal";
 import { useRouter } from "next/router";
 import Wrapper from "@/layout/wrapper";
 import ManagementCard from "@/components/cards/management";
-import { sectionData } from "@/dummy-datas";
 import PrideOfCenter from "@/components/cards/prideOfCenter";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import parse from "html-react-parser";
 import ContentLoader from "@/components/content-loader";
+import Pagination from "@/components/pagination";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("markaz-tuzilmasi");
@@ -440,6 +438,10 @@ const Index = () => {
                       image={get(veteran, "veteran_image")}
                     />
                   ))}
+                </div>
+
+                <div className="col-span-12">
+                  <Pagination />
                 </div>
               </Reveal>
             </div>

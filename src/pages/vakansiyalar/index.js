@@ -8,6 +8,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get, isEmpty } from "lodash";
 import ContentLoader from "@/components/content-loader";
+import Pagination from "@/components/pagination";
 
 const Vacancies = () => {
   const {
@@ -62,6 +63,9 @@ const Vacancies = () => {
             />
           ))
         )}
+        <div className="col-span-12">
+          <Pagination />
+        </div>
       </div>
     </Wrapper>
   );

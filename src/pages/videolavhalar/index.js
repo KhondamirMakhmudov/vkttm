@@ -7,6 +7,7 @@ import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import VideoGallery from "@/components/cards/videogallery";
 import ContentLoader from "@/components/content-loader";
+import Pagination from "@/components/pagination";
 
 const Index = () => {
   const {
@@ -47,6 +48,9 @@ const Index = () => {
             url={get(video, "id")}
           />
         ))}
+        <div className="col-span-12">
+          <Pagination />
+        </div>
       </div>
     </Wrapper>
   );

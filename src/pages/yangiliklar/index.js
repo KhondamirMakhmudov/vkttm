@@ -10,6 +10,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import ContentLoader from "@/components/content-loader";
+import Pagination from "@/components/pagination";
 
 const Index = () => {
   const [tab, setTab] = useState("card");
@@ -203,6 +204,10 @@ const Index = () => {
                 />
               </div>
             ))}
+
+            <div className="col-span-12">
+              <Pagination />
+            </div>
           </div>
         </Reveal>
       </section>
