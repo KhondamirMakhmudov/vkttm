@@ -62,7 +62,7 @@ const Index = () => {
       >
         <h1
           className={
-            "col-span-12 font-poppins xl:text-[32px] lg:text-[28px] md:text-[25px] text-[22px] mb-[16px]"
+            "col-span-12 font-poppins text-[#2C3E50] xl:text-[32px] lg:text-[28px] md:text-[25px] text-[22px] mb-[16px]"
           }
         >
           {get(announce, "data.announce_title")}
@@ -118,7 +118,7 @@ const Index = () => {
             quality={100}
           />
 
-          <div className={"my-[30px] font-mulish !font-normal "}>
+          <div className={"my-[30px] text-[#2C3E50] font-mulish !font-normal "}>
             {parse(get(announce, "data.announce_desc", ""))}
           </div>
         </div>
