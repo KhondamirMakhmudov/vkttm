@@ -12,7 +12,6 @@ import dayjs from "dayjs";
 import ReactPlayer from "react-player";
 
 const Index = () => {
-  const [selectedVideo, setSelectedVideo] = useState("");
   const router = useRouter();
   const { id } = router.query;
 
@@ -25,6 +24,10 @@ const Index = () => {
     url: `${URLS.video}${id}`,
     enabled: !!id,
   });
+
+  const [selectedVideo, setSelectedVideo] = useState(
+    video?.data?.video_links[0]
+  );
 
   if (isLoading || isFetching) {
     return (
@@ -114,7 +117,7 @@ const Index = () => {
             }
           />
 
-          <div className={"flex gap-x-[20px]"}>
+          <div className={"flex gap-x-[20px] mt-[30px]"}>
             {get(video, "data.video_links").map((item, index) => (
               <div key={index} onClick={() => handleClick(item)}>
                 <ReactPlayer

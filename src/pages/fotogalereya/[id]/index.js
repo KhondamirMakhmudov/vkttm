@@ -26,7 +26,9 @@ const Index = () => {
     enabled: !!id,
   });
 
-  const [selectedImage, setSelectedImage] = useState(images[0]);
+  const [selectedImage, setSelectedImage] = useState(
+    `${photo?.data?.images[0]?.image?.file}`
+  );
 
   const handleClick = (image) => {
     setSelectedImage(image);
@@ -96,6 +98,7 @@ const Index = () => {
         <div className={"col-span-8"}>
           <Image
             src={selectedImage}
+            loader={() => selectedImage}
             alt={`${selectedImage}`}
             width={930}
             height={540}
