@@ -35,7 +35,7 @@ const AnnouncementCard = ({
             <Link href={`/elonlar/${url}`} className="flex-grow  flex-1">
               <p
                 className={
-                  "my-[15px] font-medium hover:text-[#00AFC0] hover:underline font-poppins line-clamp-3"
+                  "my-[15px] text font-medium text-[#2C3E50] hover:text-[#00AFC0] hover:underline font-poppins line-clamp-3"
                 }
               >
                 {title}
@@ -168,14 +168,18 @@ const AnnouncementCard = ({
             </div>
 
             <Link href={`/elonlar/${url}`}>
-              <p className={"my-[20px] font-medium text-lg   flex-1"}>
+              <p
+                className={
+                  "my-[20px] font-medium text-lg text-[#2C3E50]  flex-1"
+                }
+              >
                 {title}
               </p>
             </Link>
 
             <button
               className={
-                "font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"
+                "font-poppins text-[#2C3E50] font-medium border-b-[2px] border-b-[#00AFC0]"
               }
             >
               <Link href={`/elonlar/${url}`}>Batafsil</Link>
