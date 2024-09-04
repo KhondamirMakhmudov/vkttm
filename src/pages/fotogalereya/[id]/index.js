@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Wrapper from "@/layout/wrapper";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import dayjs from "dayjs";
+import ContentLoader from "@/components/content-loader";
 
 const images = [
   "/images/gallery1.png",
@@ -19,16 +20,24 @@ const images = [
 const Index = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [selectedImage, setSelectedImage] = useState("");
 
-  const { data: photo, isLoading } = useGetQuery({
+  const {
+    data: photo,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
     key: [KEYS.photo, id],
     url: `${URLS.photo}${id}`,
     enabled: !!id,
   });
 
-  const [selectedImage, setSelectedImage] = useState(
-    `${photo?.data?.images[0]?.image?.file}`
-  );
+  useEffect(() => {
+    if (photo) {
+      const initialImage = get(photo, "data.images[0].image.file", "");
+      setSelectedImage(initialImage);
+    }
+  }, [photo]);
 
   const handleClick = (image) => {
     setSelectedImage(image);
@@ -96,14 +105,18 @@ const Index = () => {
         </div>
 
         <div className={"col-span-8"}>
-          <Image
-            src={selectedImage}
-            loader={() => selectedImage}
-            alt={`${selectedImage}`}
-            width={930}
-            height={540}
-            className={"mb-[30px] max-h-[540px]"}
-          />
+          {isLoading || isFetching ? (
+            <ContentLoader />
+          ) : (
+            <Image
+              src={selectedImage}
+              loader={() => selectedImage}
+              alt={`${selectedImage}`}
+              width={930}
+              height={540}
+              className={"mb-[30px] max-h-[540px]"}
+            />
+          )}
 
           <div className={"flex gap-x-[20px]"}>
             {get(photo, "data.images", []).map((image) => (

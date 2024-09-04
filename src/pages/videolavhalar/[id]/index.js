@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Wrapper from "@/layout/wrapper";
 import Link from "next/link";
 import Image from "next/image";
@@ -14,6 +14,7 @@ import ReactPlayer from "react-player";
 const Index = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [selectedVideo, setSelectedVideo] = useState("");
 
   const {
     data: video,
@@ -25,9 +26,12 @@ const Index = () => {
     enabled: !!id,
   });
 
-  const [selectedVideo, setSelectedVideo] = useState(
-    video?.data?.video_links[0]
-  );
+  useEffect(() => {
+    if (video) {
+      const initialVideo = get(video, "data.video_links[0]", "");
+      setSelectedVideo(initialVideo);
+    }
+  }, [video]);
 
   if (isLoading || isFetching) {
     return (
@@ -120,21 +124,25 @@ const Index = () => {
           <div className={"flex gap-x-[20px] mt-[30px]"}>
             {get(video, "data.video_links").map((item, index) => (
               <div key={index} onClick={() => handleClick(item)}>
-                <ReactPlayer
-                  url={item}
-                  key={index}
-                  width={200}
-                  height={157}
-                  pip={true}
-                  playIcon={
-                    <Image
-                      src={"/icons/playIcon.svg"}
-                      alt="playIcon"
-                      width={48}
-                      height={48}
-                    />
-                  }
-                />
+                {isLoading || isFetching ? (
+                  <ContentLoader />
+                ) : (
+                  <ReactPlayer
+                    url={item}
+                    key={index}
+                    width={200}
+                    height={157}
+                    pip={true}
+                    playIcon={
+                      <Image
+                        src={"/icons/playIcon.svg"}
+                        alt="playIcon"
+                        width={48}
+                        height={48}
+                      />
+                    }
+                  />
+                )}
               </div>
             ))}
           </div>
