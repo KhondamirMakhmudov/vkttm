@@ -8,7 +8,7 @@ const VideoGallery = ({ views, date, time, title, videoUrl, url }) => {
   const formattedDate = dayjs(date).format("DD.MM.YYYY");
   const formattedTime = dayjs(time).format("HH:mm");
   return (
-    <div className={"lg:col-span-4 md:col-span-6 col-span-12"}>
+    <div className={"xl:col-span-4 md:col-span-6 col-span-12"}>
       <div
         className={
           "text-[#037582] flex justify-between text-sm font-mulish font-semibold"
@@ -41,11 +41,15 @@ const VideoGallery = ({ views, date, time, title, videoUrl, url }) => {
         </div>
       </div>
 
-      <div className={"my-[20px]"}>
+      <div
+        className={
+          "my-[20px] xl:w-[450px] xl:h-[300px] lg:w-full lg:h-[250px] md:w-full md:h-[200px]"
+        }
+      >
         <ReactPlayer
           url={videoUrl}
-          width={450}
-          height={300}
+          width="100%"
+          height="100%"
           playing={false}
           controls={true}
         />

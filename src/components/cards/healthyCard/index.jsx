@@ -79,7 +79,7 @@ const HealthyCard = ({
             width={220}
             height={164}
             className={
-              "rounded-[10px] lg:w-[220px] lg:h-[164px] w-[190px] h-[134px]"
+              "rounded-[10px] lg:w-[220px] lg:h-[164px] md:w-[190px] md:h-[134px] w-[140px] h-full"
             }
           />
         </div>

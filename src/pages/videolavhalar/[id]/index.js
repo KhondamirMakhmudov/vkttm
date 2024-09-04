@@ -48,7 +48,7 @@ const Index = () => {
     <Wrapper>
       <div
         className={
-          "container mx-auto flex italic font-mulish gap-x-[10px] text-[#494949] mt-[50px]"
+          "container mx-auto flex italic lg:text-sm md:text-xs text-[8px] font-mulish gap-x-[10px] text-[#494949] mt-[50px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
         <Link href={"/"}>
@@ -64,16 +64,20 @@ const Index = () => {
 
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium mb-[50px] mt-[30px]"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium mb-[50px] mt-[30px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
-        <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
+        <h1
+          className={
+            "col-span-12 font-poppins xl:text-[32px] lg:text-[28px] md:text-[25px] text-[22px]mb-[16px]"
+          }
+        >
           {get(video, "data.video_title")}
         </h1>
 
         <div
           className={
-            "col-span-12 flex items-center text-[#037582] gap-x-[50px] font-mulish mb-[50px]"
+            "col-span-12 flex items-center lg:text-base md:text-sm text-xs text-[#037582] gap-x-[50px] font-mulish lg:mb-[50px] md:mb-[40px] mb-[20px]"
           }
         >
           <p>Galereya</p>
@@ -107,31 +111,34 @@ const Index = () => {
         </div>
 
         <div className={"col-span-8"}>
-          <ReactPlayer
-            url={selectedVideo}
-            width={930}
-            height={540}
-            playIcon={
-              <Image
-                src={"/icons/playIcon.svg"}
-                alt="playIcon"
-                width={48}
-                height={48}
-              />
-            }
-          />
+          <div className="player-wrapper">
+            <ReactPlayer
+              url={selectedVideo}
+              width={930}
+              height={540}
+              className={"react-player"}
+              playIcon={
+                <Image
+                  src={"/icons/playIcon.svg"}
+                  alt="playIcon"
+                  width={48}
+                  height={48}
+                />
+              }
+            />
+          </div>
 
           <div className={"flex gap-x-[20px] mt-[30px]"}>
             {get(video, "data.video_links").map((item, index) => (
-              <div key={index} onClick={() => handleClick(item)}>
+              <div key={index}>
                 {isLoading || isFetching ? (
                   <ContentLoader />
                 ) : (
                   <ReactPlayer
                     url={item}
                     key={index}
-                    width={200}
-                    height={157}
+                    width={"100%"}
+                    height={"100%"}
                     pip={true}
                     playIcon={
                       <Image
@@ -147,8 +154,8 @@ const Index = () => {
             ))}
           </div>
         </div>
-        <div className={"col-span-4"}>
-          <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
+        <div className={"md:col-span-4 col-span-8"}>
+          <div className={"bg-[#EFF8F9] p-[30px] mb-[30px] md:mt-0 mt-[30px]"}>
             <div className={"flex items-center justify-between"}>
               <h3
                 className={

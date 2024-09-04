@@ -30,7 +30,7 @@ const Index = () => {
     <Wrapper>
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto my-[50px] gap-y-[30px]"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto my-[50px] gap-y-[30px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
         <div className={"col-span-12 "}>

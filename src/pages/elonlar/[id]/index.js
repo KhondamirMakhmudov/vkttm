@@ -70,7 +70,7 @@ const Index = () => {
 
         <div
           className={
-            "col-span-12 flex items-center text-[#037582] gap-x-[50px] font-semibold font-mulish mb-[50px]"
+            "col-span-12 flex items-center lg:text-base md:text-sm text-xs text-[#037582] gap-x-[50px] font-semibold font-mulish lg:mb-[50px] md:mb-[40px] mb-[20px]"
           }
         >
           <p>E’lon</p>
@@ -103,7 +103,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className={"col-span-8"}>
+        <div className={"md:col-span-8 col-span-12"}>
           <Image
             src={
               get(announce, "data.announce_image") || "/images/announce_id.png"
@@ -124,7 +124,7 @@ const Index = () => {
         </div>
 
         <div className={"md:col-span-4 col-span-12"}>
-          <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
+          <div className={"bg-[#EFF8F9] p-[30px] mb-[30px] mt-[30px] md:mt-0"}>
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
@@ -154,7 +154,7 @@ const Index = () => {
               {get(announce, "data.last_recommendations", []).map(
                 (recommend, index) => (
                   <li
-                    key={get(recommend, "id")}
+                    key={index}
                     className={
                       "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                     }
@@ -205,7 +205,7 @@ const Index = () => {
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
-                  "font-poppins font-medium lg:text-[20px] md:text-lg text-base text-[20px] text-[#494949]"
+                  "font-poppins font-medium lg:text-[20px] md:text-lg text-base  text-[#494949]"
                 }
               >
                 Yangiliklar
@@ -228,9 +228,9 @@ const Index = () => {
             </div>
 
             <ul className={"mt-[16px] flex flex-col gap-y-[16px]"}>
-              {get(announce, "data.last_news", []).map((news) => (
+              {get(announce, "data.last_news", []).map((news, index) => (
                 <li
-                  key={get(news, "id")}
+                  key={index}
                   className={
                     "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                   }
@@ -242,7 +242,7 @@ const Index = () => {
                       alt={"img3"}
                       width={170}
                       height={120}
-                      className="rounded-[8px]"
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
                     />
                   ) : (
                     <Image
@@ -287,8 +287,11 @@ const Index = () => {
             Boshqa e’lonlar
           </h2>
         </div>
-        {get(announce, "data.last_announces", []).map((item) => (
-          <div className={"lg:col-span-6 col-span-12"} key={(item, "id")}>
+        {get(announce, "data.last_announces", []).map((item, index) => (
+          <div
+            className={"lg:col-span-6 col-span-12 mt-[30px] md:mt-0"}
+            key={index}
+          >
             <Announcement
               width={"690px"}
               template={"card"}

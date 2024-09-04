@@ -34,7 +34,7 @@ const Index = () => {
 
   useEffect(() => {
     if (photo) {
-      const initialImage = get(photo, "data.images[0].image.file", "");
+      const initialImage = `${get(photo, "data.images[0].image.file", "")}`;
       setSelectedImage(initialImage);
     }
   }, [photo]);
@@ -46,7 +46,7 @@ const Index = () => {
     <Wrapper>
       <div
         className={
-          "container mx-auto flex italic font-mulish gap-x-[10px] text-[#494949] mt-[50px]"
+          "container mx-auto flex italic font-mulish gap-x-[10px] lg:text-sm md:text-xs text-[8px] text-[#494949] mt-[50px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
         <Link href={"/"}>
@@ -62,16 +62,20 @@ const Index = () => {
 
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium mb-[50px] mt-[30px]"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium mb-[50px] mt-[30px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
-        <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
+        <h1
+          className={
+            "col-span-12 font-poppins xl:text-[32px] lg:text-[28px] md:text-[25px] text-[22px] mb-[16px]"
+          }
+        >
           {get(photo, "data.photo_title")}
         </h1>
 
         <div
           className={
-            "col-span-12 flex items-center text-[#037582] gap-x-[50px] font-mulish mb-[50px]"
+            "col-span-12 flex items-center lg:text-base md:text-sm text-xs text-[#037582] gap-x-[50px] font-mulish mb-[50px]"
           }
         >
           <p>Galereya</p>
@@ -104,41 +108,43 @@ const Index = () => {
           </div>
         </div>
 
-        <div className={"col-span-8"}>
+        <div className={"md:col-span-8 col-span-12"}>
           {isLoading || isFetching ? (
             <ContentLoader />
           ) : (
             <Image
-              src={selectedImage}
+              src={`${selectedImage}`}
               loader={() => selectedImage}
               alt={`${selectedImage}`}
               width={930}
               height={540}
-              className={"mb-[30px] max-h-[540px]"}
+              className={"mb-[30px] max-h-[540px] w-[930px] shadow-lg"}
             />
           )}
 
-          <div className={"flex gap-x-[20px]"}>
+          <div className={"flex gap-x-[20px] gap-y-[20px]  flex-wrap"}>
             {get(photo, "data.images", []).map((image) => (
               <Image
                 key={get(image, "image.id")}
-                src={get(image, "image.file")}
+                src={`${get(image, "image.file")}`}
                 loader={() => get(image, "image.file")}
                 alt={`image`}
                 width={200}
                 height={147}
-                className={"cursor-pointer"}
+                className={
+                  "cursor-pointer lg:w-[200px] lg:h-[147px] md:w-[170px] w-[150px] shadow-md"
+                }
                 onClick={() => handleClick(get(image, "image.file"))}
               />
             ))}
           </div>
         </div>
-        <div className={"col-span-4"}>
-          <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
+        <div className={"md:col-span-4 col-span-12"}>
+          <div className={"bg-[#EFF8F9] p-[30px] mb-[30px] mt-[30px] md:mt-0"}>
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
-                  "font-poppins font-medium text-[20px] text-[#494949]"
+                  "font-poppins font-medium lg:text-[20px] md:text-lg text-base text-[#494949]"
                 }
               >
                 Sog‘lom bo‘lish uchun{" "}
@@ -147,7 +153,7 @@ const Index = () => {
               <Link
                 href={"/salomatlik-blogi"}
                 className={
-                  "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                  "lg:text-sm md:text-xs text-[10px] font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
               >
                 Barchasi
@@ -166,7 +172,7 @@ const Index = () => {
                   <li
                     key={get(item, "id")}
                     className={
-                      "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                      "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                     }
                   >
                     <Image
@@ -178,7 +184,7 @@ const Index = () => {
                       alt={"health1"}
                       width={170}
                       height={120}
-                      className="w-[170px] h-[120px]"
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
                     />
 
                     <div>
@@ -194,7 +200,11 @@ const Index = () => {
                         href={`/salomatlik-blogi/${get(item, "id")}`}
                         className="hover:text-[#037582] hover:underline"
                       >
-                        <p className={"font-poppins text-sm font-normal"}>
+                        <p
+                          className={
+                            "font-poppins text-sm font-normal line-clamp-3 hover:text-[#037582] hover:underline"
+                          }
+                        >
                           {get(item, "recommendation_title")}
                         </p>
                       </Link>
@@ -209,7 +219,7 @@ const Index = () => {
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
-                  "font-poppins font-medium text-[20px] text-[#494949]"
+                  "font-poppins font-medium lg:text-[20px] md:text-lg text-base text-[#494949]"
                 }
               >
                 Yangiliklar
@@ -218,7 +228,7 @@ const Index = () => {
               <Link
                 href={"/yangiliklar"}
                 className={
-                  "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                  "lg:text-sm md:text-xs text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
               >
                 Barchasi
@@ -236,7 +246,7 @@ const Index = () => {
                 <li
                   key={get(item, "id")}
                   className={
-                    "bg-white flex gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                    "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                   }
                 >
                   <Image
@@ -257,7 +267,7 @@ const Index = () => {
                     <Link href={`/yangiliklar/${get(item, "id")}`}>
                       <p
                         className={
-                          "font-poppins text-sm font-normal line-clamp-3 hover:text-[#037582] hover:underline"
+                          "font-poppins text-sm font-normal line-clamp-3 hover:text-[#037582] hover:underline transition-all duration-300"
                         }
                       >
                         {get(item, "news_title")}

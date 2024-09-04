@@ -84,7 +84,9 @@ const AnnouncementCard = ({
               alt={"announcement"}
               width={220}
               height={164}
-              className={"rounded-[10px] w-[220px] h-[164px] object-cover"}
+              className={
+                "rounded-[10px] lg:w-[220px] lg:h-[164px] md:w-[190px] md:h-[134px] w-[140px] h-full"
+              }
             />
           ) : (
             <Image
@@ -92,7 +94,9 @@ const AnnouncementCard = ({
               alt={"announcement"}
               width={220}
               height={164}
-              className={"rounded-[10px] w-[220px] h-[164px] object-cover"}
+              className={
+                "rounded-[10px] lg:w-[220px] lg:h-[164px] md:w-[190px] md:h-[134px] w-[140px] h-full"
+              }
             />
           )}
         </div>

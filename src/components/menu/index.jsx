@@ -264,7 +264,7 @@ const Index = ({ active = 0 }) => {
                         !open && (
                           <ul
                             className={
-                              " bg-gray-50   lg:w-[180px] w-[100px] text-start  shadow-xl  rounded-[5px]"
+                              " bg-gray-50  toggle-menu lg:w-[180px] w-[100px] text-start  shadow-xl  rounded-[5px]"
                             }
                           >
                             {get(item, "submenus", []).map((subItem) => (

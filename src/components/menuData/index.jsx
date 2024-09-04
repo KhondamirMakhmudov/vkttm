@@ -157,7 +157,8 @@ const MenuComponent = ({ activeMenu }) => {
   return (
     <div className="relative z-50 flex justify-between container py-[20px]">
       <Brand />
-      <ul className="flex xl:text-base md:text-xs font-poppins font-medium gap-4 bg-white  p-4 rounded-md">
+      {/* desktop version */}
+      <ul className="hidden md:flex  xl:text-base md:text-xs font-poppins font-medium gap-4 bg-white  p-4 rounded-md">
         {isLoading || isFetching
           ? menuData.map((menu) => (
               <li
@@ -262,6 +263,8 @@ const MenuComponent = ({ activeMenu }) => {
               </li>
             ))}
       </ul>
+
+      <ul></ul>
       <div
         className={
           "flex items-center xl:text-base md:text-xs font-poppins font-medium gap-x-[30px]"

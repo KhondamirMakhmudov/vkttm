@@ -59,7 +59,7 @@ const Announcement = () => {
         <Reveal duration={0.3}>
           <div
             className={
-              "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px] md:px-[15px] lg:px-[10px] xl:px-0"
+              "container mx-auto flex justify-between items-center gap-x-[90px] mb-[30px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
             }
           >
             <div className={"flex gap-x-[10px]"}>
@@ -181,7 +181,7 @@ const Announcement = () => {
 
         <div
           className={
-            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px] md:px-[15px] lg:px-[10px] xl:px-0"
+            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto mb-[30px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
           }
         >
           {get(announces, "data.results", []).map((item) => (
