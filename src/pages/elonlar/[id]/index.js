@@ -188,7 +188,7 @@ const Index = () => {
                       <Link href={`/salomatlik-blogi/${get(recommend, "id")}`}>
                         <p
                           className={
-                            "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all  line-clamp-3 duration-300"
+                            "font-poppins text-sm font-normal text-[#2C3E50] hover:text-[#037582] hover:underline transition-all  line-clamp-3 duration-300"
                           }
                         >
                           {get(recommend, "recommendation_title")}
@@ -265,7 +265,7 @@ const Index = () => {
                     <Link href={`/yangiliklar/${get(news, "id")}`}>
                       <p
                         className={
-                          "font-poppins text-sm font-normal line-clamp-3 hover:text-[#037582] hover:underline transition-all duration-300"
+                          "font-poppins text-sm font-normal text-[#2C3E50] line-clamp-3 hover:text-[#037582] hover:underline transition-all duration-300"
                         }
                       >
                         {get(news, "news_title")}
