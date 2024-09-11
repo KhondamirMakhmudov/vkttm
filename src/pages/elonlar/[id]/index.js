@@ -242,7 +242,7 @@ const Index = () => {
                       alt={"img3"}
                       width={170}
                       height={120}
-                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[140px] h-[120px]"
                     />
                   ) : (
                     <Image
@@ -250,6 +250,7 @@ const Index = () => {
                       alt={"img3"}
                       width={170}
                       height={120}
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[140px] h-[120px]"
                     />
                   )}
 

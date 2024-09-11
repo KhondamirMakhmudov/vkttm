@@ -39,7 +39,7 @@ const Index = () => {
     <Wrapper>
       <div
         className={
-          "container mx-auto flex italic font-mulish gap-x-[10px] text-[#494949] mt-[50px]"
+          "container mx-auto flex italic font-mulish gap-x-[10px] lg:text-sm md:text-xs text-[8px] text-[#494949] mt-[50px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
         <Link href={"/"}>
@@ -57,16 +57,20 @@ const Index = () => {
 
       <div
         className={
-          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium my-[50px]"
+          "grid grid-cols-12 gap-x-[30px] container mx-auto font-medium my-[50px] px-[20px] md:px-[15px] lg:px-[10px] xl:px-0"
         }
       >
-        <h1 className={"col-span-12 font-poppins text-[32px] mb-[16px]"}>
+        <h1
+          className={
+            "col-span-12 font-poppins xl:text-[32px] lg:text-[28px] md:text-[25px] text-[22px] mb-[16px]"
+          }
+        >
           {get(newsItem, "data.news_title")}
         </h1>
 
         <div
           className={
-            "col-span-12 flex items-center text-[#037582] gap-x-[50px] font-mulish mb-[50px] font-semibold"
+            "col-span-12 flex items-center lg:text-base md:text-sm text-xs text-[#037582] gap-x-[50px] font-mulish mb-[50px] font-semibold"
           }
         >
           <p>Yangilik</p>
@@ -99,7 +103,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className={"col-span-8"}>
+        <div className={"md:col-span-8 col-span-12"}>
           <RevealLeft>
             {!isNull(get(newsItem, "data.news_image")) ? (
               <Image
@@ -120,19 +124,19 @@ const Index = () => {
               />
             )}
 
-            <div className="!font-medium font-mulish my-[30px]">
+            <div className="!font-medium font-mulish my-[30px] text-[#494949]">
               {parse(get(newsItem, "data.news_desc", ""))}
             </div>
           </RevealLeft>
         </div>
 
-        <div className={"col-span-4"}>
+        <div className={"md:col-span-4 col-span-12"}>
           <RevealRight duration={0.3}>
             <div className={"bg-[#EFF8F9] p-[30px] mb-[30px]"}>
               <div className={"flex items-center justify-between"}>
                 <h3
                   className={
-                    "font-poppins font-medium text-[20px] text-[#494949]"
+                    "font-poppins font-medium lg:text-[20px] md:text-lg text-base text-[#494949]"
                   }
                 >
                   Sog‘lom bo‘lish uchun{" "}
@@ -141,7 +145,7 @@ const Index = () => {
                 <Link
                   href={"/salomatlik-blogi"}
                   className={
-                    "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                    "lg:text-sm md:text-xs text-[10px] font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                   }
                 >
                   Barchasi
@@ -160,7 +164,7 @@ const Index = () => {
                     <li
                       key={get(recommend, "id")}
                       className={
-                        "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                        "bg-white flex flex-row md:flex-col xl:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                       }
                     >
                       <Image
@@ -175,7 +179,7 @@ const Index = () => {
                         alt={"health1"}
                         width={170}
                         height={120}
-                        className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
+                        className="lg:w-[170px] lg:h-[120px] md:w-full w-[140px] h-[120px]"
                       />
 
                       <div>
@@ -194,7 +198,7 @@ const Index = () => {
                         >
                           <p
                             className={
-                              "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all duration-300"
+                              "font-poppins lg:text-sm md:text-xs text-[10px] text-[#494949] font-normal hover:text-[#037582] hover:underline transition-all duration-300"
                             }
                           >
                             {get(recommend, "recommendation_title")}
@@ -213,7 +217,7 @@ const Index = () => {
               <div className={"flex items-center justify-between"}>
                 <h3
                   className={
-                    "font-poppins font-medium text-[20px] text-[#494949]"
+                    "font-poppins font-medium lg:text-[20px] md:text-lg text-base  text-[#494949]"
                   }
                 >
                   E’lonlar
@@ -222,7 +226,7 @@ const Index = () => {
                 <Link
                   href={"/elonlar"}
                   className={
-                    "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                    "lg:text-sm md:text-xs text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                   }
                 >
                   Barchasi
@@ -250,7 +254,7 @@ const Index = () => {
                         alt={"img3"}
                         width={170}
                         height={120}
-                        className="w-[170px] h-[120px]"
+                        className="lg:w-[170px] lg:h-[120px] md:w-full w-[140px] h-[120px]"
                       />
                     ) : (
                       <Image
@@ -258,7 +262,7 @@ const Index = () => {
                         alt={"img3"}
                         width={170}
                         height={120}
-                        className="w-[170px] h-[120px]"
+                        className="lg:w-[170px] lg:h-[120px] md:w-full w-[140px] h-[120px]"
                       />
                     )}
 
@@ -273,11 +277,11 @@ const Index = () => {
 
                       <Link
                         href={`/elonlar/${get(announce, "id")}`}
-                        className="hover:text-[#037582] hover:underline transition-all duration-300"
+                        className="hover:text-[#037582] text-[#49494] hover:underline transition-all duration-300"
                       >
                         <p
                           className={
-                            "font-poppins text-sm font-normal line-clamp-4"
+                            "font-poppins lg:text-sm md:text-xs text-[10px] font-normal line-clamp-4"
                           }
                         >
                           {get(announce, "announce_title")}
@@ -293,13 +297,20 @@ const Index = () => {
 
         <div className={"col-span-12"}>
           <Reveal duration={0.3}>
-            <h2 className={"text-[24px] font-semibold font-poppins mb-[30px]"}>
+            <h2
+              className={
+                "lg:text-[24px] md:text-[20px] text-lg text-[#494949] font-semibold font-poppins mb-[30px] mt-[30px] "
+              }
+            >
               Boshqa yangiliklar
             </h2>
           </Reveal>
         </div>
         {get(newsItem, "data.last_news", []).map((news) => (
-          <div key={get(news, "id")} className={`col-span-4 `}>
+          <div
+            key={get(news, "id")}
+            className={`lg:col-span-4 md:col-span-6 col-span-12 `}
+          >
             <Reveal duration={0.3}>
               <div
                 className={
@@ -313,14 +324,18 @@ const Index = () => {
                     width={390}
                     height={300}
                     objectFit={"cover"}
-                    className={"object-cover  mb-[20px]"}
+                    className={
+                      "object-cover lg:w-[390px] lg:h-[300px] md:w-[350px] md:h-[300px] w-[300px] h-[200px] mb-[20px]"
+                    }
                   />
                 </Reveal>
                 <Reveal duration={0.35}>
                   <div
-                    className={"text-sm text-[#037582] flex justify-between"}
+                    className={
+                      "lg:text-sm md:text-xs text-[10px] text-[#037582] flex justify-between"
+                    }
                   >
-                    <p className={"font-mulish text-sm  "}>Yangilik</p>
+                    <p className={"font-mulish  "}>Yangilik</p>
                     <div className={"flex gap-x-[10px]"}>
                       {/*how many times was seen*/}
                       <div className={"flex gap-x-[4px]"}>
@@ -329,10 +344,11 @@ const Index = () => {
                           alt={"watch"}
                           width={18}
                           height={18}
+                          className="lg:w-[18px] lg:h-[18px] md:w-[15px] md:h-[15px] w-[12px] h-[12px]"
                         />
                         <p>{get(news, "views_count")}</p>
                       </div>
-                      <p className={"font-mulish text-sm  "}>
+                      <p className={"font-mulish  "}>
                         {dayjs(get(news, "date_time")).format("DD.MM.YYYY")}
                       </p>
                       {/*when it is deployed*/}
@@ -342,6 +358,7 @@ const Index = () => {
                           alt={"watch"}
                           width={18}
                           height={18}
+                          className="lg:w-[18px] lg:h-[18px] md:w-[15px] md:h-[15px] w-[12px] h-[12px]"
                         />
                         <p>{dayjs(get(news, "date_time")).format("HH:mm")}</p>
                       </div>
@@ -353,7 +370,7 @@ const Index = () => {
                   <Link href={`/yangiliklar/${get(news, "id")}`}>
                     <h2
                       className={
-                        "font-poppins text-[18px] hover:text-[#00AFC0] text-[#2C3E50] font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-200"
+                        "font-poppins lg:text-[18px] md:text-base  text-sm text-[#2C3E50] hover:text-[#00AFC0]  font-semibold mt-[20px] flex-1 line-clamp-2 transition-all duration-200"
                       }
                     >
                       {get(news, "news_title")}

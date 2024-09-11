@@ -40,9 +40,9 @@ const Footer = () => {
               qiladi.
             </p>
 
-            <div className={"flex gap-x-[15px]"}>
+            <div className={"flex flex-wrap gap-x-[15px]"}>
               <p>Bizning ijtimoiy tarmoqlarimiz:</p>
-              <ul className={"flex gap-x-[10px]"}>
+              <ul className={"flex flex-wrap gap-x-[10px]"}>
                 <li>
                   <Link href={"#"} className={"cursor-pointer"}>
                     <svg

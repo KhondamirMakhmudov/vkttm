@@ -69,7 +69,7 @@ const Index = () => {
       >
         <h1
           className={
-            "col-span-12 font-poppins xl:text-[32px] lg:text-[28px] md:text-[25px] text-[22px]mb-[16px]"
+            "col-span-12 text-[#494949] font-poppins xl:text-[32px] lg:text-[28px] md:text-[25px] text-[22px] mb-[16px]"
           }
         >
           {get(video, "data.video_title")}
@@ -110,7 +110,7 @@ const Index = () => {
           </div>
         </div>
 
-        <div className={"col-span-8"}>
+        <div className={"md:col-span-8 col-span-12"}>
           <div className="player-wrapper">
             <ReactPlayer
               url={selectedVideo}
@@ -154,12 +154,12 @@ const Index = () => {
             ))}
           </div>
         </div>
-        <div className={"md:col-span-4 col-span-8"}>
+        <div className={"md:col-span-4 col-span-12"}>
           <div className={"bg-[#EFF8F9] p-[30px] mb-[30px] md:mt-0 mt-[30px]"}>
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
-                  "font-poppins font-medium text-[20px] text-[#494949]"
+                  "font-poppins font-medium lg:text-[20px] md:text-lg text-base text-[#494949]"
                 }
               >
                 Sog‘lom bo‘lish uchun{" "}
@@ -168,7 +168,7 @@ const Index = () => {
               <Link
                 href={"/salomatlik-blogi"}
                 className={
-                  "text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                  "lg:text-sm md:text-xs text-[10px] text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
               >
                 Barchasi
@@ -187,7 +187,7 @@ const Index = () => {
                   <li
                     key={get(recommend, "id")}
                     className={
-                      "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                      "bg-white flex flex-col md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                     }
                   >
                     <Image
@@ -202,7 +202,7 @@ const Index = () => {
                       alt={"health1"}
                       width={170}
                       height={120}
-                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-full object-cover rounded-[8px] h-[120px]"
                     />
 
                     <div>
@@ -219,7 +219,7 @@ const Index = () => {
                       <Link href={`/salomatlik-blogi/${get(recommend, "id")}`}>
                         <p
                           className={
-                            "font-poppins text-sm font-normal hover:text-[#037582] hover:underline transition-all duration-300"
+                            "font-poppins text-sm text-[#2C3E50] font-normal hover:text-[#037582] hover:underline transition-all duration-300 line-clamp-3"
                           }
                         >
                           {get(recommend, "recommendation_title")}
@@ -263,7 +263,7 @@ const Index = () => {
                 <li
                   key={get(news, "id")}
                   className={
-                    "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                    "bg-white flex flex-col md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                   }
                 >
                   {!isNull(get(news, "news_image")) ? (
@@ -273,7 +273,7 @@ const Index = () => {
                       alt={"img3"}
                       width={170}
                       height={120}
-                      className="rounded-[8px]"
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-full h-[120px] object-cover rounded-[8px]"
                     />
                   ) : (
                     <Image
@@ -281,6 +281,7 @@ const Index = () => {
                       alt={"img3"}
                       width={170}
                       height={120}
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[140px] h-[120px]"
                     />
                   )}
 

@@ -75,7 +75,7 @@ const Index = () => {
 
         <div
           className={
-            "col-span-12 flex items-center lg:text-base md:text-sm text-xs text-[#037582] gap-x-[50px] font-mulish mb-[50px]"
+            "col-span-12 flex items-center lg:text-base md:text-sm text-xs text-[#037582] gap-x-[50px] font-mulish lg:mb-[50px] md:mb-[40px] mb-[20px]"
           }
         >
           <p>Galereya</p>
@@ -140,7 +140,11 @@ const Index = () => {
           </div>
         </div>
         <div className={"md:col-span-4 col-span-12"}>
-          <div className={"bg-[#EFF8F9] p-[30px] mb-[30px] mt-[30px] md:mt-0"}>
+          <div
+            className={
+              "bg-[#EFF8F9] lg:p-[30px] md:p-[20px] p-[10px] mb-[30px] mt-[30px] md:mt-0"
+            }
+          >
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
@@ -172,7 +176,7 @@ const Index = () => {
                   <li
                     key={get(item, "id")}
                     className={
-                      "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                      "bg-white flex flex-col md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                     }
                   >
                     <Image
@@ -184,7 +188,7 @@ const Index = () => {
                       alt={"health1"}
                       width={170}
                       height={120}
-                      className="lg:w-[170px] lg:h-[120px] md:w-full w-[170px] h-[120px]"
+                      className="lg:w-[170px] lg:h-[120px] md:w-full w-full object-cover rounded-[8px] h-[120px]"
                     />
 
                     <div>
@@ -215,7 +219,7 @@ const Index = () => {
             </ul>
           </div>
 
-          <div className={"bg-[#EFF8F9] p-[30px]"}>
+          <div className={"bg-[#EFF8F9] lg:p-[30px] md:p-[20px] p-[10px]"}>
             <div className={"flex items-center justify-between"}>
               <h3
                 className={
@@ -228,7 +232,7 @@ const Index = () => {
               <Link
                 href={"/yangiliklar"}
                 className={
-                  "lg:text-sm md:text-xs text-sm font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
+                  "lg:text-sm md:text-xs text-[10px] font-poppins text-[#037582] font-normal flex hover:translate-x-[2px] transition-all duration-300"
                 }
               >
                 Barchasi
@@ -246,7 +250,7 @@ const Index = () => {
                 <li
                   key={get(item, "id")}
                   className={
-                    "bg-white flex flex-row md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
+                    "bg-white flex flex-col md:flex-col lg:flex-row gap-x-[10px] items-start rounded-[10px] p-[10px]"
                   }
                 >
                   <Image
@@ -254,6 +258,7 @@ const Index = () => {
                     alt={"img3"}
                     width={170}
                     height={120}
+                    className="lg:w-[170px] lg:h-[120px] md:w-full w-full object-cover rounded-[8px] h-[120px]"
                   />
 
                   <div>
