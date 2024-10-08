@@ -105,7 +105,7 @@ export default function Home() {
                 {get(item, "banner_desc")}
               </motion.p>
               <Link
-                href={"/about"}
+                href={"/markaz-tuzilmasi"}
                 className={
                   "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] md:px-[55px] px-[40px] rounded-br-[10px] rounded-tl-[10px] text-white md:text-base text-sm transition-all duration-300"
                 }
@@ -903,7 +903,7 @@ export default function Home() {
               <Link href={get(item, "link")} className="">
                 <div
                   className={
-                    "col-span-4 flex items-start gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px] flex-grow flex-1"
+                    "col-span-4 flex items-center gap-x-[24px] p-[18px] bg-[#EFF8F9] rounded-[20px] flex-grow flex-1"
                   }
                 >
                   <Image

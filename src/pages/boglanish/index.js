@@ -286,6 +286,101 @@ const Index = () => {
                       </svg>
                     </Link>
                   </li>
+
+                  <li>
+                    <Link
+                      href={`${get(basicInfos, "data.company_youtube")}`}
+                      className={"cursor-pointer"}
+                    >
+                      <svg
+                        width="25"
+                        height="24"
+                        viewBox="0 0 36 36"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g clip-path="url(#clip0_850_242)">
+                          <path
+                            d="M3 12C3 10.4087 3.63214 8.88258 4.75736 7.75736C5.88258 6.63214 7.4087 6 9 6H27C28.5913 6 30.1174 6.63214 31.2426 7.75736C32.3679 8.88258 33 10.4087 33 12V24C33 25.5913 32.3679 27.1174 31.2426 28.2426C30.1174 29.3679 28.5913 30 27 30H9C7.4087 30 5.88258 29.3679 4.75736 28.2426C3.63214 27.1174 3 25.5913 3 24V12Z"
+                            stroke="#00AFC0"
+                            stroke-width="2.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M15 13.5L22.5 18L15 22.5V13.5Z"
+                            stroke="#00AFC0"
+                            stroke-width="2.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_850_242">
+                            <rect width="36" height="36" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link
+                      href={`${get(basicInfos, "data.company_linkedin")}`}
+                      className={"cursor-pointer"}
+                    >
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 36 36"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g clip-path="url(#clip0_850_247)">
+                          <path
+                            d="M6 9C6 8.20435 6.31607 7.44129 6.87868 6.87868C7.44129 6.31607 8.20435 6 9 6H27C27.7956 6 28.5587 6.31607 29.1213 6.87868C29.6839 7.44129 30 8.20435 30 9V27C30 27.7956 29.6839 28.5587 29.1213 29.1213C28.5587 29.6839 27.7956 30 27 30H9C8.20435 30 7.44129 29.6839 6.87868 29.1213C6.31607 28.5587 6 27.7956 6 27V9Z"
+                            stroke="#00AFC0"
+                            stroke-width="2.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M12 16.5V24"
+                            stroke="#00AFC0"
+                            stroke-width="2.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M12 12V12.015"
+                            stroke="#00AFC0"
+                            stroke-width="2.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M18 24V16.5"
+                            stroke="#00AFC0"
+                            stroke-width="2.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M24 24V19.5C24 18.7044 23.6839 17.9413 23.1213 17.3787C22.5587 16.8161 21.7956 16.5 21 16.5C20.2044 16.5 19.4413 16.8161 18.8787 17.3787C18.3161 17.9413 18 18.7044 18 19.5"
+                            stroke="#00AFC0"
+                            stroke-width="2.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_850_247">
+                            <rect width="36" height="36" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>

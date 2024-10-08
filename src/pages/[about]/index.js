@@ -213,10 +213,8 @@ const Index = () => {
 
               <Reveal duration={0.5}>
                 <Image
-                  src={`${get(structureOfCenter, "data.structure_image", "")}`}
-                  loader={() =>
-                    get(structureOfCenter, "data.structure_image", "")
-                  }
+                  src={`${get(structureOfCenter, "data.structure_image")}`}
+                  loader={() => get(structureOfCenter, "data.structure_image")}
                   alt={"structure-center"}
                   width={1050}
                   height={645}

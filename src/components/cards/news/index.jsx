@@ -71,9 +71,9 @@ const News = ({
               {title}
             </h2>
           </Link>
-          {/* <div className={"mt-[10px] font-mulish text-[#2C3E50] "}>
+          <div className={"mt-[10px] font-mulish text-[#2C3E50] line-clamp-4"}>
             {parse(desc)}
-          </div> */}
+          </div>
           <button
             className={
               "font-poppins font-medium border-b-[2px] border-b-[#00AFC0] hover:border-b-[#00D1E4] mt-[20px] line-clamp-4 transition-all duration-300"

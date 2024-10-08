@@ -11,7 +11,7 @@ const RevealRight = ({ children, className, classNameTop, duration }) => {
     if (isInView) {
       mainControls.start("visible");
     }
-  }, [isInView]);
+  }, [isInView, mainControls]);
 
   return (
     <div className={classNameTop} ref={ref}>

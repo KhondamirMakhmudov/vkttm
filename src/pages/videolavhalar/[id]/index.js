@@ -297,7 +297,7 @@ const Index = () => {
                     <Link href={`/yangiliklar/${get(news, "id")}`}>
                       <p
                         className={
-                          "font-poppins text-sm font-normal line-clamp-3 hover:text-[#037582] hover:underline transition-all duration-300"
+                          "font-poppins text-sm font-normal text-[#494949] line-clamp-3 hover:text-[#037582] hover:underline transition-all duration-300"
                         }
                       >
                         {get(news, "news_title")}

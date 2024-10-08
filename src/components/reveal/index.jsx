@@ -11,7 +11,7 @@ const Reveal = ({ duration = 0.4, children, className, classNames }) => {
     if (isInView) {
       mainControls.start("visible");
     }
-  }, [isInView]);
+  }, [isInView, mainControls]);
 
   return (
     <div ref={ref} className={classNames}>
