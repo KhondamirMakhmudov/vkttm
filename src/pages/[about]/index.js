@@ -534,3 +534,46 @@ const Index = () => {
 };
 
 export default Index;
+
+export async function getStaticPaths() {
+  // Fetch all possible slugs (like departments, structure, etc.)
+  const paths = [
+    { params: { about: "markaz-tuzilmasi" } },
+    { params: { about: "rahbariyat" } },
+    { params: { about: "bolimlar" } },
+    { params: { about: "lavozim-majburiyatlari" } },
+    { params: { about: "markaz-nizomi" } },
+    { params: { about: "markaz-faxri" } },
+    { params: { about: "odob-axloq-qoidalari" } },
+
+    { params: { about: "kasaba-uyushmasi" } },
+    // Add other valid paths
+  ];
+
+  return {
+    paths,
+    fallback: "blocking", // or 'false' if you want to show 404 immediately
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const { about } = params;
+
+  // Check if the `about` parameter is valid
+  const validPages = [
+    "markaz-tuzilmasi",
+    "rahbariyat",
+    "bolimlar",
+    "lavozim-majburiyatlari",
+    "markaz-nizomi",
+    "markaz-faxri",
+    "odob-axloq-qoidalari",
+    "kasaba-uyushmasi",
+  ]; // Add all valid pages here
+
+  if (!validPages.includes(about)) {
+    return {
+      notFound: true,
+    };
+  }
+}
