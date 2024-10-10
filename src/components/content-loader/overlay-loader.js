@@ -13,7 +13,9 @@ const OverlayLoader = () => {
         transition={{ repeat: Infinity, repeatDelay: 0.15 }}
         animate={{
           scale: [1, 1.2, 1.4, 1.2, 1],
+          translateX: ["100px", "50px", "100px", "50px"],
         }}
+        className="flex items-center gap-x-[6px]"
       >
         <Image
           width={125}
@@ -21,6 +23,9 @@ const OverlayLoader = () => {
           src={"/images/brand.png"}
           alt={"loader"}
         />
+        <h2 className="font-semibold font-poppins text-lg max-w-[220px] uppercase">
+          Samarqand Viloyati Ko&apos;p tarmoqli tibbiyot markazi
+        </h2>
       </motion.div>
     </div>
   );
