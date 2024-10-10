@@ -38,9 +38,9 @@ export default function Home() {
 
   if (isLoadingMainPage || isFetchingMainPage) {
     return (
-      <Wrapper>
+      <>
         <ContentLoader />
-      </Wrapper>
+      </>
     );
   }
 
