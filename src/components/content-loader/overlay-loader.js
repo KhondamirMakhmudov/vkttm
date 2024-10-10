@@ -10,16 +10,15 @@ const OverlayLoader = () => {
       }
     >
       <motion.div
-        transition={{ repeat: Infinity, repeatDelay: 0.25 }}
+        transition={{ repeat: Infinity, repeatDelay: 0.15 }}
         animate={{
-          scale: [1, 1, 1, 1, 1],
-          rotate: [0, 0, 270, 270, 0],
+          scale: [1, 1.2, 1.4, 1.2, 1],
         }}
       >
         <Image
           width={125}
           height={125}
-          src={"/images/loader.png"}
+          src={"/images/brand.png"}
           alt={"loader"}
         />
       </motion.div>
