@@ -25,6 +25,7 @@ import { get, isNull } from "lodash";
 import dayjs from "dayjs";
 import ContentLoader from "@/components/content-loader";
 import Wrapper from "@/layout/wrapper";
+import OverlayLoader from "@/components/content-loader/overlay-loader";
 
 export default function Home() {
   const {
@@ -39,7 +40,7 @@ export default function Home() {
   if (isLoadingMainPage || isFetchingMainPage) {
     return (
       <>
-        <ContentLoader />
+        <OverlayLoader />
       </>
     );
   }
