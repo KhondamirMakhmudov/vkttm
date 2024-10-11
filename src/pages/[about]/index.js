@@ -575,4 +575,10 @@ export async function getStaticProps({ params }) {
       notFound: true,
     };
   }
+
+  return {
+    props: {
+      data: {},
+    },
+  };
 }
