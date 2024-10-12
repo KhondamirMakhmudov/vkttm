@@ -1,55 +1,66 @@
 import React, { useState } from "react";
+import { Image } from "next/image";
+import { useTranslation } from "react-i18next";
+import { useSettingsStore } from "@/store";
+import { get } from "lodash";
+import { useEffect } from "react";
 
 const LanguageSelectButton = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("o'zbek");
+  const [selectedOption, setSelectedOption] = useState("o'zbek");
   const [isOpen, setIsOpen] = useState(false);
+  const setLang = useSettingsStore((state) => get(state, "setLang", () => {}));
+  const { t, i18n } = useTranslation();
 
-  const handleChange = (event) => {
-    setSelectedLanguage(event.target.value);
+  const toggleDropdown = () => setIsOpen(!isOpen);
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
     setIsOpen(false);
+    i18n.changeLanguage(option);
   };
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+  const options = ["o'zbek", "ingliz", "rus"];
 
   return (
-    <div className="relative inline-block text-left text-lg font-bold">
-      <div>
-        <button
-          type="button"
-          onClick={toggleDropdown}
-          className="inline-flex  font-bold justify-between items-center w-full rounded-md  px-4 py-2 bg-transparent  text-[#2C3E50]  focus:outline-none "
+    <div className="relative">
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={toggleDropdown}
+      >
+        <span
+          className={` text-sm font-medium ${
+            selectedOption ? "text-black" : "text-gray-400"
+          }`}
         >
-          {selectedLanguage}
-          <svg
-            className={`ml-2 -mr-1 h-5 w-5 transform transition-transform ${
-              isOpen ? "rotate-180" : "rotate-0"
-            }`}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </button>
+          {selectedOption}
+        </span>
+        <svg
+          className={`h-5 w-5  transition-transform duration-all ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fillRule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clipRule="evenodd"
+          />
+        </svg>
       </div>
+
       {isOpen && (
-        <select
-          value={selectedLanguage}
-          onChange={handleChange}
-          className="absolute w-full mt-2 text-lg font-bold rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-          size={3}
-        >
-          <option value="rus">rus</option>
-          <option value="ingliz">ingliz</option>
-          <option value="o'zbek">o&apos;zbek</option>
-        </select>
+        <div className="absolute   w-[80px] bg-white border border-gray-300 rounded-lg shadow-lg z-50">
+          {options.map((option) => (
+            <div
+              key={option}
+              className="px-[4px] py-[2px] hover:bg-gray-100 cursor-pointer"
+              onClick={() => handleOptionClick(option)}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

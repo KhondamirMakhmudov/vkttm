@@ -26,8 +26,10 @@ import dayjs from "dayjs";
 import ContentLoader from "@/components/content-loader";
 import Wrapper from "@/layout/wrapper";
 import OverlayLoader from "@/components/content-loader/overlay-loader";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
   const {
     data: mainInformations,
     isLoading: isLoadingMainPage,
@@ -116,7 +118,7 @@ export default function Home() {
                   animate={{ opacity: 100, translateX: "0px" }}
                   transition={{ duration: 0.4 }}
                 >
-                  Batafsil
+                  {t("Batafsil")}
                 </motion.button>
               </Link>
             </div>

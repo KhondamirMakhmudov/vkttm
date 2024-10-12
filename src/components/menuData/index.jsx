@@ -42,7 +42,7 @@ const menuData = [
       {
         id: 6,
         title: "Markaz faxriylari",
-        url: "/markaz-faxriylari",
+        url: "/markaz-faxri",
       },
       {
         id: 7,
@@ -155,7 +155,7 @@ const MenuComponent = ({ activeMenu }) => {
   };
 
   return (
-    <div className="relative z-50 flex justify-between container py-[20px]">
+    <div className="relative  flex justify-between container py-[20px]">
       <Brand />
       {/* desktop version */}
       <ul className="hidden md:flex  xl:text-base md:text-xs font-poppins font-medium gap-4 bg-white  p-4 rounded-md">
@@ -264,7 +264,6 @@ const MenuComponent = ({ activeMenu }) => {
             ))}
       </ul>
 
-      <ul></ul>
       <div
         className={
           "flex items-center xl:text-base md:text-xs font-poppins font-medium gap-x-[30px]"
@@ -272,7 +271,7 @@ const MenuComponent = ({ activeMenu }) => {
       >
         <Link href={"#"}>Qabulga yozilish</Link>
 
-        <Link href={"#"} className={"flex items-center "}>
+        <Link href={"/auth/login"} className={"flex items-center "}>
           <Image
             src={"/images/login.png"}
             alt={"login"}
@@ -282,12 +281,14 @@ const MenuComponent = ({ activeMenu }) => {
           <p>Kirish</p>
         </Link>
 
-        <Image
-          src={"/images/search.png"}
-          alt={"search"}
-          width={24}
-          height={24}
-        />
+        <button>
+          <Image
+            src={"/images/search.png"}
+            alt={"search"}
+            width={24}
+            height={24}
+          />
+        </button>
       </div>
     </div>
   );
