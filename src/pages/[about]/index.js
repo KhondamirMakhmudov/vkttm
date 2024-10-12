@@ -19,6 +19,10 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("markaz-tuzilmasi");
   const [accordion, setAccordion] = useState(1);
   const [isOpen, setIsOpen] = useState("");
+
+  ///// mobile version /////
+  const [openSidebar, setOpenSidebar] = useState(false);
+
   const router = useRouter();
   const { about } = router.query;
   const {
@@ -75,6 +79,7 @@ const Index = () => {
 
   const handleTabClick = (tab) => {
     router.push(`/${tab}`);
+    setOpenSidebar(false);
   };
 
   useEffect(() => {
@@ -82,6 +87,10 @@ const Index = () => {
       setActiveTab(about);
     }
   }, [about]);
+
+  const handleOpenSidebar = () => {
+    setOpenSidebar(!openSidebar);
+  };
 
   const selectAccordion = (item) => {
     setAccordion(item);
@@ -205,6 +214,149 @@ const Index = () => {
             </ul>
           </motion.div>
           {/* //// mobile version //// */}
+
+          <motion.div
+            initial={{ opacity: 0, translateX: "-100px" }}
+            animate={{ opacity: 100, translateX: "0px" }}
+            transition={{ duration: 0.5 }}
+            className="col-span-12 relative block md:hidden "
+          >
+            <div className="px-[20px] md:px-0">
+              <button onClick={handleOpenSidebar}>
+                <Image
+                  src={"/icons/sidebar.png"}
+                  alt="sidebar"
+                  width={55}
+                  height={40}
+                  className="bg-[#00AFC0] p-2 rounded-lg mb-[50px] "
+                />
+              </button>
+            </div>
+
+            {openSidebar && (
+              <div className="absolute top-0 h-screen bg-[#00AFC0] rounded-tr-2xl rounded-br-2xl shadow-xl">
+                <button
+                  onClick={() => setOpenSidebar(false)}
+                  className="float-right mr-[20px] mt-[20px]"
+                >
+                  <Image
+                    src={"/icons/close.svg"}
+                    alt="sidebar"
+                    width={20}
+                    height={20}
+                    className="float-right"
+                  />
+                </button>
+                <motion.ul
+                  initial={{ opacity: 0, translateX: "-100px" }}
+                  animate={{ opacity: 100, translateX: "0px" }}
+                  transition={{ duration: 0.5 }}
+                  exit={{ opacity: 0, translateX: "-100px" }}
+                  className={`flex  flex-col gap-y-[10px] py-[50px]  text-base text-[#494949]`}
+                >
+                  <li
+                    className={`cursor-pointer rounded-tr-lg rounded-br-lg py-[8px] px-[6px] ${
+                      activeTab === "markaz-tuzilmasi"
+                        ? "text-white bg-[#00D6EA]"
+                        : "text-white"
+                    }`}
+                  >
+                    <button onClick={() => handleTabClick("markaz-tuzilmasi")}>
+                      Markaz tuzilmasi
+                    </button>
+                  </li>
+
+                  <li
+                    className={`cursor-pointer rounded-tr-lg rounded-br-lg py-[8px] px-[6px] ${
+                      activeTab === "rahbariyat"
+                        ? "text-white bg-[#00D6EA]"
+                        : "text-white"
+                    }`}
+                  >
+                    <button onClick={() => handleTabClick("rahbariyat")}>
+                      Rahbariyat
+                    </button>
+                  </li>
+
+                  <li
+                    className={`cursor-pointer rounded-tr-lg rounded-br-lg py-[8px] px-[6px] ${
+                      activeTab === "bolimlar"
+                        ? "text-white bg-[#00D6EA]"
+                        : "text-white"
+                    }`}
+                  >
+                    <button onClick={() => handleTabClick("bolimlar")}>
+                      Bo‘limlar
+                    </button>
+                  </li>
+
+                  <li
+                    className={`cursor-pointer rounded-tr-lg rounded-br-lg py-[8px] px-[6px] ${
+                      activeTab === "lavozim-majburiyatlari"
+                        ? "text-white bg-[#00D6EA]"
+                        : "text-white"
+                    }`}
+                  >
+                    <button
+                      onClick={() => handleTabClick("lavozim-majburiyatlari")}
+                    >
+                      Lavozim majburiyatlari
+                    </button>
+                  </li>
+
+                  <li
+                    className={`cursor-pointer rounded-tr-lg rounded-br-lg py-[8px] px-[6px] ${
+                      activeTab === "markaz-nizomi"
+                        ? "text-white bg-[#00D6EA]"
+                        : "text-white"
+                    }`}
+                  >
+                    <button onClick={() => handleTabClick("markaz-nizomi")}>
+                      Markaz nizomi
+                    </button>
+                  </li>
+
+                  <li
+                    className={`cursor-pointer rounded-tr-lg rounded-br-lg py-[8px] px-[6px] ${
+                      activeTab === "markaz-faxri"
+                        ? "text-white bg-[#00D6EA]"
+                        : "text-white"
+                    }`}
+                  >
+                    <button onClick={() => handleTabClick("markaz-faxri")}>
+                      Markaz faxri
+                    </button>
+                  </li>
+
+                  <li
+                    className={`cursor-pointer rounded-tr-lg rounded-br-lg py-[8px] px-[6px] ${
+                      activeTab === "odob-axloq-qoidalari"
+                        ? "text-white bg-[#00D6EA]"
+                        : "text-white"
+                    }`}
+                  >
+                    <button
+                      onClick={() => handleTabClick("odob-axloq-qoidalari")}
+                    >
+                      Odob-axloq qoidalari
+                    </button>
+                  </li>
+
+                  <li
+                    className={`cursor-pointer rounded-tr-lg rounded-br-lg py-[8px] px-[6px] ${
+                      activeTab === "kasaba-uyushmasi"
+                        ? "text-white bg-[#00D6EA]"
+                        : "text-white"
+                    }`}
+                  >
+                    <button onClick={() => handleTabClick("kasaba-uyushmasi")}>
+                      Kasaba uyushmasi
+                    </button>
+                  </li>
+                </motion.ul>
+              </div>
+            )}
+          </motion.div>
 
           {activeTab === "markaz-tuzilmasi" && (
             <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
@@ -367,7 +519,7 @@ const Index = () => {
                                     )
                                   )
                                 ) : (
-                                  <p className="font-mulish mt-[10px] lg:text-base md:text-sm text-xs font-semibold">
+                                  <p className="font-mulish mt-[10px] lg:text-base md:text-sm text-xs text-[#2C3E50] font-semibold">
                                     Tez orada bu yerga ma&apos;lumot joylanadi.
                                     :)
                                   </p>
@@ -385,16 +537,24 @@ const Index = () => {
           )}
 
           {activeTab === "markaz-nizomi" && (
-            <div className={"col-span-9"}>
+            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
               <Title>Markaz nizomi</Title>
 
-              <div className={"mt-[30px] flex items-start gap-x-[30px]"}>
+              <div
+                className={
+                  "lg:mt-[30px] md:mt-[20px] mt-[10px] flex flex-col md:flex-row items-start gap-x-[30px]"
+                }
+              >
                 <div
                   className={
-                    "bg-[#EFF8F9] w-[570px] h-[630px] flex justify-center items-center"
+                    "bg-[#EFF8F9] md:w-[570px] w-full h-[630px] flex justify-center items-center mb-[15px] md:mb-0"
                   }
                 >
-                  <p className={"font-mulish font-semibold text-[20px]"}>
+                  <p
+                    className={
+                      "font-mulish font-semibold lg:text-[20px] md:text-lg text-base"
+                    }
+                  >
                     Nizom PDF
                   </p>
                 </div>
@@ -410,7 +570,7 @@ const Index = () => {
                     animate={{ opacity: 100 }}
                     transition={{ duration: 0.7 }}
                     className={
-                      "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[18px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
+                      "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] lg:text-base md:text-sm text-xs font-mulish bg-[#00AFC0] py-[9px] px-[18px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
                     }
                   >
                     PDF shaklda yuklab olish
@@ -421,7 +581,7 @@ const Index = () => {
           )}
 
           {activeTab === "markaz-faxri" && (
-            <div className={"col-span-9"}>
+            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
               <Reveal duration={0.3}>
                 <Title>Markaz faxri</Title>
               </Reveal>
@@ -451,7 +611,7 @@ const Index = () => {
           )}
 
           {activeTab === "odob-axloq-qoidalari" && (
-            <div className={"col-span-9"}>
+            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
               <Reveal duration={0.36}>
                 <Title>Odob-axloq qoidalari</Title>
               </Reveal>
@@ -459,7 +619,7 @@ const Index = () => {
               <Reveal duration={0.4}>
                 <h3
                   className={
-                    "text-[20px] font-mulish font-semibold mt-[30px] mb-[20px]"
+                    "lg:text-[20px] md:text-lg text-base font-mulish font-semibold mt-[30px] mb-[20px]"
                   }
                 >
                   Tibbiyot markazi xodimlari uchun odob-axloq qoidalariga
@@ -468,7 +628,11 @@ const Index = () => {
               </Reveal>
 
               <Reveal duration={0.7}>
-                <ul className={"list-disc font-mulish font-normal ml-[30px]"}>
+                <ul
+                  className={
+                    "list-disc font-mulish lg:text-base md:text-sm text-xs font-normal lg:ml-[30px] md:ml-[20px] ml-[20px]"
+                  }
+                >
                   {get(etiquettesPage, "data.results", []).map((item) => (
                     <li key={get(item, "id")}>{get(item, "etiquette_text")}</li>
                   ))}
@@ -478,13 +642,13 @@ const Index = () => {
           )}
 
           {activeTab === "kasaba-uyushmasi" && (
-            <div className={"col-span-9"}>
+            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
               <Reveal duration={0.3}>
                 <Title>{get(tradeUnionPage, "data.department_title")}</Title>
               </Reveal>
 
               <Reveal duration={0.35}>
-                <div className={"mt-[30px]"}>
+                <div className={"lg:mt-[30px] md:mt-[20px] mt-0"}>
                   <ManagementCard
                     key={get(tradeUnionPage, "data.department_chief.id")}
                     position={get(
@@ -517,14 +681,14 @@ const Index = () => {
                   >
                     <h4
                       className={
-                        "font-mulish text-[20px] mb-[20px] mt-[30px] font-semibold"
+                        "font-mulish lg:text-[20px] md:text-lg text-base mb-[20px] mt-[30px] font-semibold"
                       }
                     >
                       Tibbiyot markazidagi kasaba uyushma funktsiyalariga
                       quyidagilar kiradi:
                     </h4>
 
-                    <div>
+                    <div className="lg:text-base md:text-sm text-xs">
                       {parse(get(tradeUnionPage, "data.department_text", ""))}
                     </div>
                   </motion.div>

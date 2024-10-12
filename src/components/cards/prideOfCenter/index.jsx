@@ -12,7 +12,7 @@ const PrideOfCenter = ({
   image,
 }) => {
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       {isNull(image) ? (
         <Image
           src={"/images/management1.png"}
@@ -27,7 +27,7 @@ const PrideOfCenter = ({
           alt="pride of center"
           width={280}
           height={320}
-          className="w-[280px] h-[320px]"
+          className="md:w-[280px] md:h-[320px] w-full"
         />
       )}
 
@@ -42,17 +42,19 @@ const PrideOfCenter = ({
 
         <h3
           className={
-            "text-[#2C3E50] text-[24px] font-poppins font-semibold mt-[20px] mb-[10px]"
+            "text-[#2C3E50] lg:text-[24px] md:text-[20px] text-lg font-poppins font-semibold mt-[20px] mb-[10px]"
           }
         >
           {fullname}
         </h3>
 
-        <p className="mb-[10px] font-mulish font-normal">{veteranDesc}</p>
+        <p className="mb-[10px] font-mulish lg:text-base md:text-sm text-xs font-normal">
+          {veteranDesc}
+        </p>
 
         <Link
           href={`${veteranVideo}`}
-          className="underline text-[#037582] font-mulish font-medium"
+          className="underline text-[#037582] font-mulish lg:text-base md:text-sm text-xs font-medium"
         >
           Videoga havola
         </Link>
