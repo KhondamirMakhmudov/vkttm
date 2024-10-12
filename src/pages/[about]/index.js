@@ -255,7 +255,7 @@ const Index = () => {
           )}
 
           {activeTab === "bolimlar" && (
-            <div className={"col-span-9"}>
+            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
               <Reveal duration={0.4}>
                 <Title>Bo‘limlar</Title>
               </Reveal>
@@ -263,17 +263,20 @@ const Index = () => {
               <Reveal duration={0.45}>
                 <div
                   className={
-                    "grid grid-cols-9 gap-x-[30px]  gap-y-[30px] mt-[50px]"
+                    "grid grid-cols-12 gap-x-[30px]  gap-y-[30px] lg:mt-[50px] md:mt-[35px] mt-[20px] mb-[50px] md:mb-0"
                   }
                 >
                   {get(departments, "data.results", []).map((item) => (
-                    <div
+                    <Link
+                      href={`/department/${get(item, "id")}`}
                       key={get(item, "id")}
-                      className={
-                        "col-span-3 announce-list-shadow rounded-bl-[30px] rounded-tr-[30px]"
-                      }
+                      className="md:col-span-6 lg:col-span-4 col-span-12"
                     >
-                      <Link href={`/department/${get(item, "id")}`}>
+                      <div
+                        className={
+                          " announce-list-shadow rounded-bl-[30px] rounded-tr-[30px]"
+                        }
+                      >
                         <Image
                           src={get(item, "department_image")}
                           loader={() => get(item, "department_image")}
@@ -289,8 +292,8 @@ const Index = () => {
                         >
                           {get(item, "department_title")}
                         </p>
-                      </Link>
-                    </div>
+                      </div>
+                    </Link>
                   ))}
                 </div>
               </Reveal>
@@ -298,7 +301,7 @@ const Index = () => {
           )}
 
           {activeTab === "lavozim-majburiyatlari" && (
-            <div className={"col-span-9"}>
+            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
               <Reveal duration={0.3}>
                 <Title>Lavozim majburiyatlari</Title>
               </Reveal>
@@ -320,7 +323,7 @@ const Index = () => {
                           >
                             <p
                               className={
-                                "font-mulish font-semibold text-[20px]"
+                                "font-mulish font-semibold lg:text-[20px] md:text-lg text-base"
                               }
                             >
                               {get(responsibility, "position_title")}
@@ -330,7 +333,7 @@ const Index = () => {
                               alt={"up"}
                               width={24}
                               height={24}
-                              className={`${
+                              className={`lg:w-[24px] lg:h-[24px] md:w-[20px] md:h-[20px] w-[16px] h-[16px] ${
                                 isOpen === get(responsibility, "position_title")
                                   ? "rotate-180"
                                   : "rotate-0"
@@ -345,7 +348,7 @@ const Index = () => {
                               transition={{ duration: 0.4 }}
                             >
                               <div>
-                                <h4 className="font-mulish font-semibold text-[20px] my-[20px]">
+                                <h4 className="font-mulish font-semibold lg:text-[20px] md:text-lg text-base lg:my-[20px] md:my-[15px] my-[10px]">
                                   Tibbiyot markazi xodimlarining ish
                                   vazifalariga quyidagilar kiradi:
                                 </h4>
@@ -364,7 +367,7 @@ const Index = () => {
                                     )
                                   )
                                 ) : (
-                                  <p className="font-mulish mt-[10px] font-semibold">
+                                  <p className="font-mulish mt-[10px] lg:text-base md:text-sm text-xs font-semibold">
                                     Tez orada bu yerga ma&apos;lumot joylanadi.
                                     :)
                                   </p>
