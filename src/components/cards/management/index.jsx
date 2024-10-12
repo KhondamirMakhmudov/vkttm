@@ -17,21 +17,23 @@ const ManagementCard = ({
   positionResponsibilities,
 }) => {
   return (
-    <div className={"flex items-start gap-x-[30px] mb-[30px]"}>
+    <div
+      className={"flex flex-col md:flex-row items-start gap-x-[30px] mb-[30px]"}
+    >
       <Image
         src={image}
         loader={() => image}
         alt={"management"}
         width={280}
         height={320}
-        className={"min-w-[280px] min-h-[320px]"}
+        className={"md:min-w-[280px] md:min-h-[320px] w-full md:w-auto"}
       />
 
       <div>
         {/*Lavozim*/}
         <p
           className={
-            "px-[24px] py-[4px] text-xs font-poppins bg-[#00ADBE] text-white rounded-[30px] inline"
+            "px-[24px] py-[4px] md:text-start  text-xs font-poppins bg-[#00ADBE] text-white rounded-[30px] inline"
           }
         >
           {position}
@@ -39,28 +41,46 @@ const ManagementCard = ({
 
         <h3
           className={
-            "text-[#2C3E50] text-[24px] font-poppins mt-[20px] mb-[10px]"
+            "text-[#2C3E50] lg:text-[24px] md:text-[20px] text-lg font-poppins mt-[20px] mb-[10px]"
           }
         >
           {fullname}
         </h3>
 
-        <p className={"font-mulish font-normal mb-[10px]"}>{managerDesc}</p>
+        <p
+          className={
+            "font-mulish font-normal mb-[10px] lg:text-base md:text-sm text-xs md:w-full w-[300px]"
+          }
+        >
+          {managerDesc}
+        </p>
 
         <Link
           href={positionResponsibilities}
-          className={"underline text-[#00ADBE] font-mulish font-medium "}
+          className={
+            "underline text-[#00ADBE] font-mulish font-medium lg:text-base md:text-sm text-xs"
+          }
         >
           Lavozim yo’riqnomasi
         </Link>
 
-        <div className={"flex gap-x-[50px] mt-[30px]"}>
+        <div
+          className={
+            "flex md:flex-row flex-col gap-y-[20px] gap-x-[50px] mt-[30px]"
+          }
+        >
           <div>
-            <h4 className={"font-poppins font-medium "}>Bog’lanish:</h4>
+            <h4
+              className={
+                "font-poppins font-medium lg:text-base md:text-sm text-xs"
+              }
+            >
+              Bog’lanish:
+            </h4>
 
             <div
               className={
-                "flex gap-x-[10px] my-[10px] text-sm font-medium font-mulish"
+                "flex gap-x-[10px] my-[10px] lg:text-sm md:text-xs text-[10px] font-medium font-mulish"
               }
             >
               <Image
@@ -68,41 +88,59 @@ const ManagementCard = ({
                 alt={"phone"}
                 width={24}
                 height={24}
+                className="lg:w-[24px] lg:h-[24px] md:w-[20px] md:h-[20px] w-[16px] h-[16px]"
               />
               <Link href={`tel:${phone}`}>{phone}</Link>
             </div>
 
             <div
-              className={"flex gap-x-[10px] text-sm font-medium font-mulish"}
+              className={
+                "flex gap-x-[10px] lg:text-sm md:text-xs text-[10px] font-medium font-mulish"
+              }
             >
               <Image
                 src={"/icons/message.svg"}
                 alt={"phone"}
                 width={24}
                 height={24}
+                className="lg:w-[24px] lg:h-[24px] md:w-[20px] md:h-[20px] w-[16px] h-[16px]"
               />
               <Link href={`mailto:${email}`}>{email}</Link>
             </div>
           </div>
 
           <div>
-            <h4 className={"font-poppins font-medium "}>Qabul kunlari:</h4>
+            <h4
+              className={
+                "font-poppins font-medium lg:text-base md:text-sm text-xs"
+              }
+            >
+              Qabul kunlari:
+            </h4>
 
             <p
               className={
-                "flex gap-x-[10px] my-[10px] text-sm font-medium font-mulish"
+                "flex gap-x-[10px] my-[10px] lg:text-sm md:text-xs text-[10px] font-medium font-mulish"
               }
             >
               {receiptDays}
             </p>
 
-            <p className={"flex gap-x-[10px] text-sm font-medium font-mulish"}>
+            <p
+              className={
+                "flex gap-x-[10px] lg:text-sm md:text-xs text-[10px] font-medium font-mulish"
+              }
+            >
               {receiptTime}
             </p>
           </div>
 
           <div>
-            <h4 className={"font-poppins font-medium "}>
+            <h4
+              className={
+                "font-poppins font-medium lg:text-base md:text-sm text-xs"
+              }
+            >
               {" "}
               Ijtimoiy tarmoqlar:
             </h4>
@@ -113,6 +151,7 @@ const ManagementCard = ({
                   <svg
                     width="25"
                     height="24"
+                    className="lg:w-[24px] lg:h-[24px] md:w-[20px] md:h-[20px] w-[16px] h-[16px]"
                     viewBox="0 0 25 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -145,6 +184,7 @@ const ManagementCard = ({
                     width="25"
                     height="24"
                     viewBox="0 0 25 24"
+                    className="lg:w-[24px] lg:h-[24px] md:w-[20px] md:h-[20px] w-[16px] h-[16px]"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -176,6 +216,7 @@ const ManagementCard = ({
                     width="25"
                     height="24"
                     viewBox="0 0 25 24"
+                    className="lg:w-[24px] lg:h-[24px] md:w-[20px] md:h-[20px] w-[16px] h-[16px]"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -196,7 +237,7 @@ const ManagementCard = ({
                       />
                       <path
                         d="M17.3744 7.5V7.51"
-                        stroke="#2C3E50"
+                        stroke="#00ADBE"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"

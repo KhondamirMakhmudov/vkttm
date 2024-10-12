@@ -93,14 +93,15 @@ const Index = () => {
 
   return (
     <Wrapper>
-      <section className={"bg-white py-[50px]"}>
+      <section className={"bg-white md:py-[50px] py-[10px]"}>
         <div className={"grid grid-cols-12 gap-x-[30px] container mx-auto"}>
+          {/* //// desktop version //// */}
           <motion.div
             initial={{ opacity: 0, translateX: "-100px" }}
             animate={{ opacity: 100, translateX: "0px" }}
             transition={{ duration: 0.5 }}
             className={
-              "col-span-3 bg-[#EFF8F9] font-poppins font-medium max-h-[432px]"
+              "col-span-3 md:block hidden bg-[#EFF8F9] font-poppins font-medium max-h-[432px]"
             }
           >
             <ul
@@ -203,9 +204,10 @@ const Index = () => {
               </li>
             </ul>
           </motion.div>
+          {/* //// mobile version //// */}
 
           {activeTab === "markaz-tuzilmasi" && (
-            <div className={"col-span-9"}>
+            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
               <Reveal duration={0.4}>
                 <Title>{get(structureOfCenter, "data.structure_title")}</Title>
               </Reveal>
@@ -217,12 +219,13 @@ const Index = () => {
                   alt={"structure-center"}
                   width={1050}
                   height={645}
+                  className="mt-[15px] md:mt-0"
                 />
               </Reveal>
             </div>
           )}
           {activeTab === "rahbariyat" && (
-            <div className={"col-span-9"}>
+            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
               <Reveal duration={0.4}>
                 <Title>Rahbariyat</Title>
               </Reveal>
