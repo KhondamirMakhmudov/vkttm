@@ -41,7 +41,7 @@ const ManagementCard = ({
 
         <h3
           className={
-            "text-[#2C3E50] lg:text-[24px] md:text-[20px] text-lg font-poppins mt-[20px] mb-[10px]"
+            "text-[#2C3E50] lg:text-[24px] md:text-[20px]  text-lg font-poppins mt-[20px] mb-[10px]"
           }
         >
           {fullname}
@@ -49,7 +49,7 @@ const ManagementCard = ({
 
         <p
           className={
-            "font-mulish font-normal mb-[10px] lg:text-base md:text-sm text-xs md:w-full w-[300px]"
+            "font-mulish font-normal mb-[10px] lg:text-base text-[#2C3E50] md:text-sm text-xs md:w-full w-[300px]"
           }
         >
           {managerDesc}
@@ -69,7 +69,7 @@ const ManagementCard = ({
             "flex md:flex-row flex-col gap-y-[20px] gap-x-[50px] mt-[30px]"
           }
         >
-          <div>
+          <div className="text-[#2C3E50]">
             <h4
               className={
                 "font-poppins font-medium lg:text-base md:text-sm text-xs"

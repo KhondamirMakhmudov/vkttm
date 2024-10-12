@@ -287,7 +287,7 @@ const Index = () => {
 
                         <p
                           className={
-                            "font-poppins font-medium text-center py-[20px]"
+                            "font-poppins font-medium text-[#2C3E50] text-center py-[20px]"
                           }
                         >
                           {get(item, "department_title")}
@@ -323,7 +323,7 @@ const Index = () => {
                           >
                             <p
                               className={
-                                "font-mulish font-semibold lg:text-[20px] md:text-lg text-base"
+                                "font-mulish font-semibold text-[#2C3E50] lg:text-[20px] md:text-lg text-base"
                               }
                             >
                               {get(responsibility, "position_title")}
@@ -343,12 +343,12 @@ const Index = () => {
 
                           {isOpen === get(responsibility, "position_title") && (
                             <motion.div
-                              initial={{ opacity: 0, translateY: "100px" }}
+                              initial={{ opacity: 0, translateY: "50px" }}
                               animate={{ opacity: 100, translateY: "0px" }}
                               transition={{ duration: 0.4 }}
                             >
                               <div>
-                                <h4 className="font-mulish font-semibold lg:text-[20px] md:text-lg text-base lg:my-[20px] md:my-[15px] my-[10px]">
+                                <h4 className="font-mulish font-semibold text-[#2C3E50] lg:text-[20px] md:text-lg text-base lg:my-[20px] md:my-[15px] my-[10px]">
                                   Tibbiyot markazi xodimlarining ish
                                   vazifalariga quyidagilar kiradi:
                                 </h4>
