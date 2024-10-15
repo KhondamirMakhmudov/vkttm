@@ -9,6 +9,7 @@ import Image from "next/image";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
+import ScrollToTopButton from "@/components/scroll-to-top";
 
 const Wrapper = ({ children }) => {
   const { data: basicInfos, isLoadingBasicInfos } = useGetQuery({
@@ -20,7 +21,9 @@ const Wrapper = ({ children }) => {
     <>
       <Header />
       <MenuComponent />
+
       <main className=" content__min_h relative">
+        <ScrollToTopButton />
         {/* <div className="fixed -right-[150px]">
           <div className="flex">
             <div className="bg-white py-[30px] w-[70px] px-[10px] rounded-tl-[20px] rounded-bl-[20px]">
