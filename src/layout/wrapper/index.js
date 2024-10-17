@@ -10,6 +10,7 @@ import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import ScrollToTopButton from "@/components/scroll-to-top";
+import SocialMediaSidebar from "@/components/social-media";
 
 const Wrapper = ({ children }) => {
   const { data: basicInfos, isLoadingBasicInfos } = useGetQuery({
@@ -23,6 +24,7 @@ const Wrapper = ({ children }) => {
       <MenuComponent />
 
       <main className=" content__min_h relative">
+        <SocialMediaSidebar />
         <ScrollToTopButton />
         {/* <div className="fixed -right-[150px]">
           <div className="flex">
