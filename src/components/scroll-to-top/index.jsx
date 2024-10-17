@@ -45,27 +45,27 @@ const ScrollToTopButton = () => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <g clip-path="url(#clip0_888_275)">
+            <g clipPath="url(#clip0_888_275)">
               <path
                 d="M22 9.1665V34.8332"
                 stroke="white"
-                stroke-width="2.75"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M33 20.1665L22 9.1665"
                 stroke="white"
-                stroke-width="2.75"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M11 20.1665L22 9.1665"
                 stroke="white"
-                stroke-width="2.75"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </g>
             <defs>

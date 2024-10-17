@@ -299,20 +299,20 @@ const Index = () => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <g clip-path="url(#clip0_850_242)">
+                        <g clipPath="url(#clip0_850_242)">
                           <path
                             d="M3 12C3 10.4087 3.63214 8.88258 4.75736 7.75736C5.88258 6.63214 7.4087 6 9 6H27C28.5913 6 30.1174 6.63214 31.2426 7.75736C32.3679 8.88258 33 10.4087 33 12V24C33 25.5913 32.3679 27.1174 31.2426 28.2426C30.1174 29.3679 28.5913 30 27 30H9C7.4087 30 5.88258 29.3679 4.75736 28.2426C3.63214 27.1174 3 25.5913 3 24V12Z"
                             stroke="#00AFC0"
-                            stroke-width="2.75"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="2.75"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                           <path
                             d="M15 13.5L22.5 18L15 22.5V13.5Z"
                             stroke="#00AFC0"
-                            stroke-width="2.75"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="2.75"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           />
                         </g>
                         <defs>
