@@ -7,6 +7,7 @@ import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { dropRight, get, isEmpty } from "lodash";
+import { AnimatePresence, motion } from "framer-motion";
 
 const menuData = [
   {
@@ -136,7 +137,7 @@ const menuData = [
 
 const MenuComponent = ({ activeMenu }) => {
   const [openMenu, setOpenMenu] = useState(null);
-  const [openBurger, setOpenBurger] = useState(false);
+  const [openBurger, setOpenBurger] = useState(true);
 
   const {
     data: navMenu,
@@ -276,27 +277,50 @@ const MenuComponent = ({ activeMenu }) => {
         <div className="w-[20px] h-[2px] bg-white"></div>
       </div>
 
-      {!openBurger && (
-        <div className="md:hidden absolute z-50 h-screen right-0 p-[8px] bg-white border-[2px] border-r-0 border-[#00C6D8] rounded-r-none rounded-lg">
-          <button
-            onClick={() => setOpenBurger(true)}
-            className="float-right bg-[#00AFC0] mt-[10px] p-[3px] rounded-md"
+      <AnimatePresence>
+        {!openBurger && (
+          <motion.div
+            initial={{ opacity: 0, clipPath: "inset(0 0 0 100%)" }}
+            animate={{ opacity: 1, clipPath: "inset(0 0 0 0%)" }}
+            exit={{ opacity: 0, clipPath: "inset(0 0 0 100%)" }}
+            transition={{ duration: 0.4 }}
+            className=" md:hidden absolute z-50 h-screen right-0 p-[8px] bg-white border-[2px] border-r-0 border-[#00C6D8] rounded-r-none rounded-lg"
           >
-            <Image
-              src={"/icons/close.svg"}
-              alt="sidebar"
-              width={20}
-              height={20}
-            />
-          </button>
+            <button
+              onClick={() => setOpenBurger(true)}
+              className="float-right bg-[#00AFC0] mt-[10px] p-[3px] rounded-md"
+            >
+              <Image
+                src={"/icons/close.svg"}
+                alt="sidebar"
+                width={20}
+                height={20}
+              />
+            </button>
 
-          <ul className=" bg-white  flex flex-col p-[20px] space-y-[10px] h-screen border border-[#00AFC0] border-r-0 rounded-r-none rounded-lg font-poppins">
-            {get(navMenu, "data")?.map((item) => (
-              <li key={get(item, "id")}>{get(item, "title")}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+            <ul className=" bg-white  flex flex-col p-[20px] space-y-[10px] h-screen border border-[#00AFC0] border-r-0 rounded-r-none text-black rounded-lg font-poppins">
+              {get(navMenu, "data")?.map((item) => (
+                <li key={get(item, "id")}>
+                  {" "}
+                  <Link
+                    href={
+                      !isEmpty(get(item, "submenus", []))
+                        ? "#"
+                        : `/${get(item, "title")
+                            .toLowerCase()
+                            .replace(" ", "-")
+                            .replace("'", "")}`
+                    }
+                    className="hover:text-[#00AFC0] transition-all duration-300"
+                  >
+                    {get(item, "title")}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div
         className={

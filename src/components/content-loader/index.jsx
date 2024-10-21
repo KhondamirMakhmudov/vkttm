@@ -20,7 +20,7 @@ const ContentLoader = ({ classNames = "" }) => {
         className="flex gap-x-[10px] items-center"
       >
         <Image src={"/images/brand.png"} alt={"brand"} width={70} height={70} />
-        <h2 className="font-semibold font-poppins text-lg max-w-[220px] uppercase">
+        <h2 className="font-semibold font-poppins xl:text-lg lg:text-base md:text-sm text-xs text-black max-w-[220px] uppercase">
           Samarqand Viloyati Ko&apos;p tarmoqli tibbiyot markazi
         </h2>
       </motion.div>
