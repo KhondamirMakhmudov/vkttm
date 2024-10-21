@@ -21,8 +21,9 @@ const OverlayLoader = () => {
           height={125}
           src={"/images/brand.png"}
           alt={"loader"}
+          className="xl:w-[125px] xl:h-[125px] lg:w-[110px] lg:h-[110px] md:w-[80px] md:h-[80px] w-[70px] h-[70px]"
         />
-        <h2 className="font-semibold font-poppins text-lg max-w-[220px] uppercase">
+        <h2 className="font-semibold font-poppins xl:text-lg lg:text-base md:text-sm text-xs max-w-[220px] uppercase">
           Samarqand Viloyati Ko&apos;p tarmoqli tibbiyot markazi
         </h2>
       </motion.div>

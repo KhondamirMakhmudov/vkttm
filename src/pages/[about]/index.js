@@ -110,11 +110,13 @@ const Index = () => {
             animate={{ opacity: 100, translateX: "0px" }}
             transition={{ duration: 0.5 }}
             className={
-              "col-span-3 md:block hidden bg-[#EFF8F9] font-poppins font-medium max-h-[432px]"
+              "xl:col-span-3 md:col-span-4 md:block hidden bg-[#EFF8F9] font-poppins font-medium max-h-[432px]"
             }
           >
             <ul
-              className={"flex flex-col gap-y-[20px] p-[50px] text-[#494949]"}
+              className={
+                "flex flex-col gap-y-[20px] p-[50px] text-[#494949] xl:text-base lg:text-sm text-xs"
+              }
             >
               <li
                 className={`cursor-pointer ${
@@ -359,7 +361,11 @@ const Index = () => {
           </motion.div>
 
           {activeTab === "markaz-tuzilmasi" && (
-            <div className={"md:col-span-9 col-span-12 px-[20px] md:px-0"}>
+            <div
+              className={
+                "xl:col-span-9 md:col-span-8 col-span-12 px-[20px] md:px-0"
+              }
+            >
               <Reveal duration={0.4}>
                 <Title>{get(structureOfCenter, "data.structure_title")}</Title>
               </Reveal>
@@ -500,7 +506,7 @@ const Index = () => {
                               transition={{ duration: 0.4 }}
                             >
                               <div>
-                                <h4 className="font-mulish font-semibold text-[#2C3E50] lg:text-[20px] md:text-lg text-base lg:my-[20px] md:my-[15px] my-[10px]">
+                                <h4 className="font-mulish  font-semibold text-[#2C3E50] lg:text-[20px] md:text-lg text-base lg:my-[20px] md:my-[15px] my-[10px]">
                                   Tibbiyot markazi xodimlarining ish
                                   vazifalariga quyidagilar kiradi:
                                 </h4>

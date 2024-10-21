@@ -25,7 +25,7 @@ const ScrollToTopButton = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-8">
+    <div className="fixed z-50 bottom-8 right-8">
       {isVisible && (
         <button
           onClick={scrollToTop}
@@ -41,6 +41,7 @@ const ScrollToTopButton = () => {
           <svg
             width="44"
             height="44"
+            className="xl:w-[44px] xl:h-[44px] lg:w-[40px] lg:h-[40px] md:w-[35px] md:h-[35px] w-[30px] h-[30px]"
             viewBox="0 0 44 44"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

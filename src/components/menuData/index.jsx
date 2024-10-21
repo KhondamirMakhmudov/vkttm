@@ -155,7 +155,7 @@ const MenuComponent = ({ activeMenu }) => {
   };
 
   return (
-    <div className="relative  flex justify-between container py-[20px]">
+    <div className="relative  flex justify-between container py-[20px] px-[20px] md:px-[15px] lg:px-0">
       <Brand />
       {/* desktop version */}
       <ul className="hidden md:flex  xl:text-base md:text-xs font-poppins font-medium gap-4 bg-white  p-4 rounded-md">

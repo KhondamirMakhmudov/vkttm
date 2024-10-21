@@ -496,10 +496,14 @@ export default function Home() {
 
           <div className={"md:col-span-4 col-span-12 text-[#2C3E50]"}>
             <Reveal duration={0.35}>
-              <h2 className={"font-medium font-poppins text-[24px] mb-[20px]"}>
+              <h2
+                className={
+                  "font-medium font-poppins xl:text-[24px] lg:text-xl text-lg mb-[20px]"
+                }
+              >
                 Doimiy jismoniy mashqalar salomatlik garovidir
               </h2>
-              <p className="font-mulish">
+              <p className="font-mulish lg:text-base md:text-sm text-xs">
                 Muntazam jismoniy mashqlar jismoniy tayyorgarlikni saqlashga va
                 yurak-qon tomir tizimini mustahkamlashga yordam beradi. Ular
                 endorfin ishlab chiqarish orqali kayfiyatni yaxshilashga va
@@ -529,12 +533,12 @@ export default function Home() {
                     <div>
                       <Link
                         href={`/salomatlik-blogi/${get(recommendation, "id")}`}
-                        className="font-medium font-poppins hover:underline text-[#2C3E50]"
+                        className="font-medium lg:text-base md:text-sm text-xs font-poppins hover:underline text-[#2C3E50]"
                       >
                         <h5>{get(recommendation, "recommendation_title")}</h5>
                       </Link>
 
-                      <p className="text-sm font-medium font-poppins text-[#037582]">
+                      <p className=" font-medium lg:text-sm md:text-xs text-[10px]  font-poppins text-[#037582]">
                         {dayjs(get(recommendation, "date_time")).format(
                           "DD.MM.YYYY"
                         )}
@@ -551,7 +555,7 @@ export default function Home() {
             <Link href={"/salomatlik-blogi"}>
               <button
                 className={
-                  "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[45px] rounded-br-[10px] rounded-tl-[10px] text-white"
+                  "font-bold hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[9px] px-[45px] rounded-br-[10px] rounded-tl-[10px] text-white lg:text-base md:text-sm text-xs"
                 }
               >
                 Barcha maqolalar

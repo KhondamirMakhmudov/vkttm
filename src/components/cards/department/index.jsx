@@ -17,19 +17,25 @@ const Department = ({ image, title, desc, url, classNames }) => {
           "bg-[#00AFC0]  border-[2px] border-white rounded-full drop-shadow mb-[15px] p-[10px]"
         }
       />
-      <h3 className={"font-poppins text-[24px] font-semibold text-[#2C3E50]"}>
+      <h3
+        className={
+          "font-poppins xl:text-[24px] lg:text-xl text-lg font-semibold text-[#2C3E50]"
+        }
+      >
         {title}
       </h3>
       <p
         className={
-          "font-normal  font-mulish text-center my-[7px] flex-1 text-[#2C3E50]"
+          "font-normal  font-mulish lg:text-base md:text-sm text-xs text-center my-[7px] flex-1 text-[#2C3E50]"
         }
       >
         {desc}
       </p>
 
       <button
-        className={"font-poppins font-medium border-b-[2px] border-b-[#00AFC0]"}
+        className={
+          "font-poppins font-medium border-b-[2px] lg:text-base md:text-sm text-xs border-b-[#00AFC0]"
+        }
       >
         <Link href={url}>Batafsil</Link>
       </button>

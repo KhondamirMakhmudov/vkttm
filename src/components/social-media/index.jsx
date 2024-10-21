@@ -11,9 +11,9 @@ const SocialMediaSidebar = () => {
     url: URLS.basicInfos,
   });
   return (
-    <div>
+    <div className="lg:block hidden">
       <div className="fixed top-[645px] -right-[22px] -rotate-90">
-        <p className="font-poppins text-white bg-[#00ADBE] py-[2px] px-[16px] rounded-tr-[10px] rounded-tl-[10px]">
+        <p className="font-poppins text-white  bg-[#00ADBE] py-[2px] px-[16px] rounded-tr-[10px] rounded-tl-[10px]">
           Bizning ijtimoiy tarmoqlar
         </p>
       </div>
