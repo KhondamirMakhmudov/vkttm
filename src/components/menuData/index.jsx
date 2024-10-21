@@ -136,6 +136,7 @@ const menuData = [
 
 const MenuComponent = ({ activeMenu }) => {
   const [openMenu, setOpenMenu] = useState(null);
+  const [openBurger, setOpenBurger] = useState(false);
 
   const {
     data: navMenu,
@@ -148,7 +149,7 @@ const MenuComponent = ({ activeMenu }) => {
 
   const handleMenuClick = (menu) => {
     if (openMenu === menu) {
-      setOpenMenu(null); // Close if the same menu is clicked
+      setOpenMenu(null);
     } else {
       setOpenMenu(menu);
     }
@@ -264,9 +265,42 @@ const MenuComponent = ({ activeMenu }) => {
             ))}
       </ul>
 
+      {/* mobile version */}
+
+      <div
+        onClick={() => setOpenBurger(false)}
+        className="md:hidden bg-[#00AFC0] active:bg-[#00C6D8] flex flex-col items-center justify-center gap-y-[5px] px-[8px] rounded-md max-h-[35px] transition-all duration-200"
+      >
+        <div className="w-[20px] h-[2px] bg-white"></div>
+        <div className="w-[20px] h-[2px] bg-white"></div>
+        <div className="w-[20px] h-[2px] bg-white"></div>
+      </div>
+
+      {!openBurger && (
+        <div className="md:hidden absolute z-50 h-screen right-0 p-[8px] bg-white border-[2px] border-r-0 border-[#00C6D8] rounded-r-none rounded-lg">
+          <button
+            onClick={() => setOpenBurger(true)}
+            className="float-right bg-[#00AFC0] mt-[10px] p-[3px] rounded-md"
+          >
+            <Image
+              src={"/icons/close.svg"}
+              alt="sidebar"
+              width={20}
+              height={20}
+            />
+          </button>
+
+          <ul className=" bg-white  flex flex-col p-[20px] space-y-[10px] h-screen border border-[#00AFC0] border-r-0 rounded-r-none rounded-lg font-poppins">
+            {get(navMenu, "data")?.map((item) => (
+              <li key={get(item, "id")}>{get(item, "title")}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div
         className={
-          "flex items-center xl:text-base md:text-xs font-poppins font-medium gap-x-[30px]"
+          "hidden md:flex  items-center lg:text-base md:text-sm text-xs font-poppins font-medium gap-x-[30px]"
         }
       >
         <Link href={"#"}>Qabulga yozilish</Link>
