@@ -300,7 +300,10 @@ const MenuComponent = ({ activeMenu }) => {
 
             <ul className=" bg-white  flex flex-col p-[20px] space-y-[10px] h-screen border border-[#00AFC0] border-r-0 rounded-r-none text-black rounded-lg font-poppins">
               {get(navMenu, "data")?.map((item) => (
-                <li key={get(item, "id")}>
+                <li
+                  key={get(item, "id")}
+                  onClick={() => handleMenuClick(item.title)}
+                >
                   {" "}
                   <Link
                     href={
@@ -315,6 +318,38 @@ const MenuComponent = ({ activeMenu }) => {
                   >
                     {get(item, "title")}
                   </Link>
+                  {item.submenus && openMenu === item.title && (
+                    <motion.ul
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className={clsx(" left-0 mt-2 bg-white ", {
+                        hidden: openMenu !== item.title,
+                      })}
+                      style={{ zIndex: 1000 }}
+                    >
+                      {item?.submenus?.map((subMenu) => (
+                        <li
+                          key={subMenu.id}
+                          className="p-2 hover:bg-gray-100 text-sm transition-all duration-300"
+                        >
+                          <a
+                            href={`/${subMenu.title
+                              .toLowerCase()
+                              .replace(" ", "-")
+                              .replace("'", "")}`}
+                            className={clsx({
+                              "text-[#1890FF] font-medium":
+                                activeMenu === subMenu.id,
+                            })}
+                          >
+                            {subMenu.title}
+                          </a>
+                        </li>
+                      ))}
+                    </motion.ul>
+                  )}
                 </li>
               ))}
             </ul>
