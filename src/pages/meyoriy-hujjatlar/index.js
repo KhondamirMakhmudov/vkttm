@@ -34,7 +34,7 @@ const Index = () => {
       <section className={"my-[50px]"}>
         <div
           className={
-            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto"
+            "grid grid-cols-12 gap-x-[30px] gap-y-[30px] container mx-auto px-[20px] md:px-[15px] lg:px-0"
           }
         >
           <div className={"col-span-12"}>

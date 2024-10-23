@@ -80,18 +80,27 @@ const Index = () => {
   return (
     <Wrapper>
       <section className={"my-[50px]"}>
-        <div className={"grid grid-cols-12 container mx-auto"}>
+        <div
+          className={
+            "grid grid-cols-12 container mx-auto px-[20px] md:px-[15px] lg:px-0"
+          }
+        >
           <div className={"col-span-12 mb-[30px]"}>
             <Reveal duration={0.2}>
               <Title>Aloqa</Title>
             </Reveal>
           </div>
 
-          <RevealLeft classNameTop={"col-span-6 "} duration={0.3}>
+          <RevealLeft
+            classNameTop={"col-span-6 hidden lg:block"}
+            duration={0.3}
+          >
             <div className={"p-[30px] flex flex-col gap-y-[30px]"}>
               <div>
                 <h3
-                  className={"font-mulish text-[20px] font-semibold mb-[20px]"}
+                  className={
+                    "font-mulish lg:text-[20px] md:text-lg text-base font-semibold mb-[20px]"
+                  }
                 >
                   Manzil:
                 </h3>
@@ -102,7 +111,11 @@ const Index = () => {
                     width={24}
                     height={24}
                   />
-                  <p className={"font-mulish font-medium"}>
+                  <p
+                    className={
+                      "font-mulish text-xs md:text-sm lg:text-base font-medium"
+                    }
+                  >
                     {get(basicInfos, "data.company_address")}
                   </p>
                 </div>
@@ -110,7 +123,9 @@ const Index = () => {
 
               <div>
                 <h3
-                  className={"font-mulish text-[20px] font-semibold mb-[20px]"}
+                  className={
+                    "font-mulish lg:text-[20px] md:text-lg text-base font-semibold mb-[20px]"
+                  }
                 >
                   Qo’ng’iroq uchun:
                 </h3>
@@ -121,13 +136,21 @@ const Index = () => {
                     width={24}
                     height={24}
                   />
-                  <p className={"font-mulish font-semibold w-[200px]"}>
+                  <p
+                    className={
+                      "font-mulish text-xs md:text-sm lg:text-base font-semibold w-[200px]"
+                    }
+                  >
                     <span className={"font-bold"}>Qabulxona ish vaqti:</span>{" "}
                     <br />
                     08:00 - 20:00
                   </p>
 
-                  <div className={"font-mulish font-medium"}>
+                  <div
+                    className={
+                      "font-mulish font-medium text-xs md:text-sm lg:text-base"
+                    }
+                  >
                     <a href={`tel:${get(basicInfos, "data.company_phone")}`}>
                       {get(basicInfos, "data.company_phone")}
                     </a>{" "}
@@ -385,13 +408,24 @@ const Index = () => {
               </div>
             </div>
           </RevealLeft>
-          <RevealRight classNameTop={"col-span-6"} duration={0.3}>
-            <div className={" p-[30px] flex flex-col gap-y-[20px]"}>
-              <h3 className={"font-mulish text-[20px] font-semibold "}>
+          <RevealRight
+            classNameTop={"lg:col-span-6 col-span-12"}
+            duration={0.3}
+          >
+            <div className={" lg:p-[30px] p-0 flex flex-col gap-y-[20px]"}>
+              <h3
+                className={
+                  "font-mulish lg:text-[20px] md:text-lg text-base font-semibold "
+                }
+              >
                 Murojaat qoldiring
               </h3>
 
-              <p className={"font-mulish font-medium"}>
+              <p
+                className={
+                  "font-mulish font-medium text-xs md:text-sm lg:text-base"
+                }
+              >
                 Maslahat olish, taklif yuborish uchun o‘z murojaatingizni
                 batafsil yozib yuboring. Tez orada siz bilan bog‘lanishadi.
               </p>
@@ -406,7 +440,7 @@ const Index = () => {
                   placeholder={"F.I.SH"}
                   {...register("appeal_fullname", { required: true })}
                   className={
-                    "py-[12px] px-[30px] w-full announce-list-shadow rounded-[10px]"
+                    "py-[12px] px-[30px] w-full text-xs md:text-sm lg:text-base  announce-list-shadow rounded-[10px]"
                   }
                 />
                 <input
@@ -414,7 +448,7 @@ const Index = () => {
                   {...register("appeal_email", { required: true })}
                   placeholder={"Email"}
                   className={
-                    "py-[12px] px-[30px] w-full announce-list-shadow rounded-[10px]"
+                    "py-[12px] px-[30px] w-full text-xs md:text-sm lg:text-base announce-list-shadow rounded-[10px]"
                   }
                 />
                 <input
@@ -422,14 +456,14 @@ const Index = () => {
                   {...register("appeal_theme", { required: true })}
                   placeholder={"Murojaat mavzusi"}
                   className={
-                    "py-[12px] px-[30px] w-full announce-list-shadow rounded-[10px]"
+                    "py-[12px] px-[30px] w-full text-xs md:text-sm lg:text-base announce-list-shadow rounded-[10px]"
                   }
                 />
                 <textarea
                   {...register("appeal_text", { required: true })}
                   placeholder={"Murojaat mavzusi"}
                   className={
-                    "py-[12px] px-[30px] w-full announce-list-shadow rounded-[10px]"
+                    "py-[12px] px-[30px] w-full text-xs md:text-sm lg:text-base announce-list-shadow rounded-[10px]"
                   }
                   rows={8}
                 ></textarea>
@@ -439,7 +473,7 @@ const Index = () => {
                   animate={{ opacity: 100 }}
                   transition={{ duration: 0.7 }}
                   className={
-                    "font-bold max-w-[170px]  hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[10px] px-[52px] rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
+                    "font-bold max-w-[170px]  hover:bg-[#00CBDE] active:bg-[#009EAC] font-mulish bg-[#00AFC0] py-[10px] px-[52px] text-xs md:text-sm lg:text-base rounded-br-[10px] rounded-tl-[10px] text-white transition-all duration-300"
                   }
                 >
                   Yuborish
@@ -450,19 +484,21 @@ const Index = () => {
         </div>
 
         <div className={"grid grid-cols-12 container mx-auto mt-[30px]"}>
-          <RevealLeft classNameTop={"col-span-6 "} duration={0.3}>
+          <RevealLeft classNameTop={"lg:col-span-6 col-span-12"} duration={0.3}>
             <div className={"col-span-6 p-[30px]"}>
               <h3 className={"font-mulish text-[20px] font-semibold mb-[20px]"}>
                 Asosiy bino lokatsiyasi:
               </h3>
-              <div className={"w-[630px] h-[430px] bg-[#C5C5C5]"}>
+              <div className={" bg-[#C5C5C5]"}>
                 <iframe
                   src={`${get(aboutCenter, "data.company_location")}`}
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className={"w-full lg:h-full h-[400px] border shadow-2xl"}
+                  className={
+                    "lg:w-[630px] lg:h-[430px] w-full h-[300px] border shadow-2xl"
+                  }
                 ></iframe>
               </div>
             </div>
