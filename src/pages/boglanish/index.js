@@ -99,7 +99,7 @@ const Index = () => {
               <div>
                 <h3
                   className={
-                    "font-mulish lg:text-[20px] md:text-lg text-base font-semibold mb-[20px]"
+                    "font-mulish lg:text-[20px] text-[#2C3E50] md:text-lg text-base font-semibold mb-[20px]"
                   }
                 >
                   Manzil:
@@ -113,7 +113,7 @@ const Index = () => {
                   />
                   <p
                     className={
-                      "font-mulish text-xs md:text-sm lg:text-base font-medium"
+                      "font-mulish text-xs text-[#2C3E50] md:text-sm lg:text-base font-medium"
                     }
                   >
                     {get(basicInfos, "data.company_address")}
@@ -124,7 +124,7 @@ const Index = () => {
               <div>
                 <h3
                   className={
-                    "font-mulish lg:text-[20px] md:text-lg text-base font-semibold mb-[20px]"
+                    "font-mulish lg:text-[20px] text-[#2C3E50] md:text-lg text-base font-semibold mb-[20px]"
                   }
                 >
                   Qo’ng’iroq uchun:
@@ -138,7 +138,7 @@ const Index = () => {
                   />
                   <p
                     className={
-                      "font-mulish text-xs md:text-sm lg:text-base font-semibold w-[200px]"
+                      "font-mulish text-xs md:text-sm  text-[#2C3E50] lg:text-base font-semibold w-[200px]"
                     }
                   >
                     <span className={"font-bold"}>Qabulxona ish vaqti:</span>{" "}
@@ -148,7 +148,7 @@ const Index = () => {
 
                   <div
                     className={
-                      "font-mulish font-medium text-xs md:text-sm lg:text-base"
+                      "font-mulish font-medium text-[#2C3E50] text-xs md:text-sm lg:text-base"
                     }
                   >
                     <a href={`tel:${get(basicInfos, "data.company_phone")}`}>
@@ -164,7 +164,9 @@ const Index = () => {
 
               <div>
                 <h3
-                  className={"font-mulish text-[20px] font-semibold mb-[20px]"}
+                  className={
+                    "font-mulish text-[#2C3E50] text-[20px] font-semibold mb-[20px]"
+                  }
                 >
                   Elektron pochta:
                 </h3>
@@ -177,7 +179,7 @@ const Index = () => {
                     height={24}
                   />
                   <a
-                    className={"font-mulish font-medium"}
+                    className={"font-mulish text-[#2C3E50] font-medium"}
                     href={`mailto:${get(basicInfos, "data.company_mail")}`}
                   >
                     {get(basicInfos, "data.company_mail")}
@@ -187,7 +189,9 @@ const Index = () => {
 
               <div>
                 <h3
-                  className={"font-mulish text-[20px] font-semibold mb-[20px]"}
+                  className={
+                    "font-mulish text-[20px] text-[#2C3E50] font-semibold mb-[20px]"
+                  }
                 >
                   Ijtimoiy tarmoqlar:
                 </h3>
@@ -415,7 +419,7 @@ const Index = () => {
             <div className={" lg:p-[30px] p-0 flex flex-col gap-y-[20px]"}>
               <h3
                 className={
-                  "font-mulish lg:text-[20px] md:text-lg text-base font-semibold "
+                  "font-mulish lg:text-[20px] text-[#2C3E50] md:text-lg text-base font-semibold "
                 }
               >
                 Murojaat qoldiring
@@ -423,7 +427,7 @@ const Index = () => {
 
               <p
                 className={
-                  "font-mulish font-medium text-xs md:text-sm lg:text-base"
+                  "font-mulish font-medium text-[#2C3E50] text-xs md:text-sm lg:text-base"
                 }
               >
                 Maslahat olish, taklif yuborish uchun o‘z murojaatingizni
@@ -486,7 +490,11 @@ const Index = () => {
         <div className={"grid grid-cols-12 container mx-auto mt-[30px]"}>
           <RevealLeft classNameTop={"lg:col-span-6 col-span-12"} duration={0.3}>
             <div className={"col-span-6 p-[30px]"}>
-              <h3 className={"font-mulish text-[20px] font-semibold mb-[20px]"}>
+              <h3
+                className={
+                  "font-mulish text-[20px] text-[#2C3E50] font-semibold mb-[20px]"
+                }
+              >
                 Asosiy bino lokatsiyasi:
               </h3>
               <div className={" bg-[#C5C5C5]"}>
