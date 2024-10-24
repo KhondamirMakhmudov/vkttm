@@ -1,3 +1,14 @@
 {
-  "Batafsil": "in detail"
+  "Batafsil": "In detail",
+  "aim": "Service to our people is a great blessing",
+  "main-context": "Center for modern medical services",
+  "welcome": "The center is always open to everyone, use primary care and modern medical services",
+  "all": "All",
+  "errorInServer": "Sorry, server error):",
+  "doctors": "Doctors",
+  "health-blog": "Health blog",
+  "contacts": "Contact us",
+  "doctors_desc": "Use the medical services of top-class doctors at the medical center",
+  "healthBlog_desc": "Get acquainted with various recommendations, articles, samples of scientific works to be healthy",
+  "contacts_desc": "The ability to send questions, applications online and get additional information"
 }

@@ -1,3 +1,14 @@
 {
-  "Batafsil": "Batafsil"
+  "Batafsil": "Batafsil",
+  "aim": "Xalqimizga xizmat - oliy ne’mat",
+  "main-context": "Zamonaviy tibbiyot xizmatlari markazi",
+  "welcome": "Markaz doim barcha uchun ochiq, birlamchi tibbiy yordam va zamonaviy tibbiyot xizmarlaridan foydalaning",
+  "all": "Barchasi",
+  "errorInServer": "Kechirasiz, serverda xatolik ):",
+  "doctors": "Shifokorlar",
+  "health-blog": "Salomatlik blogi",
+  "contacts": "Biz bilan bog’laning",
+  "doctors_desc": "Tibbiyot markazidagi oliy toifali shifokorlarning tibbiy xizmatlaridan foydalaning",
+  "healthBlog_desc": "Sog’lom bo’lish uchun turli tavsiya, maqola, ilmiy ishlardan namunalar bilan tanishing",
+  "contacts_desc": "Savollar, murojaatlarni onlayn yuborish va va qo’shimcha ma’lumotlar olish imkoniyati"
 }

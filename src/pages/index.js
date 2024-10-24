@@ -83,7 +83,10 @@ export default function Home() {
                   "font-mulish font-bold md:text-base text-sm text-[#0D4866]"
                 }
               >
-                {get(item, "banner_header")}
+                {get(item, "banner_header") ===
+                "Xalqimizga xizmat - oliy ne’mat"
+                  ? t("aim")
+                  : get(item, "banner_header")}
               </motion.h3>
 
               <motion.h1
@@ -94,7 +97,10 @@ export default function Home() {
                   "text-[#0D4866] font-bold md:text-[48px] text-[30px] font-poppins mt-[30px] mb-[20px]"
                 }
               >
-                {get(item, "banner_title")}
+                {get(item, "banner_title") ===
+                "Zamonaviy tibbiyot xizmatlari markazi"
+                  ? t("main-context")
+                  : get(item, "banner_title")}
               </motion.h1>
 
               <motion.p
@@ -105,7 +111,10 @@ export default function Home() {
                   "font-mulish md:text-[20px] text-base mb-[30px] text-[#0D4866]"
                 }
               >
-                {get(item, "banner_desc")}
+                {get(item, "banner_desc") ===
+                "Markaz doim barcha uchun ochiq, birlamchi tibbiy yordam va zamonaviy tibbiyot xizmarlaridan foydalaning"
+                  ? t("welcome")
+                  : get(item, "banner_desc")}
               </motion.p>
               <Link
                 href={"/markaz-tuzilmasi"}
@@ -181,7 +190,7 @@ export default function Home() {
                     "font-poppins xl:text-base lg:text-sm md:text-xs text-[10px] font-medium border-b-[2px] border-b-[#00AFC0]"
                   }
                 >
-                  <Link href={"/to-be-healty/id"}>Barchasi</Link>
+                  <Link href={"/to-be-healty/id"}>{t("all")}</Link>
                 </button>
               </motion.div>
             </motion.li>
@@ -233,7 +242,13 @@ export default function Home() {
                       "xl:text-[24px] lg:text-[20px] md:text-[17px] text-base font-semibold font-poppins text-[#2C3E50] hover:text-[#00AFC0]"
                     }
                   >
-                    {get(item, "title")}
+                    {get(item, "title") === "Shifokorlar"
+                      ? t("doctors")
+                      : get(item, "title") === "Salomatlik blogi"
+                      ? t("health-blog")
+                      : get(item, "title") === "Biz bilan bog’laning"
+                      ? t("contacts")
+                      : get(item, "title")}
                   </h3>
 
                   <p
@@ -241,7 +256,16 @@ export default function Home() {
                       "font-mulish xl:text-base lg:text-sm md:text-xs text-[10px] font-normal lg:my-[10px] my-[5px]"
                     }
                   >
-                    {get(item, "description")}
+                    {get(item, "description") ===
+                    "Tibbiyot markazidagi oliy toifali shifokorlarning tibbiy xizmatlaridan foydalaning"
+                      ? t("doctors_desc")
+                      : get(item, "description") ===
+                        "Sog’lom bo’lish uchun turli tavsiya, maqola, ilmiy ishlardan namunalar bilan tanishing"
+                      ? t("healthBlog_desc")
+                      : get(item, "description") ===
+                        "Savollar, murojaatlarni onlayn yuborish va va qo’shimcha ma’lumotlar olish imkoniyati"
+                      ? t("contacts_desc")
+                      : get(item, "description")}
                   </p>
 
                   <button
@@ -260,7 +284,9 @@ export default function Home() {
                           : ""
                       }`}
                     >
-                      {get(item, "link_title")}
+                      {get(item, "link_title") === "Barchasi"
+                        ? t("all")
+                        : get(item, "link_title")}
                     </Link>
                   </button>
                 </motion.div>
